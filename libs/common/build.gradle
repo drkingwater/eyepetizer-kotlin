@@ -1,6 +1,4 @@
-import java.text.SimpleDateFormat
-
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -11,13 +9,13 @@ android {
     buildToolsVersion build.buildToolsVersion
 
     defaultConfig {
-        applicationId "me.pxq.eyepetizer"
         minSdkVersion build.minSdkVersion
         targetSdkVersion build.targetSdkVersion
         versionCode 1
-        versionName "1.0.1.${releaseTime()}"
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -30,12 +28,19 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    //测试依赖
+    rootProject.ext.apiTestDepds.each { k, v ->
+        testApi v
+    }
+    rootProject.ext.apiAndroidTestDepds.each { k, v ->
+        androidTestApi v
+    }
 
-    implementation project(':libs:common')
+    //库依赖
+    rootProject.ext.apiDepds.each { k, v ->
+        api v
+    }
 
-}
+    api project(':libs:utils')
 
-//版本号带上时间戳
-def static releaseTime(){
-    return new SimpleDateFormat("yyMMdd").format(new Date())
 }

@@ -1,2 +1,4 @@
+include ':libs:utils'
+include ':libs:common'
 include ':app'
 rootProject.name = "Eyepetizer"
