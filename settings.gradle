@@ -1,3 +1,4 @@
+include ':module:home'
 include ':libs:utils'
 include ':libs:common'
 include ':app'
