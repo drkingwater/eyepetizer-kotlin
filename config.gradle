@@ -8,7 +8,7 @@ ext {
             targetSdkVersion : 29
     ]
 
-    //api级别以来
+    //api级别依赖
     apiDepds = [
             //kotlin
             kotlin_stdlib   : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -17,6 +17,10 @@ ext {
             lifecycleScope  : 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01',
             //livedata
             livedata        : 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01',
+            //ViewModel Activity扩展
+            activity_ktx    : 'androidx.activity:activity-ktx:1.1.0',
+            //ViewModel Fragment扩展
+            fragment_ktx    : 'androidx.fragment:fragment-ktx:1.2.0',
             //androidx
             appcompat       : 'androidx.appcompat:appcompat:1.1.0',
             //约束布局
@@ -24,11 +28,21 @@ ext {
 
             //网络请求
             retrofit        : 'com.squareup.retrofit2:retrofit:2.9.0',
-            okhttp          : 'com.squareup.okhttp3:okhttp:4.8.0',
+//            okhttp          : 'com.squareup.okhttp3:okhttp:4.8.0',
             gson_convertor  : 'com.squareup.retrofit2:converter-gson:2.9.0',
             //gson
-            gson            : 'com.google.code.gson:gson:2.8.6'
+            gson            : 'com.google.code.gson:gson:2.8.6',
+
+            //room
+            room            : "androidx.room:room-runtime:2.2.5"
+
     ]
+
+    kapt = [
+            //room_compiler
+            room_compiler: "androidx.room:room-compiler:2.2.5"
+    ]
+
     //单元测试
     apiTestDepds = [
             junit: 'junit:junit:4.12'

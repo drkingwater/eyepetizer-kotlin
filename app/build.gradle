@@ -28,14 +28,14 @@ android {
     }
 
     compileOptions {
-
         sourceCompatibility JavaVersion.VERSION_1_8
-
         targetCompatibility JavaVersion.VERSION_1_8
+    }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
-
 
 
 dependencies {
@@ -43,13 +43,13 @@ dependencies {
 
     implementation project(':libs:common')
 
-    if (!isApp.toBoolean()){
+    if (!isApp.toBoolean()) {
         implementation project(':module:home')
     }
 
 }
 
 //版本号带上时间戳
-def static releaseTime(){
+def static releaseTime() {
     return new SimpleDateFormat("MMddHH").format(new Date())
 }

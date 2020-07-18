@@ -1,22 +1,27 @@
-package me.pxq.common
+package me.pxq.common.data
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import me.pxq.common.db.converter.HomeItemConverter
 
 /**
  * Description:
  * Author : pxq
  * Date : 2020/7/15 10:26 PM
  */
+@Entity(tableName = "home")
 data class HomePage(
-    val adExist: Boolean,
-    val count: Int,
+    @PrimaryKey
     val date: Long,
-    val dialog: Any,
-    val itemList: List<Item>,
-    val lastStartId: Int,
-    val nextPageUrl: String,
-    val nextPublishTime: Long,
-    val refreshCount: Int,
-    val topIssue: Any,
-    val total: Int
+    val adExist: Boolean = false,
+    val count: Int = 0,
+    val itemList: List<Item> = listOf(),
+    val lastStartId: Int = 0,
+    val nextPageUrl: String = "",
+    val nextPublishTime: Long = 0,
+    val refreshCount: Int = 0,
+    val total: Int = 0
 )
 
 data class Item(
@@ -29,10 +34,10 @@ data class Item(
 
 data class Data(
     val ad: Boolean,
-    val adTrack: List<Any>,
+//    val adTrack: List<Any>,
     val author: Author,
-    val brandWebsiteInfo: Any,
-    val campaign: Any,
+//    val brandWebsiteInfo: Any,
+//    val campaign: Any,
     val category: String,
     val collected: Boolean,
     val consumption: Consumption,
@@ -41,14 +46,14 @@ data class Data(
     val date: Long,
     val description: String,
     val descriptionEditor: String,
-    val descriptionPgc: Any,
+//    val descriptionPgc: Any,
     val duration: Int,
-    val favoriteAdTrack: Any,
+//    val favoriteAdTrack: Any,
     val id: Int,
     val idx: Int,
     val ifLimitVideo: Boolean,
-    val label: Any,
-    val labelList: List<Any>,
+    val label: String,
+    val labelList: List<String>,
     val lastViewTime: Any,
     val library: String,
     val playInfo: List<PlayInfo>,
@@ -58,22 +63,22 @@ data class Data(
     val promotion: Any,
     val provider: Provider,
     val reallyCollected: Boolean,
-    val recallSource: Any,
+//    val recallSource: Any,
     val releaseTime: Long,
-    val remark: Any,
+//    val remark: Any,
     val resourceType: String,
     val searchWeight: Int,
-    val shareAdTrack: Any,
-    val slogan: Any,
-    val src: Any,
-    val subtitles: List<Any>,
+//    val shareAdTrack: Any,
+    val slogan: String,
+    val src: String,
+    val subtitles: List<String>,
     val tags: List<Tag>,
-    val thumbPlayUrl: Any,
+    val thumbPlayUrl: String,
     val title: String,
-    val titlePgc: Any,
+//    val titlePgc: Any,
     val type: String,
-    val waterMarks: Any,
-    val webAdTrack: Any,
+//    val waterMarks: Any,
+//    val webAdTrack: Any,
     val webUrl: WebUrl
 )
 
@@ -128,8 +133,8 @@ data class Tag(
     val actionUrl: String,
     val adTrack: Any,
     val bgPicture: String,
-    val childTagIdList: Any,
-    val childTagList: Any,
+//    val childTagIdList: Any,
+//    val childTagList: Any,
     val communityIndex: Int,
     val desc: Any,
     val haveReward: Boolean,
@@ -137,7 +142,7 @@ data class Tag(
     val id: Int,
     val ifNewest: Boolean,
     val name: String,
-    val newestEndTime: Any,
+//    val newestEndTime: Any,
     val tagRecType: String
 )
 
