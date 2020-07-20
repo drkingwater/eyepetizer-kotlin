@@ -37,6 +37,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation project(':libs:common')
+
     //ARouter
     kapt rootProject.ext.kapt.arouter_compiler
 

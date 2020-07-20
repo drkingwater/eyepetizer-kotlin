@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--首页-->
+    <item
+        android:id="@+id/bottom_nav_index"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_nav_item_index" />
+    <!--社区-->
+    <item
+        android:id="@+id/bottom_nav_community"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_nav_item_community" />
+
+    <item
+        android:id="@+id/bottom_nav_notification"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_nav_item_notification" />
+
+    <item
+        android:id="@+id/bottom_nav_mime"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_nav_item_mine" />
+
+</menu>
