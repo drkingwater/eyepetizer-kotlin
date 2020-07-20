@@ -8,7 +8,7 @@ ext {
             targetSdkVersion : 29
     ]
 
-    //api级别依赖
+    //api级别公共依赖
     apiDepds = [
             //kotlin
             kotlin_stdlib   : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -34,13 +34,18 @@ ext {
             gson            : 'com.google.code.gson:gson:2.8.6',
 
             //room
-            room            : "androidx.room:room-runtime:2.2.5"
+            room            : "androidx.room:room-runtime:2.2.5",
+
+            //ARouter
+            arouter_api     : 'com.alibaba:arouter-api:1.5.0'
 
     ]
 
     kapt = [
             //room_compiler
-            room_compiler: "androidx.room:room-compiler:2.2.5"
+            room_compiler   : "androidx.room:room-compiler:2.2.5",
+            //aourter-compiler
+            arouter_compiler: 'com.alibaba:arouter-compiler:1.2.2'
     ]
 
     //单元测试

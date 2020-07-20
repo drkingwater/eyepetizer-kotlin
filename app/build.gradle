@@ -44,6 +44,7 @@ dependencies {
     implementation project(':libs:common')
 
     if (!isApp.toBoolean()) {
+        //首页
         implementation project(':module:home')
     }
 

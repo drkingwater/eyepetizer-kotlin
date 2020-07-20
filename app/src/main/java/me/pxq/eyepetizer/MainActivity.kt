@@ -7,12 +7,15 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.launcher.ARouter
 import me.pxq.common.Api
 import me.pxq.common.db.EyeDatabase
+import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.home.HomeViewModel
 import me.pxq.eyepetizer.home.HomeViewModelFactory
 import me.pxq.eyepetizer.home.repository.HomeRepository
 import me.pxq.network.ApiResult
+import me.pxq.utils.logd
 import me.pxq.utils.logi
 
 /**
@@ -25,31 +28,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        observeData()
         logi("onCreate")
-        lifecycleScope.launchWhenStarted {
-            viewModel.fetchHomeData()
+        ARouter.getInstance().build(RouterHub.MAIN_HONE).navigation()?.run {
+            logd("router success")
         }
     }
 
-    /**
-     * 观察数据变化
-     */
-    private fun observeData() {
-        viewModel.homeData.observe(this, Observer { result ->
-            when (result) {
-                //请求成功
-                is ApiResult.Success -> findViewById<TextView>(R.id.test_tv).text =
-                    result.data.toString()
-                //请求失败
-                is ApiResult.Error -> Toast.makeText(
-                    this,
-                    result.exception.message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-    }
 
 
     companion object {
