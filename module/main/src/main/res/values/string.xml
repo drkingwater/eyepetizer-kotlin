@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_bottom_nav_item_index">首页</string>
+    <string name="main_bottom_nav_item_community">社区</string>
+    <string name="main_bottom_nav_item_notification">通知</string>
+    <string name="main_bottom_nav_item_mine">我的</string>
+</resources>
