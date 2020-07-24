@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/main_bottom_nav_bar_height"
+    android:background="@color/colorPrimary"
+    android:paddingBottom="@dimen/main_bottom_nav_margin"
+    android:paddingTop="@dimen/main_bottom_nav_margin">
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="iv_home, tv_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/group_community"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_community"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="iv_community, tv_community"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/group_home"
+        app:layout_constraintRight_toLeftOf="@id/group_notification"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_notification"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="iv_notification, tv_notification"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/group_community"
+        app:layout_constraintRight_toLeftOf="@id/group_mine"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_mine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="iv_mine, tv_mime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/group_notification"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--  首页  -->
+    <ImageView
+        android:id="@+id/iv_home"
+        android:layout_width="@dimen/main_bottom_nav_iv_width"
+        android:layout_height="@dimen/main_bottom_nav_iv_height"
+        android:focusable="true"
+        android:src="@drawable/main_selector_bottom_nav_btn_home"
+        app:layout_constraintBottom_toTopOf="@id/tv_home"
+        app:layout_constraintLeft_toLeftOf="@id/group_home"
+        app:layout_constraintRight_toRightOf="@id/group_home"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_bottom_nav_home"
+        android:textSize="@dimen/main_bottom_nav_tv_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/iv_home"
+        app:layout_constraintRight_toRightOf="@id/iv_home"
+        app:layout_constraintTop_toBottomOf="@id/iv_home" />
+
+
+    <!--  社区  -->
+    <ImageView
+        android:id="@+id/iv_community"
+        android:layout_width="@dimen/main_bottom_nav_iv_width"
+        android:layout_height="@dimen/main_bottom_nav_iv_height"
+        android:src="@drawable/main_selector_bottom_nav_btn_community"
+        app:layout_constraintBottom_toTopOf="@id/tv_community"
+        app:layout_constraintLeft_toRightOf="@id/group_home"
+        app:layout_constraintRight_toRightOf="@id/group_community"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_community"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_community"
+        android:textSize="@dimen/main_bottom_nav_tv_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/iv_community"
+        app:layout_constraintRight_toRightOf="@id/iv_community"
+        app:layout_constraintTop_toBottomOf="@id/iv_community" />
+
+    <!--  通知  -->
+    <ImageView
+        android:id="@+id/iv_notification"
+        android:layout_width="@dimen/main_bottom_nav_iv_width"
+        android:layout_height="@dimen/main_bottom_nav_iv_height"
+        android:src="@drawable/main_selector_bottom_nav_btn_notifycation"
+        app:layout_constraintBottom_toTopOf="@id/tv_notification"
+        app:layout_constraintLeft_toLeftOf="@id/group_notification"
+        app:layout_constraintRight_toRightOf="@id/group_notification"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_notification"
+        android:textSize="@dimen/main_bottom_nav_tv_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/iv_notification"
+        app:layout_constraintRight_toRightOf="@id/iv_notification"
+        app:layout_constraintTop_toBottomOf="@id/iv_notification" />
+
+    <!--  我的  -->
+    <ImageView
+        android:id="@+id/iv_mine"
+        android:layout_width="@dimen/main_bottom_nav_iv_width"
+        android:layout_height="@dimen/main_bottom_nav_iv_height"
+        android:src="@drawable/main_selector_bottom_nav_btn_mime"
+        app:layout_constraintBottom_toTopOf="@id/tv_mime"
+        app:layout_constraintLeft_toLeftOf="@id/group_mine"
+        app:layout_constraintRight_toRightOf="@id/group_mine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_mime"
+        android:textSize="@dimen/main_bottom_nav_tv_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/iv_mine"
+        app:layout_constraintRight_toRightOf="@id/iv_mine"
+        app:layout_constraintTop_toBottomOf="@id/iv_mine" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

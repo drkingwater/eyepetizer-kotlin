@@ -4,22 +4,22 @@
     <!--首页-->
     <item
         android:id="@+id/bottom_nav_index"
-        android:icon="@drawable/main_btn_home_normal"
+        android:icon="@drawable/main_selector_bottom_nav_btn_home"
         android:title="@string/main_bottom_nav_item_index" />
     <!--社区-->
     <item
         android:id="@+id/bottom_nav_community"
-        android:icon="@drawable/main_btn_home_normal"
+        android:icon="@drawable/main_btn_community_normal"
         android:title="@string/main_bottom_nav_item_community" />
 
     <item
         android:id="@+id/bottom_nav_notification"
-        android:icon="@drawable/main_btn_home_normal"
+        android:icon="@drawable/main_btn_notification_normal"
         android:title="@string/main_bottom_nav_item_notification" />
 
     <item
         android:id="@+id/bottom_nav_mime"
-        android:icon="@drawable/main_btn_home_normal"
+        android:icon="@drawable/main_btn_mine_normal"
         android:title="@string/main_bottom_nav_item_mine" />
 
 </menu>
