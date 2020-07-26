@@ -2,7 +2,7 @@
     package="me.pxq.eyepetizer.main">
 
     <application>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

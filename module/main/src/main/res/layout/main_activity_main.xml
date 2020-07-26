@@ -10,11 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include
+    <!--    <include-->
+    <!--        android:id="@+id/bottom_nav_layout"-->
+    <!--        layout="@layout/main_bottom_nav_bar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom" />-->
+    <me.pxq.eyepetizer.main.ui.view.EyeBottomNavView
         android:id="@+id/bottom_nav_layout"
-        layout="@layout/main_bottom_nav_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_height="@dimen/main_bottom_nav_bar_height"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconSize="@dimen/main_bottom_nav_iv_height"
+        app:itemTextAppearanceActive="@style/main_bottom_nav_tv_color_active"
+        app:itemTextAppearanceInactive="@style/main_bottom_nav_tv_color_inactive"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/main_bottom_navigation_items" />
 
 </FrameLayout>

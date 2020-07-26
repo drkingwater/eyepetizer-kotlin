@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--  底部导航栏高度  -->
     <dimen name="main_bottom_nav_bar_height">42dp</dimen>
-    <dimen name="main_bottom_nav_tv_size">8sp</dimen>
-    <dimen name="main_bottom_nav_iv_width">20dp</dimen>
-    <dimen name="main_bottom_nav_iv_height">20dp</dimen>
+    <!--  底部导航栏文字大小  -->
+    <dimen name="main_bottom_nav_tv_size">10dp</dimen>
+    <!--  重写BottomNavView属性  -->
+    <dimen name="design_bottom_navigation_margin" tools:ignore="MissingDefaultResource,ResourceName" tools:override="true">
+        0dp
+    </dimen>
+
+    <dimen name="main_bottom_nav_iv_width">25dp</dimen>
+    <dimen name="main_bottom_nav_iv_height">45dp</dimen>
     <dimen name="main_bottom_nav_margin">7dp</dimen>
 </resources>
