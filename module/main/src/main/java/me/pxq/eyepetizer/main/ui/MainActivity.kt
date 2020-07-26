@@ -7,7 +7,7 @@ import me.pxq.eyepetizer.main.R
 import me.pxq.eyepetizer.main.ui.view.EyeBottomNavView
 
 /**
- * Description:
+ * Description: 主页
  * Author : pxq
  * Date : 2020/7/22 9:52 PM
  */
@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<EyeBottomNavView>(R.id.bottom_nav_layout)?.apply {
             itemIconTintList = null
+            //设置选中图标
             candidateIcons = mutableMapOf(
                 R.id.bottom_nav_menu_item_home to ContextCompat.getDrawable(
                     this@MainActivity,
@@ -37,9 +38,11 @@ class MainActivity : AppCompatActivity() {
                     R.drawable.main_btn_mine_selected
                 )!!
             )
+            //设置选中监听
             setOnNavigationItemSelectedListener {
                 //修改选中图标
                 setCheckedIcon(it.itemId)
+                //切换fragment
                 when(it.itemId){
                     //todo 切换fragment
                 }
