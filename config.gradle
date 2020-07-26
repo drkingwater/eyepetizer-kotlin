@@ -23,6 +23,8 @@ ext {
             fragment_ktx    : 'androidx.fragment:fragment-ktx:1.2.0',
             //androidx
             appcompat       : 'androidx.appcompat:appcompat:1.1.0',
+            //material，如BottomNavigationView、TabLayout等
+            material        : 'com.google.android.material:material:1.3.0-alpha01',
             //约束布局
             constraintlayout: 'androidx.constraintlayout:constraintlayout:1.1.3',
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_tab_item_discovery">发现</string>
+    <string name="home_tab_item_recommend">推荐</string>
+    <string name="home_tab_item_daily">日报</string>
+</resources>
