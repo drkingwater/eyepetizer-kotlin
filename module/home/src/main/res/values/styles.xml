@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Home_TabTextAppearance">
+        <item name="android:textSize">12dp</item>
+    </style>
+</resources>

@@ -39,7 +39,10 @@ ext {
             room            : "androidx.room:room-runtime:2.2.5",
 
             //ARouter
-            arouter_api     : 'com.alibaba:arouter-api:1.5.0'
+            arouter_api     : 'com.alibaba:arouter-api:1.5.0',
+            //图片加载
+            glide           : 'com.github.bumptech.glide:glide:4.11.0'
+
 
     ]
 
@@ -47,7 +50,9 @@ ext {
             //room_compiler
             room_compiler   : "androidx.room:room-compiler:2.2.5",
             //aourter-compiler
-            arouter_compiler: 'com.alibaba:arouter-compiler:1.2.2'
+            arouter_compiler: 'com.alibaba:arouter-compiler:1.2.2',
+
+            glide_compiler  : 'com.github.bumptech.glide:compiler:4.11.0'
     ]
 
     //单元测试

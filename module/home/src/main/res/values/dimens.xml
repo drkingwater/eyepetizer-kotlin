@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  TabLayout高度  -->
+    <dimen name="home_tab_layout_height">44dp</dimen>
+    <dimen name="home_tab_item_padding">15dp</dimen>
+    <dimen name="home_tab_layout_indicator_height">3dp</dimen>
+    <dimen name="home_tab_layout_indicator_width">10dp</dimen>
+</resources>
