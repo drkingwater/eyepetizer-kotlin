@@ -3,7 +3,7 @@ package me.pxq.eyepetizer.home
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import me.pxq.common.Api
+import me.pxq.common.ApiService
 import me.pxq.common.db.EyeDatabase
 import me.pxq.eyepetizer.home.repository.HomeRepository
 
@@ -21,7 +21,7 @@ class HomeViewModelFactory(private val repository: HomeRepository) : ViewModelPr
 
     companion object {
         fun get(context: Context): HomeViewModelFactory =
-            HomeViewModelFactory(HomeRepository(Api.service, EyeDatabase.get(context).homeDAO()))
+            HomeViewModelFactory(HomeRepository(ApiService.instance, EyeDatabase.get(context).homeDAO()))
 
     }
 }

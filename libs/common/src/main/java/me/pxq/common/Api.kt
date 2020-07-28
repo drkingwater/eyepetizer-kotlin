@@ -12,22 +12,7 @@ import retrofit2.http.GET
  */
 interface Api {
 
-    @GET(INDEX)
+    @GET("api/v5/index/tab/allRec?page=0")
     suspend fun index(): HomePage
-
-    companion object {
-        private const val BASE_URL = "http://baobab.kaiyanapp.com/"
-        //首页
-        private const val INDEX = "api/v4/tabs/selected"
-
-        val service: Api by lazy {
-            Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(Api::class.java)
-        }
-
-    }
 
 }

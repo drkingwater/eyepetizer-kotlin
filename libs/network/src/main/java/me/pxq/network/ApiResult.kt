@@ -1,5 +1,7 @@
 package me.pxq.network
 
+import android.util.Log
+
 
 /**
  * Description: api service请求响应基类

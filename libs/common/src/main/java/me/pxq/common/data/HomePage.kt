@@ -13,73 +13,100 @@ import me.pxq.common.db.converter.HomeItemConverter
 @Entity(tableName = "home")
 data class HomePage(
     @PrimaryKey
-    val date: Long,
-    val adExist: Boolean = false,
-    val count: Int = 0,
-    val itemList: List<Item> = listOf(),
-    val lastStartId: Int = 0,
-    val nextPageUrl: String = "",
-    val nextPublishTime: Long = 0,
-    val refreshCount: Int = 0,
-    val total: Int = 0
+    val key: Int,
+    val adExist: Boolean,
+    val count: Int,
+    val itemList: List<Item>,
+    val nextPageUrl: String,
+    val total: Int
 )
 
 data class Item(
     val adIndex: Int,
-    val data: Data,
+    val `data`: Data,
     val id: Int,
-    val tag: String,
+    val tag: Any,
     val type: String
 )
 
 data class Data(
+    val actionUrl: String,
     val ad: Boolean,
-//    val adTrack: List<Any>,
+    val adTrack: Any,
     val author: Author,
-//    val brandWebsiteInfo: Any,
-//    val campaign: Any,
+    val backgroundImage: String,
+    val bannerList: List<Banner>,
+    val brandWebsiteInfo: Any,
+    val campaign: Any,
     val category: String,
     val collected: Boolean,
     val consumption: Consumption,
-    val cover: Cover,
+    val content: Content,
+    val count: Int,
+    val cover: CoverX,
     val dataType: String,
     val date: Long,
     val description: String,
     val descriptionEditor: String,
-//    val descriptionPgc: Any,
+    val descriptionPgc: Any,
     val duration: Int,
-//    val favoriteAdTrack: Any,
+    val expert: Boolean,
+    val favoriteAdTrack: Any,
+    val follow: Any,
+    val footer: Any,
+    val haveReward: Boolean,
+    val header: Header,
+    val icon: String,
+    val iconType: String,
     val id: Int,
     val idx: Int,
     val ifLimitVideo: Boolean,
-    val label: String,
-    val labelList: List<String>,
+    val ifNewest: Boolean,
+    val ifPgc: Boolean,
+    val ifShowNotificationIcon: Boolean,
+    val itemList: List<ItemX>,
+    val label: Any,
+    val labelList: List<Any>,
     val lastViewTime: Any,
     val library: String,
-    val playInfo: List<PlayInfo>,
+    val medalIcon: Boolean,
+    val newestEndTime: Any,
+    val playInfo: List<PlayInfoX>,
     val playUrl: String,
     val played: Boolean,
     val playlists: Any,
     val promotion: Any,
-    val provider: Provider,
+    val provider: ProviderX,
     val reallyCollected: Boolean,
-//    val recallSource: Any,
+    val recallSource: String,
+    val refreshUrl: String,
     val releaseTime: Long,
-//    val remark: Any,
+    val remark: Any,
     val resourceType: String,
+    val rightText: String,
     val searchWeight: Int,
-//    val shareAdTrack: Any,
-    val slogan: String,
-    val src: String,
-    val subtitles: List<String>,
-    val tags: List<Tag>,
-    val thumbPlayUrl: String,
+    val shareAdTrack: Any,
+    val showHotSign: Boolean,
+    val showImmediately: Boolean,
+    val slogan: Any,
+    val src: Int,
+    val startTime: Long,
+    val subTitle: Any,
+    val subtitles: List<Any>,
+    val switchStatus: Boolean,
+    val tags: List<TagX>,
+    val text: String,
+    val thumbPlayUrl: Any,
     val title: String,
-//    val titlePgc: Any,
+    val titleList: List<String>,
+    val titlePgc: Any,
+    val topicTitle: String,
     val type: String,
-//    val waterMarks: Any,
-//    val webAdTrack: Any,
-    val webUrl: WebUrl
+    val uid: Int,
+    val videoPosterBean: VideoPosterBeanX,
+    val waterMarks: Any,
+    val webAdTrack: Any,
+    val webUrl: WebUrlX
 )
 
 data class Author(
@@ -99,7 +126,188 @@ data class Author(
     val videoNum: Int
 )
 
+data class Banner(
+    val background_image: String,
+    val link: String,
+    val poster_image: String,
+    val tag_name: String,
+    val title: String
+)
+
 data class Consumption(
+    val collectionCount: Int,
+    val realCollectionCount: Int,
+    val replyCount: Int,
+    val shareCount: Int
+)
+
+data class Content(
+    val adIndex: Int,
+    val `data`: DataX,
+    val id: Int,
+    val tag: Any,
+    val type: String
+)
+
+data class CoverX(
+    val blurred: String,
+    val detail: String,
+    val feed: String,
+    val homepage: Any,
+    val sharing: Any
+)
+
+data class Header(
+    val actionUrl: String,
+    val cover: Any,
+    val description: String,
+    val font: Any,
+    val icon: String,
+    val iconType: String,
+    val id: Int,
+    val label: Any,
+    val labelList: Any,
+    val rightText: Any,
+    val showHateVideo: Boolean,
+    val subTitle: Any,
+    val subTitleFont: Any,
+    val textAlign: String,
+    val time: Long,
+    val title: String
+)
+
+data class ItemX(
+    val adIndex: Int,
+    val `data`: DataXX,
+    val id: Int,
+    val tag: Any,
+    val type: String
+)
+
+data class PlayInfoX(
+    val height: Int,
+    val name: String,
+    val type: String,
+    val url: String,
+    val urlList: List<UrlX>,
+    val width: Int
+)
+
+data class ProviderX(
+    val alias: String,
+    val icon: String,
+    val name: String
+)
+
+data class TagX(
+    val actionUrl: String,
+    val adTrack: Any,
+    val bgPicture: String,
+    val childTagIdList: Any,
+    val childTagList: Any,
+    val communityIndex: Int,
+    val desc: Any,
+    val haveReward: Boolean,
+    val headerImage: String,
+    val id: Int,
+    val ifNewest: Boolean,
+    val name: String,
+    val newestEndTime: Any,
+    val tagRecType: String
+)
+
+data class VideoPosterBeanX(
+    val fileSizeStr: Any,
+    val scale: Any,
+    val url: Any
+)
+
+data class WebUrlX(
+    val forWeibo: String,
+    val raw: String
+)
+
+data class Follow(
+    val followed: Boolean,
+    val itemId: Int,
+    val itemType: String
+)
+
+data class Shield(
+    val itemId: Int,
+    val itemType: String,
+    val shielded: Boolean
+)
+
+data class DataX(
+    val ad: Boolean,
+    val adTrack: List<Any>,
+    val author: AuthorX,
+    val brandWebsiteInfo: Any,
+    val campaign: Any,
+    val category: String,
+    val collected: Boolean,
+    val consumption: ConsumptionX,
+    val cover: Cover,
+    val dataType: String,
+    val date: Long,
+    val description: String,
+    val descriptionEditor: String,
+    val descriptionPgc: Any,
+    val duration: Int,
+    val favoriteAdTrack: Any,
+    val id: Int,
+    val idx: Int,
+    val ifLimitVideo: Boolean,
+    val label: Any,
+    val labelList: List<Any>,
+    val lastViewTime: Any,
+    val library: String,
+    val playInfo: List<PlayInfo>,
+    val playUrl: String,
+    val played: Boolean,
+    val playlists: Any,
+    val promotion: Any,
+    val provider: Provider,
+    val reallyCollected: Boolean,
+    val recallSource: Any,
+    val releaseTime: Long,
+    val remark: String,
+    val resourceType: String,
+    val searchWeight: Int,
+    val shareAdTrack: Any,
+    val slogan: Any,
+    val src: Any,
+    val subtitles: List<Any>,
+    val tags: List<Tag>,
+    val thumbPlayUrl: Any,
+    val title: String,
+    val titlePgc: Any,
+    val type: String,
+    val videoPosterBean: VideoPosterBean,
+    val waterMarks: Any,
+    val webAdTrack: Any,
+    val webUrl: WebUrl
+)
+
+data class AuthorX(
+    val adTrack: Any,
+    val approvedNotReadyVideoCount: Int,
+    val description: String,
+    val expert: Boolean,
+    val follow: FollowX,
+    val icon: String,
+    val id: Int,
+    val ifPgc: Boolean,
+    val latestReleaseTime: Long,
+    val link: String,
+    val name: String,
+    val recSort: Int,
+    val shield: ShieldX,
+    val videoNum: Int
+)
+
+data class ConsumptionX(
     val collectionCount: Int,
     val realCollectionCount: Int,
     val replyCount: Int,
@@ -133,8 +341,8 @@ data class Tag(
     val actionUrl: String,
     val adTrack: Any,
     val bgPicture: String,
-//    val childTagIdList: Any,
-//    val childTagList: Any,
+    val childTagIdList: Any,
+    val childTagList: Any,
     val communityIndex: Int,
     val desc: Any,
     val haveReward: Boolean,
@@ -142,8 +350,14 @@ data class Tag(
     val id: Int,
     val ifNewest: Boolean,
     val name: String,
-//    val newestEndTime: Any,
+    val newestEndTime: Any,
     val tagRecType: String
+)
+
+data class VideoPosterBean(
+    val fileSizeStr: Any,
+    val scale: Any,
+    val url: Any
 )
 
 data class WebUrl(
@@ -151,13 +365,13 @@ data class WebUrl(
     val raw: String
 )
 
-data class Follow(
+data class FollowX(
     val followed: Boolean,
     val itemId: Int,
     val itemType: String
 )
 
-data class Shield(
+data class ShieldX(
     val itemId: Int,
     val itemType: String,
     val shielded: Boolean
@@ -168,15 +382,29 @@ data class Url(
     val size: Int,
     val url: String
 )
-/**
- * "count": 14,
-"total": 0,
-"nextPageUrl": "http://baobab.kaiyanapp.com/api/v4/tabs/selected?date=1594602000000&num=2&page=2",
-"adExist": false,
-"date": 1594774800000,
-"nextPublishTime": 1594861200000,
-"dialog": null,
-"topIssue": null,
-"refreshCount": 0,
-"lastStartId": 0
- */
+
+data class DataXX(
+    val cover: CoverXX,
+    val dailyResource: Boolean,
+    val dataType: String,
+    val id: Int,
+    val nickname: String,
+    val resourceType: String,
+    val url: String,
+    val urls: List<String>,
+    val userCover: String
+)
+
+data class CoverXX(
+    val blurred: Any,
+    val detail: String,
+    val feed: String,
+    val homepage: Any,
+    val sharing: Any
+)
+
+data class UrlX(
+    val name: String,
+    val size: Int,
+    val url: String
+)

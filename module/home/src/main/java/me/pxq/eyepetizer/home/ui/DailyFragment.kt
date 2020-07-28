@@ -19,7 +19,7 @@ class DailyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment_recommend, null)
+        return inflater.inflate(R.layout.home_fragment_recommend, container, false)
     }
 
     companion object{

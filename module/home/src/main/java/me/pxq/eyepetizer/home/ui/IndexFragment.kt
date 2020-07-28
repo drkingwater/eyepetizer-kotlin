@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.ui.vp.ViewPagerAdapter
@@ -25,7 +26,7 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener as OnTab
 @Route(path = RouterHub.MAIN_HONE)
 class IndexFragment : Fragment() {
 
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
 
     override fun onCreateView(
@@ -33,13 +34,13 @@ class IndexFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment_index, null)
+        return inflater.inflate(R.layout.home_fragment_index, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager = view.findViewById<ViewPager>(R.id.index_view_pager).apply {
-            adapter = ViewPagerAdapter(requireActivity().supportFragmentManager)
+        viewPager = view.findViewById<ViewPager2>(R.id.index_view_pager).apply {
+            adapter = ViewPagerAdapter(this@IndexFragment)
             currentItem = 1
         }
         tabLayout = view.findViewById<TabLayout>(R.id.index_tab_layout).apply {
@@ -64,10 +65,17 @@ class IndexFragment : Fragment() {
                     me.pxq.common.R.color.colorTextSecondary
                 ), ContextCompat.getColor(requireContext(), me.pxq.common.R.color.colorTextPrimary)
             )
-
-            //绑定ViewPager
-            setupWithViewPager(viewPager, false)
         }
+
+        //tablayout绑定viewpager
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            //设置tablaout tab文字
+            when (position) {
+                0 -> tab.text = getString(R.string.home_tab_item_discovery)
+                1 -> tab.text = getString(R.string.home_tab_item_recommend)
+                2 -> tab.text = getString(R.string.home_tab_item_daily)
+            }
+        }.attach()
 
     }
 

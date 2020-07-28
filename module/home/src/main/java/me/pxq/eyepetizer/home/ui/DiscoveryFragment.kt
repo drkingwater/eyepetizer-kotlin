@@ -19,7 +19,7 @@ class DiscoveryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment_discovery, null)
+        return inflater.inflate(R.layout.home_fragment_discovery, container, false)
     }
 
     companion object{
