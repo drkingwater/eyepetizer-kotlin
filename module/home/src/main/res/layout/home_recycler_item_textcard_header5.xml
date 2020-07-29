@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="header"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_rv_item_textcard_h5_height"
+        android:paddingStart="@dimen/home_header_padding"
+        android:paddingEnd="@dimen/home_header_padding">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{header.data.text}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_tv_size_header7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+             />
+
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="44dp"
+            android:layout_height="22dp"
+            android:background="@drawable/home_shape_rv_item_textcard_h5_follow"
+            android:gravity="center"
+            android:text="@string/home_add_follow"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            android:visibility="@{header.data.follow.followed ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

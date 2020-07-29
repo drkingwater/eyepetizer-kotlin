@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.home.R
-import me.pxq.eyepetizer.home.ui.vp.ViewPagerAdapter
-import me.pxq.utils.logd
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener as OnTabSelectedListener1
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener as OnTabSelectedListener2
+import me.pxq.eyepetizer.home.adapters.ViewPagerAdapter
 
 /**
  * Description: 首页fragment
@@ -40,7 +36,8 @@ class IndexFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager = view.findViewById<ViewPager2>(R.id.index_view_pager).apply {
-            adapter = ViewPagerAdapter(this@IndexFragment)
+            adapter =
+                ViewPagerAdapter(this@IndexFragment)
             currentItem = 1
         }
         tabLayout = view.findViewById<TabLayout>(R.id.index_tab_layout).apply {

@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.home.ui.vp
+package me.pxq.eyepetizer.home.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -7,7 +7,7 @@ import me.pxq.eyepetizer.home.ui.DiscoveryFragment
 import me.pxq.eyepetizer.home.ui.RecommendFragment
 
 /**
- * Description: 首页vp适配器
+ * Description: 首页viewpager2适配器[me.pxq.eyepetizer.home.ui.IndexFragment]
  * Author : pxq
  * Date : 2020/7/27 10:35 PM
  */

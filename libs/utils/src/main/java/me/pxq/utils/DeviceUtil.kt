@@ -38,17 +38,19 @@ object DeviceUtil {
      * 设备序列号
      */
     val DEVICE_SERIAL: String by lazy {
+        //写死
+        "d9e4d30f251a4dcfb56b3465d22aa1748694f6b7"
         //本地取序列号
-        var serial = DeviceIdUtil.getDeviceId(application).also {
-            logd("serial $it")
-        }
-        if (serial.isNullOrEmpty()) {
-            //随机生成一个序列号并保存到本地
-            serial = UUID.randomUUID().toString().replace("-", "").toLowerCase(Locale.CHINA).also {
-                SpUtil.putString(application, "deviceSerial", it)
-            }
-        }
-        serial
+//        var serial = DeviceIdUtil.getDeviceId(application).also {
+//            logd("serial $it")
+//        }
+//        if (serial.isNullOrEmpty()) {
+//            //随机生成一个序列号并保存到本地
+//            serial = UUID.randomUUID().toString().replace("-", "").toLowerCase(Locale.CHINA).also {
+//                SpUtil.putString(application, "deviceSerial", it)
+//            }
+//        }
+//        serial
     }
 
     /**
