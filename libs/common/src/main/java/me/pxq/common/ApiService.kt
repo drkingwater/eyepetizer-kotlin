@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 /**
  * Description: api服务类
@@ -45,8 +46,24 @@ class ApiService {
             }.build()
             val request = originalRequest.newBuilder().url(url)
                 .method(originalRequest.method(), originalRequest.body()).build()
-            logi(request.url())
             return chain.proceed(request)
+        }
+    }
+
+    class LoggingInterceptor : Interceptor {
+
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val request = chain.request()
+            //计算网络请求时间
+            val t1 = System.currentTimeMillis()
+            val response = chain.proceed(request)
+            val t2 = System.currentTimeMillis()
+            logi(
+                "Received response for \n{${response.request()
+                    .url()}}\nin ${(t2 - t1)} ms"
+            )
+            return response
         }
     }
 
@@ -55,6 +72,7 @@ class ApiService {
 
         private val httpClient = OkHttpClient.Builder()
             .addInterceptor(CommonParamsInterceptor())  //添加公共参数拦截器
+            .addInterceptor(LoggingInterceptor())  //添加网络请求日志拦截器
             .build()
 
         val instance: Api by lazy {

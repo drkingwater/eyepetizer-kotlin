@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{header.data.text}"
-            android:textColor="@color/black35"
+            android:textColor="@color/color_header_title"
             android:textSize="@dimen/home_tv_size_header7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

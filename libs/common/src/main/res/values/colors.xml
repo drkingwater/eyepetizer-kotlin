@@ -14,6 +14,10 @@
     <color name="black50">#80000000</color>
     <color name="black45">#8c000000</color>
     <color name="black35">#a6000000</color>
+    <color name="black25">#bf000000</color>
     <color name="black20">#cc000000</color>
     <color name="blue">#4687d7</color>
+
+    <!--  header颜色  -->
+    <color name="color_header_title">@color/black25</color>
 </resources>
