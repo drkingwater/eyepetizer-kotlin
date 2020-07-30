@@ -13,6 +13,7 @@
     <color name="black80">#33000000</color>
     <color name="black50">#80000000</color>
     <color name="black45">#8c000000</color>
+    <color name="black35">#a6000000</color>
     <color name="black20">#cc000000</color>
     <color name="blue">#4687d7</color>
 </resources>
