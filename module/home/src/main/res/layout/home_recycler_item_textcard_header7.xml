@@ -16,19 +16,19 @@
         android:paddingStart="@dimen/home_header_padding"
         android:paddingEnd="@dimen/home_header_padding">
 
-        <TextView
+        <me.pxq.common.ui.view.TypefaceTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{header.data.text}"
-            android:textColor="@color/black"
+            android:textColor="@color/black20"
             android:textSize="@dimen/home_tv_size_header7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:typeface="FZLanD" />
 
-        <TextView
+        <me.pxq.common.ui.view.TypefaceTextView
             android:id="@+id/tv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
