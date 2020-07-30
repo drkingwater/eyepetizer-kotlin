@@ -14,9 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h5_height"
-        android:paddingStart="@dimen/home_header_padding"
-        android:paddingEnd="@dimen/home_header_padding">
+        android:layout_height="@dimen/home_rv_item_textcard_h5_height">
 
         <me.pxq.common.ui.view.TypefaceTextView
             android:id="@+id/tv_title"
@@ -34,7 +32,7 @@
             android:id="@+id/tv_follow"
             android:layout_width="44dp"
             android:layout_height="22dp"
-            android:background="@drawable/home_shape_rv_item_textcard_h5_follow"
+            android:background="@drawable/home_shape_rv_item_textcard_follow"
             android:gravity="center"
             android:text="@string/home_add_follow"
             android:textColor="@color/black35"

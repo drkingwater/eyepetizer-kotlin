@@ -2,15 +2,13 @@ package me.pxq.eyepetizer.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
-import me.pxq.eyepetizer.home.databinding.HomeRecyclerItemTextcardHeader5Binding
-import me.pxq.eyepetizer.home.databinding.HomeRecyclerItemTextcardHeader7Binding
+import me.pxq.eyepetizer.home.databinding.*
 
 /**
- * Description:
+ * Description: [me.pxq.eyepetizer.home.ui.IndexFragment] 推荐栏 Rv Adapter
  * Author : pxq
  * Date : 2020/7/29 9:57 PM
  */
@@ -20,30 +18,38 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
     override fun getItemViewType(position: Int): Int {
         val item = items[position]
         return when {
-            item.type == "textCard" && item.data.type == "header7" -> 0
-            item.type == "textCard" && item.data.type == "header5" -> 1
+            item.type == "textCard" && item.data.dataType == "TextCardWithRightAndLeftTitle" -> 0
+            item.type == "textCard" && item.data.dataType == "TextCard" -> 1
+            item.type == "followCard" && item.data.dataType == "FollowCard" -> 2
             else -> 100
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            0 -> TextCardH7(
-                HomeRecyclerItemTextcardHeader7Binding.inflate(
+            0 -> ItemHolder(
+                HomeRvItemTextcardRightandleftBinding.inflate(
                     LayoutInflater.from(
                         parent.context
                     ), parent, false
                 )
             )
-            1 -> TextCardH7(
-                HomeRecyclerItemTextcardHeader5Binding.inflate(
+            1 -> ItemHolder(
+                HomeRvItemTextcardTextcardBinding.inflate(
                     LayoutInflater.from(
                         parent.context
                     ), parent, false
                 )
             )
-            else -> TextCardH7(
-                HomeRecyclerItemTextcardHeader7Binding.inflate(
+            2 -> ItemHolder(
+                HomeRvItemFollowcardFollowcardBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            else -> ItemHolder(
+                HomeRvItemTextcardRightandleftBinding.inflate(
                     LayoutInflater.from(
                         parent.context
                     ), parent, false
@@ -58,23 +64,29 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TextCardH7 -> holder.bind(items[position])
+            is ItemHolder -> holder.bind(items[position])
         }
     }
 
-    class TextCardH7(private val binding: ViewDataBinding) :
+    class ItemHolder(private val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(items: Item) {
+        fun bind(item: Item) {
             when (binding) {
-                is HomeRecyclerItemTextcardHeader5Binding -> {
+                is HomeRvItemTextcardRightandleftBinding -> {
                     binding.apply {
-                        header = items
+                        header = item
                         executePendingBindings()
                     }
                 }
-                is HomeRecyclerItemTextcardHeader7Binding -> {
+                is HomeRvItemTextcardTextcardBinding -> {
                     binding.apply {
-                        header = items
+                        header = item
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemFollowcardFollowcardBinding -> {
+                    binding.apply {
+                        daily = item
                         executePendingBindings()
                     }
                 }

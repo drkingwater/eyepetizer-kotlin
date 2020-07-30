@@ -8,7 +8,9 @@
     <dimen name="home_rv_item_textcard_h7_height">45dp</dimen>
     <dimen name="home_rv_item_textcard_h5_height">30dp</dimen>
     <dimen name="home_tv_size_header5">20dp</dimen>
-    <dimen name="home_header_padding">10dp</dimen>
+    <dimen name="home_header_padding">15dp</dimen>
     <dimen name="home_tv_size_header7">22dp</dimen>
     <dimen name="home_tv_size_right_text">14dp</dimen>
+    <dimen name="home_followcard_padding">14dp</dimen>
+    <dimen name="home_followcard_icon_size">40dp</dimen>
 </resources>

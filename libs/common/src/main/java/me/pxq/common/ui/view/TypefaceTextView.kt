@@ -28,38 +28,4 @@ class TypefaceTextView(context: Context, attributeSet: AttributeSet? = null) :
         }
     }
 
-    private fun getTypeface(context: Context, typeface: String?) = when (typeface) {
-        "FZLanL" -> {
-            Typeface.createFromAsset(
-                context.assets,
-                "fonts/FZLanTingHeiS-L-GB-Regular.TTF"
-            )
-        }
-        "FZLanD" -> {
-            Typeface.createFromAsset(
-                context.assets,
-                "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF"
-            )
-        }
-        "Futura" -> {
-            Typeface.createFromAsset(
-                context.assets,
-                "fonts/Futura-CondensedMedium.ttf"
-            )
-        }
-        "DIN" -> {
-            Typeface.createFromAsset(
-                context.assets,
-                "fonts/DIN-Condensed-Bold.ttf"
-            )
-        }
-        "Lobster" -> {
-            Typeface.createFromAsset(
-                context.assets,
-                "fonts/Lobster-1.4.otf"
-            )
-        }
-        else -> null
-    }
-
 }

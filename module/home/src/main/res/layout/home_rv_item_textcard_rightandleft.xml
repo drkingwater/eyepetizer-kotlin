@@ -12,9 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h7_height"
-        android:paddingStart="@dimen/home_header_padding"
-        android:paddingEnd="@dimen/home_header_padding">
+        android:layout_height="@dimen/home_rv_item_textcard_h7_height">
 
         <me.pxq.common.ui.view.TypefaceTextView
             android:id="@+id/tv_title"

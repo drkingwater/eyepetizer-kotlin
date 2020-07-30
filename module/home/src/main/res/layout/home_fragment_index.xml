@@ -25,6 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginStart="@dimen/home_header_padding"
+        android:layout_marginEnd="@dimen/home_header_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/index_tab_layout" />
 
