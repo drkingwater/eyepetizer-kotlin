@@ -168,7 +168,14 @@ data class Header(
     val textAlign: String,
     val time: Long,
     val title: String
-)
+){
+    companion object{
+        //圆形icon
+        const val ICON_TYPE_ROUND = "round"
+        //方形icon
+        const val ICON_TYPE_SQUARE = "square"
+    }
+}
 
 
 

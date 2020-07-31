@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <me.pxq.common.ui.view.FontTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tv_tab_title"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:duplicateParentState="true"
     android:gravity="center"
     android:textColor="@color/home_selector_tab_item_text_color"
-    android:textSize="12dp"
-    app:typeface="DIN">
+    android:textSize="@dimen/home_tablayout_item_textsize"
+    app:typeface="DIN"
+    tools:ignore="SpUsage">
 
 
 </me.pxq.common.ui.view.FontTextView>
