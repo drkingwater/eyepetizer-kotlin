@@ -16,10 +16,12 @@ import me.pxq.network.ApiResult
  */
 class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
 
-    val homeData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData();
+    //首页推荐数据
+    val homeData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData()
 
     fun fetchHomeData() {
         viewModelScope.launch(Dispatchers.IO) {
+            //更新数据
             homeData.postValue(repository.getHomeData(true))
         }
     }

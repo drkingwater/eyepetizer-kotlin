@@ -10,10 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import me.pxq.eyepetizer.home.HomeViewModel
 import me.pxq.eyepetizer.home.HomeViewModelFactory
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
+import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
 import me.pxq.eyepetizer.home.decoration.IndexRvDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
@@ -26,26 +28,37 @@ import me.pxq.utils.loge
  */
 class RecommendFragment : Fragment() {
 
-    private val viewModel by activityViewModels<HomeViewModel> { HomeViewModelFactory.get(requireContext()) }
+    private val viewModel by activityViewModels<HomeViewModel> {
+        HomeViewModelFactory.get(
+            requireContext()
+        )
+    }
+
+    private lateinit var binding: HomeFragmentRecommendBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment_recommend, container, false)
+        return HomeFragmentRecommendBinding.inflate(inflater, container, false).run {
+            binding = this
+            viewModel = this@RecommendFragment.viewModel
+            root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
+        binding.recyclerView.run {
             layoutManager = LinearLayoutManager(requireContext())
+            //设置分割线
+            addItemDecoration(IndexRvDecoration())
+            //设置adapter
+            adapter = IndexRvAdapter().also {
+                subscribeUi(it)
+            }
         }
-        //设置adapter
-        recyclerView.adapter = IndexRvAdapter().also {
-            subscribeUi(it)
-        }
-        recyclerView.addItemDecoration(IndexRvDecoration())
         //请求数据
         viewModel.fetchHomeData()
     }
@@ -55,7 +68,10 @@ class RecommendFragment : Fragment() {
      * 观察数据变化
      */
     private fun subscribeUi(adapter: IndexRvAdapter) {
+        logd("subscribe")
         viewModel.homeData.observe(requireActivity(), Observer {
+            loge("data change...")
+            binding.refreshLayout.isRefreshing = false
             when (it) {
                 is ApiResult.Success -> {
                     adapter.items = it.data.itemList
