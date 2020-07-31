@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.eyepetizer.home.HomeViewModel
 import me.pxq.eyepetizer.home.HomeViewModelFactory
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
+import me.pxq.eyepetizer.home.decoration.IndexRvDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
 import me.pxq.utils.loge
@@ -39,17 +41,19 @@ class RecommendFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(requireContext())
         }
+        //设置adapter
         recyclerView.adapter = IndexRvAdapter().also {
             subscribeUi(it)
         }
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        recyclerView.addItemDecoration(IndexRvDecoration())
+        //请求数据
         viewModel.fetchHomeData()
     }
 
+
+    /**
+     * 观察数据变化
+     */
     private fun subscribeUi(adapter: IndexRvAdapter) {
         viewModel.homeData.observe(requireActivity(), Observer {
             when (it) {

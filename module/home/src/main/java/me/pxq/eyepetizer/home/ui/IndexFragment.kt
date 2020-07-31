@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -11,8 +12,10 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import me.pxq.common.router.RouterHub
+import me.pxq.common.ui.view.FontCache
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.ViewPagerAdapter
+import me.pxq.utils.logd
 
 /**
  * Description: 首页fragment
@@ -24,6 +27,8 @@ class IndexFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+
+    private val tabs = listOf("发现", "推荐", "日报")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +43,6 @@ class IndexFragment : Fragment() {
         viewPager = view.findViewById<ViewPager2>(R.id.index_view_pager).apply {
             adapter =
                 ViewPagerAdapter(this@IndexFragment)
-            currentItem = 1
         }
         tabLayout = view.findViewById<TabLayout>(R.id.index_tab_layout).apply {
             //指示器高度
@@ -62,18 +66,27 @@ class IndexFragment : Fragment() {
                     me.pxq.common.R.color.colorTextSecondary
                 ), ContextCompat.getColor(requireContext(), me.pxq.common.R.color.colorTextPrimary)
             )
+
         }
 
         //tablayout绑定viewpager
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            //设置tablaout tab文字
-            when (position) {
-                0 -> tab.text = getString(R.string.home_tab_item_discovery)
-                1 -> tab.text = getString(R.string.home_tab_item_recommend)
-                2 -> tab.text = getString(R.string.home_tab_item_daily)
+        TabLayoutMediator(tabLayout, viewPager) { _, _ -> }.attach()
+        //再移除所有tab
+        tabLayout.removeAllTabs()
+        //手动添加tabs
+        with(tabLayout) {
+            for (tab in tabs) {
+                addTab(
+                    newTab().apply {
+                        customView = LayoutInflater.from(requireContext())
+                            .inflate(R.layout.home_tab_item, this@with, false).also {
+                                it.findViewById<TextView>(R.id.tv_tab_title).text = tab
+                            }
+                    })
             }
-        }.attach()
+        }
+        //选中"推荐"
+        viewPager.currentItem = 1
 
     }
-
 }

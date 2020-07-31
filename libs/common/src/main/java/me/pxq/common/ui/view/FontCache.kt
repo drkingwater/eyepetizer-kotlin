@@ -2,7 +2,6 @@ package me.pxq.common.ui.view
 
 import android.content.Context
 import android.graphics.Typeface
-import me.pxq.utils.logd
 import java.lang.ref.WeakReference
 
 /**
@@ -11,6 +10,13 @@ import java.lang.ref.WeakReference
  * Date : 2020/7/30 9:36 PM
  */
 object FontCache {
+
+    //字体样式
+    const val FZLAN_L = "FZLanL"
+    const val FZLAN_D = "FZLanD"
+    const val FUTURA = "Futura"
+    const val DIN = "DIN"
+    const val LOBSTER = "Lobster"
 
     @JvmStatic
     private val fontCache = mutableMapOf<String, WeakReference<Typeface>>()
@@ -26,30 +32,27 @@ object FontCache {
         if (typeface == null) {
             //根据字体名拿到字体信息
             typeface = when (typefaceName) {
-                "FZLanL" ->
+                FZLAN_L ->
                     Typeface.createFromAsset(
                         context.assets,
                         "fonts/FZLanTingHeiS-L-GB-Regular.TTF"
                     )
-                "FZLanD" ->
+                FZLAN_D ->
                     Typeface.createFromAsset(
                         context.assets,
                         "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF"
                     )
-
-                "Futura" ->
+                FUTURA ->
                     Typeface.createFromAsset(
                         context.assets,
                         "fonts/Futura-CondensedMedium.ttf"
                     )
-
-                "DIN" ->
+                DIN ->
                     Typeface.createFromAsset(
                         context.assets,
                         "fonts/DIN-Condensed-Bold.ttf"
                     )
-
-                "Lobster" ->
+                LOBSTER ->
                     Typeface.createFromAsset(
                         context.assets,
                         "fonts/Lobster-1.4.otf"

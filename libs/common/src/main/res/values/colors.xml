@@ -18,6 +18,12 @@
     <color name="black20">#cc000000</color>
     <color name="blue">#4687d7</color>
 
+    <color name="white">#ffffff</color>
+    <color name="white15">#e6ffffff</color>
+    <color name="white20">#ccffffff</color>
+    <color name="white25">#bfffffff</color>
+    <color name="white50">#80ffffff</color>
+
     <!--  header颜色  -->
     <color name="color_header_title">@color/black25</color>
 </resources>

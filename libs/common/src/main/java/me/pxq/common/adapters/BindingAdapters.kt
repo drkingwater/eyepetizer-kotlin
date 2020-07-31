@@ -1,8 +1,5 @@
 package me.pxq.common.adapters
 
-import android.content.Context
-import android.graphics.Typeface
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -10,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import me.pxq.common.data.Item
+import me.pxq.common.R
 
 /**
  * Description: databingding修改TextView字体
@@ -33,6 +30,22 @@ fun bindCover(imageView: ImageView, url: String?) {
         .load(url)
         .apply(RequestOptions.bitmapTransform(RoundedCorners(20)))
         .into(imageView)
+}
+
+@BindingAdapter("duration")
+fun bindDuration(textView: TextView, duration: Int) {
+    //计算时间
+    val hours = duration / 3600
+    val minutes = (duration - hours * 3600) / 60
+    val seconds = duration - (hours * 3600 + minutes * 60)
+    //格式化时间
+    val format = when {
+        hours > 0 -> textView.context.getString(R.string.duration_format_hms)
+            .format(hours, minutes, seconds)
+        else -> textView.context.getString(R.string.duration_format_ms)
+            .format(minutes, seconds)
+    }
+    textView.text = format
 }
 
 

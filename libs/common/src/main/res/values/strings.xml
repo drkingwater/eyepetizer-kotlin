@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">半开眼</string>
+    <!--格式化时间戳-->
+    <string name="duration_format_hms">%02d:%02d:%02d</string>
+    <string name="duration_format_ms">%02d:%02d</string>
+    <string name="duration_format_s">%02d</string>
 </resources>

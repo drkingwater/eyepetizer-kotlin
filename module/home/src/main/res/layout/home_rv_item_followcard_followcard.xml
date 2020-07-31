@@ -5,6 +5,7 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="me.pxq.common.ui.view.FontCache"/>
 
         <variable
             name="daily"
@@ -21,8 +22,31 @@
             android:layout_width="match_parent"
             android:layout_height="185dp"
             android:scaleType="fitXY"
-            app:cover="@{daily.data.content.data.cover.homepage}"
+            app:cover="@{daily.data.content.data.cover.detail}"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/home_daily_label"
+            app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+            app:layout_constraintTop_toTopOf="@id/iv_cover" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/home_shape_duration_bg"
+            android:padding="4dp"
+            android:textColor="@color/white15"
+            android:textSize="13dp"
+            app:duration="@{daily.data.content.data.duration}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintRight_toRightOf="@id/iv_cover"
+            app:typeface="Futura" />
 
 
         <com.google.android.material.internal.BaselineLayout
@@ -41,22 +65,21 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/baseline_layout" />
 
-        <me.pxq.common.ui.view.TypefaceTextView
+        <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="3dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@{daily.data.header.title, default = 怀孕了半辈子}"
-            android:textColor="@color/black35"
+            android:textColor="@color/black25"
             android:textSize="14dp"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
             app:layout_constraintTop_toBottomOf="@id/baseline_layout"
             app:typeface="FZLanD" />
 
-        <me.pxq.common.ui.view.TypefaceTextView
+        <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +88,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@{daily.data.header.description, default = 创意广告}"
-            android:textSize="12dp"
+            android:textSize="11dp"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:typeface="FZLanL" />

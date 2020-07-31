@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_rv_item_textcard_h7_height">
 
-        <me.pxq.common.ui.view.TypefaceTextView
+        <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:typeface="FZLanD" />
 
-        <me.pxq.common.ui.view.TypefaceTextView
+        <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
