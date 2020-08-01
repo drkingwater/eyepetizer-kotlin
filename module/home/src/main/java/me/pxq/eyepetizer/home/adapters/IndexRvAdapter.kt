@@ -27,7 +27,8 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             item.type == "followCard" && item.data.dataType == "FollowCard" -> VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW
             item.type == "informationCard" && item.data.dataType == "InformationCard" -> VIEW_HOLDER_TYPE_INFO_CARD_INFO
             item.type == "videoSmallCard" && item.data.dataType == "VideoBeanForClient" -> VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD
-            else -> 100
+            item.type == "textCard" && item.data.dataType == "TextCardWithTagId" -> VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG
+            else -> VIEW_HOLDER_TYPE_NOTHING
         }
     }
 
@@ -39,6 +40,7 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW -> R.layout.home_rv_item_followcard_followcard
             VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
             VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> R.layout.home_rv_item_video_small_card
+            VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
             else -> R.layout.home_rv_item_textcard_rightandleft
         }
         return ItemHolder(
@@ -67,6 +69,10 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
         private const val VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW = 2
         private const val VIEW_HOLDER_TYPE_INFO_CARD_INFO = 3
         private const val VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD = 4
+        private const val VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG = 5
+
+        //没有匹配到
+        private const val VIEW_HOLDER_TYPE_NOTHING = 100
     }
 
     class ItemHolder(private val binding: ViewDataBinding) :
@@ -116,6 +122,12 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
                 is HomeRvItemVideoSmallCardBinding -> {
                     binding.apply {
                         video = item
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemTextcardWithTagIdBinding -> {
+                    binding.apply {
+                        titleAction = item
                         executePendingBindings()
                     }
                 }

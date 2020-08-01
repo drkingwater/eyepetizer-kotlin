@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -7,41 +6,38 @@
     <data>
 
         <variable
-            name="header"
+            name="titleAction"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h7_height">
+        android:layout_height="wrap_content">
 
-        <me.pxq.common.ui.view.FontTextView
-            android:id="@+id/tv_title"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{header.data.text}"
-            android:textColor="@color/color_header_title"
-            android:textSize="@dimen/home_tv_size_header7"
+            android:src="@drawable/home_refresh_part"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:typeface="FZLanD" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_more"
             style="@style/Home_TitleActionImage"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_more"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_more" />
 
         <me.pxq.common.ui.view.FontTextView
-            android:id="@+id/tv_right"
+            android:id="@+id/tv_more"
             style="@style/Home_TitleActionText"
-            android:text="@{header.data.rightText, default = @string/home_look_before}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_more"
+            android:text="@{titleAction.data.text, default = @string/home_look_more_video}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/iv_more"
-            app:layout_constraintTop_toTopOf="@id/iv_more"
-            tools:text="查看更多" />
-
+            tools:ignore="SpUsage"
+            tools:text="查看更多视频" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

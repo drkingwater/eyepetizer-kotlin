@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Home_TabTextAppearance">
         <item name="android:textSize">12dp</item>
     </style>
@@ -14,6 +15,21 @@
         <item name="android:textColor">@color/white15</item>
         <item name="android:textSize">13dp</item>
         <item name="typeface">Futura</item>
+    </style>
+
+    <style name="Home_TitleActionImage">
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">13dp</item>
+        <item name="android:src">@drawable/home_foot_more_small</item>
+    </style>
+
+    <style name="Home_TitleActionText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/home_title_action_magin_right</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">@dimen/home_text_size_normal</item>
+        <item name="typeface">FZLanD</item>
     </style>
 
 </resources>

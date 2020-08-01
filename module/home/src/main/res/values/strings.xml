@@ -5,5 +5,8 @@
     <string name="home_tab_item_daily">日报</string>
     <string name="home_add_follow">+关注</string>
 
+    <string name="home_look_before">查看往期</string>
+    <string name="home_look_more_video">查看更多视频</string>
+
     <string name="home_video_tag">#%s / 开眼精选</string>
 </resources>
