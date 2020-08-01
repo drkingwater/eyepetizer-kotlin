@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import me.pxq.common.R
 import me.pxq.common.data.Header
+import me.pxq.common.data.Item
 import me.pxq.utils.glide.TopRoundedCorners
 
 /**
@@ -84,6 +85,18 @@ fun bindInfoBg(imageView: ImageView, url: String?){
         .load(url)
         .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
         .into(imageView)
+}
+
+//selected card
+@BindingAdapter("selections", "select")
+fun bindSelectedCard(imageView: ImageView, selections : List<Item>?, index : Int){
+    selections ?.run {
+        Glide.with(imageView)
+            .load(this[index].data.url)
+            .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
+            .into(imageView)
+    }
+
 }
 
 

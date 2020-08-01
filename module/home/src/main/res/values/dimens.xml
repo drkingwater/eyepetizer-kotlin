@@ -17,4 +17,6 @@
     <dimen name="home_daily_label_size">48dp</dimen>
     <dimen name="home_text_size_normal">14dp</dimen>
     <dimen name="home_title_action_magin_right">5dp</dimen>
+    <dimen name="home_banner_height">185dp</dimen>
+    <dimen name="home_selection_margin">2dp</dimen>
 </resources>

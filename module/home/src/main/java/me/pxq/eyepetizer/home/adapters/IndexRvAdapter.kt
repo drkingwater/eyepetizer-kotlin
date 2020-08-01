@@ -28,6 +28,8 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             item.type == "informationCard" && item.data.dataType == "InformationCard" -> VIEW_HOLDER_TYPE_INFO_CARD_INFO
             item.type == "videoSmallCard" && item.data.dataType == "VideoBeanForClient" -> VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD
             item.type == "textCard" && item.data.dataType == "TextCardWithTagId" -> VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG
+            item.type == "banner" && item.data.dataType == "Banner" -> VIEW_HOLDER_TYPE_BANNER
+            item.type == "ugcSelectedCardCollection" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_SELECTION_CARD
             else -> VIEW_HOLDER_TYPE_NOTHING
         }
     }
@@ -41,6 +43,8 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
             VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> R.layout.home_rv_item_video_small_card
             VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
+            VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner
+            VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard
             else -> R.layout.home_rv_item_textcard_rightandleft
         }
         return ItemHolder(
@@ -70,6 +74,8 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
         private const val VIEW_HOLDER_TYPE_INFO_CARD_INFO = 3
         private const val VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD = 4
         private const val VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG = 5
+        private const val VIEW_HOLDER_TYPE_BANNER = 6
+        private const val VIEW_HOLDER_TYPE_SELECTION_CARD = 7
 
         //没有匹配到
         private const val VIEW_HOLDER_TYPE_NOTHING = 100
@@ -128,6 +134,18 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
                 is HomeRvItemTextcardWithTagIdBinding -> {
                     binding.apply {
                         titleAction = item
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemBannerBinding -> {
+                    binding.apply {
+                        banner = item
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemUgsSelectioncardBinding -> {
+                    binding.apply {
+                        collection = item
                         executePendingBindings()
                     }
                 }

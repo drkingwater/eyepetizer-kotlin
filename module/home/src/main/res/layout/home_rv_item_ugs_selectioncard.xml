@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="collection"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_rv_item_textcard_h7_height"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{collection.data.header.title}"
+                android:textColor="@color/color_header_title"
+                android:textSize="@dimen/home_tv_size_header7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:typeface="FZLanD"
+                tools:text="社区精选" />
+
+            <ImageView
+                android:id="@+id/iv_more"
+                style="@style/Home_TitleActionImage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_right"
+                style="@style/Home_TitleActionText"
+                android:text="@{collection.data.header.rightText, default = @string/home_look_before}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_more"
+                app:layout_constraintRight_toLeftOf="@id/iv_more"
+                app:layout_constraintTop_toTopOf="@id/iv_more"
+                tools:text="查看更多" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.internal.BaselineLayout
+            android:id="@+id/base_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_layout" />
+
+        <ImageView
+            android:id="@+id/iv_cover_left"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/home_banner_height"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/iv_cover_right"
+            app:layout_constraintTop_toBottomOf="@id/base_line"
+            app:select="@{0}"
+            app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:id="@+id/iv_cover_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/home_selection_margin"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/iv_cover_bottom"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@id/iv_cover_left"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/base_line"
+            app:layout_constraintVertical_weight="1"
+            app:select="@{1}"
+            app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:id="@+id/iv_cover_bottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/home_selection_margin"
+            android:layout_marginTop="@dimen/home_selection_margin"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_left"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@id/iv_cover_left"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover_right"
+            app:layout_constraintVertical_weight="1"
+            app:select="@{2}"
+            app:selections="@{collection.data.itemList}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
