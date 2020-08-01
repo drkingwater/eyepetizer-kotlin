@@ -7,16 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import me.pxq.eyepetizer.home.HomeViewModel
 import me.pxq.eyepetizer.home.HomeViewModelFactory
-import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
-import me.pxq.eyepetizer.home.decoration.IndexRvDecoration
+import me.pxq.eyepetizer.home.decoration.MarginDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
 import me.pxq.utils.loge
@@ -53,7 +49,7 @@ class RecommendFragment : Fragment() {
         binding.recyclerView.run {
             layoutManager = LinearLayoutManager(requireContext())
             //设置分割线
-            addItemDecoration(IndexRvDecoration())
+            addItemDecoration(MarginDecoration(bottom = 50))
             //设置adapter
             adapter = IndexRvAdapter().also {
                 subscribeUi(it)

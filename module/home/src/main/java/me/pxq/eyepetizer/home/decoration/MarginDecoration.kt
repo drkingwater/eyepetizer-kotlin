@@ -5,11 +5,11 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Description:
+ * Description: 上下左右边距Decoration
  * Author : pxq
  * Date : 2020/7/31 8:02 PM
  */
-class IndexRvDecoration : RecyclerView.ItemDecoration() {
+class MarginDecoration(val left : Int= 0, val top : Int = 0, val right : Int = 0, val bottom : Int = 0) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

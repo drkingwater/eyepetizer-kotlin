@@ -1,11 +1,18 @@
 package me.pxq.eyepetizer.home.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import me.pxq.common.data.Item
-import me.pxq.eyepetizer.home.databinding.*
+import me.pxq.eyepetizer.home.databinding.HomeRvItemFollowcardFollowcardBinding
+import me.pxq.eyepetizer.home.databinding.HomeRvItemInfocardInfocardBinding
+import me.pxq.eyepetizer.home.databinding.HomeRvItemTextcardRightandleftBinding
+import me.pxq.eyepetizer.home.databinding.HomeRvItemTextcardTextcardBinding
+import me.pxq.eyepetizer.home.decoration.MarginDecoration
+import me.pxq.utils.logd
 
 /**
  * Description: [me.pxq.eyepetizer.home.ui.IndexFragment] 推荐栏 Rv Adapter
@@ -21,6 +28,7 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             item.type == "textCard" && item.data.dataType == "TextCardWithRightAndLeftTitle" -> 0
             item.type == "textCard" && item.data.dataType == "TextCard" -> 1
             item.type == "followCard" && item.data.dataType == "FollowCard" -> 2
+            item.type == "informationCard" && item.data.dataType == "InformationCard" -> 3
             else -> 100
         }
     }
@@ -43,6 +51,13 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             )
             2 -> ItemHolder(
                 HomeRvItemFollowcardFollowcardBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            3 -> ItemHolder(
+                HomeRvItemInfocardInfocardBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -90,8 +105,32 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
                         executePendingBindings()
                     }
                 }
+                is HomeRvItemInfocardInfocardBinding -> {
+                    binding.apply {
+                        logd("info card...")
+                        //绑定rv adapter
+                        if (rvBanner.adapter == null){
+                            rvBanner.run {
+                                //设置分割线
+                                addItemDecoration(MarginDecoration(bottom = 20))
+                                //布局方式
+                                layoutManager = LinearLayoutManager(this.context)
+                                //优化绘制
+                                setHasFixedSize(true)
+                                //设置adapter
+                                adapter = InfoCardRvAdapter()
+                            }
+                        }
+                        //更新数据
+                        (rvBanner.adapter as InfoCardRvAdapter).submitList(item.data.titleList)
+                        info = item
+                        executePendingBindings()
+                    }
+                }
             }
 
         }
     }
+
+
 }

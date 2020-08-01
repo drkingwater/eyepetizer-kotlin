@@ -44,6 +44,9 @@ fun bindIsAuthor(imageView: ImageView, iconType: String?) {
     }
 }
 
+/**
+ * FollowCard 视频cover，圆角
+ */
 @BindingAdapter("cover")
 fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
@@ -53,6 +56,9 @@ fun bindCover(imageView: ImageView, url: String?) {
         .into(imageView)
 }
 
+/**
+ * FollowCard 时间格式化
+ */
 @BindingAdapter("duration")
 fun bindDuration(textView: TextView, duration: Int) {
     //计算时间
@@ -67,6 +73,16 @@ fun bindDuration(textView: TextView, duration: Int) {
             .format(minutes, seconds)
     }
     textView.text = format
+}
+
+
+@BindingAdapter("infoUrl")
+fun bindInfoBg(imageView: ImageView, url: String?){
+    url ?: return
+    Glide.with(imageView)
+        .load(url)
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(20)))
+        .into(imageView)
 }
 
 

@@ -24,6 +24,9 @@
     <color name="white25">#bfffffff</color>
     <color name="white50">#80ffffff</color>
 
+
+    <color name="gray">#ededed</color>
+
     <!--  header颜色  -->
     <color name="color_header_title">@color/black25</color>
 </resources>
