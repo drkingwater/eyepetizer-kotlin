@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import me.pxq.common.R
 import me.pxq.common.data.Header
+import me.pxq.utils.glide.TopRoundedCorners
 
 /**
  * Description: DataBinding Adapters
@@ -81,7 +82,7 @@ fun bindInfoBg(imageView: ImageView, url: String?){
     url ?: return
     Glide.with(imageView)
         .load(url)
-        .apply(RequestOptions.bitmapTransform(RoundedCorners(20)))
+        .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20)))
         .into(imageView)
 }
 
