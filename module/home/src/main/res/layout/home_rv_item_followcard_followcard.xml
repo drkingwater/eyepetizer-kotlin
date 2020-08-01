@@ -5,7 +5,8 @@
     <data>
 
         <import type="android.view.View" />
-        <import type="me.pxq.common.ui.view.FontCache"/>
+
+        <import type="me.pxq.common.ui.view.FontCache" />
 
         <variable
             name="daily"
@@ -35,18 +36,10 @@
             app:layout_constraintTop_toTopOf="@id/iv_cover" />
 
         <me.pxq.common.ui.view.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/home_shape_duration_bg"
-            android:padding="4dp"
-            android:textColor="@color/white15"
-            android:textSize="13dp"
+            style="@style/Home_VideoDurationText"
             app:duration="@{daily.data.content.data.duration}"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-            app:layout_constraintRight_toRightOf="@id/iv_cover"
-            app:typeface="Futura" />
+            app:layout_constraintRight_toRightOf="@id/iv_cover" />
 
 
         <com.google.android.material.internal.BaselineLayout
@@ -61,8 +54,8 @@
             android:layout_width="@dimen/home_followcard_icon_size"
             android:layout_height="@dimen/home_followcard_icon_size"
             android:scaleType="centerCrop"
-            app:iconUrl="@{daily.data.header.icon}"
             app:iconType="@{daily.data.header.iconType}"
+            app:iconUrl="@{daily.data.header.icon}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/baseline_layout" />
 
@@ -70,9 +63,9 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:src="@drawable/home_author_icon"
-            app:layout_constraintRight_toRightOf="@id/iv_icon"
+            app:isAuthor="@{daily.data.header.iconType}"
             app:layout_constraintBottom_toBottomOf="@id/iv_icon"
-            app:isAuthor="@{daily.data.header.iconType}"/>
+            app:layout_constraintRight_toRightOf="@id/iv_icon" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"
@@ -83,7 +76,7 @@
             android:singleLine="true"
             android:text="@{daily.data.header.title, default = 怀孕了半辈子}"
             android:textColor="@color/black25"
-            android:textSize="14dp"
+            android:textSize="@dimen/home_text_size_normal"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
             app:layout_constraintTop_toBottomOf="@id/baseline_layout"
             app:typeface="FZLanD" />

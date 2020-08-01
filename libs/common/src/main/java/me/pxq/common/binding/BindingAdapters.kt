@@ -82,7 +82,7 @@ fun bindInfoBg(imageView: ImageView, url: String?){
     url ?: return
     Glide.with(imageView)
         .load(url)
-        .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20)))
+        .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
         .into(imageView)
 }
 

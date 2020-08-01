@@ -15,4 +15,5 @@
     <dimen name="home_followcard_icon_size">38dp</dimen>
     <dimen name="home_tablayout_item_textsize">12dp</dimen>
     <dimen name="home_daily_label_size">48dp</dimen>
+    <dimen name="home_text_size_normal">14dp</dimen>
 </resources>

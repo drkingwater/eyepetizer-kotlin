@@ -3,4 +3,17 @@
     <style name="Home_TabTextAppearance">
         <item name="android:textSize">12dp</item>
     </style>
+
+    <style name="Home_VideoDurationText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@drawable/home_shape_duration_bg</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/white15</item>
+        <item name="android:textSize">13dp</item>
+        <item name="typeface">Futura</item>
+    </style>
+
 </resources>

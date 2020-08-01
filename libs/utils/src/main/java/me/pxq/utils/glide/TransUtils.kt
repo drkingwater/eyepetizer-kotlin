@@ -42,7 +42,8 @@ object TransUtils {
         //设置缩放比例
         if (scaleWidth != 0) {
             val matrix = Matrix().apply {
-                setScale(1.2f, 1.0f)
+//                preScale(1.2f, 1.0f)
+//                postScale(1.2f, 1.0f)
             }
             canvas.setMatrix(matrix)
         }
