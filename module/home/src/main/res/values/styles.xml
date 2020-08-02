@@ -19,7 +19,7 @@
 
     <style name="Home_TitleActionImage">
         <item name="android:layout_width">10dp</item>
-        <item name="android:layout_height">13dp</item>
+        <item name="android:layout_height">10dp</item>
         <item name="android:src">@drawable/home_foot_more_small</item>
     </style>
 

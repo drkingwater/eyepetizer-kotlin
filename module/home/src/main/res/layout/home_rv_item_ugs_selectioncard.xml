@@ -37,16 +37,16 @@
             <ImageView
                 android:id="@+id/iv_more"
                 style="@style/Home_TitleActionImage"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@id/tv_right"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_right" />
 
             <me.pxq.common.ui.view.FontTextView
                 android:id="@+id/tv_right"
                 style="@style/Home_TitleActionText"
                 android:text="@{collection.data.header.rightText, default = @string/home_look_before}"
-                app:layout_constraintBottom_toBottomOf="@id/iv_more"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/iv_more"
-                app:layout_constraintTop_toTopOf="@id/iv_more"
                 tools:text="查看更多" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

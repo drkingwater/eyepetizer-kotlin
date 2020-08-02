@@ -5,7 +5,7 @@
     <dimen name="home_tab_item_padding">20dp</dimen>
     <dimen name="home_tab_layout_indicator_height">3dp</dimen>
     <dimen name="home_tab_layout_indicator_width">10dp</dimen>
-    <dimen name="home_rv_item_textcard_h7_height">45dp</dimen>
+    <dimen name="home_rv_item_textcard_h7_height">38dp</dimen>
     <dimen name="home_rv_item_textcard_h5_height">30dp</dimen>
     <dimen name="home_tv_size_header5">20dp</dimen>
     <dimen name="home_header_padding">15dp</dimen>
@@ -19,4 +19,5 @@
     <dimen name="home_title_action_magin_right">5dp</dimen>
     <dimen name="home_banner_height">185dp</dimen>
     <dimen name="home_selection_margin">2dp</dimen>
+    <dimen name="home_briefcard_icon_size">50dp</dimen>
 </resources>

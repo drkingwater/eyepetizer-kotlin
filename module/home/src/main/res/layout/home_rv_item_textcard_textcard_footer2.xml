@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="header"
             type="me.pxq.common.data.Item" />
@@ -13,19 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h7_height">
-
-        <me.pxq.common.ui.view.FontTextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{header.data.text}"
-            android:textColor="@color/color_header_title"
-            android:textSize="@dimen/home_tv_size_header7"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:typeface="FZLanD" />
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_more"
@@ -37,10 +27,10 @@
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_right"
             style="@style/Home_TitleActionText"
-            android:text="@{header.data.rightText, default = @string/home_look_before}"
+            android:text="@{header.data.text, default = @string/home_look_before}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/iv_more"
-            tools:text="查看更多" />
+            tools:text="查看更多热门排行" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

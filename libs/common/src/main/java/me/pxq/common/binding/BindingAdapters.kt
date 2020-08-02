@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import me.pxq.common.R
+import me.pxq.common.data.Follow
 import me.pxq.common.data.Header
 import me.pxq.common.data.Item
 import me.pxq.utils.glide.TopRoundedCorners
@@ -18,8 +19,8 @@ import me.pxq.utils.glide.TopRoundedCorners
  * Author : pxq
  * Date : 2020/7/29 11:24 PM
  */
-@BindingAdapter("iconUrl", "iconType")
-fun bindIcon(imageView: ImageView, url: String?, iconType: String?) {
+@BindingAdapter("iconUrl", "iconType", requireAll = false)
+fun bindIcon(imageView: ImageView, url: String?, iconType: String? = Header.ICON_TYPE_ROUND) {
     url ?: return
     Glide.with(imageView)
         .load(url)
@@ -43,6 +44,20 @@ fun bindIsAuthor(imageView: ImageView, iconType: String?) {
         View.VISIBLE
     } else {
         View.GONE
+    }
+}
+
+/**
+ * TextCard header5 判断是否关注
+ */
+@BindingAdapter("followed")
+fun bindFollowed(textView: TextView, follow: Follow?) {
+    follow?.run {
+        textView.visibility = if (followed) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
     }
 }
 
@@ -79,7 +94,7 @@ fun bindDuration(textView: TextView, duration: Int) {
 
 
 @BindingAdapter("infoUrl")
-fun bindInfoBg(imageView: ImageView, url: String?){
+fun bindInfoBg(imageView: ImageView, url: String?) {
     url ?: return
     Glide.with(imageView)
         .load(url)
@@ -88,13 +103,21 @@ fun bindInfoBg(imageView: ImageView, url: String?){
 }
 
 //selected card
+/**
+ * Rv Item SelectedCard图片加载，[selections]：图片源,[index]:要选择的图片索引
+ */
 @BindingAdapter("selections", "select")
-fun bindSelectedCard(imageView: ImageView, selections : List<Item>?, index : Int){
-    selections ?.run {
-        Glide.with(imageView)
-            .load(this[index].data.url)
-            .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
-            .into(imageView)
+fun bindSelectedCard(imageView: ImageView, selections: List<Item>?, index: Int) {
+    selections?.run {
+        //图片不够
+        if (size <= index) {
+            imageView.visibility = View.GONE
+        } else {
+            Glide.with(imageView)
+                .load(this[index].data.url)
+                .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
+                .into(imageView)
+        }
     }
 
 }
