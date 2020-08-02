@@ -4,6 +4,7 @@ import me.pxq.common.data.HomePage
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 /**
  * Description: 数据接口
@@ -12,7 +13,10 @@ import retrofit2.http.GET
  */
 interface Api {
 
-    @GET("api/v5/index/tab/allRec?page=0")
-    suspend fun index(): HomePage
+    /**
+     * 获取首页-推荐数据
+     */
+    @GET
+    suspend fun recommend(@Url url: String = "http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0"): HomePage
 
 }

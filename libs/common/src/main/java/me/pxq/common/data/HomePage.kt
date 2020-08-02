@@ -16,7 +16,7 @@ data class HomePage(
     val key: Int,
     val adExist: Boolean,
     val count: Int,
-    val itemList: List<Item>,
+    val itemList: MutableList<Item>,
     val nextPageUrl: String,
     val total: Int
 )
@@ -66,7 +66,7 @@ data class Data(
     val ifPgc: Boolean,
     val ifShowNotificationIcon: Boolean,
     val itemList: List<Item>,
-    val image : String,
+    val image: String,
     val label: Any,
     val labelList: List<Any>,
     val lastViewTime: Any,
@@ -173,15 +173,15 @@ data class Header(
     val textAlign: String,
     val time: Long,
     val title: String
-){
-    companion object{
+) {
+    companion object {
         //圆形icon
         const val ICON_TYPE_ROUND = "round"
+
         //方形icon
         const val ICON_TYPE_SQUARE = "square"
     }
 }
-
 
 
 data class Follow(

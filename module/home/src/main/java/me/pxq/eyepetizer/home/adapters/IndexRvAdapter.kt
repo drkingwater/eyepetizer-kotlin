@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
 import me.pxq.common.data.Item
+import me.pxq.common.ui.view.TheEndHolder
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.*
 import me.pxq.eyepetizer.home.decoration.MarginDecoration
@@ -16,12 +17,13 @@ import me.pxq.utils.logd
  * Author : pxq
  * Date : 2020/7/29 9:57 PM
  */
-class IndexRvAdapter(var items: List<Item> = emptyList()) :
+class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         val item = items[position]
         return when {
+            item.type == "theEnd" -> VIEW_HOLDER_TYPE_THE_END
             item.type == "textCard" && item.data.dataType == "TextCardWithRightAndLeftTitle" -> VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
             item.type == "textCard" && item.data.dataType == "TextCard" && "header5" == item.data.type -> VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5
             item.type == "textCard" && item.data.dataType == "TextCard" && "footer2" == item.data.type -> VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2
@@ -38,7 +40,7 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
+        if (viewType == VIEW_HOLDER_TYPE_THE_END) return TheEndHolder(parent)
         val layoutId = when (viewType) {
             VIEW_HOLDER_TYPE_TEXT_CARD_TITLE -> R.layout.home_rv_item_textcard_rightandleft
             VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5 -> R.layout.home_rv_item_textcard_textcard_header5
@@ -85,6 +87,8 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
         private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TAG = 8
         private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TOP = 9
         private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 = 10
+
+        private const val VIEW_HOLDER_TYPE_THE_END = 99
 
         //没有匹配到
         private const val VIEW_HOLDER_TYPE_NOTHING = 100
