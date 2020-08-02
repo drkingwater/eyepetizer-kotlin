@@ -6,11 +6,12 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 
 /**
- * Description: 半圆角矩形，左上角、右上角为圆角[roundingRadius]，可以选择设置水平缩放宽度[scaleWidth]
+ * Description: 半圆角矩形，左上角、右上角为圆角[roundingRadius]
+ * todo : 可以选择设置水平缩放宽度[scaleWidth]
  * Author : pxq
  * Date : 2020/8/1 1:27 PM
  */
-class TopRoundedCorners(private val roundingRadius: Int, private val scaleWidth: Int = 0) :
+class SingleRoundedCorners(private val roundingRadius: Int, private val type:Int, private val scaleWidth: Int = 0) :
     BitmapTransformation() {
 
     override fun updateDiskCacheKey(messageDigest: MessageDigest) {
@@ -23,11 +24,11 @@ class TopRoundedCorners(private val roundingRadius: Int, private val scaleWidth:
         outWidth: Int,
         outHeight: Int
     ): Bitmap {
-        return TransUtils.topRoundedCorners(pool, toTransform, roundingRadius, scaleWidth)
+        return TransUtils.roundedCorners(pool, toTransform, roundingRadius, type)
     }
 
     override fun equals(other: Any?): Boolean {
-        if (other is TopRoundedCorners) {
+        if (other is SingleRoundedCorners) {
             return other.roundingRadius == roundingRadius
         }
         return false

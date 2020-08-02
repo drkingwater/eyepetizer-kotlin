@@ -1,8 +1,10 @@
 package me.pxq.common.binding
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -12,7 +14,8 @@ import me.pxq.common.R
 import me.pxq.common.data.Follow
 import me.pxq.common.data.Header
 import me.pxq.common.data.Item
-import me.pxq.utils.glide.TopRoundedCorners
+import me.pxq.utils.extensions.dp2px
+import me.pxq.utils.glide.RoundedCornersTransformation
 
 /**
  * Description: DataBinding Adapters
@@ -20,15 +23,21 @@ import me.pxq.utils.glide.TopRoundedCorners
  * Date : 2020/7/29 11:24 PM
  */
 
+/**
+ * 控制view显示与否
+ */
 @BindingAdapter("isGone")
-fun bindIsGone(view: View, isGone : Boolean){
-    view.visibility = if (isGone){
+fun bindIsGone(view: View, isGone: Boolean) {
+    view.visibility = if (isGone) {
         View.GONE
-    } else{
+    } else {
         View.VISIBLE
     }
 }
 
+/**
+ * 根据[iconType]加载图片
+ */
 @BindingAdapter("iconUrl", "iconType", requireAll = false)
 fun bindIcon(imageView: ImageView, url: String?, iconType: String? = Header.ICON_TYPE_ROUND) {
     url ?: return
@@ -37,7 +46,7 @@ fun bindIcon(imageView: ImageView, url: String?, iconType: String? = Header.ICON
         .apply(
             when (iconType) { //根据icon类型裁剪
                 Header.ICON_TYPE_ROUND -> RequestOptions.bitmapTransform(CircleCrop())
-                else -> RequestOptions.bitmapTransform(RoundedCorners(20))
+                else -> RequestOptions.bitmapTransform(RoundedCorners(defaultRoundRadius().toInt()))
             }
         )
         .into(imageView)
@@ -79,7 +88,7 @@ fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
     Glide.with(imageView)
         .load(url)
-        .apply(RequestOptions.bitmapTransform(RoundedCorners(20)))
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(defaultRoundRadius().toInt())))
         .into(imageView)
 }
 
@@ -103,12 +112,24 @@ fun bindDuration(textView: TextView, duration: Int) {
 }
 
 
+/**
+ * 开眼咨询，图片要求：顶部圆角，底部不变
+ */
 @BindingAdapter("infoUrl")
 fun bindInfoBg(imageView: ImageView, url: String?) {
     url ?: return
     Glide.with(imageView)
         .load(url)
-        .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
+//        .apply(RequestOptions.bitmapTransform(SingleRoundedCorners(20, TransUtils.TYPE_TOP)))
+        .apply(
+            RequestOptions.bitmapTransform(
+                RoundedCornersTransformation(
+                    defaultRoundRadius().toInt(),
+                    0,
+                    RoundedCornersTransformation.CornerType.TOP
+                )
+            )
+        )
         .into(imageView)
 }
 
@@ -123,13 +144,28 @@ fun bindSelectedCard(imageView: ImageView, selections: List<Item>?, index: Int) 
         if (size <= index) {
             imageView.visibility = View.GONE
         } else {
+            val type = when (index) {
+                0 -> RoundedCornersTransformation.CornerType.LEFT
+                1 -> RoundedCornersTransformation.CornerType.TOP_RIGHT
+                else -> RoundedCornersTransformation.CornerType.BOTTOM_RIGHT
+            }
             Glide.with(imageView)
                 .load(this[index].data.url)
-                .apply(RequestOptions.bitmapTransform(TopRoundedCorners(20, 20)))
+//                .apply(RequestOptions.bitmapTransform(SingleRoundedCorners(20, type)))
+                .apply(
+                    RequestOptions.bitmapTransform(
+                        RoundedCornersTransformation(
+                            defaultRoundRadius().toInt(), 0, type
+                        )
+                    )
+                )
                 .into(imageView)
         }
     }
 
 }
+
+//获取默认的圆角尺寸
+fun defaultRoundRadius() = 5f.dp2px
 
 

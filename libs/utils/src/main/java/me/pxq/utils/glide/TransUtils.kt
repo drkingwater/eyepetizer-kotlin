@@ -11,15 +11,30 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
  * Date : 2020/8/1 2:02 PM
  */
 object TransUtils {
+    //上左、上右圆角
+    const val TYPE_TOP = 1
+
+    //上右圆角
+    const val TYPE_TOP_RIGHT = 2
+
+    //上左圆角
+    const val TYPE_TOP_LEFT = 3
+
+    //下右圆角
+    const val TYPE_BOTTOM_RIGHT = 4
+
+    //左上、左下圆角
+    const val TYPE_LEFT = 5
+
 
     /**
      * 绘制半圆角图片(顶部两个圆角)
      */
-    fun topRoundedCorners(
+    fun roundedCorners(
         pool: BitmapPool,
         inBitmap: Bitmap,
         roundingRadius: Int,
-        scaleWidth: Int = 0
+        type: Int
     ): Bitmap {
 
         // Alpha is required for this transformation.
@@ -35,21 +50,59 @@ object TransUtils {
             isAntiAlias = true
             this.shader = shader
         }
-        //设置目标高度比原图高，让底部的角不被裁剪
-        val rect = RectF(0f, 0f, result.width.toFloat(), result.height.toFloat() + roundingRadius)
 
-        val canvas = Canvas(result)
-        //设置缩放比例
-        if (scaleWidth != 0) {
-            val matrix = Matrix().apply {
-//                preScale(1.2f, 1.0f)
-//                postScale(1.2f, 1.0f)
-            }
-            canvas.setMatrix(matrix)
+        val rect = when (type) {
+            TYPE_TOP -> RectF(  //上面两个角圆角
+                0f,
+                0f,
+                result.width.toFloat(),
+                result.height.toFloat() + roundingRadius  //设置目标高度比原图高，让底部的角不被裁剪
+            )
+            TYPE_TOP_RIGHT -> RectF(  //右上角圆角
+                -roundingRadius.toFloat(),
+                0f,
+                result.width.toFloat() + roundingRadius,
+                result.height.toFloat() + roundingRadius
+            )
+            TYPE_TOP_LEFT -> RectF(  //左上角圆角
+                0f,
+                0f,
+                result.width.toFloat() + 1,
+                result.height.toFloat() + 1
+            )
+            TYPE_BOTTOM_RIGHT -> RectF(  //右下角圆角
+                -roundingRadius.toFloat(),
+                0f,
+                result.width.toFloat(),
+                result.height.toFloat()
+            )
+            TYPE_LEFT -> RectF(  //左边圆角
+                0f,
+                0f,
+                result.width.toFloat() + roundingRadius,
+                result.height.toFloat()
+            )
+            else -> RectF(
+                0f,
+                0f,
+                result.width.toFloat(),
+                result.height.toFloat() + roundingRadius
+            )
+
         }
+        val canvas = Canvas(result)
+        //todo 设置缩放比例
+//        if (scaleWidth != 0) {
+//            val matrix = Matrix().apply {
+////                preScale(1.2f, 1.0f)
+////                postScale(1.2f, 1.0f)
+//            }
+//            canvas.setMatrix(matrix)
+//        }
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
 //        drawRoundedCorners(canvas, paint, rect)
         canvas.drawRoundRect(rect, roundingRadius.toFloat(), roundingRadius.toFloat(), paint)
+
         clear(canvas)
 
         if (toTransform != inBitmap) {
@@ -57,6 +110,12 @@ object TransUtils {
         }
 
         return result
+    }
+
+    private fun getPath(roundingRadius : Float, width : Float, height:Float){
+        val path = Path()
+        val rectF = RectF(0f, 0f, width, height)
+
     }
 
     // Avoids warnings in M+.
