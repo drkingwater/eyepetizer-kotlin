@@ -22,4 +22,6 @@
     <dimen name="home_briefcard_icon_size">50dp</dimen>
     <dimen name="home_icon_new_size">14dp</dimen>
     <dimen name="home_rv_item_topic_height">65dp</dimen>
+    <!--  多图Tag  -->
+    <dimen name="home_multi_pic_size">35dp</dimen>
 </resources>

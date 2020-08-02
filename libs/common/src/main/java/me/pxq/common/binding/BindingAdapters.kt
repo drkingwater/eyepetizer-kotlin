@@ -1,6 +1,7 @@
 package me.pxq.common.binding
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +16,7 @@ import me.pxq.common.data.Follow
 import me.pxq.common.data.Header
 import me.pxq.common.data.Item
 import me.pxq.utils.extensions.dp2px
+import me.pxq.utils.extensions.load
 import me.pxq.utils.glide.RoundedCornersTransformation
 
 /**
@@ -41,15 +43,12 @@ fun bindIsGone(view: View, isGone: Boolean) {
 @BindingAdapter("iconUrl", "iconType", requireAll = false)
 fun bindIcon(imageView: ImageView, url: String?, iconType: String? = Header.ICON_TYPE_ROUND) {
     url ?: return
-    Glide.with(imageView)
-        .load(url)
-        .apply(
-            when (iconType) { //根据icon类型裁剪
-                Header.ICON_TYPE_ROUND -> RequestOptions.bitmapTransform(CircleCrop())
-                else -> RequestOptions.bitmapTransform(RoundedCorners(defaultRoundRadius().toInt()))
-            }
-        )
-        .into(imageView)
+    imageView.load(
+        url, when (iconType) { //根据icon类型裁剪
+            Header.ICON_TYPE_ROUND -> CircleCrop()
+            else -> RoundedCorners(defaultRoundRadius().toInt())
+        }
+    )
 
 }
 
@@ -86,10 +85,7 @@ fun bindFollowed(textView: TextView, follow: Follow?) {
 @BindingAdapter("cover")
 fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
-    Glide.with(imageView)
-        .load(url)
-        .apply(RequestOptions.bitmapTransform(RoundedCorners(defaultRoundRadius().toInt())))
-        .into(imageView)
+    imageView.load(url, RoundedCorners(defaultRoundRadius().toInt()))
 }
 
 /**
@@ -118,52 +114,77 @@ fun bindDuration(textView: TextView, duration: Int) {
 @BindingAdapter("infoUrl")
 fun bindInfoBg(imageView: ImageView, url: String?) {
     url ?: return
-    Glide.with(imageView)
-        .load(url)
-//        .apply(RequestOptions.bitmapTransform(SingleRoundedCorners(20, TransUtils.TYPE_TOP)))
-        .apply(
-            RequestOptions.bitmapTransform(
-                RoundedCornersTransformation(
-                    defaultRoundRadius().toInt(),
-                    0,
-                    RoundedCornersTransformation.CornerType.TOP
-                )
-            )
+    imageView.load(
+        url, RoundedCornersTransformation(
+            defaultRoundRadius().toInt(),
+            0,
+            RoundedCornersTransformation.CornerType.TOP
         )
-        .into(imageView)
+    )
 }
 
 //selected card
+
 /**
- * Rv Item SelectedCard图片加载，[selections]：图片源,[index]:要选择的图片索引
+ * Rv Item SelectedCard图片加载，
+ * [selections]：图片源
+ * [index]:要选择的图片索引
+ * [isIcon]:是否是用户头像
+ * [multiPicTag]:是否多图标志
  */
-@BindingAdapter("selections", "select")
-fun bindSelectedCard(imageView: ImageView, selections: List<Item>?, index: Int) {
+@BindingAdapter("selections", "select", "isIcon", "multiPicTag", requireAll = false)
+fun bindSelectedCard(
+    view: View,
+    selections: List<Item>?,
+    index: Int,
+    isIcon: Boolean = false,
+    multiPicTag: Boolean = false
+) {
     selections?.run {
         //图片不够
         if (size <= index) {
-            imageView.visibility = View.GONE
+            view.visibility = View.GONE
         } else {
-            val type = when (index) {
-                0 -> RoundedCornersTransformation.CornerType.LEFT
-                1 -> RoundedCornersTransformation.CornerType.TOP_RIGHT
-                else -> RoundedCornersTransformation.CornerType.BOTTOM_RIGHT
+            when (view) {
+                is ImageView -> {
+                    when {
+                        //用户头像标志
+                        isIcon -> view.load(this[index].data.userCover, CircleCrop())
+                        //多图标志
+                        multiPicTag -> {
+                            view.visibility =
+                                if (this[index].data.urls.size > 1) {
+                                    View.VISIBLE
+                                } else {
+                                    View.GONE
+                                }
+                        }
+                        //cover
+                        else -> {
+                            val type = when (index) {
+                                0 -> RoundedCornersTransformation.CornerType.LEFT
+                                1 -> RoundedCornersTransformation.CornerType.TOP_RIGHT
+                                else -> RoundedCornersTransformation.CornerType.BOTTOM_RIGHT
+                            }
+                            view.load(
+                                this[index].data.url, RoundedCornersTransformation(
+                                    defaultRoundRadius().toInt(), 0, type
+                                )
+                            )
+                        }
+                    }
+
+                }
+                is TextView -> { //用户名
+                    view.text = this[index].data.nickname
+                }
+                else -> null
             }
-            Glide.with(imageView)
-                .load(this[index].data.url)
-//                .apply(RequestOptions.bitmapTransform(SingleRoundedCorners(20, type)))
-                .apply(
-                    RequestOptions.bitmapTransform(
-                        RoundedCornersTransformation(
-                            defaultRoundRadius().toInt(), 0, type
-                        )
-                    )
-                )
-                .into(imageView)
+
         }
     }
-
 }
+
 
 //获取默认的圆角尺寸
 fun defaultRoundRadius() = 5f.dp2px

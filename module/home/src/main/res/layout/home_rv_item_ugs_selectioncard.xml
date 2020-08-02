@@ -73,6 +73,37 @@
             app:selections="@{collection.data.itemList}" />
 
         <ImageView
+            android:layout_width="@dimen/home_multi_pic_size"
+            android:layout_height="@dimen/home_multi_pic_size"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_icon_multi_pic"
+            app:layout_constraintRight_toRightOf="@id/iv_cover_left"
+            app:layout_constraintTop_toTopOf="@id/iv_cover_left"
+            app:multiPicTag="@{true}"
+            app:select="@{0}"
+            app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:id="@+id/iv_icon_left"
+            style="@style/Home_SelectionCardIconImage"
+            app:isIcon="@{true}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_left"
+            app:layout_constraintRight_toLeftOf="@id/tv_user_name_left"
+            app:select="@{0}"
+            app:selections="@{collection.data.itemList}"
+            tools:src="@drawable/home_icon_user" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_user_name_left"
+            style="@style/Home_SelectionCardIconText"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_left"
+            app:layout_constraintRight_toRightOf="@id/iv_cover_left"
+            app:layout_constraintTop_toTopOf="@id/iv_icon_left"
+            app:select="@{0}"
+            app:selections="@{collection.data.itemList}"
+            tools:text="用户名" />
+
+        <ImageView
             android:id="@+id/iv_cover_right"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -86,6 +117,38 @@
             app:layout_constraintVertical_weight="1"
             app:select="@{1}"
             app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:layout_width="@dimen/home_multi_pic_size"
+            android:layout_height="@dimen/home_multi_pic_size"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_icon_multi_pic"
+            app:layout_constraintRight_toRightOf="@id/iv_cover_right"
+            app:layout_constraintTop_toTopOf="@id/iv_cover_right"
+            app:multiPicTag="@{true}"
+            app:select="@{1}"
+            app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:id="@+id/iv_icon_right"
+            style="@style/Home_SelectionCardIconImage"
+            android:src="@drawable/home_icon_user"
+            app:isIcon="@{true}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_right"
+            app:layout_constraintRight_toLeftOf="@id/tv_user_name_right"
+            app:select="@{1}"
+            app:selections="@{collection.data.itemList}" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_user_name_right"
+            style="@style/Home_SelectionCardIconText"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_right"
+            app:layout_constraintRight_toRightOf="@id/iv_cover_right"
+            app:layout_constraintTop_toTopOf="@id/iv_icon_right"
+            app:select="@{1}"
+            app:selections="@{collection.data.itemList}"
+            tools:text="用户名"
+            tools:textColor="@color/blue" />
 
         <ImageView
             android:id="@+id/iv_cover_bottom"
@@ -102,6 +165,38 @@
             app:layout_constraintVertical_weight="1"
             app:select="@{2}"
             app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:layout_width="@dimen/home_multi_pic_size"
+            android:layout_height="@dimen/home_multi_pic_size"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_icon_multi_pic"
+            app:layout_constraintRight_toRightOf="@id/iv_cover_bottom"
+            app:layout_constraintTop_toTopOf="@id/iv_cover_bottom"
+            app:multiPicTag="@{true}"
+            app:select="@{2}"
+            app:selections="@{collection.data.itemList}" />
+
+        <ImageView
+            android:id="@+id/iv_icon_bottom"
+            style="@style/Home_SelectionCardIconImage"
+            app:isIcon="@{true}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_bottom"
+            app:layout_constraintRight_toLeftOf="@id/tv_user_name_bottom"
+            app:select="@{2}"
+            app:selections="@{collection.data.itemList}"
+            tools:src="@drawable/home_icon_user" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_user_name_bottom"
+            style="@style/Home_SelectionCardIconText"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover_bottom"
+            app:layout_constraintRight_toRightOf="@id/iv_cover_bottom"
+            app:layout_constraintTop_toTopOf="@id/iv_icon_bottom"
+            app:select="@{2}"
+            app:selections="@{collection.data.itemList}"
+            tools:text="用户名"
+            tools:textColor="@color/blue" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
