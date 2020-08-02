@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="me.pxq.eyepetizer.home.HomeViewModel" />
+            type="me.pxq.eyepetizer.home.ui.recommend.RecommendViewModel" />
     </data>
 
     <FrameLayout
@@ -17,8 +17,7 @@
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:onRefreshListener="@{() -> viewModel.fetchHomeData()}"
->
+            app:onRefreshListener="@{() -> viewModel.fetchRecommend()}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"

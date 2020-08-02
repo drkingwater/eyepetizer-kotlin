@@ -1,20 +1,16 @@
-package me.pxq.eyepetizer.home.ui
+package me.pxq.eyepetizer.home.ui.discovery
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import me.pxq.eyepetizer.home.HomeViewModel
-import me.pxq.eyepetizer.home.HomeViewModelFactory
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
-import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
+import me.pxq.eyepetizer.home.databinding.HomeFragmentDiscoveryBinding
 import me.pxq.eyepetizer.home.decoration.MarginDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
@@ -22,28 +18,26 @@ import me.pxq.utils.loge
 import me.pxq.utils.logi
 
 /**
- * Description: 推荐
+ * Description: 发现
  * Author : pxq
- * Date : 2020/7/27 10:30 PM
+ * Date : 2020/7/27 10:28 PM
  */
-class RecommendFragment : Fragment() {
+class DiscoveryFragment : Fragment() {
 
-    private val viewModel by activityViewModels<HomeViewModel> {
-        HomeViewModelFactory.get(
-            requireContext()
-        )
+    private val viewModel by activityViewModels<DiscoveryViewModel> {
+        DiscoveryViewModelFactory.get(requireContext())
     }
 
-    private lateinit var binding: HomeFragmentRecommendBinding
+    private lateinit var binding: HomeFragmentDiscoveryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFragmentRecommendBinding.inflate(inflater, container, false).run {
+        return HomeFragmentDiscoveryBinding.inflate(inflater, container, false).run {
             binding = this
-            viewModel = this@RecommendFragment.viewModel
+            viewModel = this@DiscoveryFragment.viewModel
             root
         }
     }
@@ -58,7 +52,7 @@ class RecommendFragment : Fragment() {
             adapter = IndexRvAdapter().also {
                 subscribeUi(it)
             }
-            addOnScrollListener(object : OnScrollListener() {
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 private var onBottom = false
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom){
@@ -82,7 +76,7 @@ class RecommendFragment : Fragment() {
             })
         }
         //请求数据
-        viewModel.fetchHomeData()
+        viewModel.fetchDiscovery()
     }
 
 
@@ -92,7 +86,7 @@ class RecommendFragment : Fragment() {
     private fun subscribeUi(adapter: IndexRvAdapter) {
         logd("subscribe")
         //刷新数据
-        viewModel.homeData.observe(requireActivity(), Observer {
+        viewModel.discoveryData.observe(requireActivity(), Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
             when (it) {
@@ -105,22 +99,23 @@ class RecommendFragment : Fragment() {
             }
         })
         //上拉加载数据
-        viewModel.refreshData.observe(requireActivity(), Observer {
-            loge("data change...")
-            binding.refreshLayout.isRefreshing = false
-            when (it) {
-                is ApiResult.Success -> {
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyDataSetChanged()
-                }
-                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
-            }
-        })
+//        viewModel.refreshData.observe(requireActivity(), Observer {
+//            loge("data change...")
+//            binding.refreshLayout.isRefreshing = false
+//            when (it) {
+//                is ApiResult.Success -> {
+//                    adapter.items.addAll(it.data.itemList)
+//                    adapter.notifyDataSetChanged()
+//                }
+//                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
+//            }
+//        })
     }
-
 
     companion object {
         @JvmStatic
-        fun newInstance() = RecommendFragment()
+        fun newInstance() =
+            DiscoveryFragment()
     }
+
 }

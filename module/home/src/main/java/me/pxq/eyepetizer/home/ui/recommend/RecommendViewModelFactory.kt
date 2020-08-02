@@ -1,7 +1,6 @@
-package me.pxq.eyepetizer.home
+package me.pxq.eyepetizer.home.ui.recommend
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.pxq.common.ApiService
@@ -13,16 +12,17 @@ import me.pxq.eyepetizer.home.repository.HomeRepository
  * Author : pxq
  * Date : 2020/7/18 10:44 PM
  */
-class HomeViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
+class RecommendViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeViewModel(repository) as T
+        return RecommendViewModel(repository) as T
     }
 
     companion object {
-        fun get(context: Context): HomeViewModelFactory =
-            HomeViewModelFactory(HomeRepository(ApiService.instance, EyeDatabase.get(context).homeDAO()))
-
+        fun get(context: Context): RecommendViewModelFactory =
+            RecommendViewModelFactory(
+                HomeRepository(ApiService.instance, EyeDatabase.get(context).homeDAO())
+            )
     }
 }

@@ -1,11 +1,7 @@
 package me.pxq.eyepetizer.home.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import me.pxq.common.Api
-import me.pxq.common.data.HomePage
 import me.pxq.common.db.HomeDAO
-import me.pxq.network.ApiResult
 import me.pxq.network.request
 
 /**
@@ -16,14 +12,23 @@ import me.pxq.network.request
 class HomeRepository(private val apiService: Api, private val homeDAO: HomeDAO) {
 
     /**
-     * 获取首页数据
+     * 获取推荐数据
+     * [nextPage]:下一页数据请求地址
      */
-    suspend fun fetchNext(url: String) =
+    suspend fun fetchRecommend(nextPage: String) =
         request(call = {
-            if (url.isEmpty()) {
+            if (nextPage.isEmpty()) {
                 apiService.recommend()
-            } else{
-                apiService.recommend(url)
+            } else {
+                apiService.recommend(nextPage)
             }
+        }, errorMsg = "请求失败")
+
+    /**
+     * 获取发现数据
+     */
+    suspend fun fetchDiscovery() =
+        request(call = {
+            apiService.discovery()
         }, errorMsg = "请求失败")
 }

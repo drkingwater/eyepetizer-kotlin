@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import me.pxq.common.db.converter.HomeItemConverter
 
 /**
- * Description:
+ * Description: 首页-推荐 数据类
  * Author : pxq
  * Date : 2020/7/15 10:26 PM
  */
@@ -16,7 +16,7 @@ data class HomePage(
     val key: Int,
     val adExist: Boolean,
     val count: Int,
-    val itemList: MutableList<Item>,
+    val itemList: List<Item>,
     val nextPageUrl: String,
     val total: Int
 )

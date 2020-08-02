@@ -3,8 +3,8 @@ package me.pxq.eyepetizer.home.adapters
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import me.pxq.eyepetizer.home.ui.DailyFragment
-import me.pxq.eyepetizer.home.ui.DiscoveryFragment
-import me.pxq.eyepetizer.home.ui.RecommendFragment
+import me.pxq.eyepetizer.home.ui.discovery.DiscoveryFragment
+import me.pxq.eyepetizer.home.ui.recommend.RecommendFragment
 
 /**
  * Description: 首页viewpager2适配器[me.pxq.eyepetizer.home.ui.IndexFragment]

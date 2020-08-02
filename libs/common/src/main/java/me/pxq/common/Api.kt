@@ -1,8 +1,6 @@
 package me.pxq.common
 
 import me.pxq.common.data.HomePage
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Url
 
@@ -18,5 +16,12 @@ interface Api {
      */
     @GET
     suspend fun recommend(@Url url: String = "http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0"): HomePage
+
+    /**
+     * 获取首页-发现数据
+     */
+    @GET("api/v7/index/tab/discovery")
+    suspend fun discovery(): HomePage
+
 
 }
