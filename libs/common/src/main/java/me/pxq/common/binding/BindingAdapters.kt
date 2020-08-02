@@ -19,6 +19,16 @@ import me.pxq.utils.glide.TopRoundedCorners
  * Author : pxq
  * Date : 2020/7/29 11:24 PM
  */
+
+@BindingAdapter("isGone")
+fun bindIsGone(view: View, isGone : Boolean){
+    view.visibility = if (isGone){
+        View.GONE
+    } else{
+        View.VISIBLE
+    }
+}
+
 @BindingAdapter("iconUrl", "iconType", requireAll = false)
 fun bindIcon(imageView: ImageView, url: String?, iconType: String? = Header.ICON_TYPE_ROUND) {
     url ?: return

@@ -20,4 +20,6 @@
     <dimen name="home_banner_height">185dp</dimen>
     <dimen name="home_selection_margin">2dp</dimen>
     <dimen name="home_briefcard_icon_size">50dp</dimen>
+    <dimen name="home_icon_new_size">14dp</dimen>
+    <dimen name="home_rv_item_topic_height">65dp</dimen>
 </resources>

@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="topic"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_rv_item_topic_height">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/home_briefcard_icon_size"
+            android:layout_height="@dimen/home_briefcard_icon_size"
+            android:scaleType="fitXY"
+            app:iconType="@{topic.data.iconType}"
+            app:iconUrl="@{topic.data.icon}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/icon_barrier"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            app:barrierDirection="right"
+            app:constraint_referenced_ids="iv_icon"/>
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="3dp"
+            android:drawableEnd="@drawable/home_icon_reward"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{topic.data.topicTitle}"
+            android:textColor="@color/color_header_title"
+            android:textSize="@dimen/home_text_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/tv_description"
+            app:layout_constraintLeft_toRightOf="@id/icon_barrier"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeface="FZLanD"
+            tools:text="测试数据嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻" />
+
+        <ImageView
+            android:id="@+id/iv_new"
+            android:layout_width="@dimen/home_icon_new_size"
+            android:layout_height="@dimen/home_icon_new_size"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/home_icon_latest"
+            app:isGone="@{!topic.data.ifNewest}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/icon_barrier"
+            app:layout_constraintRight_toLeftOf="@id/tv_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="3dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{topic.data.description}"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_new"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:typeface="FZLanL"
+            tools:text="测试数据" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -32,7 +32,7 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             item.type == "banner" && item.data.dataType == "Banner" -> VIEW_HOLDER_TYPE_BANNER
             item.type == "ugcSelectedCardCollection" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_SELECTION_CARD
             item.type == "briefCard" && item.data.dataType == "TagBriefCard" -> VIEW_HOLDER_TYPE_BRIEF_CARD_TAG
-            item.type == "briefCard" && item.data.dataType == "TopBriefCard" -> VIEW_HOLDER_TYPE_BRIEF_CARD_TOP
+            item.type == "briefCard" && item.data.dataType == "TopicBriefCard" -> VIEW_HOLDER_TYPE_BRIEF_CARD_TOP
             else -> VIEW_HOLDER_TYPE_NOTHING
         }
     }
@@ -50,6 +50,7 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
             VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner
             VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard
             VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
+            VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
             else -> R.layout.home_rv_item_textcard_rightandleft
         }
         return ItemHolder(
@@ -166,6 +167,12 @@ class IndexRvAdapter(var items: List<Item> = emptyList()) :
                 is HomeRvItemBriefcardTagBinding -> {
                     binding.apply {
                         brief = item
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemBriefcardTopBinding -> {
+                    binding.apply {
+                        topic = item
                         executePendingBindings()
                     }
                 }
