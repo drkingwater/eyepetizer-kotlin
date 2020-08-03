@@ -85,6 +85,7 @@ fun bindFollowed(textView: TextView, follow: Follow?) {
 @BindingAdapter("cover")
 fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
+    Log.d("Cover", "bindCover: $url")
     imageView.load(url, RoundedCorners(defaultRoundRadius().toInt()))
 }
 

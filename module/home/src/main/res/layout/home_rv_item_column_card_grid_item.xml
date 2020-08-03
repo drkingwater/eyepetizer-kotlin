@@ -5,29 +5,31 @@
     <data>
 
         <variable
-            name="category"
+            name="column"
             type="me.pxq.common.data.Item" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="@dimen/home_special_category_item_size"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/home_special_category_item_size">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            app:cover="@{category.data.image}" />
+            app:cover="@{column.data.image}" />
 
         <me.pxq.common.ui.view.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@{category.data.title}"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@{column.data.title}"
             android:textColor="@color/gray"
-            android:textSize="14sp"
+            android:textSize="@dimen/home_text_size_normal"
             app:typeface="FZLanD"
-            tools:text="#广告" />
+            tools:text="#奇奇怪怪运动合集" />
 
     </FrameLayout>
 
