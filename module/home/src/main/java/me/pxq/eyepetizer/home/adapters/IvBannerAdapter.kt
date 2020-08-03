@@ -12,7 +12,7 @@ import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.HomeRvItemBannerBinding
 
 /**
- * Description:
+ * Description: 水平滚动图片rv adapter
  * Author : pxq
  * Date : 2020/8/3 8:28 PM
  */
@@ -22,7 +22,7 @@ class IvBannerAdapter : ListAdapter<Item, IvBannerAdapter.IvBannerHolder>(TitleD
     /**
      *  Image Banner holder
      */
-    class IvBannerHolder(val binding: HomeRvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
+    class IvBannerHolder(private val binding: HomeRvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item){
             binding.apply {
                 banner = item

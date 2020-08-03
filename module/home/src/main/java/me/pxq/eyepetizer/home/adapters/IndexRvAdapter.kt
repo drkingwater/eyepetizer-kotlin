@@ -38,6 +38,7 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
             item.type == "briefCard" && item.data.dataType == "TopicBriefCard" -> VIEW_HOLDER_TYPE_BRIEF_CARD_TOP
             item.type == "horizontalScrollCard" && item.data.dataType == "HorizontalScrollCard" -> VIEW_HOLDER_TYPE_HOR_SCROLL_CARD
             item.type == "autoPlayVideoAd" && item.data.dataType == "AutoPlayVideoAdDetail" -> VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD
+            item.type == "specialSquareCardCollection" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD
             else -> VIEW_HOLDER_TYPE_NOTHING
         }
     }
@@ -58,6 +59,7 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
             VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
             VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> R.layout.home_rv_item_hor_scrollcard
             VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad
+            VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> R.layout.home_rv_item_special_square_card
             else -> R.layout.home_rv_item_textcard_rightandleft
         }
         return ItemHolder(
@@ -92,9 +94,11 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
         private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TAG = 8
         private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TOP = 9
         private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 = 10
-        private const val VIEW_HOLDER_TYPE_HOR_SCROLL_CARD= 11
+        private const val VIEW_HOLDER_TYPE_HOR_SCROLL_CARD = 11
+        private const val VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD = 12
+
         //自动播放广告
-        private const val VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD= 90
+        private const val VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD = 90
         private const val VIEW_HOLDER_TYPE_THE_END = 99
 
         //没有匹配到
@@ -141,8 +145,9 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                         //绑定rv adapter
                         if (rvBanner.adapter == null) {
                             rvBanner.run {
+                                isNestedScrollingEnabled = true
                                 //设置分割线
-                                addItemDecoration(MarginDecoration(bottom = 15f.dp2px.toInt()))
+                                addItemDecoration(MarginDecoration(bottom = 13f.dp2px.toInt()))
                                 //布局方式
                                 layoutManager = LinearLayoutManager(this.context)
                                 //优化绘制
@@ -193,14 +198,19 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemHorScrollcardBinding -> {
+                is HomeRvItemHorScrollcardBinding -> {  //首页-发现 水平滚动banner
                     binding.apply {
                         if (rvBanner.adapter == null) {
                             rvBanner.run {
+                                isNestedScrollingEnabled = true
                                 //设置分割线
                                 addItemDecoration(MarginDecoration(right = 8f.dp2px.toInt()))
                                 //布局方式
-                                layoutManager = LinearLayoutManager(this.context, RecyclerView.HORIZONTAL, false)
+                                layoutManager = LinearLayoutManager(
+                                    this.context,
+                                    RecyclerView.HORIZONTAL,
+                                    false
+                                )
                                 //优化绘制
                                 setHasFixedSize(true)
                                 //设置adapter
@@ -209,6 +219,34 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                         }
                         //更新数据
                         (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList)
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemSpecialSquareCardBinding -> {  //热门分类
+                    binding.apply {
+                        if (rvCategory.adapter == null) {
+                            rvCategory.run {
+                                isNestedScrollingEnabled = true
+                                //设置分割线
+                                addItemDecoration(
+                                    MarginDecoration(
+                                        right = 5f.dp2px.toInt(),
+                                        bottom = 5f.dp2px.toInt()
+                                    )
+                                )
+                                //布局方式
+                                layoutManager = GridLayoutManager(context, 2).apply {
+                                    orientation = GridLayoutManager.HORIZONTAL
+                                }
+                                //优化绘制
+                                setHasFixedSize(true)
+                                //设置adapter
+                                adapter = SpecialSquareAdapter()
+                            }
+                        }
+                        collection = item
+                        //更新数据
+                        (rvCategory.adapter as SpecialSquareAdapter).submitList(item.data.itemList)
                         executePendingBindings()
                     }
                 }

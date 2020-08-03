@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="category"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/home_special_category_item_size"
+        android:layout_height="@dimen/home_special_category_item_size">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:cover="@{category.data.image}" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@{category.data.title}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:typeface="FZLanD"
+            tools:text="#广告" />
+
+    </FrameLayout>
+
+</layout>
