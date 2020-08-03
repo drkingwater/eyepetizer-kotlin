@@ -14,7 +14,7 @@ import me.pxq.eyepetizer.home.R
  * Author : pxq
  * Date : 2020/8/1 11:36 AM
  */
-class InfoCardRvAdapter() : ListAdapter<String, InfoCardRvAdapter.BannerHolder>(TitleDiffCallBack()) {
+class InfoCardRvAdapter : ListAdapter<String, InfoCardRvAdapter.BannerHolder>(TitleDiffCallBack()) {
 
 
     /**

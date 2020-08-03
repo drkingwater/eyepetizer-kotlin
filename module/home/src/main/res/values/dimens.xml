@@ -24,4 +24,6 @@
     <dimen name="home_rv_item_topic_height">65dp</dimen>
     <!--  多图Tag  -->
     <dimen name="home_multi_pic_size">35dp</dimen>
+    <dimen name="home_video_ad_height">185dp</dimen>
+    <dimen name="home_video_ad_icon_size">40dp</dimen>
 </resources>
