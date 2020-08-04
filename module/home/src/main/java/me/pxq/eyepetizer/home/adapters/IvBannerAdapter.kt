@@ -10,22 +10,25 @@ import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.HomeRvItemBannerBinding
+import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import kotlin.math.acos
 
 /**
  * Description: 水平滚动图片rv adapter
  * Author : pxq
  * Date : 2020/8/3 8:28 PM
  */
-class IvBannerAdapter : ListAdapter<Item, IvBannerAdapter.IvBannerHolder>(TitleDiffCallBack()) {
+class IvBannerAdapter(val actionMV : BaseViewModel) : ListAdapter<Item, IvBannerAdapter.IvBannerHolder>(TitleDiffCallBack()) {
 
 
     /**
      *  Image Banner holder
      */
-    class IvBannerHolder(private val binding: HomeRvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class IvBannerHolder(private val binding: HomeRvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item){
             binding.apply {
                 banner = item
+                viewModel = actionMV
                 executePendingBindings()
             }
         }

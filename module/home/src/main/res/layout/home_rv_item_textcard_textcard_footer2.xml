@@ -9,13 +9,18 @@
         <import type="android.view.View" />
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="header"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, header.data.actionUrl)}">
 
         <ImageView
             android:id="@+id/iv_more"

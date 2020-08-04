@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
 import me.pxq.eyepetizer.home.databinding.HomeRvItemColumnCardGridItemBinding
+import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
 import me.pxq.utils.logd
 
 /**
@@ -14,32 +15,18 @@ import me.pxq.utils.logd
  * Author : pxq
  * Date : 2020/8/3 11:55 PM
  */
-class ColumnCardAdapter :
+class ColumnCardAdapter(val actionVM : BaseViewModel) :
     ListAdapter<Item, ColumnCardAdapter.ColumnCardHolder>(CategoryDiffCallBack()) {
 
-    class ColumnCardHolder(private val binding: HomeRvItemColumnCardGridItemBinding) :
+    inner class ColumnCardHolder(private val binding: HomeRvItemColumnCardGridItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
             binding.apply {
-                column = item.also {
-                    logd("column bind ${it.data.title}")
-                    logd("column bind ${it.data.image}")
-                }
+                column = item
+                viewModel = actionVM
                 executePendingBindings()
             }
         }
-    }
-
-
-    internal class CategoryDiffCallBack : DiffUtil.ItemCallback<Item>() {
-        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem.data.title == newItem.data.title
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColumnCardHolder {
@@ -54,5 +41,16 @@ class ColumnCardAdapter :
 
     override fun onBindViewHolder(holder: ColumnCardHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    internal class CategoryDiffCallBack : DiffUtil.ItemCallback<Item>() {
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem.data.title == newItem.data.title
+        }
+
     }
 }

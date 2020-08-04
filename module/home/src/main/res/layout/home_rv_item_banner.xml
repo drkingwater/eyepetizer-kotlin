@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="banner"
             type="me.pxq.common.data.Item" />
 
@@ -15,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_banner_height"
         android:scaleType="fitXY"
-        app:cover="@{banner.data.image}" />
+        app:cover="@{banner.data.image}"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, banner.data.actionUrl)}" />
 
 </layout>

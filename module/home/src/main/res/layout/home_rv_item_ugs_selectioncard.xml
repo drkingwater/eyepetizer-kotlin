@@ -6,13 +6,18 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="collection"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, collection.data.header.actionUrl)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/title_layout"
@@ -70,7 +75,8 @@
             app:layout_constraintRight_toLeftOf="@id/iv_cover_right"
             app:layout_constraintTop_toBottomOf="@id/base_line"
             app:select="@{0}"
-            app:selections="@{collection.data.itemList}" />
+            app:selections="@{collection.data.itemList}"
+            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 0)}"/>
 
         <ImageView
             android:layout_width="@dimen/home_multi_pic_size"
@@ -116,7 +122,8 @@
             app:layout_constraintTop_toBottomOf="@id/base_line"
             app:layout_constraintVertical_weight="1"
             app:select="@{1}"
-            app:selections="@{collection.data.itemList}" />
+            app:selections="@{collection.data.itemList}"
+            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 1)}"/>
 
         <ImageView
             android:layout_width="@dimen/home_multi_pic_size"
@@ -164,7 +171,8 @@
             app:layout_constraintTop_toBottomOf="@id/iv_cover_right"
             app:layout_constraintVertical_weight="1"
             app:select="@{2}"
-            app:selections="@{collection.data.itemList}" />
+            app:selections="@{collection.data.itemList}"
+            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 2)}"/>
 
         <ImageView
             android:layout_width="@dimen/home_multi_pic_size"

@@ -1,5 +1,6 @@
 package me.pxq.eyepetizer.home.ui.recommend
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.pxq.common.data.HomePage
 import me.pxq.eyepetizer.home.repository.HomeRepository
+import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
 import me.pxq.utils.loge
@@ -16,7 +18,7 @@ import me.pxq.utils.loge
  * Author : pxq
  * Date : 2020/7/18 3:29 PM
  */
-class RecommendViewModel(private val repository: HomeRepository) : ViewModel() {
+class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel() {
 
     //下一页数据url
     private var nextPage: String = ""
@@ -42,10 +44,10 @@ class RecommendViewModel(private val repository: HomeRepository) : ViewModel() {
     }
 
     /**
-     *
+     * 请求数据
      */
     private fun fetchData(isFirst : Boolean, url: String = "") {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             if (!isFirst && url.isEmpty()){
                 loge("没有数据了...")
                 return@launch
@@ -58,13 +60,15 @@ class RecommendViewModel(private val repository: HomeRepository) : ViewModel() {
             }.let {
                 //更新数据
                 if (url.isEmpty()) {
-                    homeData.postValue(it)
+                    homeData.value = it
                 } else {
-                    refreshData.postValue(it)
+                    refreshData.value = it
                 }
             }
         }
     }
+
+
 
 
 }

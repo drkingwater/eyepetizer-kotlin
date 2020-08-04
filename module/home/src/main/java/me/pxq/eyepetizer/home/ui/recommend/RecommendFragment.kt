@@ -41,6 +41,7 @@ class RecommendFragment : Fragment() {
         return HomeFragmentRecommendBinding.inflate(inflater, container, false).run {
             binding = this
             viewModel = this@RecommendFragment.viewModel
+            lifecycleOwner = requireActivity()
             root
         }
     }
@@ -52,7 +53,7 @@ class RecommendFragment : Fragment() {
             //设置分割线
             addItemDecoration(MarginDecoration(bottom = 50))
             //设置adapter
-            adapter = IndexRvAdapter().also {
+            adapter = IndexRvAdapter(viewModel).also {
                 subscribeUi(it)
             }
             addOnScrollListener(object : OnScrollListener() {
@@ -73,7 +74,6 @@ class RecommendFragment : Fragment() {
                     //当前 RecyclerView 的所有子项个数
                     val totalItemCount = layoutManager.itemCount
                     //RecyclerView 的滑动状态
-                    val state = recyclerView.scrollState
                     onBottom = visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1
                 }
             })
@@ -107,8 +107,9 @@ class RecommendFragment : Fragment() {
             binding.refreshLayout.isRefreshing = false
             when (it) {
                 is ApiResult.Success -> {
+                    val newPosition = adapter.items.size
                     adapter.items.addAll(it.data.itemList)
-                    adapter.notifyDataSetChanged()
+                    adapter.notifyItemInserted(newPosition)
                 }
                 is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
             }

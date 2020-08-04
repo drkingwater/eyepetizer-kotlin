@@ -6,13 +6,18 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="titleAction"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, titleAction.data.actionUrl)}">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -21,7 +26,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:onClickListener="@{(theView) -> viewModel.refreshToCommend(theView, titleAction)}" />
 
         <ImageView
             android:id="@+id/iv_more"
@@ -29,6 +35,16 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_right"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_right" />
+
+<!--        <androidx.constraintlayout.widget.Group-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:constraint_referenced_ids="tv_right"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:onClickListener="@{(theView) -> viewModel.execAction(theView, titleAction.data.actionUrl)}" />-->
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_right"

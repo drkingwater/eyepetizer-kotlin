@@ -9,13 +9,18 @@
         <import type="android.view.View" />
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="header"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h5_height">
+        android:layout_height="@dimen/home_rv_item_textcard_h5_height"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, header.data.actionUrl)}">
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"
@@ -28,15 +33,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:typeface="FZLanD"
-            tools:text="本周排行"/>
+            tools:text="本周排行" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/home_goto_icon"
-            app:layout_constraintLeft_toRightOf="@id/tv_title"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintLeft_toRightOf="@id/tv_title"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_follow"
@@ -47,10 +52,11 @@
             android:text="@string/home_add_follow"
             android:textColor="@color/black35"
             android:textSize="10dp"
+            app:followed="@{header.data.follow}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:followed="@{header.data.follow}"
+            app:onClickListener="@{(theView) -> viewModel.follow(theView, header)}"
             app:typeface="FZLanD" />
 
 

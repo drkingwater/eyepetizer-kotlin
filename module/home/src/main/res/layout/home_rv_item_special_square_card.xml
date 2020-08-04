@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="collection"
             type="me.pxq.common.data.Item" />
     </data>
@@ -20,7 +24,8 @@
             android:layout_height="@dimen/home_rv_item_textcard_h7_height"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:onClickListener="@{(theView) -> viewModel.execAction(theView, collection.data.header.actionUrl)}">
 
             <me.pxq.common.ui.view.FontTextView
                 android:id="@+id/tv_title"

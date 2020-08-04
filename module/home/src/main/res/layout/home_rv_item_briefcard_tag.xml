@@ -8,13 +8,18 @@
         <import type="android.view.View" />
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="brief"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_briefcard_icon_size">
+        android:layout_height="@dimen/home_briefcard_icon_size"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, brief.data.actionUrl)}">
 
         <ImageView
             android:id="@+id/iv_icon"
@@ -42,7 +47,7 @@
             app:layout_constraintRight_toLeftOf="@id/tv_follow"
             app:layout_constraintTop_toTopOf="parent"
             app:typeface="FZLanD"
-            tools:text="测试数据嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻" />
+            tools:text="@string/home_txt_test" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_description"
@@ -60,7 +65,7 @@
             app:layout_constraintRight_toLeftOf="@id/tv_follow"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:typeface="FZLanL"
-            tools:text="测试数据" />
+            tools:text="@string/home_txt_test" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_follow"
@@ -75,6 +80,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:onClickListener="@{(theView) -> viewModel.follow(theView, brief)}"
             app:typeface="FZLanD" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

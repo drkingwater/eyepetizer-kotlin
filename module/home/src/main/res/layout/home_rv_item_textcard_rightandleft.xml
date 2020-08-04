@@ -7,13 +7,18 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+
+        <variable
             name="header"
             type="me.pxq.common.data.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h7_height">
+        android:layout_height="@dimen/home_rv_item_textcard_h7_height"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, header.data.actionUrl)}">
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"

@@ -10,6 +10,7 @@ import me.pxq.common.ui.view.TheEndHolder
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.*
 import me.pxq.eyepetizer.home.decoration.MarginDecoration
+import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 
@@ -18,52 +19,18 @@ import me.pxq.utils.logd
  * Author : pxq
  * Date : 2020/7/29 9:57 PM
  */
-class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
+class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> = mutableListOf()) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
-        val item = items[position]
-        return when {
-            item.type == "theEnd" -> VIEW_HOLDER_TYPE_THE_END
-            item.type == "textCard" && item.data.dataType == "TextCardWithRightAndLeftTitle" -> VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-            item.type == "textCard" && item.data.dataType == "TextCard" && "header5" == item.data.type -> VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5
-            item.type == "textCard" && item.data.dataType == "TextCard" && "footer2" == item.data.type -> VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2
-            item.type == "followCard" && item.data.dataType == "FollowCard" -> VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW
-            item.type == "informationCard" && item.data.dataType == "InformationCard" -> VIEW_HOLDER_TYPE_INFO_CARD_INFO
-            item.type == "videoSmallCard" && item.data.dataType == "VideoBeanForClient" -> VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD
-            item.type == "textCard" && item.data.dataType == "TextCardWithTagId" -> VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG
-            item.type == "banner" && item.data.dataType == "Banner" -> VIEW_HOLDER_TYPE_BANNER
-            item.type == "ugcSelectedCardCollection" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_SELECTION_CARD
-            item.type == "briefCard" && item.data.dataType == "TagBriefCard" -> VIEW_HOLDER_TYPE_BRIEF_CARD_TAG
-            item.type == "briefCard" && item.data.dataType == "TopicBriefCard" -> VIEW_HOLDER_TYPE_BRIEF_CARD_TOP
-            item.type == "horizontalScrollCard" && item.data.dataType == "HorizontalScrollCard" -> VIEW_HOLDER_TYPE_HOR_SCROLL_CARD
-            item.type == "autoPlayVideoAd" && item.data.dataType == "AutoPlayVideoAdDetail" -> VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD
-            item.type == "specialSquareCardCollection" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD
-            item.type == "columnCardList" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_COLUMN_CARD
-            else -> VIEW_HOLDER_TYPE_NOTHING
-        }
+        return IndexRvHelper.getItemViewType(items[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == VIEW_HOLDER_TYPE_THE_END) return TheEndHolder(parent)
-        val layoutId = when (viewType) {
-            VIEW_HOLDER_TYPE_TEXT_CARD_TITLE -> R.layout.home_rv_item_textcard_rightandleft
-            VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5 -> R.layout.home_rv_item_textcard_textcard_header5
-            VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 -> R.layout.home_rv_item_textcard_textcard_footer2
-            VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW -> R.layout.home_rv_item_followcard_followcard
-            VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
-            VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> R.layout.home_rv_item_video_small_card
-            VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
-            VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner
-            VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard
-            VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
-            VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
-            VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> R.layout.home_rv_item_hor_scrollcard
-            VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad
-            VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> R.layout.home_rv_item_special_square_card //热门分类、专题策划共用一个item
-            VIEW_HOLDER_TYPE_COLUMN_CARD -> R.layout.home_rv_item_special_square_card
-            else -> R.layout.home_rv_item_textcard_rightandleft
-        }
+        if (viewType == IndexRvHelper.VIEW_HOLDER_TYPE_THE_END) return TheEndHolder(parent)
+        //获取相应的布局文件
+        val layoutId = IndexRvHelper.getItemLayout(viewType)
+        //数据绑定
         return ItemHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
@@ -85,66 +52,47 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
         }
     }
 
-    companion object {
-        private const val VIEW_HOLDER_TYPE_TEXT_CARD_TITLE = 0
-        private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5 = 1
-        private const val VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW = 2
-        private const val VIEW_HOLDER_TYPE_INFO_CARD_INFO = 3
-        private const val VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD = 4
-        private const val VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG = 5
-        private const val VIEW_HOLDER_TYPE_BANNER = 6
-        private const val VIEW_HOLDER_TYPE_SELECTION_CARD = 7
-        private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TAG = 8
-        private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TOP = 9
-        private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 = 10
-        private const val VIEW_HOLDER_TYPE_HOR_SCROLL_CARD = 11
-        private const val VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD = 12
-        private const val VIEW_HOLDER_TYPE_COLUMN_CARD = 13
 
-        //自动播放广告
-        private const val VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD = 90
-        private const val VIEW_HOLDER_TYPE_THE_END = 99
-
-        //没有匹配到
-        private const val VIEW_HOLDER_TYPE_NOTHING = 100
-    }
-
-    class ItemHolder(private val binding: ViewDataBinding, private val viewType: Int) :
+    inner class ItemHolder(private val binding: ViewDataBinding, private val viewType: Int) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
             when (binding) {
                 is HomeRvItemAutoPlayVideoAdBinding -> {  //自动播放广告
-                    binding.apply {
+                    with(binding) {
                         videoAd = item
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemTextcardRightandleftBinding -> {
-                    binding.apply {
+                is HomeRvItemTextcardRightandleftBinding -> {  //标题 header7 ：如每日开眼精选
+                    with(binding) {
                         header = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemTextcardTextcardHeader5Binding -> {
-                    binding.apply {
+                is HomeRvItemTextcardTextcardHeader5Binding -> { //标题header5
+                    with(binding) {
                         header = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemTextcardTextcardFooter2Binding -> {
-                    binding.apply {
+                is HomeRvItemTextcardTextcardFooter2Binding -> {  //底部文字
+                    with(binding) {
                         header = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemFollowcardFollowcardBinding -> {
-                    binding.apply {
+                is HomeRvItemFollowcardFollowcardBinding -> {  //视频:如每日开眼精选
+                    with(binding) {
                         daily = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemInfocardInfocardBinding -> {
-                    binding.apply {
+                    with(binding) {
                         logd("info card...")
                         //绑定rv adapter
                         if (rvBanner.adapter == null) {
@@ -157,53 +105,59 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                                 //优化绘制
                                 setHasFixedSize(true)
                                 //设置adapter
-                                adapter = InfoCardRvAdapter()
+                                adapter = InfoCardRvAdapter(actionVM)
                             }
                         }
                         //更新数据
-                        (rvBanner.adapter as InfoCardRvAdapter).submitList(item.data.titleList)
+                        (rvBanner.adapter as InfoCardRvAdapter).submitList(item.data.bannerList)
                         info = item
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemVideoSmallCardBinding -> {
-                    binding.apply {
+                    with(binding) {
                         video = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemTextcardWithTagIdBinding -> {
-                    binding.apply {
+                    with(binding) {
                         titleAction = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemBannerBinding -> {
-                    binding.apply {
+                    with(binding) {
                         banner = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemUgsSelectioncardBinding -> {
-                    binding.apply {
+                    with(binding) {
                         collection = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemBriefcardTagBinding -> {
-                    binding.apply {
+                    with(binding) {
                         brief = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemBriefcardTopBinding -> {
-                    binding.apply {
+                    with(binding) {
                         topic = item
+                        viewModel = actionVM
                         executePendingBindings()
                     }
                 }
                 is HomeRvItemHorScrollcardBinding -> {  //首页-发现 水平滚动banner
-                    binding.apply {
+                    with(binding) {
                         if (rvBanner.adapter == null) {
                             rvBanner.run {
                                 isNestedScrollingEnabled = true
@@ -218,7 +172,7 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                                 //优化绘制
                                 setHasFixedSize(true)
                                 //设置adapter
-                                adapter = IvBannerAdapter()
+                                adapter = IvBannerAdapter(actionVM)
                             }
                         }
                         //更新数据
@@ -227,8 +181,8 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                     }
                 }
                 is HomeRvItemSpecialSquareCardBinding -> {  //热门分类、专题策划，共用一个rv item
-                    binding.apply {
-                        logd("viewType $viewType")
+                    with(binding) {
+                        //rv设置适配器
                         if (rvCategory.adapter == null) {
                             rvCategory.run {
                                 isNestedScrollingEnabled = true
@@ -243,28 +197,31 @@ class IndexRvAdapter(var items: MutableList<Item> = mutableListOf()) :
                                 setHasFixedSize(true)
                                 //设置adapter
                                 when (viewType) {  //热门分类、专题策划adapter不同
-                                    VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> {
-                                        adapter = SpecialSquareAdapter()
+                                    IndexRvHelper.VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> {  //热门分类
+                                        adapter = SpecialSquareAdapter(actionVM)
                                         //布局方式
                                         layoutManager = GridLayoutManager(context, 2).apply {
                                             //水平滚动
                                             orientation = GridLayoutManager.HORIZONTAL
                                         }
                                     }
-                                    else -> {
+                                    else -> {   //专题策划
+                                        adapter = ColumnCardAdapter(actionVM)
                                         layoutManager = GridLayoutManager(context, 2).apply {
                                             //竖直滚动
                                             orientation = GridLayoutManager.VERTICAL
                                         }
-                                        adapter = ColumnCardAdapter()
                                     }
                                 }
                             }
                         }
+                        //设置数据
                         collection = item
+                        //设置viewModel
+                        viewModel = actionVM
                         //更新数据
                         when (viewType) {  //热门分类、专题策划adapter不同
-                            VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> (rvCategory.adapter as SpecialSquareAdapter).submitList(
+                            IndexRvHelper.VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> (rvCategory.adapter as SpecialSquareAdapter).submitList(
                                 item.data.itemList
                             )
                             else -> (rvCategory.adapter as ColumnCardAdapter).submitList(item.data.itemList)
