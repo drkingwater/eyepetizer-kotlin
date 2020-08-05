@@ -1,3 +1,5 @@
+include ':launch:player'
+include ':libs:player'
 include ':launch:home'
 include ':module:main'
 include ':libs:network'
