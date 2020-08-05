@@ -1,10 +1,9 @@
-package me.pxq.eyepetizer.home.ui.discovery
+package me.pxq.eyepetizer.home.ui.daily
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -12,8 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
-import me.pxq.eyepetizer.home.databinding.HomeFragmentDiscoveryBinding
+import me.pxq.eyepetizer.home.databinding.HomeFragmentDailyBinding
+import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
 import me.pxq.eyepetizer.home.decoration.MarginDecoration
+import me.pxq.eyepetizer.home.ui.recommend.RecommendViewModel
+import me.pxq.eyepetizer.home.ui.recommend.RecommendViewModelFactory
 import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
@@ -21,26 +23,28 @@ import me.pxq.utils.loge
 import me.pxq.utils.logi
 
 /**
- * Description: 发现
+ * Description: 推荐
  * Author : pxq
- * Date : 2020/7/27 10:28 PM
+ * Date : 2020/7/27 10:30 PM
  */
-class DiscoveryFragment : Fragment() {
+class DailyFragment : Fragment() {
 
-    private val viewModel by activityViewModels<DiscoveryViewModel> {
-        DiscoveryViewModelFactory.get(requireContext())
+    private val viewModel by activityViewModels<DailyViewModel> {
+        DailyViewModelFactory.get(
+            requireContext()
+        )
     }
 
-    private lateinit var binding: HomeFragmentDiscoveryBinding
+    private lateinit var binding: HomeFragmentDailyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFragmentDiscoveryBinding.inflate(inflater, container, false).run {
+        return HomeFragmentDailyBinding.inflate(inflater, container, false).run {
             binding = this
-            viewModel = this@DiscoveryFragment.viewModel
+            viewModel = this@DailyFragment.viewModel
             lifecycleOwner = requireActivity()
             root
         }
@@ -59,12 +63,11 @@ class DiscoveryFragment : Fragment() {
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 private var onBottom = false
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom){
                         logi("到底了,刷新数据...")
                         viewModel.fetchNextPage()
                     }
                 }
-
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     val layoutManager =
                         recyclerView.layoutManager as LinearLayoutManager
@@ -74,12 +77,13 @@ class DiscoveryFragment : Fragment() {
                     val visibleItemCount = layoutManager.childCount
                     //当前 RecyclerView 的所有子项个数
                     val totalItemCount = layoutManager.itemCount
+                    //RecyclerView 的滑动状态
                     onBottom = visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1
                 }
             })
         }
         //请求数据
-        viewModel.fetchDiscovery()
+        viewModel.fetchDaily()
     }
 
 
@@ -89,7 +93,7 @@ class DiscoveryFragment : Fragment() {
     private fun subscribeUi(adapter: IndexRvAdapter) {
         logd("subscribe")
         //刷新数据
-        viewModel.discoveryData.observe(requireActivity(), Observer {
+        viewModel.dailyData.observe(requireActivity(), Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
             when (it) {
@@ -102,23 +106,22 @@ class DiscoveryFragment : Fragment() {
             }
         })
         //上拉加载数据
-//        viewModel.refreshData.observe(requireActivity(), Observer {
-//            loge("data change...")
-//            binding.refreshLayout.isRefreshing = false
-//            when (it) {
-//                is ApiResult.Success -> {
-//                    adapter.items.addAll(it.data.itemList)
-//                    adapter.notifyDataSetChanged()
-//                }
-//                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
-//            }
-//        })
+        viewModel.refreshData.observe(requireActivity(), Observer {
+            loge("data change...")
+            binding.refreshLayout.isRefreshing = false
+            when (it) {
+                is ApiResult.Success -> {
+                    val newPosition = adapter.items.size
+                    adapter.items.addAll(it.data.itemList)
+                    adapter.notifyItemInserted(newPosition)
+                }
+                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
+            }
+        })
     }
-
-    companion object {
+    companion object{
         @JvmStatic
-        fun newInstance() =
-            DiscoveryFragment()
+        fun newInstance() = DailyFragment()
     }
 
 }

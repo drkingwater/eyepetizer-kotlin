@@ -23,5 +23,11 @@ interface Api {
     @GET("api/v7/index/tab/discovery")
     suspend fun discovery(): HomePage
 
+    /**
+     * 获取首页-日报数据
+     */
+    @GET
+    suspend fun daily(@Url url: String = "http://baobab.kaiyanapp.com/api/v5/index/tab/feed"): HomePage
+
 
 }

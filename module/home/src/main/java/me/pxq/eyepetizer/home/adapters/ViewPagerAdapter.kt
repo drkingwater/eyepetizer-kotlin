@@ -2,7 +2,7 @@ package me.pxq.eyepetizer.home.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import me.pxq.eyepetizer.home.ui.DailyFragment
+import me.pxq.eyepetizer.home.ui.daily.DailyFragment
 import me.pxq.eyepetizer.home.ui.discovery.DiscoveryFragment
 import me.pxq.eyepetizer.home.ui.recommend.RecommendFragment
 

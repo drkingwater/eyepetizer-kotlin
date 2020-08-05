@@ -70,7 +70,11 @@ fun bindIsAuthor(imageView: ImageView, iconType: String?) {
  */
 @BindingAdapter("followed")
 fun bindFollowed(textView: TextView, follow: Follow?) {
-    follow?.run {
+    if (follow == null){
+        textView.visibility = View.GONE
+        return
+    }
+    follow.run {
         textView.visibility = if (followed) {
             View.GONE
         } else {

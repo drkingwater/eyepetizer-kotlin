@@ -19,13 +19,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_rv_item_textcard_h5_height"
+        android:layout_height="wrap_content"
         app:onClickListener="@{(theView) -> viewModel.execAction(theView, header.data.actionUrl)}">
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/home_header_margin_top"
             android:text="@{header.data.text}"
             android:textColor="@color/color_header_title"
             android:textSize="@dimen/home_tv_size_header7"
@@ -39,9 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/home_goto_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:isGone="@{header.data.actionUrl == null}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
             app:layout_constraintLeft_toRightOf="@id/tv_title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_follow"
@@ -53,9 +55,9 @@
             android:textColor="@color/black35"
             android:textSize="10dp"
             app:followed="@{header.data.follow}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
             app:onClickListener="@{(theView) -> viewModel.follow(theView, header)}"
             app:typeface="FZLanD" />
 

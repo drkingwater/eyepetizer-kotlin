@@ -28,4 +28,8 @@
     <dimen name="home_video_ad_icon_size">40dp</dimen>
     <dimen name="home_content_margin_top">15dp</dimen>
     <dimen name="home_special_category_item_size">107dp</dimen>
+    <dimen name="home_header_margin_top">10dp</dimen>
+
+    <!--  Index Rv Divider  -->
+    <dimen name="home_index_rv_divider_bottom">4dp</dimen>
 </resources>

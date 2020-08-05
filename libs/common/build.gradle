@@ -55,6 +55,11 @@ dependencies {
         api v
     }
 
+    //库依赖
+    rootProject.ext.apmDepds.each { k, v ->
+        api v
+    }
+
     //Room
     kapt rootProject.ext.kapt.room_compiler
 

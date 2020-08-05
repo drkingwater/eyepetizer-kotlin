@@ -15,8 +15,11 @@ abstract class BaseViewModel : ViewModel() {
     /**
      * 处理带action的view
      */
-    fun execAction(view: View, actionUrl: String) {
-        logd(actionUrl)
+    fun execAction(view: View, actionUrl: String?) {
+        actionUrl?.run {
+            logd(actionUrl)
+        }
+
     }
 
     /**

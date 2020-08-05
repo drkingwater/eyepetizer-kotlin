@@ -31,4 +31,16 @@ class HomeRepository(private val apiService: Api, private val homeDAO: HomeDAO) 
         request(call = {
             apiService.discovery()
         }, errorMsg = "请求失败")
+
+    /**
+     * 获取首页-日报数据
+     */
+    suspend fun fetchDaily(nextPage: String) =
+        request(call = {
+            if (nextPage.isEmpty()) {
+                apiService.daily()
+            } else {
+                apiService.daily(nextPage)
+            }
+        }, errorMsg = "请求失败")
 }
