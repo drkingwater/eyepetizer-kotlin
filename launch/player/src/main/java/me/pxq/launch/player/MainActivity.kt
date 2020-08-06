@@ -4,32 +4,77 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.TextureView
 import android.view.View
+import android.widget.CheckBox
+import android.widget.RadioGroup
 import androidx.lifecycle.Observer
-import me.pxq.player.ExPlayer
+import me.pxq.player.base.PlayerBase
 import me.pxq.player.PlayerPool
 import me.pxq.utils.logd
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val URL =
+            "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=202808&resourceType=video&editionType=default&source=aliyun&playUrlType=url_oss"
+    }
+
     lateinit var textureView: TextureView
-    var player: ExPlayer? = null
+    var player: PlayerBase? = null
+
+    // 播放器类型
+    private var playerCore: Int = PlayerBase.PLAYER_EXO
+
+    // 循环播放
+    private var repeat: Boolean = false
+    // 自动播放
+    private var autoPlay: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textureView = findViewById(R.id.texture_view)
+        findViewById<RadioGroup>(R.id.radio_group).apply {
+            setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.radio_exo -> playerCore = PlayerBase.PLAYER_EXO
+                    else -> playerCore = PlayerBase.PLAYER_MEDIA
+                }
+            }
+        }
+        findViewById<CheckBox>(R.id.cb_auto_play).apply {
+            isSelected = autoPlay
+            setOnCheckedChangeListener { _, checked ->
+                autoPlay = checked
+            }
+        }
     }
 
     fun play(view: View) {
-        player = PlayerPool.get(this)
-        with(player!!){
+        player?.start()
+    }
+
+    fun pause(view: View) {
+        player?.pause()
+    }
+
+    fun prepare(view: View) {
+        player?.release()
+        //初始化播放器
+        player = PlayerPool.get(this, playerCore)
+        //设置播放器参数
+        with(player!!) {
             setTextureView(textureView)
+            // 自动播放
+            autoPlay(autoPlay)
+            // 重复
+            repeat(repeat)
+
             playState.observe(this@MainActivity, Observer {
                 logd("play state : $it")
             })
             prepare(URL)
         }
-
     }
 
     override fun onStop() {
@@ -37,8 +82,10 @@ class MainActivity : AppCompatActivity() {
         player?.release()
     }
 
-    companion object {
-        const val URL =
-            "http://ali.cdn.kaiyanapp.com/1562841227064_13408871_480x270.mp4?auth_key=1596644177-0-0-43388f23bc2e8480bfec6895fd9aea20"
+
+    fun release(view: View) {
+        player?.release()
     }
+
+
 }

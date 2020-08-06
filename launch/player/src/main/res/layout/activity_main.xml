@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextureView
         android:id="@+id/texture_view"
         android:layout_width="match_parent"
@@ -14,14 +15,103 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/cb_auto_play"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/texture_view">
+
+        <RadioButton
+            android:id="@+id/radio_exo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="ExoPlayer" />
+
+        <RadioButton
+            android:id="@+id/radio_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MediaPlayer" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cb_auto_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动播放"
+        app:layout_constraintBottom_toTopOf="@id/btn_prepare"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/cb_repeat"
+        app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+    <CheckBox
+        android:id="@+id/cb_repeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="循环播放"
+        app:layout_constraintBottom_toTopOf="@id/btn_release"
+        app:layout_constraintLeft_toRightOf="@id/cb_auto_play"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
     <Button
+        android:id="@+id/btn_prepare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="prepare"
+        android:text="初始化"
+        app:layout_constraintBottom_toTopOf="@id/btn_play"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_release"
+        app:layout_constraintTop_toBottomOf="@id/cb_auto_play" />
+
+    <Button
+        android:id="@+id/btn_release"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="release"
+        android:text="释放"
+        app:layout_constraintBottom_toTopOf="@id/btn_play"
+        app:layout_constraintLeft_toRightOf="@id/btn_prepare"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_repeat" />
+
+    <Button
+        android:id="@+id/btn_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="play"
         android:text="播放"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_pause"
+        app:layout_constraintTop_toBottomOf="@id/texture_view" />
+
+    <Button
+        android:id="@+id/btn_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="pause"
+        android:text="暂停"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_play"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/texture_view" />
+
+    <Button
+        android:id="@+id/btn_full"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="pause"
+        android:text="全屏"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
