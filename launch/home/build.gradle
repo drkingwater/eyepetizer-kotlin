@@ -48,6 +48,5 @@ dependencies {
 
     //首页
     implementation project(':module:home')
-    implementation project(':module:detail')
 }
 

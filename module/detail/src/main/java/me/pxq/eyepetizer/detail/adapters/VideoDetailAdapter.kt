@@ -12,6 +12,7 @@ import me.pxq.common.data.Item
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoDetailHeaderBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoRelatedBinding
+import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.MarginDecoration
@@ -22,23 +23,41 @@ import me.pxq.utils.ui.decoration.MarginDecoration
  * Date : 2020/8/8 8:15 PM
  */
 class VideoDetailAdapter(
-    private val actionMV: BaseViewModel,
+    private val actionMV: VideoDetailViewModel,
     var count: Int = 0,
     var videoDetail: Item? = null,
     var relatedVideos: MutableList<Item> = mutableListOf()
 ) :
     RecyclerView.Adapter<VideoDetailAdapter.VideoDetailHolder>() {
 
+    // viewTypes
     private val holderTypes = listOf("video", "videoSmallCard")
 
-    override fun getItemViewType(position: Int): Int {
-//        val item = items[position]
-//        return when {
-//            item.type == "video" && item.data.dataType == "VideoBeanForClient" -> 1
-//            item.type == "videoSmallCard" && item.data.dataType == "VideoBeanForClient" -> 2
-//            else -> 1
-//        }
+    // 相关推荐视频adapter
+    private lateinit var videoRelatedAdapter: VideoRelatedAdapter
 
+    // 相关推荐视频binding
+    private var relatedVideosBinding : DetailRvItemVideoRelatedBinding? = null
+
+    // 设置"查看更多"是否可见
+    fun setLoadMoreRelatedVisible(visible : Boolean){
+        relatedVideosBinding?.tvSeeMore?.visibility = if (visible){
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+    }
+
+    // 查看更多视频
+    fun loadMoreRelatedVideos(videos : List<Item>){
+        with(videoRelatedAdapter) {
+            val start = relatedVideos.size
+            relatedVideos.addAll(videos)
+            notifyItemRangeInserted(start, relatedVideos.size)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
         return when (holderTypes[position]) {
             "video" -> 1
             "videoSmallCard" -> 2
@@ -63,7 +82,9 @@ class VideoDetailAdapter(
                         LayoutInflater.from(
                             parent.context
                         ), parent, false
-                    )
+                    ).also {
+                        relatedVideosBinding = it
+                    }
                 )
             }
             else -> VideoDetailHolder(
@@ -103,9 +124,20 @@ class VideoDetailAdapter(
                 is DetailRvItemVideoRelatedBinding -> {
                     with(binding.rvVideoRelated) {
                         if (adapter == null) {
-                            adapter = VideoRelatedAdapter(actionMV)
+                            // 初始化
+                            binding.detailViewModel = actionMV
+
+                            adapter = VideoRelatedAdapter(actionMV).also {
+                                videoRelatedAdapter = it
+                            }
                             // Item分割区域
-                            addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(R.dimen.rv_divider_bottom).dp2px.toInt()))
+                            addItemDecoration(
+                                MarginDecoration(
+                                    bottom = context.resources.getDimension(
+                                        R.dimen.rv_divider_bottom
+                                    ).dp2px.toInt()
+                                )
+                            )
 
                             layoutManager =
                                 LinearLayoutManager(

@@ -25,6 +25,7 @@ class VideoRelatedAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         init {
+            // 修改字体颜色
             binding.tvVideoCategory.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,

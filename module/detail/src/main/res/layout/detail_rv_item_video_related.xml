@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="detailViewModel"
+            type="me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@string/detail_see_more"
             android:textColor="@color/white"
+            app:onClickListener="@{() -> detailViewModel.loadRelatedVideos()}"
             android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -120,6 +120,13 @@ class VideoDetailFragment : Fragment() {
                 }
             }
         }
+        // 查看更多视频
+        videoDetailViewModel.moreRelatedVideos.observe(this){
+            videoDetailAdapter.loadMoreRelatedVideos(it)
+        }
+        videoDetailViewModel.isLoadMoreVisible.observe(this){
+            videoDetailAdapter.setLoadMoreRelatedVisible(it)
+        }
     }
 
 
