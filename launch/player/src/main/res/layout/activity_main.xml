@@ -107,7 +107,7 @@
         android:id="@+id/btn_full"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="pause"
+        android:onClick="full"
         android:text="全屏"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -59,7 +59,7 @@
             android:singleLine="true"
             android:text="@{videoAd.data.detail.title}"
             android:textColor="@color/color_header_title"
-            android:textSize="@dimen/home_text_size_normal"
+            android:textSize="@dimen/text_size_normal"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/tv_video_desc"
             app:layout_constraintLeft_toRightOf="@id/iv_video_icon"
@@ -67,7 +67,7 @@
             app:layout_constraintTop_toTopOf="@id/iv_video_icon"
             app:typeface="FZLanD"
             tools:ignore="SpUsage"
-            tools:text="@string/home_txt_test" />
+            tools:text="@string/txt_test" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_video_desc"
@@ -84,7 +84,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:typeface="FZLanL"
             tools:ignore="SpUsage"
-            tools:text="@string/home_txt_test" />
+            tools:text="@string/txt_test" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

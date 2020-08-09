@@ -1,7 +1,9 @@
 package me.pxq.player.media
 
+import android.content.Context
 import android.graphics.SurfaceTexture
 import android.media.MediaPlayer
+import android.net.Uri
 import android.view.Surface
 import android.view.TextureView
 import me.pxq.player.base.AbsPlayer
@@ -12,12 +14,13 @@ import me.pxq.player.base.PlayerBase
  * Author : pxq
  * Date : 2020/8/6 10:02 PM
  */
-internal class EMediaPlayer : AbsPlayer(), TextureView.SurfaceTextureListener {
+internal class EMediaPlayer(private val context: Context) : AbsPlayer(),
+    TextureView.SurfaceTextureListener {
 
     private val mediaPlayer = MediaPlayer().apply {
         setOnPreparedListener {
             onStateChange(PlayerBase.READY)
-            if (autoPlay){
+            if (autoPlay) {
                 start()
             }
         }
@@ -34,7 +37,7 @@ internal class EMediaPlayer : AbsPlayer(), TextureView.SurfaceTextureListener {
     }
 
     override fun setTextureView(textureView: TextureView) {
-        if (textureView.isAvailable){
+        if (textureView.isAvailable) {
             mediaPlayer.setSurface(Surface(textureView.surfaceTexture))
         }
         textureView.surfaceTextureListener = this
@@ -48,8 +51,20 @@ internal class EMediaPlayer : AbsPlayer(), TextureView.SurfaceTextureListener {
         mediaPlayer.isLooping = repeat
     }
 
+    /**
+     * Map<String, String> headers = new HashMap<>();
+    headers.put("Content-Type", "audio/mp3"); // change content type if necessary
+    headers.put("Accept-Ranges", "bytes");
+    headers.put("Status", "206");
+    headers.put("Cache-control", "no-cache");
+     */
     override fun prepare(url: String) {
-        mediaPlayer.setDataSource(url)
+        mediaPlayer.setDataSource(
+            context.applicationContext,
+            Uri.parse(url),
+            //todo 播放到一半停止播放的bug
+            mapOf("Cache-control" to "no-cache", "Accept-Ranges" to "bytes", "Status" to "206")
+        )
         mediaPlayer.prepareAsync()
     }
 
@@ -62,8 +77,13 @@ internal class EMediaPlayer : AbsPlayer(), TextureView.SurfaceTextureListener {
     }
 
     override fun release() {
-        mediaPlayer.stop()
-        mediaPlayer.release()
+        try {
+
+            mediaPlayer.stop()
+            mediaPlayer.release()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {

@@ -25,9 +25,10 @@
             android:layout_width="match_parent"
             android:layout_height="185dp"
             android:scaleType="fitXY"
+            android:transitionName="@string/trans_detail_video_cover"
             app:cover="@{daily.data.content.data.cover.detail}"
             app:layout_constraintTop_toTopOf="parent"
-            app:onClickListener="@{(theView) -> viewModel.navigateToVideo(theView, daily)}" />
+            app:onClickListener="@{(theView) -> viewModel.navigateToVideo(theView, daily.data.content)}" />
 
         <ImageView
             android:layout_width="@dimen/home_daily_label_size"
@@ -76,7 +77,7 @@
         <ImageView
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:src="@drawable/home_author_icon"
+            android:src="@drawable/ic_author_star"
             app:isAuthor="@{daily.data.header.iconType}"
             app:layout_constraintBottom_toBottomOf="@id/iv_icon"
             app:layout_constraintRight_toRightOf="@id/iv_icon" />
@@ -90,7 +91,7 @@
             android:singleLine="true"
             android:text="@{daily.data.header.title, default = 怀孕了半辈子}"
             android:textColor="@color/black25"
-            android:textSize="@dimen/home_text_size_normal"
+            android:textSize="@dimen/text_size_normal"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
             app:layout_constraintTop_toBottomOf="@id/baseline_layout"
             app:typeface="FZLanD" />

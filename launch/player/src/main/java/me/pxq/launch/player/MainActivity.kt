@@ -87,5 +87,9 @@ class MainActivity : AppCompatActivity() {
         player?.release()
     }
 
+    fun full(view: View) {
+        
+    }
+
 
 }

@@ -51,7 +51,7 @@
             android:maxLines="2"
             android:text="@{topic.data.topicTitle}"
             android:textColor="@color/color_header_title"
-            android:textSize="@dimen/home_text_size_normal"
+            android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toTopOf="@id/tv_description"
             app:layout_constraintLeft_toRightOf="@id/icon_barrier"
             app:layout_constraintRight_toRightOf="parent"

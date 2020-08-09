@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.github.moduth.blockcanary.BlockCanary
 import com.github.moduth.blockcanary.BlockCanaryContext
 import me.pxq.utils.DeviceUtil
+import me.pxq.utils.logd
 
 /**
  * Description:
@@ -22,7 +23,7 @@ class EyepetizerApp : Application() {
 
         //工具类需要用到context
         DeviceUtil.application = this
-
+        logd("arouter init ...")
         //BlockCanary
 //        BlockCanary.install(this, AppBlockCanaryContext()).start()
     }

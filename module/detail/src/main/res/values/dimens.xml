@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="detail_video_title_margin_top">15dp</dimen>
+    <dimen name="detail_ic_detail_size">23dp</dimen>
+    <dimen name="detail_video_header_author_size">40dp</dimen>
+    <dimen name="detail_video_rv_item_margin">10dp</dimen>
+    <dimen name="detail_video_title_text_size">16dp</dimen>
+</resources>

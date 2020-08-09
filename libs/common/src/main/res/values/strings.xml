@@ -4,4 +4,11 @@
     <string name="duration_format_hms">%02d:%02d:%02d</string>
     <string name="duration_format_ms">%02d:%02d</string>
     <string name="duration_format_s">%02d</string>
+
+    <string name="home_add_follow">+关注</string>
+
+    <!--  共享元素  -->
+    <string name="trans_detail_video_cover">trans_detail_video_cover</string>
+
+    <string name="txt_test">测试数据测试数据嘻嘻嘻嘻嘻嘻嘻嘻寻嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻寻寻寻寻寻寻寻寻寻</string>
 </resources>

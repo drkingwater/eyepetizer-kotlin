@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import me.pxq.common.db.converter.HomeItemConverter
+import java.io.Serializable
 
 /**
  * Description: 首页-推荐 数据类
@@ -27,7 +28,7 @@ data class Item(
     val id: Int,
     val tag: Any,
     val type: String
-)
+) : Serializable
 
 
 data class Data(
@@ -42,7 +43,7 @@ data class Data(
     val category: String,
     val collected: Boolean,
     val consumption: Consumption,
-    val content: Content,
+    val content: Item,
     val count: Int,
     val cover: Cover,
     val dataType: String,
@@ -114,7 +115,7 @@ data class Data(
     val waterMarks: Any,
     val webAdTrack: Any,
     val webUrl: WebUrl
-)
+) : Serializable
 
 data class Author(
     val adTrack: Any,
@@ -131,7 +132,7 @@ data class Author(
     val recSort: Int,
     val shield: Shield,
     val videoNum: Int
-)
+) : Serializable
 
 data class Banner(
     val background_image: String,
@@ -139,22 +140,16 @@ data class Banner(
     val poster_image: String,
     val tag_name: String,
     val title: String
-)
+) : Serializable
 
 data class Consumption(
     val collectionCount: Int,
     val realCollectionCount: Int,
     val replyCount: Int,
     val shareCount: Int
-)
+) : Serializable
 
-data class Content(
-    val adIndex: Int,
-    val `data`: Data,
-    val id: Int,
-    val tag: Any,
-    val type: String
-)
+
 
 
 data class Header(
@@ -174,7 +169,7 @@ data class Header(
     val textAlign: String,
     val time: Long,
     val title: String
-) {
+) : Serializable{
     companion object {
         //圆形icon
         const val ICON_TYPE_ROUND = "round"
@@ -189,13 +184,13 @@ data class Follow(
     val followed: Boolean,
     val itemId: Int,
     val itemType: String
-)
+) : Serializable
 
 data class Shield(
     val itemId: Int,
     val itemType: String,
     val shielded: Boolean
-)
+) : Serializable
 
 
 data class Cover(
@@ -204,7 +199,7 @@ data class Cover(
     val feed: String,
     val homepage: String,
     val sharing: Any
-)
+) : Serializable
 
 data class PlayInfo(
     val height: Int,
@@ -213,13 +208,13 @@ data class PlayInfo(
     val url: String,
     val urlList: List<Url>,
     val width: Int
-)
+) : Serializable
 
 data class Provider(
     val alias: String,
     val icon: String,
     val name: String
-)
+) : Serializable
 
 data class Tag(
     val actionUrl: String,
@@ -236,25 +231,25 @@ data class Tag(
     val name: String,
     val newestEndTime: Any,
     val tagRecType: String
-)
+) : Serializable
 
 data class VideoPosterBean(
     val fileSizeStr: Any,
     val scale: Any,
     val url: Any
-)
+) : Serializable
 
 data class WebUrl(
     val forWeibo: String,
     val raw: String
-)
+) : Serializable
 
 
 data class Url(
     val name: String,
     val size: Int,
     val url: String
-)
+) : Serializable
 
 data class Detail(
     val actionUrl: String,
@@ -285,7 +280,7 @@ data class Detail(
     val url: String,
     val videoAdType: String,
     val videoType: String
-)
+) : Serializable
 
 data class AdTrack(
     val clickUrl: String,
@@ -294,4 +289,4 @@ data class AdTrack(
     val organization: String,
     val playUrl: String,
     val viewUrl: String
-)
+) : Serializable

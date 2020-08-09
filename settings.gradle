@@ -1,3 +1,4 @@
+include ':module:detail'
 include ':launch:player'
 include ':libs:player'
 include ':launch:home'

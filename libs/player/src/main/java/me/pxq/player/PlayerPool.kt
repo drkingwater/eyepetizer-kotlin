@@ -18,7 +18,7 @@ object PlayerPool {
 
     fun get(context: Context, @PlayerBase.PlayerCore playerCore: Int = PlayerBase.PLAYER_EXO): PlayerBase {
         return when (playerCore) {
-            PlayerBase.PLAYER_MEDIA -> EMediaPlayer()
+            PlayerBase.PLAYER_MEDIA -> EMediaPlayer(context)
             else -> ExPlayer(
                 SimpleExoPlayer.Builder(context)
                     .build(), context

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <!--        <import type="java.lang.String"/>-->
+        <import type="me.pxq.common.data.Header" />
+
+        <variable
+            name="video"
+            type="me.pxq.common.data.Item" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/video_detail_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black80"
+            android:padding="@dimen/detail_video_rv_item_margin"
+            app:layout_constraintBottom_toTopOf="@id/iv_author"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{video.data.title}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/detail_video_title_text_size"
+                app:layout_constraintBottom_toTopOf="@id/tv_category"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:typeface="FZLanD"
+                tools:text="@string/txt_test"
+                tools:textColor="@color/black" />
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{video.data.category}"
+                android:textColor="@color/white20"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBottom_toTopOf="@id/tv_description"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:typeface="FZLanL"
+                tools:text="@string/txt_test"
+                tools:textColor="@color/black" />
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{video.data.description}"
+                android:textColor="@color/white20"
+                android:textSize="@dimen/text_size_middle"
+                app:layout_constraintLeft_toLeftOf="@id/tv_category"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_category"
+                app:typeface="FZLanL"
+                tools:text="@string/txt_test"
+                tools:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/iv_ic_like"
+                android:layout_width="@dimen/detail_ic_detail_size"
+                android:layout_height="@dimen/detail_ic_detail_size"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/detail_ic_detail_like"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tv_like"
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_like"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{String.valueOf(video.data.consumption.collectionCount)}"
+                android:textColor="@color/white20"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBottom_toBottomOf="@id/iv_ic_like"
+                app:layout_constraintLeft_toRightOf="@id/iv_ic_like"
+                app:layout_constraintRight_toLeftOf="@id/iv_ic_share"
+                app:layout_constraintTop_toTopOf="@id/iv_ic_like"
+                app:typeface="FZLanL"
+                tools:text="40000"
+                tools:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/iv_ic_share"
+                android:layout_width="@dimen/detail_ic_detail_size"
+                android:layout_height="@dimen/detail_ic_detail_size"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/detail_ic_detail_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tv_like"
+                app:layout_constraintRight_toLeftOf="@id/tv_share"
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+            <me.pxq.common.ui.view.FontTextView
+                android:id="@+id/tv_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{String.valueOf(video.data.consumption.shareCount)}"
+                android:textColor="@color/white20"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBottom_toBottomOf="@id/iv_ic_share"
+                app:layout_constraintLeft_toRightOf="@id/iv_ic_share"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_ic_share"
+                app:typeface="FZLanL"
+                tools:text="400"
+                tools:textColor="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_author"
+            iconType="@{Header.ICON_TYPE_ROUND}"
+            iconUrl="@{video.data.author.icon}"
+            android:layout_width="@dimen/detail_video_header_author_size"
+            android:layout_height="@dimen/detail_video_header_author_size"
+            android:layout_marginStart="@dimen/detail_video_rv_item_margin"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/video_detail_layout"
+            app:layout_constraintTop_toBottomOf="@id/video_detail_layout"
+            tools:src="@drawable/ic_author_star" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_author_star"
+            app:layout_constraintBottom_toBottomOf="@id/iv_author"
+            app:layout_constraintRight_toRightOf="@id/iv_author" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{video.data.author.name}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_middle"
+            app:layout_constraintBottom_toTopOf="@id/tv_author_desc"
+            app:layout_constraintLeft_toRightOf="@id/iv_author"
+            app:layout_constraintRight_toLeftOf="@id/btn_follow"
+            app:layout_constraintTop_toTopOf="@id/iv_author"
+            app:typeface="FZLanD"
+            tools:text="@string/txt_test"
+            tools:textColor="@color/black" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_author_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{video.data.author.description}"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_author"
+            app:layout_constraintLeft_toRightOf="@id/iv_author"
+            app:layout_constraintRight_toLeftOf="@id/btn_follow"
+            app:layout_constraintTop_toBottomOf="@id/tv_author"
+            app:typeface="FZLanL"
+            tools:text="@string/txt_test"
+            tools:textColor="@color/black" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/btn_follow"
+            followed="@{video.data.author.follow}"
+            android:layout_width="44dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="@dimen/detail_video_rv_item_margin"
+            android:background="@drawable/shape_follow_bg_white"
+            android:gravity="center"
+            android:text="@string/home_add_follow"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_author"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_author"
+            app:typeface="FZLanD"
+            tools:textColor="@color/black" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="15dp"
+            android:background="@color/white80"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_author" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

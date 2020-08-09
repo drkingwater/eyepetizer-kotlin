@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import me.pxq.eyepetizer.home.BaseFragment
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
@@ -25,7 +26,7 @@ import me.pxq.utils.logi
  * Author : pxq
  * Date : 2020/7/27 10:30 PM
  */
-class RecommendFragment : Fragment() {
+class RecommendFragment : BaseFragment() {
 
     private val viewModel by activityViewModels<RecommendViewModel> {
         RecommendViewModelFactory.get(
@@ -115,6 +116,10 @@ class RecommendFragment : Fragment() {
                 }
                 is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
             }
+        })
+        // 导航到详情页
+        viewModel.videoDetail.observe(requireActivity(), Observer {
+            navigateToVideo(it)
         })
     }
 

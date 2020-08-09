@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.alibaba.arouter'
 
 def build = rootProject.ext.build
 
@@ -47,5 +48,6 @@ dependencies {
 
     //首页
     implementation project(':module:home')
+    implementation project(':module:detail')
 }
 

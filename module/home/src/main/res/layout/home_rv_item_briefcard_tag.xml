@@ -41,13 +41,13 @@
             android:maxLines="1"
             android:text="@{brief.data.title}"
             android:textColor="@color/color_header_title"
-            android:textSize="@dimen/home_text_size_normal"
+            android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toTopOf="@id/tv_description"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
             app:layout_constraintRight_toLeftOf="@id/tv_follow"
             app:layout_constraintTop_toTopOf="parent"
             app:typeface="FZLanD"
-            tools:text="@string/home_txt_test" />
+            tools:text="@string/txt_test" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_description"
@@ -65,7 +65,7 @@
             app:layout_constraintRight_toLeftOf="@id/tv_follow"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:typeface="FZLanL"
-            tools:text="@string/home_txt_test" />
+            tools:text="@string/txt_test" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_follow"
