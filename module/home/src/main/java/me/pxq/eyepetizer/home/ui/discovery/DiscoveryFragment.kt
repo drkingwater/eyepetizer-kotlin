@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentDiscoveryBinding
-import me.pxq.eyepetizer.home.decoration.MarginDecoration
+import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
@@ -51,7 +51,7 @@ class DiscoveryFragment : Fragment() {
         binding.recyclerView.run {
             layoutManager = LinearLayoutManager(requireContext())
             //设置分割线
-            addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(R.dimen.home_index_rv_divider_bottom).dp2px.toInt()))
+            addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom).dp2px.toInt()))
             //设置adapter
             adapter = IndexRvAdapter(viewModel).also {
                 subscribeUi(it)

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
 import me.pxq.eyepetizer.home.databinding.HomeRvItemSpecialSquareGridItemBinding
-import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import me.pxq.common.viewmodel.BaseViewModel
 
 /**
  * Description: 热门分类 rv adapter

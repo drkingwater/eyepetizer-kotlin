@@ -13,7 +13,7 @@ import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentDailyBinding
 import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
-import me.pxq.eyepetizer.home.decoration.MarginDecoration
+import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.eyepetizer.home.ui.recommend.RecommendViewModel
 import me.pxq.eyepetizer.home.ui.recommend.RecommendViewModelFactory
 import me.pxq.network.ApiResult
@@ -55,7 +55,7 @@ class DailyFragment : Fragment() {
         binding.recyclerView.run {
             layoutManager = LinearLayoutManager(requireContext())
             //设置分割线
-            addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(R.dimen.home_index_rv_divider_bottom).dp2px.toInt()))
+            addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom).dp2px.toInt()))
             //设置adapter
             adapter = IndexRvAdapter(viewModel).also {
                 subscribeUi(it)

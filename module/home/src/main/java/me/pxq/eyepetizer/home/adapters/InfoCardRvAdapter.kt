@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Banner
 import me.pxq.eyepetizer.home.R
-import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import me.pxq.common.viewmodel.BaseViewModel
 
 /**
  * Description: Info Card titleList Rv Adapter

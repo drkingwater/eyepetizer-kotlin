@@ -15,7 +15,7 @@
     <dimen name="home_followcard_icon_size">38dp</dimen>
     <dimen name="home_tablayout_item_textsize">12dp</dimen>
     <dimen name="home_daily_label_size">48dp</dimen>
-    <dimen name="home_title_action_magin_right">5dp</dimen>
+
     <dimen name="home_banner_height">185dp</dimen>
     <dimen name="home_selection_margin">2dp</dimen>
     <dimen name="home_briefcard_icon_size">50dp</dimen>
@@ -29,6 +29,5 @@
     <dimen name="home_special_category_item_size">107dp</dimen>
     <dimen name="home_header_margin_top">10dp</dimen>
 
-    <!--  Index Rv Divider  -->
-    <dimen name="home_index_rv_divider_bottom">4dp</dimen>
+
 </resources>

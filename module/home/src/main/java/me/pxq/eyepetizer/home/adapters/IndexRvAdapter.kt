@@ -6,11 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
 import me.pxq.common.data.Item
+import me.pxq.common.databinding.RvItemVideoSmallCardBinding
 import me.pxq.common.ui.view.TheEndHolder
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.*
-import me.pxq.eyepetizer.home.decoration.MarginDecoration
-import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import me.pxq.utils.ui.decoration.MarginDecoration
+import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 
@@ -114,7 +115,7 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemVideoSmallCardBinding -> {
+                is RvItemVideoSmallCardBinding -> {
                     with(binding) {
                         video = item
                         viewModel = actionVM

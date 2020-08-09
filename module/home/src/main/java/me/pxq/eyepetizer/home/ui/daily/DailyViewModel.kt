@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.pxq.common.data.HomePage
 import me.pxq.eyepetizer.home.repository.HomeRepository
-import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
 import me.pxq.utils.loge

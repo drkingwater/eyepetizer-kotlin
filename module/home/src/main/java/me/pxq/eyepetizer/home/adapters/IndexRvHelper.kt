@@ -61,7 +61,7 @@ object IndexRvHelper {
         VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 -> R.layout.home_rv_item_textcard_textcard_footer2
         VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW -> R.layout.home_rv_item_followcard_followcard
         VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
-        VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> R.layout.home_rv_item_video_small_card
+        VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> me.pxq.common.R.layout.rv_item_video_small_card
         VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
         VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner
         VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard

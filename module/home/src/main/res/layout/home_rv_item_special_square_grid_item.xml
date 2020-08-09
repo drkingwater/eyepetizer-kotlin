@@ -6,7 +6,8 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+            type="me.pxq.common.viewmodel.BaseViewModel" />
+
 
         <variable
             name="category"

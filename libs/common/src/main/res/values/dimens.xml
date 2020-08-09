@@ -3,4 +3,12 @@
     <dimen name="text_size_normal">14dp</dimen>
     <dimen name="text_size_middle">13dp</dimen>
     <dimen name="text_size_small">12dp</dimen>
+
+    <!--  small video card  -->
+    <dimen name="small_video_card_cover_width">175dp</dimen>
+    <dimen name="small_video_card_cover_height">100dp</dimen>
+
+    <dimen name="home_title_action_magin_right">5dp</dimen>
+    <!--  Index Rv Divider  -->
+    <dimen name="rv_divider_bottom">4dp</dimen>
 </resources>

@@ -1,19 +1,9 @@
-package me.pxq.eyepetizer.home.viewmodel
+package me.pxq.common.viewmodel
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alibaba.android.arouter.launcher.ARouter
-import me.pxq.common.R
 import me.pxq.common.data.Item
-import me.pxq.common.router.RouterHub
-import me.pxq.eyepetizer.detail.VideoDetailActivity
 import me.pxq.utils.logd
 
 /**

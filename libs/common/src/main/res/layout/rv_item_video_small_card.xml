@@ -7,7 +7,8 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.eyepetizer.home.viewmodel.BaseViewModel" />
+            type="me.pxq.common.viewmodel.BaseViewModel" />
+
 
         <variable
             name="video"
@@ -21,8 +22,8 @@
 
         <ImageView
             android:id="@+id/iv_cover"
-            android:layout_width="175dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/small_video_card_cover_width"
+            android:layout_height="@dimen/small_video_card_cover_height"
             android:scaleType="fitXY"
             app:cover="@{video.data.cover.feed}"
             app:layout_constrainedWidth="true"

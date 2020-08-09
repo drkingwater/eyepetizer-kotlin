@@ -1,5 +1,7 @@
 package me.pxq.eyepetizer.home
 
+import android.os.Build
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import me.pxq.common.data.Item
@@ -19,16 +21,20 @@ abstract class BaseFragment : Fragment() {
     /**
      * 跳转至详情页
      */
-    fun navigateToVideo(item: Item) {
+    fun navigateToVideo( item: Item, view: View? = null) {
         logd("播放详情页：${item.data.type}")
         ARouter.getInstance().build(RouterHub.DETAIL_VIDEO)
             .withSerializable("video_detail", item)
             .navigation()?.run {
                 this as Fragment
                 this@BaseFragment.requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setReorderingAllowed(true) // Optimize for shared element transition
-//                    .addSharedElement(transitioningView, transitioningView.getTransitionName())
+                    .beginTransaction().also {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
+                            // Optimize for shared element transition
+                            it.setReorderingAllowed(true)
+                            it.addSharedElement(view, view.transitionName)
+                        }
+                    }
                     .setCustomAnimations(
                         me.pxq.common.R.anim.slide_bottom_in,
                         me.pxq.common.R.anim.slide_bottom_out,

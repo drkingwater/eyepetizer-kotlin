@@ -18,9 +18,9 @@ class HomeRepository(private val apiService: Api, private val homeDAO: HomeDAO) 
     suspend fun fetchRecommend(nextPage: String) =
         request(call = {
             if (nextPage.isEmpty()) {
-                apiService.recommend()
+                apiService.fetchRecommend()
             } else {
-                apiService.recommend(nextPage)
+                apiService.fetchRecommend(nextPage)
             }
         }, errorMsg = "请求失败")
 
@@ -29,7 +29,7 @@ class HomeRepository(private val apiService: Api, private val homeDAO: HomeDAO) 
      */
     suspend fun fetchDiscovery() =
         request(call = {
-            apiService.discovery()
+            apiService.fetchDiscovery()
         }, errorMsg = "请求失败")
 
     /**
@@ -38,9 +38,9 @@ class HomeRepository(private val apiService: Api, private val homeDAO: HomeDAO) 
     suspend fun fetchDaily(nextPage: String) =
         request(call = {
             if (nextPage.isEmpty()) {
-                apiService.daily()
+                apiService.fetchDaily()
             } else {
-                apiService.daily(nextPage)
+                apiService.fetchDaily(nextPage)
             }
         }, errorMsg = "请求失败")
 }

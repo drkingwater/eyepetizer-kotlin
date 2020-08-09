@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.HomeRvItemBannerBinding
-import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import me.pxq.common.viewmodel.BaseViewModel
 import kotlin.math.acos
 
 /**

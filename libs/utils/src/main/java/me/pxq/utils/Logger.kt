@@ -18,4 +18,4 @@ inline fun <reified T> T.logd(msg :Any) = Log.d("$APP_TAG-${T::class.java.simple
 //fun loge(tag :String, msg :String) = Log.e("$APP_TAG-$tag", msg)
 inline fun <reified T> T.loge( msg :Any) = Log.e("$APP_TAG-${T::class.java.simpleName}", msg.toString())
 
-fun loge(tag :String, msg :String, tr : Throwable) = Log.e("$APP_TAG-$tag", msg, tr)
+inline fun <reified T> T.loge(tr : Throwable) = Log.e("$APP_TAG-${T::class.java.simpleName}", tr.message, tr)

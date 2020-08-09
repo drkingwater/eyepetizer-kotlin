@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
 import me.pxq.eyepetizer.home.databinding.HomeRvItemColumnCardGridItemBinding
-import me.pxq.eyepetizer.home.viewmodel.BaseViewModel
+import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.utils.logd
 
 /**

@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.home.decoration
+package  me.pxq.utils.ui.decoration
 
 import android.graphics.Rect
 import android.view.View

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.pxq.eyepetizer.detail">
 
-    <application>
-        <activity android:name=".VideoDetailActivity"/>
-    </application>
+<!--    <application>-->
+<!--        <activity android:name=".VideoDetailActivity"/>-->
+<!--    </application>-->
 </manifest>

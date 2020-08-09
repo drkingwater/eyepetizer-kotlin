@@ -14,14 +14,18 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import me.pxq.common.ApiService
 import me.pxq.common.R
 import me.pxq.common.data.Item
 import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
+import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
+import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.load
 import me.pxq.utils.logd
+import me.pxq.utils.loge
 
 /**
  * Description: 视频详情页Fragment
@@ -29,22 +33,14 @@ import me.pxq.utils.logd
  * Date : 2020/8/9 2:27 PM
  */
 @Route(path = RouterHub.DETAIL_VIDEO)
-class VideoDetailFragment : Fragment(), Observer<Item> {
+class VideoDetailFragment : Fragment() {
 
-    private val videoDetailViewModel = VideoDetailViewModel()
+    private val videoDetailViewModel =
+        VideoDetailViewModel(VideoDetailRepository(ApiService.instance))
 
     private lateinit var binding: DetailActivityVideoBinding
 
     private lateinit var videoDetailAdapter: VideoDetailAdapter
-
-//    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
-//        return if (enter){
-//            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_in)
-//        } else {
-//            AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
-//
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +53,7 @@ class VideoDetailFragment : Fragment(), Observer<Item> {
             with(binding.rvVideoDetail) {
                 layoutManager =
                     LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-                adapter = VideoDetailAdapter().also {
+                adapter = VideoDetailAdapter(videoDetailViewModel).also {
                     videoDetailAdapter = it
                 }
             }
@@ -77,23 +73,49 @@ class VideoDetailFragment : Fragment(), Observer<Item> {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        videoDetailViewModel.videoDetail.removeObserver(this)
-    }
 
     private fun observe() {
-        videoDetailViewModel.videoDetail.observe(requireActivity(), this)
-    }
+        // 视频信息刷新
+        videoDetailViewModel.videoDetail.observe(this) {
+            // 滚到顶部
+            binding.rvVideoDetail.smoothScrollToPosition(0)
+            // 加载背景图
+            binding.ivBg.load(it.data.cover.blurred)
+            // adapter count数量+1
+            with(videoDetailAdapter){
+                if (count == 0) {
+                    count = 1
+                }
+                videoDetail = it
+                notifyItemChanged(0)
+            }
 
-    override fun onChanged(it: Item?) {
-        it?.run {
-            binding.ivBg.load(it.data.cover.blurred, placeHolderId = R.color.black)
-            videoDetailAdapter.items.add(0, it)
-            logd("size : ${videoDetailAdapter.items.size}")
-            videoDetailAdapter.notifyItemChanged(0)
+            // 视频信息更新,获取相关视频
+            videoDetailViewModel.fetchVideoRelated()
         }
+        // 相关视频
+        videoDetailViewModel.videoRelated.observe(this) {
+            when (it) {
+                is ApiResult.Success -> {
+                    with(videoDetailAdapter){
+                        relatedVideos.clear()
+                        relatedVideos.addAll(it.data.itemList)
+                        // adapter count数量+1
+                        if (count <= 1) {
+                            count++
+                            notifyDataSetChanged()
+                        } else {
+                            notifyItemChanged(1)
+                        }
+                    }
 
+                }
+                is ApiResult.Error -> {
+                    loge(it.exception)
+                }
+            }
+        }
     }
+
 
 }
