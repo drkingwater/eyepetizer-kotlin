@@ -21,6 +21,9 @@ import me.pxq.utils.logd
  */
 class VideoDetailViewModel(private val repository: VideoDetailRepository) : BaseViewModel() {
 
+    // 首次加载
+    private var onAnim = true
+
     private val _videoRelated = MutableLiveData<ApiResult<HomePage>>()
     val videoRelated: LiveData<ApiResult<HomePage>> = _videoRelated
 
@@ -29,9 +32,13 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
         videoDetail.value?.let {
             viewModelScope.launch(Dispatchers.IO) {
                 // 延迟一点时间，让动画执行完
-                delay(300)
+                if (onAnim) {
+                    onAnim = false
+                    delay(300)
+                }
                 val homePage = repository.fetchVideoRelated(it.data.id).run {
                     if (this is ApiResult.Success){
+                        // 去除
                         if(data.itemList.isNotEmpty() && data.itemList[0].type != "videoSmallCard"){
                             logd("remove index 0 ")
                             data.itemList.removeAt(0)

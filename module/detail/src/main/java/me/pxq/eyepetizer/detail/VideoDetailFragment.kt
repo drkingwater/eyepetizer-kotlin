@@ -77,36 +77,41 @@ class VideoDetailFragment : Fragment() {
     private fun observe() {
         // 视频信息刷新
         videoDetailViewModel.videoDetail.observe(this) {
-            // 滚到顶部
-            binding.rvVideoDetail.smoothScrollToPosition(0)
+
+            // 加载视频cover
+            binding.ivCover.load(it.data.cover.detail)
+
             // 加载背景图
             binding.ivBg.load(it.data.cover.blurred)
+
+            // 先隐藏
+            binding.rvVideoDetail.visibility = View.GONE
+            // 滚到顶部
+//            binding.rvVideoDetail.smoothScrollToPosition(0)
+
             // adapter count数量+1
-            with(videoDetailAdapter){
-                if (count == 0) {
-                    count = 1
-                }
+            with(videoDetailAdapter) {
+                count = 1
                 videoDetail = it
-                notifyItemChanged(0)
+                notifyDataSetChanged()
             }
+            // 显示
+            binding.rvVideoDetail.visibility = View.VISIBLE
 
             // 视频信息更新,获取相关视频
             videoDetailViewModel.fetchVideoRelated()
         }
         // 相关视频
         videoDetailViewModel.videoRelated.observe(this) {
+
             when (it) {
                 is ApiResult.Success -> {
-                    with(videoDetailAdapter){
+                    with(videoDetailAdapter) {
                         relatedVideos.clear()
                         relatedVideos.addAll(it.data.itemList)
                         // adapter count数量+1
-                        if (count <= 1) {
-                            count++
-                            notifyDataSetChanged()
-                        } else {
-                            notifyItemChanged(1)
-                        }
+                        count = 2
+                        notifyItemInserted(1)
                     }
 
                 }

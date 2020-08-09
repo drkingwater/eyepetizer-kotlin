@@ -2,7 +2,9 @@ package me.pxq.eyepetizer.detail.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import me.pxq.common.R
 import me.pxq.common.data.Item
 import me.pxq.common.databinding.RvItemVideoSmallCardBinding
 import me.pxq.common.viewmodel.BaseViewModel
@@ -21,6 +23,21 @@ class VideoRelatedAdapter(
 
     inner class VideoRelatedHolder(private val binding: RvItemVideoSmallCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.tvVideoCategory.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.white25
+                )
+            )
+            binding.tvVideoTitle.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.white
+                )
+            )
+        }
 
         fun bind(item: Item) {
             binding.viewModel = actionMV

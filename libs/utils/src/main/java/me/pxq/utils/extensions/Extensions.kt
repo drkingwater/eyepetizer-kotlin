@@ -6,6 +6,8 @@ import android.util.TypedValue
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
+import com.bumptech.glide.load.resource.bitmap.DrawableTransformation
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 
 /**
@@ -32,6 +34,7 @@ fun ImageView.load(url: String, trans: Transformation<Bitmap>? = null, placeHold
         Glide.with(this)
             .load(url)
             .placeholder(placeHolderId)
+            .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
     } else {
         Glide.with(this)
