@@ -8,6 +8,7 @@
     <color name="colorTextPrimaryDark">#333333</color>
     <color name="colorTextSecondary">#888888</color>
 
+
     <color name="black">#000000</color>
     <color name="black85">#26000000</color>
     <color name="black80">#33000000</color>
@@ -29,6 +30,7 @@
 
     <color name="gray">#ededed</color>
 
+    <color name="video_detail_video_title">@color/white15</color>
     <!--  header颜色  -->
     <color name="color_header_title">@color/black25</color>
 </resources>

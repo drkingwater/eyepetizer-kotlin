@@ -10,6 +10,7 @@ import me.pxq.common.R
 import me.pxq.common.binding.bindDuration
 import me.pxq.common.data.Item
 import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.eyepetizer.detail.databinding.DetailRvItemRepliesBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoDetailHeaderBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoRelatedBinding
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
@@ -26,22 +27,26 @@ class VideoDetailAdapter(
     private val actionMV: VideoDetailViewModel,
     var count: Int = 0,
     var videoDetail: Item? = null,
-    var relatedVideos: MutableList<Item> = mutableListOf()
+    var relatedVideos: MutableList<Item> = mutableListOf(),
+    var replies: MutableList<Item> = mutableListOf()
 ) :
     RecyclerView.Adapter<VideoDetailAdapter.VideoDetailHolder>() {
 
     // viewTypes
-    private val holderTypes = listOf("video", "videoSmallCard")
+    private val holderTypes = listOf("video", "videoSmallCard", "replay")
 
     // 相关推荐视频adapter
     private lateinit var videoRelatedAdapter: VideoRelatedAdapter
 
+    // 评论adapter
+    private lateinit var replayAdapter: VideoReplayAdapter
+
     // 相关推荐视频binding
-    private var relatedVideosBinding : DetailRvItemVideoRelatedBinding? = null
+    private var relatedVideosBinding: DetailRvItemVideoRelatedBinding? = null
 
     // 设置"查看更多"是否可见
-    fun setLoadMoreRelatedVisible(visible : Boolean){
-        relatedVideosBinding?.tvSeeMore?.visibility = if (visible){
+    fun setLoadMoreRelatedVisible(visible: Boolean) {
+        relatedVideosBinding?.tvSeeMore?.visibility = if (visible) {
             View.VISIBLE
         } else {
             View.GONE
@@ -49,11 +54,19 @@ class VideoDetailAdapter(
     }
 
     // 查看更多视频
-    fun loadMoreRelatedVideos(videos : List<Item>){
+    fun loadMoreRelatedVideos(videos: List<Item>) {
         with(videoRelatedAdapter) {
             val start = relatedVideos.size
             relatedVideos.addAll(videos)
             notifyItemRangeInserted(start, relatedVideos.size)
+        }
+    }
+    // 加载更多评论
+    fun loadMoreReplies(replies: List<Item>) {
+        with(replayAdapter) {
+            val start = replies.size
+            this@VideoDetailAdapter.replies.addAll(replies)
+            notifyItemRangeInserted(start, this@VideoDetailAdapter.replies.size)
         }
     }
 
@@ -61,13 +74,14 @@ class VideoDetailAdapter(
         return when (holderTypes[position]) {
             "video" -> 1
             "videoSmallCard" -> 2
+            "replay" -> 3
             else -> 1
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoDetailHolder {
         return when (viewType) {
-            1 -> {
+            1 -> {    // 视频信息
                 VideoDetailHolder(
                     DetailRvItemVideoDetailHeaderBinding.inflate(
                         LayoutInflater.from(
@@ -76,7 +90,7 @@ class VideoDetailAdapter(
                     )
                 )
             }
-            2 -> {
+            2 -> {   // 推荐视频
                 VideoDetailHolder(
                     DetailRvItemVideoRelatedBinding.inflate(
                         LayoutInflater.from(
@@ -85,6 +99,15 @@ class VideoDetailAdapter(
                     ).also {
                         relatedVideosBinding = it
                     }
+                )
+            }
+            3 -> {   // 评论
+                VideoDetailHolder(
+                    DetailRvItemRepliesBinding.inflate(
+                        LayoutInflater.from(
+                            parent.context
+                        ), parent, false
+                    )
                 )
             }
             else -> VideoDetailHolder(
@@ -105,6 +128,7 @@ class VideoDetailAdapter(
                 holder.bind(this)
             }
             1 -> holder.bind(relatedVideos)
+            2 -> holder.bind(replies)
             else -> holder.itemView.visibility = View.GONE
         }
     }
@@ -124,6 +148,7 @@ class VideoDetailAdapter(
                 is DetailRvItemVideoRelatedBinding -> {
                     with(binding.rvVideoRelated) {
                         if (adapter == null) {
+                            isNestedScrollingEnabled = false
                             // 初始化
                             binding.detailViewModel = actionMV
 
@@ -157,6 +182,38 @@ class VideoDetailAdapter(
 
                     binding.executePendingBindings()
                 }
+                is DetailRvItemRepliesBinding -> {
+                    with(binding.rvReplies) {
+                        if (adapter == null) {
+                            isNestedScrollingEnabled = false
+                            // 设置adapter
+                            adapter = VideoReplayAdapter().also {
+                                replayAdapter = it
+                            }
+                            // Item分割区域
+                            addItemDecoration(
+                                MarginDecoration(
+                                    bottom = context.resources.getDimension(
+                                        R.dimen.rv_divider_bottom
+                                    ).dp2px.toInt()
+                                )
+                            )
+                            layoutManager =
+                                LinearLayoutManager(
+                                    context,
+                                    RecyclerView.VERTICAL,
+                                    false
+                                )
+                        }
+                        (adapter as VideoReplayAdapter).run {
+                            replies.clear()
+                            replies.addAll(items)
+                            notifyDataSetChanged()
+                        }
+                    }
+                    binding.executePendingBindings()
+                }
+
             }
         }
     }

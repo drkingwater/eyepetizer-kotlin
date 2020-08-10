@@ -25,7 +25,7 @@ data class HomePage(
 data class Item(
     val adIndex: Int,
     val `data`: Data,
-    val id: Int,
+    val id: String,
     val tag: Any,
     val type: String
 ) : Serializable
@@ -46,6 +46,7 @@ data class Data(
     val content: Item,
     val count: Int,
     val cover: Cover,
+    val createTime: Long,
     val dataType: String,
     val date: Long,
     val description: String,
@@ -61,7 +62,7 @@ data class Data(
     val header: Header,
     val icon: String,
     val iconType: String,
-    val id: Int,
+    val id: String,
     val idx: Int,
     val ifLimitVideo: Boolean,
     val ifNewest: Boolean,
@@ -73,7 +74,13 @@ data class Data(
     val labelList: List<Any>,
     val lastViewTime: Any,
     val library: String,
+    val liked: Boolean,
+    val likeCount: Int,
+    val hot: Boolean,
+    val showParentReply: Boolean,
+    val showConversationButton: Boolean,
     val medalIcon: Boolean,
+    val message: String,
     val newestEndTime: Any,
     val nickname: String,
     val playInfo: List<PlayInfo>,
@@ -86,6 +93,7 @@ data class Data(
     val recallSource: String,
     val refreshUrl: String,
     val releaseTime: Long,
+    val replyStatus: String,
     val remark: Any,
     val resourceType: String,
     val rightText: String,
@@ -111,6 +119,7 @@ data class Data(
     val userCover: String,
     val url: String,
     val urls: List<String>,
+    val user: User,
     val videoPosterBean: VideoPosterBean,
     val waterMarks: Any,
     val webAdTrack: Any,
@@ -150,8 +159,6 @@ data class Consumption(
 ) : Serializable
 
 
-
-
 data class Header(
     val actionUrl: String,
     val cover: Any,
@@ -169,7 +176,7 @@ data class Header(
     val textAlign: String,
     val time: Long,
     val title: String
-) : Serializable{
+) : Serializable {
     companion object {
         //圆形icon
         const val ICON_TYPE_ROUND = "round"
@@ -250,6 +257,31 @@ data class Url(
     val size: Int,
     val url: String
 ) : Serializable
+
+data class User(
+    val actionUrl: String,
+    val area: Any,
+    val avatar: String,
+    val birthday: Any,
+    val city: Any,
+    val country: Any,
+    val cover: Any,
+    val description: Any,
+    val expert: Boolean,
+    val followed: Boolean,
+    val gender: Any,
+    val ifPgc: Boolean,
+    val job: Any,
+    val library: String,
+    val limitVideoOpen: Boolean,
+    val nickname: String,
+    val registDate: Long,
+    val releaseDate: Any,
+    val uid: Int,
+    val university: Any,
+    val userType: String
+)
+
 
 data class Detail(
     val actionUrl: String,

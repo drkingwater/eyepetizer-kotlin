@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="header"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <me.pxq.common.ui.view.FontTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/detail_video_rv_item_margin"
+        android:layout_marginBottom="@dimen/detail_video_rv_item_margin"
+        android:text="@{header.data.text}"
+        android:textColor="@color/video_detail_video_title"
+        android:textSize="@dimen/text_size_normal"
+        app:typeface="FZLanD"
+        tools:text="@string/txt_test"
+        tools:textColor="@color/black" />
+</layout>

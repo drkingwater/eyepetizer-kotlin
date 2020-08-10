@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="me.pxq.common.data.Header" />
+
+        <variable
+            name="replay"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            iconType="@{Header.ICON_TYPE_ROUND}"
+            iconUrl="@{replay.data.user.avatar}"
+            android:layout_width="@dimen/detail_avatar_size"
+            android:layout_height="@dimen/detail_avatar_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_nickname_margin_start"
+            android:layout_marginEnd="@dimen/detail_nickname_margin_start"
+            android:maxLines="1"
+            android:text="@{replay.data.user.nickname}"
+            android:textColor="@color/video_detail_video_title"
+            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
+            app:layout_constraintRight_toLeftOf="@id/tv_like_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeface="FZLanD"
+            tools:text="昵称"
+            tools:textColor="@color/black" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:text='@{replay.data.likeCount > 0 ? String.valueOf(replay.data.likeCount) : ""}'
+            android:textColor="@color/white20"
+            android:textSize="@dimen/text_size_middle"
+            app:layout_constraintBottom_toBottomOf="@id/iv_like"
+            app:layout_constraintRight_toLeftOf="@id/iv_like"
+            app:layout_constraintTop_toTopOf="@id/iv_like"
+            app:typeface="FZLanL"
+            tools:text="100"
+            tools:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="@dimen/detail_action_like_size"
+            android:layout_height="@dimen/detail_action_like_size"
+            android:src="@drawable/ic_action_like"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_nickname_margin_start"
+            android:layout_marginTop="@dimen/detail_nickname_margin_start"
+            android:text="@{replay.data.message}"
+            android:textColor="@color/white20"
+            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+            app:typeface="FZLanL"
+            tools:text="@string/txt_test"
+            tools:textColor="@color/black" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_nickname_margin_start"
+            android:layout_marginTop="7dp"
+            android:text="@string/replay"
+            android:textColor="@color/white25"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
+            app:layout_constraintTop_toBottomOf="@id/tv_message"
+            app:typeface="FZLanD"
+            tools:textColor="@color/black" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_create_date"
+            createDate="@{replay.data.createTime}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white25"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintLeft_toRightOf="@id/tv_replay"
+            app:layout_constraintTop_toTopOf="@id/tv_replay"
+            app:typeface="FZLanL"
+            tools:textColor="@color/black"
+            tools:text="2020/08/10"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white80"
+            app:layout_constraintLeft_toLeftOf="@id/tv_replay"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_replay" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

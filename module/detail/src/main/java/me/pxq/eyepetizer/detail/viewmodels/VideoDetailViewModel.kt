@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import me.pxq.common.data.HomePage
@@ -13,6 +14,7 @@ import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
+import me.pxq.utils.loge
 
 /**
  * Description: 视频详情页vm
@@ -37,6 +39,17 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
     // "查看更多"按钮是否可见
     private val _isLoadMoreVisible = MutableLiveData<Boolean>()
     val isLoadMoreVisible: LiveData<Boolean> = _isLoadMoreVisible
+
+    // 评论数据
+    private val _replies = MutableLiveData<ApiResult<HomePage>>()
+
+    // 更多评论数据
+    private val _moreReplies = MutableLiveData<ApiResult<HomePage>>()
+
+    // 下一页评论
+    private var nextRepliesUrl = ""
+    val replies: LiveData<ApiResult<HomePage>> = _replies
+    val moreReplies: LiveData<ApiResult<HomePage>> = _moreReplies
 
     // 获取相关视频
     fun fetchVideoRelated() {
@@ -78,6 +91,12 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
                     this
                 }
                 _videoRelated.postValue(homePage)
+                // 获取评论
+                _replies.postValue(repository.fetchVideoReplies(it.data.id).also {
+                    if (it is ApiResult.Success) {
+                        nextRepliesUrl = it.data.nextPageUrl ?: ""
+                    }
+                })
             }
         }
     }
@@ -90,6 +109,23 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
         moreRelatedVideos.value = _moreRelatedVideos
         // 设置"查看更多"按钮不可见
         _isLoadMoreVisible.value = false
+    }
+
+    /**
+     * 加载更多评论数据
+     */
+    fun fetchMoreVideoReplies() {
+        if (nextRepliesUrl.isNotEmpty()) {
+            viewModelScope.launch(Dispatchers.IO) {
+                _moreReplies.postValue(repository.fetchMoreVideoReplies(nextRepliesUrl).also {
+                    if (it is ApiResult.Success) {
+                        nextRepliesUrl = it.data.nextPageUrl ?: ""
+                    }
+                })
+            }
+        } else {
+            loge("没有更多评论了...")
+        }
     }
 
 

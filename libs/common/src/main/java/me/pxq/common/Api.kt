@@ -36,12 +36,20 @@ interface Api {
      * 获取视频详情-推荐列表
      */
     @GET("api/v4/video/related")
-    suspend fun fetchVideoRelated(@Query("id") videoId: Int): HomePage
+    suspend fun fetchVideoRelated(@Query("id") videoId: String): HomePage
 
     /**
      * 获取视频详情-评论列表
      */
+    @GET("api/v2/replies/video")
+    suspend fun fetchVideoReplies(@Query("videoId") videoId: String): HomePage
+
+    /**
+     * 加载更多视频详情-评论列表
+     */
     @GET
-    suspend fun fetchVideoReplies(@Url url: String): String
+    suspend fun fetchMoreVideoReplies(@Url url : String): HomePage
+
+
 
 }

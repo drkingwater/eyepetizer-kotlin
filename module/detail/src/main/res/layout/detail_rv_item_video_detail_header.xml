@@ -37,7 +37,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@{video.data.title}"
-                android:textColor="@color/white"
+                android:textColor="@color/video_detail_video_title"
                 android:textSize="@dimen/detail_video_title_text_size"
                 app:layout_constraintBottom_toTopOf="@id/tv_category"
                 app:layout_constraintLeft_toLeftOf="parent"

@@ -18,12 +18,16 @@ import me.pxq.common.data.Item
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.extensions.load
 import me.pxq.utils.glide.RoundedCornersTransformation
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Description: DataBinding Adapters
  * Author : pxq
  * Date : 2020/7/29 11:24 PM
  */
+
+internal val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.CHINA)
 
 /**
  * 控制view显示与否
@@ -70,7 +74,7 @@ fun bindIsAuthor(imageView: ImageView, iconType: String?) {
  */
 @BindingAdapter("followed")
 fun bindFollowed(textView: TextView, follow: Follow?) {
-    if (follow == null){
+    if (follow == null) {
         textView.visibility = View.GONE
         return
     }
@@ -188,6 +192,11 @@ fun bindSelectedCard(
 
         }
     }
+}
+
+@BindingAdapter("createDate")
+fun bindReplayDate(textView: TextView, createTime: Long) {
+    textView.text = simpleDateFormat.format(Date(createTime))
 }
 
 

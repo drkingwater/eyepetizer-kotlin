@@ -14,6 +14,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import kotlinx.android.synthetic.main.detail_rv_item_replies_item.*
 import me.pxq.common.ApiService
 import me.pxq.common.R
 import me.pxq.common.data.Item
@@ -110,8 +111,8 @@ class VideoDetailFragment : Fragment() {
                         relatedVideos.clear()
                         relatedVideos.addAll(it.data.itemList)
                         // adapter count数量+1
-                        count = 2
-                        notifyItemInserted(1)
+                        count++
+//                        notifyItemInserted(1)
                     }
 
                 }
@@ -121,12 +122,44 @@ class VideoDetailFragment : Fragment() {
             }
         }
         // 查看更多视频
-        videoDetailViewModel.moreRelatedVideos.observe(this){
+        videoDetailViewModel.moreRelatedVideos.observe(this) {
             videoDetailAdapter.loadMoreRelatedVideos(it)
         }
-        videoDetailViewModel.isLoadMoreVisible.observe(this){
+        videoDetailViewModel.isLoadMoreVisible.observe(this) {
             videoDetailAdapter.setLoadMoreRelatedVisible(it)
         }
+        // 评论
+        videoDetailViewModel.replies.observe(this) {
+            when (it) {
+                is ApiResult.Success -> {
+                    with(videoDetailAdapter) {
+                        replies.clear()
+                        replies.addAll(it.data.itemList)
+                        // adapter count数量+1
+                        count++
+                        logd("replay $count")
+                        notifyItemRangeInserted(1, count)
+//                        notifyItemInserted(count - 1)
+//                        notifyDataSetChanged()
+                    }
+                }
+                is ApiResult.Error -> {
+                    loge(it.exception)
+                }
+            }
+        }
+        // 更多评论
+        videoDetailViewModel.moreReplies.observe(this) {
+            when (it) {
+                is ApiResult.Success -> {
+                    videoDetailAdapter.loadMoreReplies(it.data.itemList)
+                }
+                is ApiResult.Error -> {
+                    loge(it.exception)
+                }
+            }
+        }
+
     }
 
 

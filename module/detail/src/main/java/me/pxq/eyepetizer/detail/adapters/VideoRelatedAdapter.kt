@@ -35,7 +35,7 @@ class VideoRelatedAdapter(
             binding.tvVideoTitle.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    R.color.white
+                    R.color.video_detail_video_title
                 )
             )
         }
