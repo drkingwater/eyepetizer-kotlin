@@ -2,6 +2,7 @@ package me.pxq.player.base
 
 import android.view.TextureView
 import androidx.annotation.IntDef
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 
 /**
@@ -13,9 +14,13 @@ interface PlayerBase {
 
     val playState: LiveData<Int>
 
-    fun setTextureView(textureView: TextureView)
+    // 生命周期控制
+    var lifecycleOwner : LifecycleOwner?
     // 是否自动播放
-    fun autoPlay(auto: Boolean)
+    var autoPlay : Boolean
+    // textureview
+    var textureView : TextureView?
+
     // 是否循环播放
     fun repeat(repeat : Boolean)
     // 准备播放资源

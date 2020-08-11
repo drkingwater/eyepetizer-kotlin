@@ -47,6 +47,8 @@ dependencies {
 
     implementation project(':libs:common')
 
+    implementation project(':libs:player')
+
     //ARouter
     kapt rootProject.ext.kapt.arouter_compiler
 

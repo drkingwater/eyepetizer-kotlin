@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_nickname_margin_start"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:text="@string/replay"
             android:textColor="@color/white25"
             android:textSize="@dimen/text_size_small"

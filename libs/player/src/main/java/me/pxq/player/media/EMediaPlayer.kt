@@ -17,35 +17,47 @@ import me.pxq.player.base.PlayerBase
 internal class EMediaPlayer(private val context: Context) : AbsPlayer(),
     TextureView.SurfaceTextureListener {
 
+    // 自动播放
+    override var autoPlay: Boolean = false
+
+    // 设置surface
+    override var textureView: TextureView? = null
+        set(value) {
+            field = value
+            textureView?.run {
+                if (isAvailable) {
+                    mediaPlayer.setSurface(Surface(surfaceTexture))
+                }
+                surfaceTextureListener = this@EMediaPlayer
+            }
+        }
+
+
     private val mediaPlayer = MediaPlayer().apply {
         setOnPreparedListener {
-            onStateChange(PlayerBase.READY)
+            onPlayStateChange(PlayerBase.READY)
             if (autoPlay) {
                 start()
             }
         }
         setOnErrorListener { _, _, _ ->
-            onStateChange(PlayerBase.ERROR)
+            onPlayStateChange(PlayerBase.ERROR)
             true
         }
         setOnCompletionListener {
-            onStateChange(PlayerBase.COMPLETED)
+            onPlayStateChange(PlayerBase.COMPLETED)
         }
         setOnBufferingUpdateListener { _, _ ->
 
         }
     }
 
-    override fun setTextureView(textureView: TextureView) {
-        if (textureView.isAvailable) {
-            mediaPlayer.setSurface(Surface(textureView.surfaceTexture))
-        }
-        textureView.surfaceTextureListener = this
-    }
-
-    override fun autoPlay(auto: Boolean) {
-        autoPlay = auto
-    }
+//    override fun setTextureView(textureView: TextureView) {
+//        if (textureView.isAvailable) {
+//            mediaPlayer.setSurface(Surface(textureView.surfaceTexture))
+//        }
+//        textureView.surfaceTextureListener = this
+//    }
 
     override fun repeat(repeat: Boolean) {
         mediaPlayer.isLooping = repeat
@@ -78,7 +90,7 @@ internal class EMediaPlayer(private val context: Context) : AbsPlayer(),
 
     override fun release() {
         try {
-
+            super.release()
             mediaPlayer.stop()
             mediaPlayer.release()
         } catch (e: Exception) {

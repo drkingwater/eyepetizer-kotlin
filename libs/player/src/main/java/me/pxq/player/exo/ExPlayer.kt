@@ -21,14 +21,18 @@ import me.pxq.player.base.PlayerBase
  */
 internal class ExPlayer(private val player: SimpleExoPlayer, private val context: Context) : AbsPlayer() {
 
-    override fun setTextureView(textureView: TextureView) {
-        player.setVideoTextureView(textureView)
-    }
-
-    override fun autoPlay(auto: Boolean) {
-        autoPlay = auto
-        player.playWhenReady = auto
-    }
+    // 是否自动播放
+    override var autoPlay: Boolean = false
+        set(value) {
+            field = value
+            player.playWhenReady = value
+        }
+    // 设置surface
+    override var textureView: TextureView? = null
+        set(value) {
+            field = value
+            player.setVideoTextureView(textureView)
+        }
 
     override fun repeat(repeat: Boolean) {
         player.repeatMode = Player.REPEAT_MODE_ONE
@@ -47,13 +51,13 @@ internal class ExPlayer(private val player: SimpleExoPlayer, private val context
         player.addListener(object : Player.EventListener {
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 when (playbackState) {
-                    Player.STATE_BUFFERING -> onStateChange(PlayerBase.BUFFERING)
-                    Player.STATE_READY -> onStateChange(PlayerBase.READY)
+                    Player.STATE_BUFFERING -> onPlayStateChange(PlayerBase.BUFFERING)
+                    Player.STATE_READY -> onPlayStateChange(PlayerBase.READY)
                 }
             }
 
             override fun onPlayerError(error: ExoPlaybackException) {
-                onStateChange(PlayerBase.ERROR)
+                onPlayStateChange(PlayerBase.ERROR)
             }
         })
         player.prepare(videoSource)
@@ -68,6 +72,7 @@ internal class ExPlayer(private val player: SimpleExoPlayer, private val context
     }
 
     override fun release() {
+        super.release()
         player.release()
     }
 

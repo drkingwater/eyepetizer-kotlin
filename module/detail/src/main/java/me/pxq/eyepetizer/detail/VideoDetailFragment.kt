@@ -24,6 +24,8 @@ import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
 import me.pxq.network.ApiResult
+import me.pxq.player.PlayerPool
+import me.pxq.player.base.PlayerBase
 import me.pxq.utils.extensions.load
 import me.pxq.utils.logd
 import me.pxq.utils.loge
@@ -42,6 +44,8 @@ class VideoDetailFragment : Fragment() {
     private lateinit var binding: DetailActivityVideoBinding
 
     private lateinit var videoDetailAdapter: VideoDetailAdapter
+
+    private var videoPlayer: PlayerBase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,11 +83,30 @@ class VideoDetailFragment : Fragment() {
         // 视频信息刷新
         videoDetailViewModel.videoDetail.observe(this) {
 
+            // 播放视频
+            videoPlayer?.run {
+                release()
+            }
+            videoPlayer = PlayerPool.get(requireContext()).apply {
+                // 生命周期控制
+                lifecycleOwner = this@VideoDetailFragment
+                // prepare后自动播放
+                autoPlay = true
+                // surface
+                textureView = binding.videoTexture
+                // 准备播放
+                prepare(it.data.playUrl)
+            }
+
+
             // 加载视频cover
             binding.ivCover.load(it.data.cover.detail)
 
             // 加载背景图
-            binding.ivBg.load(it.data.cover.blurred, placeHolderId = R.drawable.shape_bg_album_loading)
+            binding.ivBg.load(
+                it.data.cover.blurred,
+                placeHolderId = R.drawable.shape_bg_album_loading
+            )
 
             // 先隐藏
             binding.rvVideoDetail.visibility = View.GONE
@@ -161,6 +184,5 @@ class VideoDetailFragment : Fragment() {
         }
 
     }
-
 
 }
