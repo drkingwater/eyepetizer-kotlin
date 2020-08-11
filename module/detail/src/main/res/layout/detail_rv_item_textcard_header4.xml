@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,16 +10,38 @@
             type="me.pxq.common.data.Item" />
     </data>
 
-    <me.pxq.common.ui.view.FontTextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/detail_video_rv_item_margin"
-        android:layout_marginBottom="@dimen/detail_video_rv_item_margin"
-        android:text="@{header.data.text}"
-        android:textColor="@color/video_detail_video_title"
-        android:textSize="@dimen/text_size_normal"
-        app:typeface="FZLanD"
-        tools:text="@string/txt_test"
-        tools:textColor="@color/black" />
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{header.data.text}"
+            android:textColor="@color/video_detail_video_title"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/iv_goto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeface="FZLanD"
+            tools:text="热门评论"
+            tools:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/iv_goto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_goto"
+            app:isGone="@{header.data.actionUrl == null}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintLeft_toRightOf="@id/tv_title"
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

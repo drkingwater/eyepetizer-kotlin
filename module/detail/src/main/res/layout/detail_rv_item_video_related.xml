@@ -41,12 +41,6 @@
             android:layout_marginBottom="@dimen/detail_video_rv_item_margin"
             tools:textColor="@color/black" />
 
-<!--        <include-->
-<!--            layout="@layout/rv_divider"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tv_see_more" />-->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
