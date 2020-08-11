@@ -7,8 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_cover"
@@ -20,15 +19,17 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <me.pxq.common.ui.view.ForegroundImageView
             android:id="@+id/iv_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
+            app:foreColor="@color/loading"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+            app:layout_constraintTop_toBottomOf="@id/iv_cover"
+            android:background="@color/gray"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_video_detail"

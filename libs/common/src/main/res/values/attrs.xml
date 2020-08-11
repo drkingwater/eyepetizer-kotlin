@@ -5,4 +5,8 @@
         <attr name="typeface" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="ForegroundImageView">
+        <attr name="foreColor" format="color"/>
+    </declare-styleable>
+
 </resources>

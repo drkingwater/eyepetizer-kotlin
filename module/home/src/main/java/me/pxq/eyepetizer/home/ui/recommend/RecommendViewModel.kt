@@ -68,7 +68,12 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
         }
     }
 
-
-
+    /**
+     * 网络错误
+     * 点击重试
+     */
+    fun retryOnError(){
+        fetchRecommend()
+    }
 
 }

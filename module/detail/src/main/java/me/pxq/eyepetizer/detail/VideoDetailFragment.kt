@@ -83,7 +83,7 @@ class VideoDetailFragment : Fragment() {
             binding.ivCover.load(it.data.cover.detail)
 
             // 加载背景图
-            binding.ivBg.load(it.data.cover.blurred)
+            binding.ivBg.load(it.data.cover.blurred, placeHolderId = R.drawable.shape_bg_album_loading)
 
             // 先隐藏
             binding.rvVideoDetail.visibility = View.GONE
@@ -111,7 +111,7 @@ class VideoDetailFragment : Fragment() {
                         relatedVideos.clear()
                         relatedVideos.addAll(it.data.itemList)
                         // adapter count数量+1
-                        count++
+                        count = 2
 //                        notifyItemInserted(1)
                     }
 
@@ -138,9 +138,9 @@ class VideoDetailFragment : Fragment() {
                         // adapter count数量+1
                         count++
                         logd("replay $count")
-                        notifyItemRangeInserted(1, count)
+//                        notifyItemRangeInserted(1, count)
 //                        notifyItemInserted(count - 1)
-//                        notifyDataSetChanged()
+                        notifyDataSetChanged()
                     }
                 }
                 is ApiResult.Error -> {

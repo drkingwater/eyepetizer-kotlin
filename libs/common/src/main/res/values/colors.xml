@@ -29,6 +29,8 @@
 
 
     <color name="gray">#ededed</color>
+    <!--  视频详情页背景模糊颜色  -->
+    <color name="loading">#80000000</color>
 
     <color name="video_detail_video_title">@color/white15</color>
     <!--  header颜色  -->

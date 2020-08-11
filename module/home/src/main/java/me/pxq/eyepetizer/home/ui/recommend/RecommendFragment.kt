@@ -62,11 +62,12 @@ class RecommendFragment : BaseFragment() {
             addOnScrollListener(object : OnScrollListener() {
                 private var onBottom = false
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom){
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
                         logi("到底了,刷新数据...")
                         viewModel.fetchNextPage()
                     }
                 }
+
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     val layoutManager =
                         recyclerView.layoutManager as LinearLayoutManager
@@ -97,11 +98,22 @@ class RecommendFragment : BaseFragment() {
             binding.refreshLayout.isRefreshing = false
             when (it) {
                 is ApiResult.Success -> {
+                    // 隐藏网络请求失败布局
+                    binding.layoutNetError.visibility = View.GONE
+                    // 显示数据
+                    binding.refreshLayout.visibility = View.VISIBLE
                     adapter.items.clear()
                     adapter.items.addAll(it.data.itemList)
                     adapter.notifyDataSetChanged()
                 }
-                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
+                is ApiResult.Error -> {
+                    // 请求失败
+                    loge(it.exception.message ?: "error!!!")
+                    // 隐藏布局
+                    binding.refreshLayout.visibility = View.GONE
+                    // 显示网络错误
+                    binding.layoutNetError.visibility = View.VISIBLE
+                }
             }
         })
         //上拉加载数据
@@ -110,11 +122,24 @@ class RecommendFragment : BaseFragment() {
             binding.refreshLayout.isRefreshing = false
             when (it) {
                 is ApiResult.Success -> {
+                    // 隐藏网络请求失败布局
+                    binding.layoutNetError.visibility = View.GONE
+                    // 显示数据
+                    binding.refreshLayout.visibility = View.VISIBLE
+
                     val newPosition = adapter.items.size
                     adapter.items.addAll(it.data.itemList)
                     adapter.notifyItemInserted(newPosition)
                 }
-                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
+                is ApiResult.Error -> {
+
+                    // 请求失败
+                    loge(it.exception.message ?: "error!!!")
+                    // 隐藏布局
+                    binding.refreshLayout.visibility = View.GONE
+                    // 显示网络错误
+                    binding.layoutNetError.visibility = View.VISIBLE
+                }
             }
         })
         // 导航到详情页

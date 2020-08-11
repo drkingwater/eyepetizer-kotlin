@@ -23,4 +23,5 @@
 
     <string name="txt_test">测试数据测试数据嘻嘻嘻嘻嘻嘻嘻嘻寻嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻寻寻寻寻寻寻寻寻寻</string>
     <string name="replay">回复</string>
+    <string name="tip_network_error">网络错误\n点击屏幕重试</string>
 </resources>
