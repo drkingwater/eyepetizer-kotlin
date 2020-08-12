@@ -148,7 +148,6 @@ class VideoDetailAdapter(
                 is DetailRvItemVideoRelatedBinding -> {
                     with(binding.rvVideoRelated) {
                         if (adapter == null) {
-                            isNestedScrollingEnabled = false
                             // 初始化
                             binding.detailViewModel = actionMV
 
@@ -185,7 +184,6 @@ class VideoDetailAdapter(
                 is DetailRvItemRepliesBinding -> {
                     with(binding.rvReplies) {
                         if (adapter == null) {
-                            isNestedScrollingEnabled = false
                             // 设置adapter
                             adapter = VideoReplayAdapter().also {
                                 replayAdapter = it

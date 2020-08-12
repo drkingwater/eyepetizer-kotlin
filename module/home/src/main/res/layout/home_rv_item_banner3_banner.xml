@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="me.pxq.common.data.Header" />
+
+        <variable
+            name="banner"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_video_cover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_video_ad_height"
+            android:scaleType="fitXY"
+            app:cover="@{banner.data.image}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tvLabel"
+            android:layout_width="36dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="9dp"
+            android:background="@drawable/home_shape_label_ad_bg"
+            android:gravity="center"
+            android:text="@string/home_ad"
+            android:textColor="@color/white"
+            android:textSize="@dimen/home_tablayout_item_textsize"
+            app:layout_constraintRight_toRightOf="@id/iv_video_cover"
+            app:layout_constraintTop_toTopOf="@id/iv_video_cover"
+            app:typeface="FZLanD" />
+
+        <ImageView
+            android:id="@+id/iv_video_icon"
+            android:layout_width="@dimen/home_video_ad_icon_size"
+            android:layout_height="@dimen/home_video_ad_icon_size"
+            android:layout_marginTop="20dp"
+            app:iconType="@{Header.ICON_TYPE_SQUARE}"
+            app:iconUrl="@{banner.data.header.icon}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_video_cover" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{banner.data.header.title}"
+            android:textColor="@color/color_header_title"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_video_desc"
+            app:layout_constraintLeft_toRightOf="@id/iv_video_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_video_icon"
+            app:typeface="FZLanD"
+            tools:ignore="SpUsage"
+            tools:text="@string/txt_test" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_video_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{banner.data.header.description}"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/home_tablayout_item_textsize"
+            app:layout_constraintBottom_toBottomOf="@id/iv_video_icon"
+            app:layout_constraintLeft_toLeftOf="@id/tv_video_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_video_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:typeface="FZLanL"
+            tools:ignore="SpUsage"
+            tools:text="@string/txt_test" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

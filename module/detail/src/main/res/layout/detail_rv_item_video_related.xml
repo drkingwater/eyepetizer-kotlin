@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="detailViewModel"
             type="me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel" />
@@ -17,11 +18,11 @@
             android:id="@+id/rv_video_related"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/detail_video_rv_item_margin"
+            android:layout_marginEnd="@dimen/detail_video_rv_item_margin"
             android:background="@null"
             android:overScrollMode="never"
             android:scrollbars="none"
-            android:layout_marginStart="@dimen/detail_video_rv_item_margin"
-            android:layout_marginEnd="@dimen/detail_video_rv_item_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_see_more"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -31,24 +32,24 @@
             android:id="@+id/tv_see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_video_rv_item_margin"
             android:text="@string/detail_see_more"
             android:textColor="@color/white"
-            app:onClickListener="@{() -> detailViewModel.loadRelatedVideos()}"
             android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="@dimen/detail_video_rv_item_margin"
+            app:onClickListener="@{() -> detailViewModel.loadRelatedVideos()}"
             tools:textColor="@color/black" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/white80"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_see_more"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_see_more" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

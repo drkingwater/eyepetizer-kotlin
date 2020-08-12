@@ -21,8 +21,21 @@ abstract class BaseFragment : Fragment() {
     /**
      * 跳转至详情页
      */
-    fun navigateToVideo( item: Item, view: View? = null) {
+    fun navigateToVideo(item: Item, view: View? = null) {
         logd("播放详情页：${item.data.type}")
+
+        // 针对activity
+        startActivity(item)
+        // 针对Fragment
+
+    }
+
+    private fun startActivity(item: Item) {
+        ARouter.getInstance().build(RouterHub.DETAIL_VIDEO).withSerializable("video_detail", item)
+            .navigation(requireContext())
+    }
+
+    private fun startFragment(item: Item, view: View?) {
         ARouter.getInstance().build(RouterHub.DETAIL_VIDEO)
             .withSerializable("video_detail", item)
             .navigation()?.run {

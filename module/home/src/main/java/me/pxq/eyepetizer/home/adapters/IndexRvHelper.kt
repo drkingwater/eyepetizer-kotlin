@@ -13,19 +13,19 @@ object IndexRvHelper {
     //布局类型
     private const val VIEW_HOLDER_TYPE_TEXT_CARD_TITLE = 0
     private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5 = 1 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW = 2 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_INFO_CARD_INFO = 3 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD = 4 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG = 5 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_BANNER = 6 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_SELECTION_CARD = 7 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TAG = 8 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TOP = 9 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 =
-        10 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_HOR_SCROLL_CARD = 11 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    const val VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD = 12 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
-    private const val VIEW_HOLDER_TYPE_COLUMN_CARD = 13 + VIEW_HOLDER_TYPE_TEXT_CARD_TITLE
+    private const val VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW = 1 + VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_HEADER5
+    private const val VIEW_HOLDER_TYPE_INFO_CARD_INFO = 1 + VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW
+    private const val VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD = 1 + VIEW_HOLDER_TYPE_INFO_CARD_INFO
+    private const val VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG = 1 + VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD
+    private const val VIEW_HOLDER_TYPE_BANNER = 1 + VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG
+    private const val VIEW_HOLDER_TYPE_SELECTION_CARD = 1 + VIEW_HOLDER_TYPE_BANNER
+    private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TAG = 1 + VIEW_HOLDER_TYPE_SELECTION_CARD
+    private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TOP = 1 + VIEW_HOLDER_TYPE_BRIEF_CARD_TAG
+    private const val VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 = 1 + VIEW_HOLDER_TYPE_BRIEF_CARD_TOP
+    private const val VIEW_HOLDER_TYPE_HOR_SCROLL_CARD = 1 + VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2
+    const val VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD = 1 + VIEW_HOLDER_TYPE_HOR_SCROLL_CARD
+    private const val VIEW_HOLDER_TYPE_COLUMN_CARD = 1 + VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD
+    private const val VIEW_HOLDER_TYPE_BANNER_BANNER3 = 1 + VIEW_HOLDER_TYPE_COLUMN_CARD
 
     //自动播放广告
     private const val VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD = 90
@@ -52,6 +52,8 @@ object IndexRvHelper {
             item.type == "autoPlayVideoAd" && item.data.dataType == "AutoPlayVideoAdDetail" -> VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD
             item.type == "specialSquareCardCollection" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD
             item.type == "columnCardList" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_COLUMN_CARD
+            // banner广告
+            item.type == "banner3" && item.data.dataType == "Banner" -> VIEW_HOLDER_TYPE_BANNER_BANNER3
             else -> VIEW_HOLDER_TYPE_NOTHING
         }
     }
@@ -69,9 +71,10 @@ object IndexRvHelper {
         VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
         VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
         VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> R.layout.home_rv_item_hor_scrollcard
-        VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad
+        VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad   //视频广告
         VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> R.layout.home_rv_item_special_square_card //热门分类、专题策划共用一个item
         VIEW_HOLDER_TYPE_COLUMN_CARD -> R.layout.home_rv_item_special_square_card
+        VIEW_HOLDER_TYPE_BANNER_BANNER3 -> R.layout.home_rv_item_banner3_banner           //banner广告
         else -> R.layout.home_rv_item_textcard_rightandleft
     }
 

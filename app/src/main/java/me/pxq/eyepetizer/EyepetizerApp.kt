@@ -2,6 +2,7 @@ package me.pxq.eyepetizer
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
+import me.pxq.utils.DeviceUtil
 
 /**
  * Description:
@@ -15,6 +16,9 @@ class EyepetizerApp : Application() {
         ARouter.init(this)
         ARouter.openDebug()
         ARouter.openLog()
+
+        //工具类需要用到context
+        DeviceUtil.application = this
     }
 
 }

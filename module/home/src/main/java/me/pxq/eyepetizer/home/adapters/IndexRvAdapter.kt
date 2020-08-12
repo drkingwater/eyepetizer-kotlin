@@ -64,6 +64,12 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
+                is HomeRvItemBanner3BannerBinding -> {  //banner广告
+                    with(binding) {
+                        banner = item
+                        executePendingBindings()
+                    }
+                }
                 is HomeRvItemTextcardRightandleftBinding -> {  //标题 header7 ：如每日开眼精选
                     with(binding) {
                         header = item

@@ -3,12 +3,12 @@
 
     <!--没有选中的样式-->
     <style name="main_bottom_nav_tv_color_active">
-        <item name="android:textColor">@color/main_colorTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textSize">@dimen/main_bottom_nav_tv_size</item>
     </style>
     <!--选中的样式-->
     <style name="main_bottom_nav_tv_color_inactive">
-        <item name="android:textColor">@color/main_colorTextSecondary</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
         <item name="android:textSize">@dimen/main_bottom_nav_tv_size</item>
     </style>
 
