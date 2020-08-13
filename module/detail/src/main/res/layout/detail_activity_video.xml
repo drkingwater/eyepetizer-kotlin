@@ -41,7 +41,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_cover" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <me.pxq.common.ui.view.BottomRecyclerView
             android:id="@+id/rv_video_detail"
             android:layout_width="0dp"
             android:layout_height="0dp"

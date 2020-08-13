@@ -41,6 +41,7 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
      */
     fun fetchNextPage() {
         fetchData(false, nextPage)
+        nextPage = ""
     }
 
     /**

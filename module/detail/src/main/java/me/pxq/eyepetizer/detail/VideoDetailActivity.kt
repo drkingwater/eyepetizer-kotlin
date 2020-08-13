@@ -1,7 +1,6 @@
 package me.pxq.eyepetizer.detail
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -20,6 +19,7 @@ import me.pxq.network.ApiResult
 import me.pxq.player.PlayerPool
 import me.pxq.player.base.PlayerBase
 import me.pxq.utils.extensions.load
+import me.pxq.utils.logd
 import me.pxq.utils.loge
 
 /**
@@ -49,12 +49,17 @@ class VideoDetailActivity : AppCompatActivity() {
             with(binding.rvVideoDetail) {
                 layoutManager =
                     LinearLayoutManager(this@VideoDetailActivity, RecyclerView.VERTICAL, false)
-                adapter = VideoDetailAdapter(videoDetailViewModel).also {
-                    videoDetailAdapter = it
+                adapter = VideoDetailAdapter(videoDetailViewModel).also { adapter ->
+                    videoDetailAdapter = adapter
                 }
+                // todo 更多评论
+//                setOnBottomListener {
+////                    logd(" detail activity on bottom ... ")
+//                    videoDetailViewModel.fetchMoreVideoReplies()
+//                }
             }
         }
-
+        // 观察数据变化
         observe()
 
         // 获取传参
@@ -125,7 +130,7 @@ class VideoDetailActivity : AppCompatActivity() {
         }
         // 查看更多视频
         videoDetailViewModel.moreRelatedVideos.observe(this) {
-            videoDetailAdapter.loadMoreRelatedVideos(it)
+            videoDetailAdapter.onMoreRelatedVideosLoaded(it)
         }
         // 查看更多 按钮隐藏控制
         videoDetailViewModel.isLoadMoreVisible.observe(this) {
@@ -156,7 +161,7 @@ class VideoDetailActivity : AppCompatActivity() {
         videoDetailViewModel.moreReplies.observe(this) {
             when (it) {
                 is ApiResult.Success -> {
-                    videoDetailAdapter.loadMoreReplies(it.data.itemList)
+                    videoDetailAdapter.onMoreRepliesLoaded(it.data.itemList)
                 }
                 is ApiResult.Error -> {
                     loge(it.exception)

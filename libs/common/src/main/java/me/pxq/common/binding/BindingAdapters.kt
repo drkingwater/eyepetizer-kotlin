@@ -161,12 +161,14 @@ fun bindSelectedCard(
                         isIcon -> view.load(this[index].data.userCover, CircleCrop())
                         //多图标志
                         multiPicTag -> {
-                            view.visibility =
-                                if (this[index].data.urls.size > 1) {
-                                    View.VISIBLE
-                                } else {
+                            view.visibility = this[index].data.urls?.run {
+                                if (size <= 1) {
                                     View.GONE
+                                } else {
+                                    View.VISIBLE
                                 }
+                            } ?: View.GONE
+
                         }
                         //cover
                         else -> {

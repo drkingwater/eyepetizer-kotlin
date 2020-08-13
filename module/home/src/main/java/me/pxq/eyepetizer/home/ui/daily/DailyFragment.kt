@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import me.pxq.eyepetizer.home.BaseFragment
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentDailyBinding
@@ -27,7 +28,7 @@ import me.pxq.utils.logi
  * Author : pxq
  * Date : 2020/7/27 10:30 PM
  */
-class DailyFragment : Fragment() {
+class DailyFragment : BaseFragment() {
 
     private val viewModel by activityViewModels<DailyViewModel> {
         DailyViewModelFactory.get(
@@ -117,6 +118,10 @@ class DailyFragment : Fragment() {
                 }
                 is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
             }
+        })
+        // 导航到详情页
+        viewModel.videoDetail.observe(requireActivity(), Observer {
+            navigateToVideo(it)
         })
     }
     companion object{

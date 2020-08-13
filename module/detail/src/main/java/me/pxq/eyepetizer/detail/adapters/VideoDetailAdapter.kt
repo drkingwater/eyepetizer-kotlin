@@ -54,7 +54,7 @@ class VideoDetailAdapter(
     }
 
     // 查看更多视频
-    fun loadMoreRelatedVideos(videos: List<Item>) {
+    fun onMoreRelatedVideosLoaded(videos: List<Item>) {
         with(videoRelatedAdapter) {
             val start = relatedVideos.size
             relatedVideos.addAll(videos)
@@ -62,11 +62,11 @@ class VideoDetailAdapter(
         }
     }
     // 加载更多评论
-    fun loadMoreReplies(replies: List<Item>) {
+    fun onMoreRepliesLoaded(_replies: List<Item>) {
         with(replayAdapter) {
             val start = replies.size
-            this@VideoDetailAdapter.replies.addAll(replies)
-            notifyItemRangeInserted(start, this@VideoDetailAdapter.replies.size)
+            replies.addAll(_replies)
+            notifyItemRangeInserted(start, replies.size)
         }
     }
 
@@ -145,7 +145,7 @@ class VideoDetailAdapter(
 
         fun bind(items: List<Item>) {
             when (binding) {
-                is DetailRvItemVideoRelatedBinding -> {
+                is DetailRvItemVideoRelatedBinding -> {   // 推荐视频
                     with(binding.rvVideoRelated) {
                         if (adapter == null) {
                             // 初始化
@@ -181,7 +181,7 @@ class VideoDetailAdapter(
 
                     binding.executePendingBindings()
                 }
-                is DetailRvItemRepliesBinding -> {
+                is DetailRvItemRepliesBinding -> {   // 评论
                     with(binding.rvReplies) {
                         if (adapter == null) {
                             // 设置adapter
@@ -202,6 +202,9 @@ class VideoDetailAdapter(
                                     RecyclerView.VERTICAL,
                                     false
                                 )
+//                            setOnBottomListener {   // 加载更多视频
+//                                actionMV.fetchMoreVideoReplies()
+//                            }
                         }
                         (adapter as VideoReplayAdapter).run {
                             replies.clear()

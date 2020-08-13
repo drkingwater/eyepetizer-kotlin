@@ -4,21 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
-import kotlinx.android.synthetic.main.detail_rv_item_replies_item.*
 import me.pxq.common.ApiService
 import me.pxq.common.R
 import me.pxq.common.data.Item
-import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
@@ -146,7 +138,7 @@ class VideoDetailFragment : Fragment() {
         }
         // 查看更多视频
         videoDetailViewModel.moreRelatedVideos.observe(this) {
-            videoDetailAdapter.loadMoreRelatedVideos(it)
+            videoDetailAdapter.onMoreRelatedVideosLoaded(it)
         }
         videoDetailViewModel.isLoadMoreVisible.observe(this) {
             videoDetailAdapter.setLoadMoreRelatedVisible(it)
@@ -175,7 +167,7 @@ class VideoDetailFragment : Fragment() {
         videoDetailViewModel.moreReplies.observe(this) {
             when (it) {
                 is ApiResult.Success -> {
-                    videoDetailAdapter.loadMoreReplies(it.data.itemList)
+                    videoDetailAdapter.onMoreRepliesLoaded(it.data.itemList)
                 }
                 is ApiResult.Error -> {
                     loge(it.exception)

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <me.pxq.common.ui.view.BottomRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rv_replies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/detail_video_rv_item_margin"/>
+        android:layout_margin="@dimen/detail_video_rv_item_margin" />
 
 </layout>

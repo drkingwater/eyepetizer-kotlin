@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:onRefreshListener="@{() -> viewModel.fetchRecommend()}">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <me.pxq.common.ui.view.BottomRecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

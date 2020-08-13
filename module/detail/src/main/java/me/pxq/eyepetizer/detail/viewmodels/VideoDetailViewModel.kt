@@ -61,9 +61,9 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
                     onAnim = false
                     delay(200)
                 }
-                val homePage = repository.fetchVideoRelated(it.data.id).run {
-                    if (this is ApiResult.Success) {
-                        if (data.itemList.isNotEmpty()) {
+                val homePage = async {
+                    repository.fetchVideoRelated(it.data.id).apply {
+                        if (this is ApiResult.Success && data.itemList.isNotEmpty()) {
                             // 去除无关数据 todo 把字符串明文改为常量
                             if (data.itemList[0].type != "videoSmallCard") {
                                 logd("remove index 0 ")
@@ -88,15 +88,20 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
                             }
                         }
                     }
-                    this
                 }
-                _videoRelated.postValue(homePage)
                 // 获取评论
-                _replies.postValue(repository.fetchVideoReplies(it.data.id).also {
-                    if (it is ApiResult.Success) {
-                        nextRepliesUrl = it.data.nextPageUrl ?: ""
+                val replies = async {
+                    repository.fetchVideoReplies(it.data.id).also {
+                        if (it is ApiResult.Success) {
+                            nextRepliesUrl = it.data.nextPageUrl ?: ""
+                        }
                     }
-                })
+                }
+                // 通知推荐更新
+                _videoRelated.postValue(homePage.await())
+                // 通知评论更新
+                _replies.postValue(replies.await())
+
             }
         }
     }
@@ -117,7 +122,9 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
     fun fetchMoreVideoReplies() {
         if (nextRepliesUrl.isNotEmpty()) {
             viewModelScope.launch(Dispatchers.IO) {
-                _moreReplies.postValue(repository.fetchMoreVideoReplies(nextRepliesUrl).also {
+                val nextUrl = nextRepliesUrl
+                nextRepliesUrl = ""
+                _moreReplies.postValue(repository.fetchMoreVideoReplies(nextUrl).also {
                     if (it is ApiResult.Success) {
                         nextRepliesUrl = it.data.nextPageUrl ?: ""
                     }
