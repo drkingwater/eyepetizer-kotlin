@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.RadioGroup
 import androidx.lifecycle.Observer
+import com.google.android.exoplayer2.ui.PlayerView
 import me.pxq.player.base.PlayerBase
 import me.pxq.player.PlayerPool
 import me.pxq.utils.logd
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     lateinit var textureView: TextureView
+    lateinit var playerView: PlayerView
     var player: PlayerBase? = null
 
     // 播放器类型
@@ -48,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                 autoPlay = checked
             }
         }
+        playerView = findViewById(R.id.player_view)
+
+
     }
 
     fun play(view: View) {
@@ -64,9 +69,9 @@ class MainActivity : AppCompatActivity() {
         player = PlayerPool.get(this, playerCore)
         //设置播放器参数
         with(player!!) {
-            setTextureView(textureView)
+            textureView = textureView
             // 自动播放
-            autoPlay(autoPlay)
+            autoPlay = autoPlay
             // 重复
             repeat(repeat)
 

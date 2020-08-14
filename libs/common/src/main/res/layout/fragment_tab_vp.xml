@@ -13,12 +13,12 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/index_tab_layout"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/home_tab_layout_height"
+            android:layout_height="@dimen/tab_layout_height"
             android:layout_centerInParent="true"
             app:tabBackground="@android:color/transparent"
             app:tabIndicatorFullWidth="false"
-            app:tabPaddingEnd="@dimen/home_tab_item_padding"
-            app:tabPaddingStart="@dimen/home_tab_item_padding"
+            app:tabPaddingEnd="@dimen/tab_item_padding"
+            app:tabPaddingStart="@dimen/tab_item_padding"
             app:tabRippleColor="@android:color/transparent"
             app:tabTextAppearance="@style/Home_TabTextAppearance" />
 
@@ -28,8 +28,8 @@
         android:id="@+id/index_view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/home_header_padding"
-        android:layout_marginEnd="@dimen/home_header_padding"
+        android:layout_marginStart="@dimen/header_padding"
+        android:layout_marginEnd="@dimen/header_padding"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/index_tab_layout" />

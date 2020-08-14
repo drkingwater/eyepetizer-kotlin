@@ -1,9 +1,10 @@
-package me.pxq.eyepetizer.home
+package me.pxq.common.ui
 
 import android.os.Build
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
+import me.pxq.common.R
 import me.pxq.common.data.Item
 import me.pxq.common.router.RouterHub
 import me.pxq.utils.logd
@@ -49,10 +50,10 @@ abstract class BaseFragment : Fragment() {
                         }
                     }
                     .setCustomAnimations(
-                        me.pxq.common.R.anim.slide_bottom_in,
-                        me.pxq.common.R.anim.slide_bottom_out,
-                        me.pxq.common.R.anim.slide_bottom_in,
-                        me.pxq.common.R.anim.slide_bottom_out
+                        R.anim.slide_bottom_in,
+                        R.anim.slide_bottom_out,
+                        R.anim.slide_bottom_in,
+                        R.anim.slide_bottom_out
                     )
                     .add(
                         R.id.fragment_container, this, DETAIL_FRAGMENT_TAG

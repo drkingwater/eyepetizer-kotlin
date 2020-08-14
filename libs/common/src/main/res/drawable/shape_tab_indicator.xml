@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <size android:height="@dimen/home_tab_layout_indicator_height"
-        android:width="@dimen/home_tab_layout_indicator_width"/>
+    <size android:height="@dimen/tab_layout_indicator_height"
+        android:width="@dimen/tab_layout_indicator_width"/>
 
 </shape>

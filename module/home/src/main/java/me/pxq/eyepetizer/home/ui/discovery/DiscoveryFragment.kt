@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.eyepetizer.home.BaseFragment
+import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentDiscoveryBinding

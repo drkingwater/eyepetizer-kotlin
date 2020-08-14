@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  TabLayout高度  -->
-    <dimen name="home_tab_layout_height">45dp</dimen>
-    <dimen name="home_tab_item_padding">20dp</dimen>
-    <dimen name="home_tab_layout_indicator_height">3dp</dimen>
-    <dimen name="home_tab_layout_indicator_width">10dp</dimen>
     <dimen name="home_rv_item_textcard_h7_height">35dp</dimen>
     <dimen name="home_rv_item_textcard_h5_height">30dp</dimen>
     <dimen name="home_tv_size_header5">20dp</dimen>
-    <dimen name="home_header_padding">15dp</dimen>
     <dimen name="home_tv_size_header7">22dp</dimen>
     <dimen name="home_tv_size_right_text">14dp</dimen>
     <dimen name="home_followcard_padding">14dp</dimen>
@@ -28,6 +23,7 @@
     <dimen name="home_content_margin_top">15dp</dimen>
     <dimen name="home_special_category_item_size">107dp</dimen>
     <dimen name="home_header_margin_top">10dp</dimen>
+    <dimen name="home_ugs_nickname_max_width">100dp</dimen>
 
 
 </resources>

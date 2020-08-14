@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:textColor="@color/home_selector_tab_item_text_color"
-    android:textSize="@dimen/home_tablayout_item_textsize"
+    android:textColor="@color/selector_tab_item_text_color"
+    android:textSize="@dimen/tablayout_item_textsize"
     app:typeface="DIN"
     tools:ignore="SpUsage">
 

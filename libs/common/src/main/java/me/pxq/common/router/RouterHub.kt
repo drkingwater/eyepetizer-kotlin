@@ -6,8 +6,12 @@ package me.pxq.common.router
  * Date : 2020/7/20 9:54 PM
  */
 object RouterHub {
-    // 首页
-    const val MAIN_HONE = "/home/main"
+    // 主页-首页
+    const val MAIN_HONE = "/home/index"
+
+    // 主页-社区
+    const val MAIN_COMMUNITY = "/community/index"
+
     // 视频详情页
     const val DETAIL_VIDEO = "/detail/video"
 

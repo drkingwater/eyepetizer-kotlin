@@ -12,7 +12,8 @@ object SpUtil {
 
     fun getString(context: Context, key: String) =
         context.getSharedPreferences("${context.packageName}_eye_sp", Context.MODE_PRIVATE)
-            .getString(key, "")
+            .getString(key, "") ?: ""
+
 
     fun putString(context: Context, key: String, value: String) {
         context.getSharedPreferences("${context.packageName}_eye_sp", Context.MODE_PRIVATE).edit {

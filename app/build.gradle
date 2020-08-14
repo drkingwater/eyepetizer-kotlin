@@ -51,12 +51,15 @@ dependencies {
 
     implementation project(':libs:common')
 
-    if (!isApp.toBoolean()) {
-        //主页
-        implementation project(':module:main')
-        //首页
-        implementation project(':module:home')
-    }
+    // 主页
+    implementation project(':module:main')
+    // 首页
+    implementation project(':module:home')
+    // 社区
+    implementation project(':module:community')
+    // 详情
+    implementation project(':module:detail')
+
 
 }
 

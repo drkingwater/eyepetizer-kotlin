@@ -9,14 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.eyepetizer.home.BaseFragment
-import me.pxq.eyepetizer.home.R
+import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.databinding.HomeFragmentDailyBinding
-import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
 import me.pxq.utils.ui.decoration.MarginDecoration
-import me.pxq.eyepetizer.home.ui.recommend.RecommendViewModel
-import me.pxq.eyepetizer.home.ui.recommend.RecommendViewModelFactory
 import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd

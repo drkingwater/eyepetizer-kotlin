@@ -11,10 +11,10 @@ import me.pxq.eyepetizer.home.ui.recommend.RecommendFragment
  * Author : pxq
  * Date : 2020/7/27 10:35 PM
  */
-class ViewPagerAdapter(fragment: Fragment) :
+class ViewPagerAdapter(fragment: Fragment, private val tabSize : Int) :
     FragmentStateAdapter(fragment) {
 
-    override fun getItemCount() = 3
+    override fun getItemCount() = tabSize
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {

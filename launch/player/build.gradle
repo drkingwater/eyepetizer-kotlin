@@ -46,4 +46,6 @@ dependencies {
     implementation project(':libs:common')
     implementation project(':libs:player')
 
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.7'
+
 }

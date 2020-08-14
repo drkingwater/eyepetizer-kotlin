@@ -65,6 +65,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_layout" />
 
+
         <ImageView
             android:id="@+id/iv_cover_left"
             android:layout_width="0dp"
@@ -75,9 +76,11 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/iv_cover_right"
             app:layout_constraintTop_toBottomOf="@id/base_line"
+            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 0)}"
             app:select="@{0}"
             app:selections="@{collection.data.itemList}"
-            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 0)}"/>
+            tools:src="@color/loading" />
+
 
         <ImageView
             android:layout_width="@dimen/home_multi_pic_size"
@@ -103,12 +106,14 @@
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_user_name_left"
             style="@style/Home_SelectionCardIconText"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover_left"
             app:layout_constraintRight_toRightOf="@id/iv_cover_left"
             app:layout_constraintTop_toTopOf="@id/iv_icon_left"
+            app:layout_constraintWidth_max="@dimen/home_ugs_nickname_max_width"
             app:select="@{0}"
             app:selections="@{collection.data.itemList}"
-            tools:text="用户名" />
+            tools:text="@string/txt_test" />
 
         <ImageView
             android:id="@+id/iv_cover_right"
@@ -122,9 +127,10 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/base_line"
             app:layout_constraintVertical_weight="1"
+            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 1)}"
             app:select="@{1}"
             app:selections="@{collection.data.itemList}"
-            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 1)}"/>
+            tools:src="@color/loading" />
 
         <ImageView
             android:layout_width="@dimen/home_multi_pic_size"
@@ -150,12 +156,14 @@
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_user_name_right"
             style="@style/Home_SelectionCardIconText"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover_right"
             app:layout_constraintRight_toRightOf="@id/iv_cover_right"
             app:layout_constraintTop_toTopOf="@id/iv_icon_right"
+            app:layout_constraintWidth_max="@dimen/home_ugs_nickname_max_width"
             app:select="@{1}"
             app:selections="@{collection.data.itemList}"
-            tools:text="用户名"
+            tools:text="@string/txt_test"
             tools:textColor="@color/blue" />
 
         <ImageView
@@ -171,9 +179,10 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_cover_right"
             app:layout_constraintVertical_weight="1"
+            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 2)}"
             app:select="@{2}"
             app:selections="@{collection.data.itemList}"
-            app:onClickListener="@{(theView) -> viewModel.navigateToPicture(theView, collection.data.itemList, 2)}"/>
+            tools:src="@color/loading" />
 
         <ImageView
             android:layout_width="@dimen/home_multi_pic_size"
@@ -199,12 +208,14 @@
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_user_name_bottom"
             style="@style/Home_SelectionCardIconText"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover_bottom"
             app:layout_constraintRight_toRightOf="@id/iv_cover_bottom"
             app:layout_constraintTop_toTopOf="@id/iv_icon_bottom"
+            app:layout_constraintWidth_max="@dimen/home_ugs_nickname_max_width"
             app:select="@{2}"
             app:selections="@{collection.data.itemList}"
-            tools:text="用户名"
+            tools:text="@string/txt_test"
             tools:textColor="@color/blue" />
 
 
