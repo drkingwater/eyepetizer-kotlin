@@ -3,7 +3,9 @@ package me.pxq.common.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.google.gson.annotations.JsonAdapter
 import me.pxq.common.db.converter.HomeItemConverter
+import me.pxq.common.retrofit.CoverTypeAdapter
 import java.io.Serializable
 
 /**
@@ -45,6 +47,7 @@ data class Data(
     val consumption: Consumption,
     val content: Item,
     val count: Int,
+    @JsonAdapter(CoverTypeAdapter::class)
     val cover: Cover,
     val createTime: Long,
     val dataType: String,
@@ -204,8 +207,7 @@ data class Cover(
     val blurred: String,
     val detail: String,
     val feed: String,
-    val homepage: String,
-    val sharing: Any
+    val homepage: String
 ) : Serializable
 
 data class PlayInfo(

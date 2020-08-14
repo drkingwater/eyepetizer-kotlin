@@ -1,3 +1,4 @@
+include ':launch:community'
 include ':module:community'
 include ':module:detail'
 include ':launch:player'
