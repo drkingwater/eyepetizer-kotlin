@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.pxq.common.viewmodel.BaseViewModel" />
+
+
+        <variable
+            name="sectionAd"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, sectionAd.data.actionUrl)}">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="@dimen/small_video_card_cover_width"
+            android:layout_height="@dimen/small_video_card_cover_height"
+            android:scaleType="fitXY"
+            app:cover="@{sectionAd.data.url}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/loading" />
+
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{sectionAd.data.headerTitle}"
+            android:textColor="@color/black25"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintLeft_toRightOf="@id/iv_cover"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeface="FZLanD"
+            tools:ignore="SpUsage"
+            tools:text="@string/txt_test" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

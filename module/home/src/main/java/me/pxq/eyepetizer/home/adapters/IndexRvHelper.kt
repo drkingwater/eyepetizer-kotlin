@@ -26,6 +26,8 @@ object IndexRvHelper {
     const val VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD = 1 + VIEW_HOLDER_TYPE_HOR_SCROLL_CARD
     private const val VIEW_HOLDER_TYPE_COLUMN_CARD = 1 + VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD
     private const val VIEW_HOLDER_TYPE_BANNER_BANNER3 = 1 + VIEW_HOLDER_TYPE_COLUMN_CARD
+    private const val VIEW_HOLDER_TYPE_SECTION_AD_SMALL_CARD = 1 + VIEW_HOLDER_TYPE_BANNER_BANNER3
+    private const val VIEW_HOLDER_TYPE_SECTION_AD_BIG_CARD = 1 + VIEW_HOLDER_TYPE_SECTION_AD_SMALL_CARD
 
     //自动播放广告
     private const val VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD = 90
@@ -54,6 +56,9 @@ object IndexRvHelper {
             item.type == "columnCardList" && item.data.dataType == "ItemCollection" -> VIEW_HOLDER_TYPE_COLUMN_CARD
             // banner广告
             item.type == "banner3" && item.data.dataType == "Banner" -> VIEW_HOLDER_TYPE_BANNER_BANNER3
+            // section ad
+            item.type == "sectionAdSmallCard" && item.data.dataType == "SectionAd" -> VIEW_HOLDER_TYPE_SECTION_AD_SMALL_CARD
+            item.type == "sectionAdBigCard" && item.data.dataType == "SectionAd" -> VIEW_HOLDER_TYPE_SECTION_AD_BIG_CARD
             else -> VIEW_HOLDER_TYPE_NOTHING
         }
     }
@@ -71,10 +76,12 @@ object IndexRvHelper {
         VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
         VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
         VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> R.layout.home_rv_item_hor_scrollcard
-        VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad   //视频广告
+        VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad   //视频广告，自动播放
         VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> R.layout.home_rv_item_special_square_card //热门分类、专题策划共用一个item
         VIEW_HOLDER_TYPE_COLUMN_CARD -> R.layout.home_rv_item_special_square_card
         VIEW_HOLDER_TYPE_BANNER_BANNER3 -> R.layout.home_rv_item_banner3_banner           //banner广告
+        VIEW_HOLDER_TYPE_SECTION_AD_SMALL_CARD -> R.layout.home_rv_item_section_ad_small_card   //分段广告 small
+        VIEW_HOLDER_TYPE_SECTION_AD_BIG_CARD -> R.layout.home_rv_item_section_ad_big_card  //分段广告 big
         else -> R.layout.home_rv_item_textcard_rightandleft
     }
 

@@ -121,9 +121,23 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is RvItemVideoSmallCardBinding -> {
+                is RvItemVideoSmallCardBinding -> {   // 视频信息
                     with(binding) {
                         video = item
+                        viewModel = actionVM
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemSectionAdSmallCardBinding -> {// 分段广告 small
+                    with(binding) {
+                        sectionAd = item
+                        viewModel = actionVM
+                        executePendingBindings()
+                    }
+                }
+                is HomeRvItemSectionAdBigCardBinding -> { // 分段广告 small
+                    with(binding) {
+                        sectionAd = item
                         viewModel = actionVM
                         executePendingBindings()
                     }
