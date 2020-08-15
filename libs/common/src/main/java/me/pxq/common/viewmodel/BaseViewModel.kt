@@ -15,6 +15,20 @@ abstract class BaseViewModel : ViewModel() {
 
     val videoDetail = MutableLiveData<Item>()
 
+
+    /**
+     * 首次进入获取数据
+     */
+    abstract fun fetchData()
+
+    /**
+     * 网络错误
+     * 点击重试
+     */
+    open fun retryOnError(){
+        fetchData()
+    }
+
     /**
      * 处理带action的view
      */
@@ -38,13 +52,6 @@ abstract class BaseViewModel : ViewModel() {
     fun navigateToVideo(view: View, item: Item) {
         logd("播放详情页：${item.data.type}")
         videoDetail.value = item
-//        if (view is ImageView) {
-//            ARouter.getInstance().build(RouterHub.DETAIL_VIDEO)
-//                .withSerializable("video_detail", item)
-//                .navigation() as Fragment
-//
-//        }
-
     }
 
     /**

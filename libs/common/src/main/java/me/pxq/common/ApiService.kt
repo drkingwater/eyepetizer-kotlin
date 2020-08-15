@@ -70,6 +70,13 @@ class ApiService {
     companion object {
         private const val BASE_URL = "http://baobab.kaiyanapp.com/"
 
+        // 首页-推荐第一页数据
+        const val HOME_RECOMMEND_PAGE = "${BASE_URL}api/v5/index/tab/allRec?page=0"
+        // 首页-日报第一页数据
+        const val HOME_DAILY_PAGE = "${BASE_URL}api/v5/index/tab/feed"
+        // 社区-推荐第一页数据
+        const val COMMUNITY_RECOMMEND_PAGE = "${BASE_URL}api/v7/community/tab/rec"
+
         private val httpClient = OkHttpClient.Builder()
             .addInterceptor(CommonParamsInterceptor())  //添加公共参数拦截器
             .addInterceptor(LoggingInterceptor())  //添加网络请求日志拦截器

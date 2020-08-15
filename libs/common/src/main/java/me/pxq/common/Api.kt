@@ -17,7 +17,7 @@ interface Api {
      * 获取首页-推荐数据
      */
     @GET
-    suspend fun fetchRecommend(@Url url: String = "http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0"): HomePage
+    suspend fun fetchRecommend(@Url url: String = ApiService.HOME_RECOMMEND_PAGE): HomePage
 
     /**
      * 获取首页-发现数据
@@ -29,7 +29,7 @@ interface Api {
      * 获取首页-日报数据
      */
     @GET
-    suspend fun fetchDaily(@Url url: String = "http://baobab.kaiyanapp.com/api/v5/index/tab/feed"): HomePage
+    suspend fun fetchDaily(@Url url: String = ApiService.HOME_DAILY_PAGE): HomePage
 
 
     /**
@@ -48,8 +48,13 @@ interface Api {
      * 加载更多视频详情-评论列表
      */
     @GET
-    suspend fun fetchMoreVideoReplies(@Url url : String): HomePage
+    suspend fun fetchMoreVideoReplies(@Url url: String): HomePage
 
+    /**
+     * 获取社区-推荐数据
+     */
+    @GET
+    suspend fun fetchCommunityRecommend(@Url url: String): HomePage
 
 
 }

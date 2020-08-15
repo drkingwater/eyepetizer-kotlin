@@ -23,4 +23,7 @@
     <dimen name="rv_divider_bottom">4dp</dimen>
     <dimen name="detail_avatar_size">40dp</dimen>
     <dimen name="detail_action_like_size">22dp</dimen>
+
+    <!--  banner  -->
+    <dimen name="hor_scroll_banner_height">185dp</dimen>
 </resources>

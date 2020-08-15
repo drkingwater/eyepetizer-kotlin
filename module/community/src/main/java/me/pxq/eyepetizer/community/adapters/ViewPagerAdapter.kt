@@ -2,8 +2,8 @@ package me.pxq.eyepetizer.community.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import me.pxq.eyepetizer.community.FollowFragment
-import me.pxq.eyepetizer.community.RecommendFragment
+import me.pxq.eyepetizer.community.ui.follow.FollowFragment
+import me.pxq.eyepetizer.community.ui.recommend.RecommendFragment
 
 /**
  * Description: 首页viewpager2适配器[me.pxq.eyepetizer.community.CommunityFragment]

@@ -29,11 +29,11 @@ object IndexRvHelper {
     private const val VIEW_HOLDER_TYPE_SECTION_AD_SMALL_CARD = 1 + VIEW_HOLDER_TYPE_BANNER_BANNER3
     private const val VIEW_HOLDER_TYPE_SECTION_AD_BIG_CARD = 1 + VIEW_HOLDER_TYPE_SECTION_AD_SMALL_CARD
 
-    //自动播放广告
+    // 自动播放广告
     private const val VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD = 90
     const val VIEW_HOLDER_TYPE_THE_END = 99
 
-    //没有匹配到
+    // 没有匹配到
     private const val VIEW_HOLDER_TYPE_NOTHING = 100
 
     fun getItemViewType(item: Item): Int {
@@ -71,11 +71,11 @@ object IndexRvHelper {
         VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
         VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> me.pxq.common.R.layout.rv_item_video_small_card
         VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
-        VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner
+        VIEW_HOLDER_TYPE_BANNER -> me.pxq.common.R.layout.rv_item_banner
         VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard
         VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
         VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
-        VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> R.layout.home_rv_item_hor_scrollcard
+        VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> me.pxq.common.R.layout.rv_item_hor_scrollcard
         VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad   //视频广告，自动播放
         VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> R.layout.home_rv_item_special_square_card //热门分类、专题策划共用一个item
         VIEW_HOLDER_TYPE_COLUMN_CARD -> R.layout.home_rv_item_special_square_card

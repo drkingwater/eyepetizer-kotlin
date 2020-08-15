@@ -8,19 +8,20 @@
             name="viewModel"
             type="me.pxq.common.viewmodel.BaseViewModel" />
 
-
         <variable
             name="banner"
             type="me.pxq.common.data.Item" />
 
     </data>
 
-    <ImageView
-        android:id="@+id/iv_banner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/home_banner_height"
-        android:scaleType="fitXY"
-        app:cover="@{banner.data.image}"
-        app:onClickListener="@{(theView) -> viewModel.execAction(theView, banner.data.actionUrl)}" />
+
+
+        <ImageView
+            android:id="@+id/iv_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:cover="@{banner.data.image}"
+            app:onClickListener="@{(theView) -> viewModel.execAction(theView, banner.data.actionUrl)}" />
 
 </layout>

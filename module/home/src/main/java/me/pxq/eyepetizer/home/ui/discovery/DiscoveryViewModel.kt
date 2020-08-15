@@ -1,7 +1,6 @@
 package me.pxq.eyepetizer.home.ui.discovery
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,21 +30,21 @@ class DiscoveryViewModel(private val repository: HomeRepository) : BaseViewModel
     /**
      * 获取首页-发现数据
      */
-    fun fetchDiscovery() {
-        fetchData(true)
+    override fun fetchData() {
+        fetchDiscoveryData(true)
     }
 
     /**
      * 下一页数据
      */
     fun fetchNextPage() {
-        fetchData(false, nextPage)
+        fetchDiscoveryData(false, nextPage)
     }
 
     /**
      *
      */
-    private fun fetchData(isFirst : Boolean, url: String = "") {
+    private fun fetchDiscoveryData(isFirst : Boolean, url: String = "") {
         viewModelScope.launch(Dispatchers.IO) {
             if (!isFirst && url.isEmpty()){
                 loge("没有数据了...")

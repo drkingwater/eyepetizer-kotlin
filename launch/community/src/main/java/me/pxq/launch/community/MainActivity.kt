@@ -18,6 +18,16 @@ class MainActivity : AppCompatActivity() {
                     CommunityFragment(),
                     CommunityFragment::class.java.simpleName
                 ).commit()
+//        }
+//        val fragment =
+//            supportFragmentManager.findFragmentByTag(Vp2Fragment::class.java.simpleName)
+//        if (fragment == null) {
+//            supportFragmentManager.beginTransaction()
+//                .add(
+//                    R.id.fragment_container,
+//                    Vp2Fragment(),
+//                    Vp2Fragment::class.java.simpleName
+//                ).commit()
         }
     }
 }

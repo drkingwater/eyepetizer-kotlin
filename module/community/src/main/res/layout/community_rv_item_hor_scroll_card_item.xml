@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.pxq.common.viewmodel.BaseViewModel" />
+
+        <variable
+            name="content"
+            type="me.pxq.common.data.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/community_squre_content_image_height"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, content.data.actionUrl)}">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            cover="@{content.data.bgPicture}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/loading" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{content.data.title}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_bg"
+            app:layout_constraintRight_toRightOf="@+id/iv_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeface="FZLanD"
+            tools:text="@string/txt_test" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{content.data.subTitle}"
+            android:textColor="@color/white15"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/iv_bg"
+            app:layout_constraintRight_toRightOf="@id/iv_bg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:typeface="FZLanL"
+            tools:text="@string/txt_test" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

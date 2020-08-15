@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
+import me.pxq.common.adapters.IvBannerAdapter
 import me.pxq.common.data.Item
+import me.pxq.common.databinding.RvItemBannerBinding
+import me.pxq.common.databinding.RvItemHorScrollcardBinding
 import me.pxq.common.databinding.RvItemVideoSmallCardBinding
 import me.pxq.common.ui.view.TheEndHolder
-import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.databinding.*
 import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.common.viewmodel.BaseViewModel
@@ -104,7 +106,6 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         //绑定rv adapter
                         if (rvBanner.adapter == null) {
                             rvBanner.run {
-                                isNestedScrollingEnabled = true
                                 //设置分割线
                                 addItemDecoration(MarginDecoration(bottom = 13f.dp2px.toInt()))
                                 //布局方式
@@ -149,7 +150,7 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemBannerBinding -> {
+                is RvItemBannerBinding -> {
                     with(binding) {
                         banner = item
                         viewModel = actionVM
@@ -177,21 +178,20 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemHorScrollcardBinding -> {  //首页-发现 水平滚动banner
+                is RvItemHorScrollcardBinding -> {  //首页-发现 水平滚动banner
                     with(binding) {
                         if (rvBanner.adapter == null) {
                             rvBanner.run {
-                                isNestedScrollingEnabled = true
                                 //设置分割线
                                 addItemDecoration(MarginDecoration(right = 8f.dp2px.toInt()))
                                 //布局方式
-                                layoutManager = LinearLayoutManager(
-                                    this.context,
-                                    RecyclerView.HORIZONTAL,
-                                    false
-                                )
-                                //优化绘制
-                                setHasFixedSize(true)
+//                                layoutManager = LinearLayoutManager(
+//                                    this.context,
+//                                    RecyclerView.HORIZONTAL,
+//                                    false
+//                                )
+//                                //优化绘制
+//                                setHasFixedSize(true)
                                 //设置adapter
                                 adapter = IvBannerAdapter(actionVM)
                             }
@@ -206,7 +206,6 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         //rv设置适配器
                         if (rvCategory.adapter == null) {
                             rvCategory.run {
-                                isNestedScrollingEnabled = true
                                 //设置分割线
                                 addItemDecoration(
                                     MarginDecoration(

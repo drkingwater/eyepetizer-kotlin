@@ -141,4 +141,8 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
         const val VISIBLE_RELATED_VIDEO_COUNT = 5
     }
 
+    override fun fetchData() {
+        // 不需要做什么
+    }
+
 }

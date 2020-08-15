@@ -4,22 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
-import me.pxq.eyepetizer.home.R
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
-import me.pxq.eyepetizer.home.databinding.HomeFragmentRecommendBinding
 import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 import me.pxq.utils.loge
-import me.pxq.utils.logi
 
 /**
  * Description: 推荐
@@ -34,14 +29,14 @@ class RecommendFragment : BaseFragment() {
         )
     }
 
-    private lateinit var binding: HomeFragmentRecommendBinding
+    private lateinit var binding: FragmentRvWithFreshBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFragmentRecommendBinding.inflate(inflater, container, false).run {
+        return FragmentRvWithFreshBinding.inflate(inflater, container, false).run {
             binding = this
             viewModel = this@RecommendFragment.viewModel
             lifecycleOwner = requireActivity()
@@ -63,31 +58,9 @@ class RecommendFragment : BaseFragment() {
             setOnBottomListener {
                 viewModel.fetchNextPage()
             }
-//            addOnScrollListener(object : OnScrollListener() {
-//                private var onBottom = false
-//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
-//                        logi("到底了,刷新数据...")
-//
-//                    }
-//                }
-//
-//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                    val layoutManager =
-//                        recyclerView.layoutManager as LinearLayoutManager
-//                    //屏幕中最后一个可见子项的 position
-//                    val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-//                    //当前屏幕所看到的子项个数
-//                    val visibleItemCount = layoutManager.childCount
-//                    //当前 RecyclerView 的所有子项个数
-//                    val totalItemCount = layoutManager.itemCount
-//                    //RecyclerView 的滑动状态
-//                    onBottom = visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1
-//                }
-//            })
         }
         //请求数据
-        viewModel.fetchRecommend()
+        viewModel.fetchData()
     }
 
 
@@ -97,7 +70,7 @@ class RecommendFragment : BaseFragment() {
     private fun subscribeUi(adapter: IndexRvAdapter) {
         logd("subscribe")
         //刷新数据
-        viewModel.homeData.observe(requireActivity(), Observer {
+        viewModel.homeData.observe(viewLifecycleOwner, Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
             when (it) {
@@ -121,7 +94,7 @@ class RecommendFragment : BaseFragment() {
             }
         })
         //上拉加载数据
-        viewModel.refreshData.observe(requireActivity(), Observer {
+        viewModel.refreshData.observe(viewLifecycleOwner, Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
             when (it) {
@@ -147,7 +120,7 @@ class RecommendFragment : BaseFragment() {
             }
         })
         // 导航到详情页
-        viewModel.videoDetail.observe(requireActivity(), Observer {
+        viewModel.videoDetail.observe(viewLifecycleOwner, Observer {
             navigateToVideo(it)
         })
     }

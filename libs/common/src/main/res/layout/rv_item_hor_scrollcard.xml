@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layerType="software"
+        android:clipChildren="false">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/rv_banner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hor_scroll_banner_height"
+            android:layout_marginEnd="50dp"
+            android:clipChildren="false" />
+
+    </FrameLayout>
+
+</layout>

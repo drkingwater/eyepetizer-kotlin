@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.community
+package me.pxq.eyepetizer.community.ui.follow
 
 import me.pxq.common.ui.BaseFragment
 

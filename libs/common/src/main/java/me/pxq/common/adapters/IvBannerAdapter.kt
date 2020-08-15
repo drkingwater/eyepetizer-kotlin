@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.home.adapters
+package me.pxq.common.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.data.Item
-import me.pxq.eyepetizer.home.R
-import me.pxq.eyepetizer.home.databinding.HomeRvItemBannerBinding
+import me.pxq.common.databinding.RvItemBannerBinding
 import me.pxq.common.viewmodel.BaseViewModel
 import kotlin.math.acos
 
@@ -24,7 +23,7 @@ class IvBannerAdapter(val actionMV : BaseViewModel) : ListAdapter<Item, IvBanner
     /**
      *  Image Banner holder
      */
-    inner class IvBannerHolder(private val binding: HomeRvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class IvBannerHolder(private val binding: RvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item){
             binding.apply {
                 banner = item
@@ -35,7 +34,7 @@ class IvBannerAdapter(val actionMV : BaseViewModel) : ListAdapter<Item, IvBanner
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IvBannerHolder {
-        return IvBannerHolder(HomeRvItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return IvBannerHolder(RvItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: IvBannerHolder, position: Int) {

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
-import me.pxq.eyepetizer.home.databinding.HomeFragmentDailyBinding
 import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.dp2px
@@ -32,14 +31,14 @@ class DailyFragment : BaseFragment() {
         )
     }
 
-    private lateinit var binding: HomeFragmentDailyBinding
+    private lateinit var binding: FragmentRvWithFreshBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFragmentDailyBinding.inflate(inflater, container, false).run {
+        return FragmentRvWithFreshBinding.inflate(inflater, container, false).run {
             binding = this
             viewModel = this@DailyFragment.viewModel
             lifecycleOwner = requireActivity()
@@ -80,7 +79,7 @@ class DailyFragment : BaseFragment() {
             })
         }
         //请求数据
-        viewModel.fetchDaily()
+        viewModel.fetchData()
     }
 
 
@@ -90,7 +89,7 @@ class DailyFragment : BaseFragment() {
     private fun subscribeUi(adapter: IndexRvAdapter) {
         logd("subscribe")
         //刷新数据
-        viewModel.dailyData.observe(requireActivity(), Observer {
+        viewModel.dailyData.observe(viewLifecycleOwner, Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
             when (it) {
@@ -103,7 +102,7 @@ class DailyFragment : BaseFragment() {
             }
         })
         //上拉加载数据
-        viewModel.refreshData.observe(requireActivity(), Observer {
+        viewModel.refreshData.observe(viewLifecycleOwner, Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
             when (it) {

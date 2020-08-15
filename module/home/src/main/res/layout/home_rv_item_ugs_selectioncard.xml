@@ -69,7 +69,7 @@
         <ImageView
             android:id="@+id/iv_cover_left"
             android:layout_width="0dp"
-            android:layout_height="@dimen/home_banner_height"
+            android:layout_height="@dimen/hor_scroll_banner_height"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="3"
