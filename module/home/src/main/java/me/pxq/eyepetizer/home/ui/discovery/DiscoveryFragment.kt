@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +40,15 @@ class DiscoveryFragment : BaseFragment() {
         return FragmentRvWithFreshBinding.inflate(inflater, container, false).run {
             binding = this
             viewModel = this@DiscoveryFragment.viewModel
-            lifecycleOwner = requireActivity()
+            lifecycleOwner = viewLifecycleOwner
+            // 为了水平滑动Banner，取消左右margin
+            with(refreshLayout){
+                val layoutParams = layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.leftMargin = 0
+                layoutParams.rightMargin = 0
+                this.layoutParams = layoutParams
+            }
+
             root
         }
     }

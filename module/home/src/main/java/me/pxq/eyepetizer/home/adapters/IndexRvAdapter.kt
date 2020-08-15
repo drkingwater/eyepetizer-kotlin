@@ -2,9 +2,13 @@ package me.pxq.eyepetizer.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
+import me.pxq.common.R
 import me.pxq.common.adapters.IvBannerAdapter
 import me.pxq.common.data.Item
 import me.pxq.common.databinding.RvItemBannerBinding
@@ -16,6 +20,7 @@ import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
+import me.pxq.utils.ui.decoration.LeftDecoration
 
 /**
  * Description: [me.pxq.eyepetizer.home.ui.IndexFragment] 推荐栏 Rv Adapter
@@ -58,6 +63,25 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
 
     inner class ItemHolder(private val binding: ViewDataBinding, private val viewType: Int) :
         RecyclerView.ViewHolder(binding.root) {
+        private val margin =
+            itemView.context.resources.getDimension(R.dimen.header_padding)
+                .toInt()
+
+        init {
+            // 如果不是水平滑动Banner
+            if (viewType != IndexRvHelper.VIEW_HOLDER_TYPE_HOR_SCROLL_CARD) {
+                val layoutParams = itemView.layoutParams
+                // 动态设置左右margin
+                if (layoutParams is RecyclerView.LayoutParams) {
+                    if (layoutParams.leftMargin != margin) {
+                        layoutParams.leftMargin = margin
+                        layoutParams.rightMargin = margin
+                        itemView.layoutParams = layoutParams
+                    }
+                }
+            }
+        }
+
         fun bind(item: Item) {
             when (binding) {
                 is HomeRvItemAutoPlayVideoAdBinding -> {  //自动播放广告
@@ -180,23 +204,19 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                 }
                 is RvItemHorScrollcardBinding -> {  //首页-发现 水平滚动banner
                     with(binding) {
-                        if (rvBanner.adapter == null) {
-                            rvBanner.run {
-                                //设置分割线
-                                addItemDecoration(MarginDecoration(right = 8f.dp2px.toInt()))
-                                //布局方式
-//                                layoutManager = LinearLayoutManager(
-//                                    this.context,
-//                                    RecyclerView.HORIZONTAL,
-//                                    false
-//                                )
-//                                //优化绘制
-//                                setHasFixedSize(true)
-                                //设置adapter
+                        with(rvBanner) {
+                            adapter ?: kotlin.run {
+                                addItemDecoration(
+                                    LeftDecoration(
+                                        context.resources.getDimension(
+                                            R.dimen.hor_scroll_banner_divider_width
+                                        ).toInt()
+                                    )
+                                )
                                 adapter = IvBannerAdapter(actionVM)
+                                offscreenPageLimit = 3
                             }
                         }
-                        //更新数据
                         (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList)
                         executePendingBindings()
                     }

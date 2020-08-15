@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import me.pxq.utils.logd
 
 /**
- * Description: 右边距Decoration
+ * Description: 左边距Decoration
  * Author : pxq
  * Date : 2020/7/31 8:02 PM
  */
@@ -20,7 +20,7 @@ class LeftDecoration(private val left : Int) : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
-        val count = parent.adapter?.itemCount ?: 0
+//        val count = parent.adapter?.itemCount ?: 0
         // 第一个
         if (position == 0){
             // 不设置边距
