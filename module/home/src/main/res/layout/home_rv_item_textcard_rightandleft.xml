@@ -24,7 +24,6 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/home_header_margin_top"
             android:text="@{header.data.text}"
             android:textColor="@color/color_header_title"
             android:textSize="@dimen/home_tv_size_header7"

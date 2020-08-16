@@ -63,20 +63,21 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
 
     inner class ItemHolder(private val binding: ViewDataBinding, private val viewType: Int) :
         RecyclerView.ViewHolder(binding.root) {
-        private val margin =
-            itemView.context.resources.getDimension(R.dimen.header_padding)
-                .toInt()
+        private val margin = itemView.context.resources.getDimension(R.dimen.header_padding).toInt()
 
         init {
-            // 如果不是水平滑动Banner
-            if (viewType != IndexRvHelper.VIEW_HOLDER_TYPE_HOR_SCROLL_CARD) {
-                val layoutParams = itemView.layoutParams
-                // 动态设置左右margin
-                if (layoutParams is RecyclerView.LayoutParams) {
-                    if (layoutParams.leftMargin != margin) {
-                        layoutParams.leftMargin = margin
-                        layoutParams.rightMargin = margin
-                        itemView.layoutParams = layoutParams
+            when (viewType) {
+                // 水平滑动Banner，忽略
+                IndexRvHelper.VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> Unit
+                else -> {
+                    val layoutParams = itemView.layoutParams
+                    // 动态设置左右margin
+                    if (layoutParams is RecyclerView.LayoutParams) {
+                        if (layoutParams.leftMargin != margin) {
+                            layoutParams.leftMargin = margin
+                            layoutParams.rightMargin = margin
+                            itemView.layoutParams = layoutParams
+                        }
                     }
                 }
             }
@@ -174,7 +175,7 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is RvItemBannerBinding -> {
+                is HomeRvItemBannerSingleBinding -> {   // 当个图片
                     with(binding) {
                         banner = item
                         viewModel = actionVM
@@ -206,15 +207,7 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                     with(binding) {
                         with(rvBanner) {
                             adapter ?: kotlin.run {
-                                addItemDecoration(
-                                    LeftDecoration(
-                                        context.resources.getDimension(
-                                            R.dimen.hor_scroll_banner_divider_width
-                                        ).toInt()
-                                    )
-                                )
                                 adapter = IvBannerAdapter(actionVM)
-                                offscreenPageLimit = 3
                             }
                         }
                         (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList)

@@ -37,16 +37,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_right" />
 
-<!--        <androidx.constraintlayout.widget.Group-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:constraint_referenced_ids="tv_right"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:onClickListener="@{(theView) -> viewModel.execAction(theView, titleAction.data.actionUrl)}" />-->
-
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_right"
             style="@style/Home_TitleActionText"

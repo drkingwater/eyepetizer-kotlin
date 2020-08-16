@@ -20,14 +20,13 @@ class LeftDecoration(private val left : Int) : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
-//        val count = parent.adapter?.itemCount ?: 0
-        // 第一个
-        if (position == 0){
-            // 不设置边距
-            outRect.set(0, 0, 0, 0)
-        } else{
-            // 设置左边距
-            outRect.set(left, 0, 0, 0)
+        val count = parent.adapter?.itemCount ?: 0
+        // 第一个、最后一个都不处理
+        when (position) {
+            0 ->    // 不设置边距
+                outRect.set(0, 0, 0, 0)
+            else -> // 设置左边距
+                outRect.set(left, 0, 0, 0)
         }
 
     }

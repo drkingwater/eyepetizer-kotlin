@@ -1,14 +1,18 @@
 package me.pxq.common.ui.view
 
 import android.content.Context
+import android.os.Build
 import android.os.Looper
 import android.util.AttributeSet
+import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.FrameLayout
+import androidx.annotation.RequiresApi
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.*
 import me.pxq.utils.logd
 import kotlin.math.abs
 
@@ -20,11 +24,11 @@ import kotlin.math.abs
 class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
     FrameLayout(context, attributeSet) {
 
-    private lateinit var viewPager2 : ViewPager2
+    private lateinit var viewPager2: ViewPager2
 
     private var parentVp2: ViewPager2? = null
 
-    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop / 2
+    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
 
     private var startX = 0f
     private var startY = 0f
@@ -35,6 +39,15 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
             val start = System.currentTimeMillis()
             logd("find start ")
             viewPager2 = getChildAt(0) as ViewPager2
+            viewPager2.offscreenPageLimit = 4
+            viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    if (state == SCROLL_STATE_IDLE) {
+                        setVp2ParentState(true)
+                    }
+                }
+            })
             findViewPager2()
             logd("find end ${System.currentTimeMillis() - start}ms")
         }, 100) // 延迟一点时间，确保能找到vp2 parent
@@ -64,10 +77,7 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
                 // 先禁止父view拦截事件
                 parent.requestDisallowInterceptTouchEvent(true)
                 // 禁止vp2 parent滑动
-                if (parentVp2 != null) {
-                    parentVp2!!.isUserInputEnabled = false
-                }
-                logd("ACTION_DOWN")
+                setVp2ParentState(false)
             }
             MotionEvent.ACTION_MOVE -> {
                 val endX = event.x
@@ -80,16 +90,12 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
                     val canScroll = canScroll(endX - startY < 0)
                     // 判断是否需要拦截事件
                     parent.requestDisallowInterceptTouchEvent(canScroll)
-                    // 判断vp2 parent是否可以滑动
-                    if (parentVp2 != null) {
-                        parentVp2!!.isUserInputEnabled = !canScroll
-                    }
+                    // 判断是否需要把滑动交给vp2 parent
+                    setVp2ParentState(!canScroll)
                 } else {
                     // 竖直方向不处理
-//                    parent.requestDisallowInterceptTouchEvent(false)
-//                    if (parentVp2 != null) {
-//                        parentVp2!!.isUserInputEnabled = true
-//                    }
+                    parent.requestDisallowInterceptTouchEvent(true)
+                    setVp2ParentState(false)
                 }
 
             }
@@ -98,10 +104,7 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
                 parent.requestDisallowInterceptTouchEvent(
                     false
                 )
-                if (parentVp2 != null) {
-                    parentVp2!!.isUserInputEnabled = true
-                    logd("ACTION_UP")
-                }
+                setVp2ParentState(true)
             }
         }
         return super.onInterceptTouchEvent(event)
@@ -118,6 +121,7 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
         return with((parentVp2!!)) {
             val current = currentItem
             val total = adapter?.itemCount ?: 0
+            logd("$directionLeft $current $total")
             when {
                 // 往左滑，且划到最后一个
                 directionLeft && current == total - 1 -> false
@@ -127,6 +131,16 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
             }
         }
 
+    }
+
+    /**
+     * 设置vp2 parent滑动状态
+     * [enable] true : 可滑动 false : 不可滑动
+     */
+    private fun setVp2ParentState(enable: Boolean) {
+        if (parentVp2 != null) {
+            parentVp2!!.isUserInputEnabled = enable
+        }
     }
 
 }

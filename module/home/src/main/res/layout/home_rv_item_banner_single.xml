@@ -18,9 +18,7 @@
         <ImageView
             android:id="@+id/iv_banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/header_padding"
-            android:layout_marginStart="@dimen/header_padding"
+            android:layout_height="@dimen/home_single_banner_height"
             android:scaleType="fitXY"
             app:cover="@{banner.data.image}"
             app:onClickListener="@{(theView) -> viewModel.execAction(theView, banner.data.actionUrl)}" />

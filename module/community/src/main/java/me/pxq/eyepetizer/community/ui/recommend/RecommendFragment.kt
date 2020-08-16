@@ -41,7 +41,10 @@ class RecommendFragment : BaseFragment() {
             with(recyclerView) {
                 layoutManager = LinearLayoutManager(requireContext())
                 //设置分割线
-                addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(R.dimen.rv_divider_bottom).dp2px.toInt()))
+                addItemDecoration(MarginDecoration(top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
+                    .toInt(),
+                    bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
+                        .toInt()))
                 //设置adapter
                 adapter = RecommendAdapter(recommendViewModel).also {
                     subscribeUI(it)

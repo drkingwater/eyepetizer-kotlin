@@ -51,7 +51,14 @@ class DailyFragment : BaseFragment() {
         binding.recyclerView.run {
             layoutManager = LinearLayoutManager(requireContext())
             //设置分割线
-            addItemDecoration(MarginDecoration(bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom).dp2px.toInt()))
+            addItemDecoration(
+                MarginDecoration(
+                    top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
+                        .toInt(),
+                    bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
+                        .toInt()
+                )
+            )
             //设置adapter
             adapter = IndexRvAdapter(viewModel).also {
                 subscribeUi(it)
@@ -59,11 +66,12 @@ class DailyFragment : BaseFragment() {
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 private var onBottom = false
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom){
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
                         logi("到底了,刷新数据...")
                         viewModel.fetchNextPage()
                     }
                 }
+
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     val layoutManager =
                         recyclerView.layoutManager as LinearLayoutManager
@@ -119,7 +127,8 @@ class DailyFragment : BaseFragment() {
             navigateToVideo(it)
         })
     }
-    companion object{
+
+    companion object {
         @JvmStatic
         fun newInstance() = DailyFragment()
     }

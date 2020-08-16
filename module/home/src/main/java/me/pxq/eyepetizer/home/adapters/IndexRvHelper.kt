@@ -17,6 +17,7 @@ object IndexRvHelper {
     private const val VIEW_HOLDER_TYPE_INFO_CARD_INFO = 1 + VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW
     private const val VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD = 1 + VIEW_HOLDER_TYPE_INFO_CARD_INFO
     private const val VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG = 1 + VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD
+    // 单个图片
     private const val VIEW_HOLDER_TYPE_BANNER = 1 + VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG
     private const val VIEW_HOLDER_TYPE_SELECTION_CARD = 1 + VIEW_HOLDER_TYPE_BANNER
     private const val VIEW_HOLDER_TYPE_BRIEF_CARD_TAG = 1 + VIEW_HOLDER_TYPE_SELECTION_CARD
@@ -72,7 +73,7 @@ object IndexRvHelper {
         VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
         VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> me.pxq.common.R.layout.rv_item_video_small_card
         VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
-        VIEW_HOLDER_TYPE_BANNER -> me.pxq.common.R.layout.rv_item_banner
+        VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner_single
         VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard
         VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
         VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top

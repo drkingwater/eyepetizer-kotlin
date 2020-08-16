@@ -13,6 +13,8 @@ import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.R
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemHorScrollCardBinding
 import me.pxq.utils.extensions.dp2px
+import me.pxq.utils.logd
+import me.pxq.utils.ui.decoration.BannerDecoration
 import me.pxq.utils.ui.decoration.LeftDecoration
 
 /**
@@ -65,7 +67,12 @@ class RecommendAdapter(
                         adapter ?: kotlin.run {
                             setHasFixedSize(true)
                             // 设置边距
-                            addItemDecoration(LeftDecoration(context.resources.getDimension(me.pxq.common.R.dimen.hor_scroll_banner_divider_width).toInt()))
+                            addItemDecoration(
+                                LeftDecoration(
+                                    context.resources.getDimension(me.pxq.common.R.dimen.hor_scroll_banner_divider_width)
+                                        .toInt()
+                                )
+                            )
                             //
                             layoutManager =
                                 LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -82,15 +89,14 @@ class RecommendAdapter(
                     with(binding) {
                         with(rvBanner) {
                             adapter ?: kotlin.run {
-                                addItemDecoration(
-                                    LeftDecoration(
-                                        context.resources.getDimension(
-                                            me.pxq.common.R.dimen.hor_scroll_banner_divider_width
-                                        ).toInt()
-                                    )
-                                )
+//                                addItemDecoration(
+//                                    BannerDecoration(
+//                                        context.resources.getDimension(
+//                                            me.pxq.common.R.dimen.header_padding
+//                                        ).toInt()
+//                                    )
+//                                )
                                 adapter = IvBannerAdapter(actionVM)
-                                offscreenPageLimit = 3
                             }
                         }
                         (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList)

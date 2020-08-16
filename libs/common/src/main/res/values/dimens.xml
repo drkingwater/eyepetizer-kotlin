@@ -20,7 +20,7 @@
 
     <dimen name="home_title_action_magin_right">5dp</dimen>
     <!--  Index Rv Divider  -->
-    <dimen name="rv_divider_bottom">4dp</dimen>
+    <dimen name="rv_divider_bottom">15dp</dimen>
     <dimen name="detail_avatar_size">40dp</dimen>
     <dimen name="detail_action_like_size">22dp</dimen>
 

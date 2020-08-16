@@ -11,6 +11,8 @@
     <dimen name="home_tablayout_item_textsize">12dp</dimen>
     <dimen name="home_daily_label_size">48dp</dimen>
 
+    <!--  单个Banner图片   -->
+    <dimen name="home_single_banner_height">185dp</dimen>
 
     <dimen name="home_selection_margin">2dp</dimen>
     <dimen name="home_briefcard_icon_size">50dp</dimen>
@@ -21,7 +23,7 @@
     <dimen name="home_video_ad_height">185dp</dimen>
     <dimen name="home_video_ad_icon_size">40dp</dimen>
     <dimen name="home_content_margin_top">15dp</dimen>
-    <dimen name="home_special_category_item_size">107dp</dimen>
+    <dimen name="home_special_category_item_size">103dp</dimen>
     <dimen name="home_header_margin_top">10dp</dimen>
     <dimen name="home_ugs_nickname_max_width">100dp</dimen>
 

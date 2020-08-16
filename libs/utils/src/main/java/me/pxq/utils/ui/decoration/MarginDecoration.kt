@@ -18,7 +18,12 @@ class MarginDecoration(val left : Int= 0, val top : Int = 0, val right : Int = 0
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.set(left, top, right, bottom)
+        val position = parent.getChildAdapterPosition(view)
+        if (position == 0) {
+            outRect.set(left, top, right, bottom)
+        } else {
+            outRect.set(left, 0, right, bottom)
+        }
     }
 
 }
