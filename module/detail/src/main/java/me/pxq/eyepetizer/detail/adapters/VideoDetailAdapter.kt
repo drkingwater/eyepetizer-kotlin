@@ -160,7 +160,7 @@ class VideoDetailAdapter(
                                 MarginDecoration(
                                     bottom = context.resources.getDimension(
                                         R.dimen.rv_divider_bottom
-                                    ).dp2px.toInt()
+                                    ).toInt()
                                 )
                             )
 
@@ -194,7 +194,7 @@ class VideoDetailAdapter(
                                 MarginDecoration(
                                     bottom = context.resources.getDimension(
                                         R.dimen.rv_divider_bottom
-                                    ).dp2px.toInt()
+                                    ).toInt()
                                 )
                             )
                             layoutManager =
