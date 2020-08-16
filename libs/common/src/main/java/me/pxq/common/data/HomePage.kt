@@ -173,6 +173,7 @@ data class Header(
     val icon: String,
     val iconType: String,
     val id: Int,
+    val issuerName: String,
     val label: Any,
     val labelList: Any,
     val rightText: String,

@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import me.pxq.common.ApiService
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
@@ -20,6 +21,7 @@ import me.pxq.network.ApiResult
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.MarginDecoration
+import me.pxq.utils.ui.decoration.StaggeredDecoration
 
 /**
  * Description: 社区-推荐
@@ -39,12 +41,25 @@ class RecommendFragment : BaseFragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = recommendViewModel
             with(recyclerView) {
-                layoutManager = LinearLayoutManager(requireContext())
+//                layoutManager = LinearLayoutManager(requireContext())
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 //设置分割线
-                addItemDecoration(MarginDecoration(top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
-                    .toInt(),
-                    bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
-                        .toInt()))
+                addItemDecoration(
+                    MarginDecoration(
+                        top = context.resources.getDimension(R.dimen.first_item_margin_top)
+                            .toInt(),
+                        bottom = context.resources.getDimension(R.dimen.rv_divider_bottom)
+                            .toInt()
+                    )
+                )
+                addItemDecoration(
+                    StaggeredDecoration(
+                        context.resources.getDimension(R.dimen.header_padding).toInt(),
+                        context.resources.getDimension(R.dimen.header_padding).toInt(),
+                        context.resources.getDimension(R.dimen.hor_scroll_banner_divider_width)
+                            .toInt()
+                    )
+                )
                 //设置adapter
                 adapter = RecommendAdapter(recommendViewModel).also {
                     subscribeUI(it)
@@ -54,7 +69,7 @@ class RecommendFragment : BaseFragment() {
 //                }
             }
             // 设置swipe_layout边距
-            with(refreshLayout){
+            with(refreshLayout) {
                 val layoutParams = this.layoutParams as ConstraintLayout.LayoutParams
                 layoutParams.leftMargin = 0
                 layoutParams.rightMargin = 0

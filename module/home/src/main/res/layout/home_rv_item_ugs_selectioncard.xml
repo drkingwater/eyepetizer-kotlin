@@ -83,10 +83,10 @@
 
 
         <ImageView
-            android:layout_width="@dimen/home_multi_pic_size"
-            android:layout_height="@dimen/home_multi_pic_size"
+            android:layout_width="@dimen/multi_pic_size"
+            android:layout_height="@dimen/multi_pic_size"
             android:scaleType="fitXY"
-            android:src="@drawable/home_icon_multi_pic"
+            android:src="@drawable/icon_multi_pic"
             app:layout_constraintRight_toRightOf="@id/iv_cover_left"
             app:layout_constraintTop_toTopOf="@id/iv_cover_left"
             app:multiPicTag="@{true}"
@@ -133,10 +133,10 @@
             tools:src="@color/loading" />
 
         <ImageView
-            android:layout_width="@dimen/home_multi_pic_size"
-            android:layout_height="@dimen/home_multi_pic_size"
+            android:layout_width="@dimen/multi_pic_size"
+            android:layout_height="@dimen/multi_pic_size"
             android:scaleType="fitXY"
-            android:src="@drawable/home_icon_multi_pic"
+            android:src="@drawable/icon_multi_pic"
             app:layout_constraintRight_toRightOf="@id/iv_cover_right"
             app:layout_constraintTop_toTopOf="@id/iv_cover_right"
             app:multiPicTag="@{true}"
@@ -185,10 +185,10 @@
             tools:src="@color/loading" />
 
         <ImageView
-            android:layout_width="@dimen/home_multi_pic_size"
-            android:layout_height="@dimen/home_multi_pic_size"
+            android:layout_width="@dimen/multi_pic_size"
+            android:layout_height="@dimen/multi_pic_size"
             android:scaleType="fitXY"
-            android:src="@drawable/home_icon_multi_pic"
+            android:src="@drawable/icon_multi_pic"
             app:layout_constraintRight_toRightOf="@id/iv_cover_bottom"
             app:layout_constraintTop_toTopOf="@id/iv_cover_bottom"
             app:multiPicTag="@{true}"

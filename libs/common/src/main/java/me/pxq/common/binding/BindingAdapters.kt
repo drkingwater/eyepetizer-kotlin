@@ -201,6 +201,15 @@ fun bindReplayDate(textView: TextView, createTime: Long) {
     textView.text = simpleDateFormat.format(Date(createTime))
 }
 
+@BindingAdapter("isMultiPic")
+fun bindIsMultiPic(imageView: ImageView, list: List<Any>?) {
+    imageView.visibility = when {
+        list.isNullOrEmpty() -> View.GONE
+        list.size > 1 -> View.VISIBLE
+        else -> View.GONE
+    }
+}
+
 
 //获取默认的圆角尺寸
 fun defaultRoundRadius() = 5f.dp2px

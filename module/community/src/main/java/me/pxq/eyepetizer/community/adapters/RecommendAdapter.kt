@@ -6,11 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import me.pxq.common.adapters.IvBannerAdapter
 import me.pxq.common.data.Item
 import me.pxq.common.databinding.RvItemHorScrollcardBinding
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.R
+import me.pxq.eyepetizer.community.databinding.CommunityRvItemColumnsCardBinding
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemHorScrollCardBinding
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
@@ -33,6 +35,7 @@ class RecommendAdapter(
         return when {
             item.type == "horizontalScrollCard" && item.data.dataType == "ItemCollection" -> 1
             item.type == "horizontalScrollCard" && item.data.dataType == "HorizontalScrollCard" -> 2
+            item.type == "communityColumnsCard" && item.data.dataType == "FollowCard" -> 3
             else -> 1
         }
     }
@@ -41,6 +44,7 @@ class RecommendAdapter(
         val layoutId = when (viewType) {
             1 -> R.layout.community_rv_item_hor_scroll_card
             2 -> me.pxq.common.R.layout.rv_item_hor_scrollcard
+            3 -> R.layout.community_rv_item_columns_card
             else -> me.pxq.common.R.layout.rv_item_hor_scrollcard
         }
         return RecommendHolder(
@@ -63,6 +67,9 @@ class RecommendAdapter(
         fun bind(item: Item) {
             when (binding) {
                 is CommunityRvItemHorScrollCardBinding -> {   // horizontalScrollCard - ItemCollection
+                    // 设置跨行
+                    (itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan =
+                        true
                     with(binding.rvHorScrollCard) {
                         adapter ?: kotlin.run {
                             setHasFixedSize(true)
@@ -86,6 +93,9 @@ class RecommendAdapter(
                     binding.executePendingBindings()
                 }
                 is RvItemHorScrollcardBinding -> {  //水平滚动banner horizontalScrollCard - HorizontalScrollCard
+                    // 设置跨行
+                    (itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan =
+                        true
                     with(binding) {
                         with(rvBanner) {
                             adapter ?: kotlin.run {
@@ -102,6 +112,10 @@ class RecommendAdapter(
                         (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList)
                         executePendingBindings()
                     }
+                }
+                is CommunityRvItemColumnsCardBinding -> {
+                    binding.column = item
+                    binding.executePendingBindings()
                 }
             }
         }

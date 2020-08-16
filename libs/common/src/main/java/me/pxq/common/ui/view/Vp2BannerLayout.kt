@@ -28,7 +28,7 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
 
     private var parentVp2: ViewPager2? = null
 
-    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
+    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop / 2
 
     private var startX = 0f
     private var startY = 0f
@@ -39,7 +39,7 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
             val start = System.currentTimeMillis()
             logd("find start ")
             viewPager2 = getChildAt(0) as ViewPager2
-            viewPager2.offscreenPageLimit = 4
+            viewPager2.offscreenPageLimit = 3
             viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageScrollStateChanged(state: Int) {
                     super.onPageScrollStateChanged(state)
@@ -87,18 +87,18 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
                 // 水平滑动
                 if (viewPager2.orientation == RecyclerView.HORIZONTAL && (distanceX > touchSlop && distanceX > distanceY)) {
                     // 判断当前vp2能否继续滑动
-                    val canScroll = canScroll(endX - startY < 0)
+                    val canScroll = canScroll(endX - startX < 0)
                     // 判断是否需要拦截事件
                     parent.requestDisallowInterceptTouchEvent(canScroll)
                     // 判断是否需要把滑动交给vp2 parent
                     setVp2ParentState(!canScroll)
                 } else {
                     // 竖直方向不处理
-                    parent.requestDisallowInterceptTouchEvent(true)
-                    setVp2ParentState(false)
+                    parent.requestDisallowInterceptTouchEvent(false)
                 }
 
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 // 状态复原
                 parent.requestDisallowInterceptTouchEvent(

@@ -4,11 +4,16 @@
     <dimen name="tab_layout_height">45dp</dimen>
     <dimen name="tab_item_padding">20dp</dimen>
     <dimen name="header_padding">15dp</dimen>
+
+    <dimen name="first_item_margin_top">10dp</dimen>
     <!--  TabLayout 指示器宽高  -->
     <dimen name="tab_layout_indicator_height">3dp</dimen>
     <dimen name="tab_layout_indicator_width">10dp</dimen>
     <!--  自定义Tab Item 文字大小  -->
     <dimen name="tablayout_item_textsize">12dp</dimen>
+
+    <!--  多图Tag  -->
+    <dimen name="multi_pic_size">35dp</dimen>
 
     <dimen name="text_size_normal">14dp</dimen>
     <dimen name="text_size_middle">13dp</dimen>
