@@ -20,10 +20,11 @@ class CommunityViewModel(private val repository: CommunityRepository) : BaseView
 
 
     // 下一页数据url
-    private var nextPage: String = ""
+    private var _nextPage: String = ""
 
     // 下一页的数据
-    val refreshData = MutableLiveData<ApiResult<HomePage>>()
+    private val _refreshData = MutableLiveData<ApiResult<HomePage>>()
+    val refreshData: LiveData<ApiResult<HomePage>> = _refreshData
 
     // 社区-推荐数据
     private val _recommendData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData()
@@ -34,10 +35,32 @@ class CommunityViewModel(private val repository: CommunityRepository) : BaseView
      * 获取社区-推荐数据
      */
     override fun fetchData() {
+        _nextPage = ""
         viewModelScope.launch(Dispatchers.IO) {
             _recommendData.postValue(repository.fetchCommunityRecommend().also {
-                logd(it)
+                if (it is ApiResult.Success) {
+                    _nextPage = it.data.nextPageUrl ?: ""
+                }
             })
+        }
+    }
+
+    /**
+     * 获取下一页
+     */
+    fun fetchNextPage() {
+        if (_nextPage.isNotEmpty()) {
+            val nextPage = _nextPage
+            _nextPage = ""
+            viewModelScope.launch(Dispatchers.IO) {
+                _refreshData.postValue(repository.fetchCommunityRecommend(nextPage).also {
+                    if (it is ApiResult.Success) {
+                        _nextPage = it.data.nextPageUrl ?: ""
+                    }
+                })
+            }
+        } else {
+            logd("没有下一页...")
         }
     }
 

@@ -29,16 +29,30 @@ val Float.dp2px
 /**
  * 图片加载扩展方法
  */
-fun ImageView.load(url: String, trans: Transformation<Bitmap>? = null, placeHolderId : Int = 0) {
-    if (trans == null){
+fun ImageView.load(
+    url: String,
+    trans: Transformation<Bitmap>? = null,
+    placeHolderId: Int = 0,
+    overrideWidth: Int = 0,
+    overrideHeight: Int = 0
+) {
+    if (trans == null) {
         Glide.with(this)
-            .load(url)
+            .load(url).apply {
+                if (overrideWidth > 0 && overrideHeight > 0) {
+                    override(overrideWidth, overrideHeight)
+                }
+            }
             .placeholder(placeHolderId)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
     } else {
         Glide.with(this)
-            .load(url)
+            .load(url).apply {
+                if (overrideWidth > 0 && overrideHeight > 0) {
+                    override(overrideWidth, overrideHeight)
+                }
+            }
             .placeholder(placeHolderId)
             .apply(
                 RequestOptions.bitmapTransform(trans)

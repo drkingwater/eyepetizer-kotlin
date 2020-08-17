@@ -20,7 +20,7 @@ data class HomePage(
     val adExist: Boolean,
     val count: Int,
     val itemList: MutableList<Item>,
-    val nextPageUrl: String,
+    val nextPageUrl: String?,
     val total: Int
 )
 
@@ -83,6 +83,7 @@ data class Data(
     val liked: Boolean,
     val likeCount: Int,
     val hot: Boolean,
+    val height: Int,
     val showParentReply: Boolean,
     val showConversationButton: Boolean,
     val medalIcon: Boolean,
@@ -127,8 +128,7 @@ data class Data(
     val urls: List<String>?,
     val user: User,
     val videoPosterBean: VideoPosterBean,
-    val waterMarks: Any,
-    val webAdTrack: Any,
+    val width : Int,
     val webUrl: WebUrl
 ) : Serializable
 

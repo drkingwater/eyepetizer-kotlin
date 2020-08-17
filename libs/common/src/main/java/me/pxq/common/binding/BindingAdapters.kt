@@ -88,14 +88,14 @@ fun bindFollowed(textView: TextView, follow: Follow?) {
 }
 
 /**
- * FollowCard 视频cover，圆角
+ * cover图片，圆角
  */
 @BindingAdapter("cover")
 fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
-//    Log.d("Cover", "bindCover: $url")
     imageView.load(url, RoundedCorners(defaultRoundRadius().toInt()))
 }
+
 
 /**
  * FollowCard 时间格式化

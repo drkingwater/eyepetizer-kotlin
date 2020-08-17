@@ -21,11 +21,13 @@ import me.pxq.utils.ui.decoration.LeftDecoration
 
 /**
  * Description: adapter for [me.pxq.eyepetizer.community.ui.recommend.RecommendFragment]
+ * [staggeredLayoutItemWidth]:瀑布流Item宽度（粗略计算）,用来计算瀑布流图片高度
  * Author : pxq
  * Date : 2020/8/15 4:31 PM
  */
 class RecommendAdapter(
     private val actionVM: BaseViewModel,
+    private val staggeredLayoutItemWidth: Int,
     val items: MutableList<Item> = mutableListOf()
 ) : RecyclerView.Adapter<RecommendAdapter.RecommendHolder>() {
 
@@ -114,10 +116,29 @@ class RecommendAdapter(
                     }
                 }
                 is CommunityRvItemColumnsCardBinding -> {
+                    // 重写ImageView高度
+                    binding.ivCover.run {
+                        layoutParams.height = calImageViewHeight(
+                            item.data.content.data.width,
+                            item.data.content.data.height
+                        )
+                    }
                     binding.column = item
                     binding.executePendingBindings()
                 }
             }
         }
     }
+
+    /**
+     * 根据图片尺寸计算ImageView高度
+     * [imageWidth]:图片宽度
+     * [imageHeight]:图片高度
+     */
+    private fun calImageViewHeight(imageWidth: Int, imageHeight: Int) =
+        if (imageHeight > 0 && imageWidth > 0) {
+            staggeredLayoutItemWidth * imageHeight / imageWidth
+        } else {
+            staggeredLayoutItemWidth
+        }
 }

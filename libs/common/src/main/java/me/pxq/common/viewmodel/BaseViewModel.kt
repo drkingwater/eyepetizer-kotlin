@@ -25,7 +25,7 @@ abstract class BaseViewModel : ViewModel() {
      * 网络错误
      * 点击重试
      */
-    open fun retryOnError(){
+    open fun retryOnError() {
         fetchData()
     }
 

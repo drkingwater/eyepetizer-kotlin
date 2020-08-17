@@ -24,13 +24,12 @@ class StaggeredDecoration(val left: Int = 0, val right: Int = 0, var margin : In
         val position = parent.getChildAdapterPosition(view)
         if (layoutParams is StaggeredGridLayoutManager.LayoutParams) {
             val index = layoutParams.spanIndex
-            logd("index $index")
             when {
-                position > 1 && index % 2 == 0 -> {  // 左边的
-                    outRect.set(left, 0, margin, 0)
+                position > 1 && index % 2 == 0 -> {  // 左边item边距
+                    outRect.set(left, 0, margin / 2, 0)
                 }
-                position > 1 && index % 2 == 1 -> {
-                    outRect.set(0, 0, right, 0)
+                position > 1 && index % 2 == 1 -> {  // 右边item边距
+                    outRect.set(margin / 2, 0, right, 0)
                 }
             }
         }

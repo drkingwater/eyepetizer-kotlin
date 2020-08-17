@@ -30,7 +30,16 @@ import me.pxq.utils.ui.decoration.StaggeredDecoration
  */
 class RecommendFragment : BaseFragment() {
 
+    // 推荐vm
     private val recommendViewModel by activityViewModels<CommunityViewModel> { CommunityViewModelFactory() }
+
+    // 计算瀑布流图片宽度:(屏幕宽度-item左右边距-中间边距) / 2
+    private val staggeredLayoutItemWidth by lazy {
+        ((requireContext().resources.displayMetrics.widthPixels - 2 * requireContext().resources.getDimension(
+            R.dimen.header_padding
+        ) - requireContext().resources.getDimension(R.dimen.hor_scroll_banner_divider_width)
+            .toInt()) / 2).toInt()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,12 +70,12 @@ class RecommendFragment : BaseFragment() {
                     )
                 )
                 //设置adapter
-                adapter = RecommendAdapter(recommendViewModel).also {
+                adapter = RecommendAdapter(recommendViewModel, staggeredLayoutItemWidth).also {
                     subscribeUI(it)
                 }
-//                setOnBottomListener {
-//
-//                }
+                setOnBottomListener {
+                    recommendViewModel.fetchNextPage()
+                }
             }
             // 设置swipe_layout边距
             with(refreshLayout) {
@@ -96,6 +105,15 @@ class RecommendFragment : BaseFragment() {
                     adapter.items.clear()
                     adapter.items.addAll(it.data.itemList)
                     adapter.notifyDataSetChanged()
+                }
+            }
+        })
+        recommendViewModel.refreshData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ApiResult.Success -> {
+                    val index = adapter.items.size
+                    adapter.items.addAll(it.data.itemList)
+                    adapter.notifyItemRangeInserted(index, adapter.items.size)
                 }
             }
         })
