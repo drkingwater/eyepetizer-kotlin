@@ -1,23 +1,24 @@
 package me.pxq.common.ui.view
 
 import android.content.Context
-import android.os.Build
-import android.os.Looper
 import android.util.AttributeSet
-import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.FrameLayout
-import androidx.annotation.RequiresApi
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.*
+import me.pxq.common.R
 import me.pxq.utils.logd
 import kotlin.math.abs
 
 /**
- * Description: 处理vp2嵌套vp2水平滑动冲突，必须要包含vp2子view
+ * Description: Vp2实现的Banner，处理嵌套vp2时水平滑动冲突
+ * <p>
+ * 1、只能包含vp2子view
+ * 2、可设置Banner Item显示时的左右间距和Item之间的间隔
+ * </p>
  * Author : pxq
  * Date : 2020/8/15 11:53 PM
  */
@@ -25,21 +26,37 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
     FrameLayout(context, attributeSet) {
 
     private lateinit var viewPager2: ViewPager2
+    private var init = false
 
+    // 嵌套的vp2
     private var parentVp2: ViewPager2? = null
 
+    // 滑动最小距离
     private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop / 2
 
+    // 处理滑动冲突，记录屏幕按下位置
     private var startX = 0f
     private var startY = 0f
 
+    // 自定义属性
+    private var bannerMarginStart = 0
+    private var bannerMarginEnd = 0
+    private var pageMargin = 0
+
     init {
-        // 找到vp2 parent
-        postDelayed({
+        // 获取自定义属性值
+        initAttr(attributeSet)
+
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (!init) {
+            logd("onAttachedToWindow")
             val start = System.currentTimeMillis()
             logd("find start ")
             viewPager2 = getChildAt(0) as ViewPager2
-            viewPager2.offscreenPageLimit = 3
+            viewPager2.offscreenPageLimit = 1
             viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageScrollStateChanged(state: Int) {
                     super.onPageScrollStateChanged(state)
@@ -48,16 +65,68 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
                     }
                 }
             })
-            findViewPager2()
+            // 设置Banner边距
+            setRvPadding()
+            // 寻找嵌套的父vp2
+            findVp2Parent()
             logd("find end ${System.currentTimeMillis() - start}ms")
-        }, 100) // 延迟一点时间，确保能找到vp2 parent
+            // 找到vp2 parent
+            postDelayed({
 
+            }, 100) // 延迟一点时间，确保能找到vp2 parent
+            init = true
+        }
+
+
+    }
+
+    /**
+     * 获取自定义属性的值
+     */
+    private fun initAttr(attributeSet: AttributeSet?) {
+        context.obtainStyledAttributes(attributeSet, R.styleable.Vp2BannerLayout).run {
+            if (hasValue(R.styleable.Vp2BannerLayout_bannerMarginStart)) {
+                bannerMarginStart =
+                    getDimension(R.styleable.Vp2BannerLayout_bannerMarginStart, 0f).toInt()
+            }
+            if (hasValue(R.styleable.Vp2BannerLayout_bannerMarginEnd)) {
+                bannerMarginEnd =
+                    getDimension(R.styleable.Vp2BannerLayout_bannerMarginEnd, 0f).toInt()
+            }
+            if (hasValue(R.styleable.Vp2BannerLayout_pageMargin)) {
+                pageMargin = getDimension(R.styleable.Vp2BannerLayout_pageMargin, 0f).toInt()
+            }
+
+            recycle()
+        }
+    }
+
+    /**
+     * 设置banner间距
+     */
+    private fun setRvPadding() {
+        // 设置item左右边距
+        logd("$bannerMarginStart $bannerMarginEnd $pageMargin")
+        with((viewPager2.getChildAt(0) as RecyclerView)) {
+            setPadding(
+                bannerMarginStart,
+                0,
+                bannerMarginEnd, 0
+            )
+            clipToPadding = false
+        }
+        // 设置item间距
+        if (pageMargin > 0) {
+            viewPager2.setPageTransformer(
+                MarginPageTransformer(pageMargin)
+            )
+        }
     }
 
     /**
      * 找到嵌套的父vp2
      */
-    private fun findViewPager2() {
+    private fun findVp2Parent() {
         var theParent = parent
         while (theParent != null) {
             if (theParent is ViewPager2) {
@@ -87,11 +156,11 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
                 // 水平滑动
                 if (viewPager2.orientation == RecyclerView.HORIZONTAL && (distanceX > touchSlop && distanceX > distanceY)) {
                     // 判断当前vp2能否继续滑动
-                    val canScroll = canScroll(endX - startX < 0)
+//                    val canScroll = canScroll(endX - startX < 0)
                     // 判断是否需要拦截事件
-                    parent.requestDisallowInterceptTouchEvent(canScroll)
+//                    parent.requestDisallowInterceptTouchEvent(canScroll)
                     // 判断是否需要把滑动交给vp2 parent
-                    setVp2ParentState(!canScroll)
+//                    setVp2ParentState(!canScroll)
                 } else {
                     // 竖直方向不处理
                     parent.requestDisallowInterceptTouchEvent(false)
@@ -101,9 +170,7 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
 
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 // 状态复原
-                parent.requestDisallowInterceptTouchEvent(
-                    false
-                )
+                parent.requestDisallowInterceptTouchEvent(false)
                 setVp2ParentState(true)
             }
         }
@@ -121,7 +188,6 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
         return with((parentVp2!!)) {
             val current = currentItem
             val total = adapter?.itemCount ?: 0
-            logd("$directionLeft $current $total")
             when {
                 // 往左滑，且划到最后一个
                 directionLeft && current == total - 1 -> false

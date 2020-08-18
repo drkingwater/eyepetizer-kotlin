@@ -4,6 +4,7 @@
     <dimen name="tab_layout_height">45dp</dimen>
     <dimen name="tab_item_padding">20dp</dimen>
     <dimen name="header_padding">15dp</dimen>
+    <dimen name="header_padding_half">5dp</dimen>
 
     <dimen name="first_item_margin_top">10dp</dimen>
     <!--  TabLayout 指示器宽高  -->
@@ -31,5 +32,5 @@
 
     <!--  banner  -->
     <dimen name="hor_scroll_banner_height">185dp</dimen>
-    <dimen name="hor_scroll_banner_divider_width">7dp</dimen>
+    <dimen name="hor_scroll_banner_divider_width">6dp</dimen>
 </resources>

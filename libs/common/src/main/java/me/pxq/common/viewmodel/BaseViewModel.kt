@@ -1,6 +1,7 @@
 package me.pxq.common.viewmodel
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import me.pxq.common.data.Item
@@ -15,6 +16,8 @@ abstract class BaseViewModel : ViewModel() {
 
     val videoDetail = MutableLiveData<Item>()
 
+    protected val _onRefreshing = MutableLiveData<Boolean>()
+    val onRefreshing : LiveData<Boolean> = _onRefreshing
 
     /**
      * 首次进入获取数据

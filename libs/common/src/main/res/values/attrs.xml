@@ -6,7 +6,16 @@
     </declare-styleable>
 
     <declare-styleable name="ForegroundImageView">
-        <attr name="foreColor" format="color"/>
+        <attr name="foreColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="Vp2BannerLayout">
+        <!--    Banner Item左边距    -->
+        <attr name="bannerMarginStart" format="dimension" />
+        <!--    Banner Item右边距    -->
+        <attr name="bannerMarginEnd" format="dimension" />
+        <!--    Banner Item间隔    -->
+        <attr name="pageMargin" format="dimension" />
     </declare-styleable>
 
 </resources>

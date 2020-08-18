@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.viewpager2.widget.MarginPageTransformer
 import me.pxq.common.adapters.IvBannerAdapter
 import me.pxq.common.data.Item
 import me.pxq.common.databinding.RvItemHorScrollcardBinding
@@ -14,9 +15,6 @@ import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.R
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemColumnsCardBinding
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemHorScrollCardBinding
-import me.pxq.utils.extensions.dp2px
-import me.pxq.utils.logd
-import me.pxq.utils.ui.decoration.BannerDecoration
 import me.pxq.utils.ui.decoration.LeftDecoration
 
 /**
@@ -101,17 +99,13 @@ class RecommendAdapter(
                     with(binding) {
                         with(rvBanner) {
                             adapter ?: kotlin.run {
-//                                addItemDecoration(
-//                                    BannerDecoration(
-//                                        context.resources.getDimension(
-//                                            me.pxq.common.R.dimen.header_padding
-//                                        ).toInt()
-//                                    )
-//                                )
                                 adapter = IvBannerAdapter(actionVM)
                             }
+                            offscreenPageLimit = 1
                         }
-                        (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList)
+                        (rvBanner.adapter as IvBannerAdapter).submitList(item.data.itemList){
+                            rvBanner.setCurrentItem(0, false)
+                        }
                         executePendingBindings()
                     }
                 }

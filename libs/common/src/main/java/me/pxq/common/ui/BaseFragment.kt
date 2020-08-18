@@ -17,7 +17,7 @@ import me.pxq.utils.logd
  */
 abstract class BaseFragment : Fragment() {
 
-    val DETAIL_FRAGMENT_TAG = "detail_fragment_tag"
+    private val DETAIL_FRAGMENT_TAG = "detail_fragment_tag"
 
     /**
      * 跳转至详情页

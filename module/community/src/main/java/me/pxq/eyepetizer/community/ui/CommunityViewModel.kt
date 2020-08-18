@@ -18,7 +18,6 @@ import me.pxq.utils.logd
  */
 class CommunityViewModel(private val repository: CommunityRepository) : BaseViewModel() {
 
-
     // 下一页数据url
     private var _nextPage: String = ""
 
@@ -37,11 +36,13 @@ class CommunityViewModel(private val repository: CommunityRepository) : BaseView
     override fun fetchData() {
         _nextPage = ""
         viewModelScope.launch(Dispatchers.IO) {
+            _onRefreshing.postValue(true)
             _recommendData.postValue(repository.fetchCommunityRecommend().also {
                 if (it is ApiResult.Success) {
                     _nextPage = it.data.nextPageUrl ?: ""
                 }
             })
+            _onRefreshing.postValue(false)
         }
     }
 

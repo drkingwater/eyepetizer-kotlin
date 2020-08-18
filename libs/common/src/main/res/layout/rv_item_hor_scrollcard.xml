@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
 
     <me.pxq.common.ui.view.Vp2BannerLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:bannerMarginEnd="@dimen/header_padding"
+        app:bannerMarginStart="@dimen/header_padding"
+        app:pageMargin="@dimen/header_padding_half">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/rv_banner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/hor_scroll_banner_height" />
+
     </me.pxq.common.ui.view.Vp2BannerLayout>
 
 

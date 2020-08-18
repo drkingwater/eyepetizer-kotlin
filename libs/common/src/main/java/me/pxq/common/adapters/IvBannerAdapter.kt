@@ -17,14 +17,16 @@ import kotlin.math.acos
  * Author : pxq
  * Date : 2020/8/3 8:28 PM
  */
-class IvBannerAdapter(val actionMV : BaseViewModel) : ListAdapter<Item, IvBannerAdapter.IvBannerHolder>(TitleDiffCallBack()) {
+class IvBannerAdapter(val actionMV: BaseViewModel) :
+    ListAdapter<Item, IvBannerAdapter.IvBannerHolder>(TitleDiffCallBack()) {
 
 
     /**
      *  Image Banner holder
      */
-    inner class IvBannerHolder(private val binding: RvItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item){
+    inner class IvBannerHolder(private val binding: RvItemBannerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Item) {
             binding.apply {
                 banner = item
                 viewModel = actionMV
@@ -34,7 +36,13 @@ class IvBannerAdapter(val actionMV : BaseViewModel) : ListAdapter<Item, IvBanner
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IvBannerHolder {
-        return IvBannerHolder(RvItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return IvBannerHolder(
+            RvItemBannerBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: IvBannerHolder, position: Int) {
@@ -43,11 +51,11 @@ class IvBannerAdapter(val actionMV : BaseViewModel) : ListAdapter<Item, IvBanner
 
     internal class TitleDiffCallBack : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem == newItem
+            return oldItem.data.image == newItem.data.image
         }
 
         override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem.data.title == newItem.data.title
+            return oldItem.data.image == newItem.data.image
         }
 
     }
