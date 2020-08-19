@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.main.ui.view
+package me.pxq.common.ui.view
 
 import android.content.Context
 import android.graphics.drawable.Drawable

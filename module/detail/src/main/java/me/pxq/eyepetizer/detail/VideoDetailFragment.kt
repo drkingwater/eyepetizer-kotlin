@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -73,7 +74,7 @@ class VideoDetailFragment : Fragment() {
 
     private fun observe() {
         // 视频信息刷新
-        videoDetailViewModel.videoDetail.observe(this) {
+        videoDetailViewModel.videoDetail.observe(viewLifecycleOwner, Observer {
 
             // 播放视频
             videoPlayer?.run {
@@ -116,9 +117,9 @@ class VideoDetailFragment : Fragment() {
 
             // 视频信息更新,获取相关视频
             videoDetailViewModel.fetchVideoRelated()
-        }
+        })
         // 相关视频
-        videoDetailViewModel.videoRelated.observe(this) {
+        videoDetailViewModel.videoRelated.observe(viewLifecycleOwner, Observer {
 
             when (it) {
                 is ApiResult.Success -> {
@@ -135,16 +136,16 @@ class VideoDetailFragment : Fragment() {
                     loge(it.exception)
                 }
             }
-        }
+        })
         // 查看更多视频
-        videoDetailViewModel.moreRelatedVideos.observe(this) {
+        videoDetailViewModel.moreRelatedVideos.observe(viewLifecycleOwner, Observer {
             videoDetailAdapter.onMoreRelatedVideosLoaded(it)
-        }
-        videoDetailViewModel.isLoadMoreVisible.observe(this) {
+        })
+        videoDetailViewModel.isLoadMoreVisible.observe(viewLifecycleOwner, Observer {
             videoDetailAdapter.setLoadMoreRelatedVisible(it)
-        }
+        })
         // 评论
-        videoDetailViewModel.replies.observe(this) {
+        videoDetailViewModel.replies.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ApiResult.Success -> {
                     with(videoDetailAdapter) {
@@ -162,9 +163,9 @@ class VideoDetailFragment : Fragment() {
                     loge(it.exception)
                 }
             }
-        }
+        })
         // 更多评论
-        videoDetailViewModel.moreReplies.observe(this) {
+        videoDetailViewModel.moreReplies.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ApiResult.Success -> {
                     videoDetailAdapter.onMoreRepliesLoaded(it.data.itemList)
@@ -173,7 +174,7 @@ class VideoDetailFragment : Fragment() {
                     loge(it.exception)
                 }
             }
-        }
+        })
 
     }
 

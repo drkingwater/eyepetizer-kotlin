@@ -31,6 +31,7 @@ class DiscoveryViewModel(private val repository: HomeRepository) : BaseViewModel
      * 获取首页-发现数据
      */
     override fun fetchData() {
+        _onRefreshing.value = true
         fetchDiscoveryData(true)
     }
 
@@ -59,6 +60,7 @@ class DiscoveryViewModel(private val repository: HomeRepository) : BaseViewModel
                 //更新数据
                 if (url.isEmpty()) {
                     discoveryData.postValue(it)
+                    _onRefreshing.postValue(false)
                 } else {
                     refreshData.postValue(it)
                 }

@@ -2,7 +2,9 @@ package me.pxq.eyepetizer
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
+import leakcanary.LeakCanary
 import me.pxq.utils.DeviceUtil
+import shark.Leak
 
 /**
  * Description:
@@ -20,5 +22,4 @@ class EyepetizerApp : Application() {
         //工具类需要用到context
         DeviceUtil.application = this
     }
-
 }

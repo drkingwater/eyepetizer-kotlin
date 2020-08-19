@@ -2,7 +2,14 @@
     package="me.pxq.eyepetizer.main">
 
     <application>
-        <activity android:name=".ui.MainActivity">
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/Activity.SlideRightIn">
+
+        </activity>
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

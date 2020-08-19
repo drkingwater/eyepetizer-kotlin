@@ -2,6 +2,7 @@ package me.pxq.eyepetizer.home.ui.recommend
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.pxq.common.data.HomePage
 import me.pxq.eyepetizer.home.repository.HomeRepository
@@ -30,6 +31,7 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
      * 获取首页-推荐数据
      */
     override fun fetchData() {
+        _onRefreshing.value = true
         fetchRecommendData(true)
     }
 
@@ -45,7 +47,7 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
      * 请求数据
      */
     private fun fetchRecommendData(isFirst : Boolean, url: String = "") {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             if (!isFirst && url.isEmpty()){
                 loge("没有数据了...")
                 return@launch
@@ -58,9 +60,10 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
             }.let {
                 //更新数据
                 if (url.isEmpty()) {
-                    homeData.value = it
+                    homeData.postValue(it)
+                    _onRefreshing.postValue(false)
                 } else {
-                    refreshData.value = it
+                    refreshData.postValue(it)
                 }
             }
         }

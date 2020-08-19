@@ -2,6 +2,7 @@ package me.pxq.eyepetizer.home.ui.daily
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.pxq.common.data.HomePage
 import me.pxq.eyepetizer.home.repository.HomeRepository
@@ -30,6 +31,7 @@ class DailyViewModel(private val repository: HomeRepository) : BaseViewModel() {
      * 获取首页-日报数据
      */
     override fun fetchData() {
+        _onRefreshing.value = true
         fetchDailyData(true)
     }
 
@@ -45,7 +47,7 @@ class DailyViewModel(private val repository: HomeRepository) : BaseViewModel() {
      * 请求数据
      */
     private fun fetchDailyData(isFirst : Boolean, url: String = "") {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             if (!isFirst && url.isEmpty()){
                 loge("没有数据了...")
                 return@launch
@@ -58,9 +60,10 @@ class DailyViewModel(private val repository: HomeRepository) : BaseViewModel() {
             }.let {
                 //更新数据
                 if (url.isEmpty()) {
-                    dailyData.value = it
+                    dailyData.postValue(it)
+                    _onRefreshing.postValue(false)
                 } else {
-                    refreshData.value = it
+                    refreshData.postValue(it)
                 }
             }
         }

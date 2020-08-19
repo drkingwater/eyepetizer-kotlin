@@ -24,7 +24,7 @@ abstract class EyeDatabase : RoomDatabase() {
     companion object {
         lateinit var appContext: Context
         fun get(appContext: Context): EyeDatabase {
-            this.appContext = appContext
+            this.appContext = appContext.applicationContext
             return instance
         }
 

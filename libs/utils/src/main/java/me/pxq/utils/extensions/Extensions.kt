@@ -6,7 +6,6 @@ import android.util.TypedValue
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
-import com.bumptech.glide.load.resource.bitmap.DrawableTransformation
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 
@@ -32,32 +31,46 @@ val Float.dp2px
 fun ImageView.load(
     url: String,
     trans: Transformation<Bitmap>? = null,
-    placeHolderId: Int = 0,
-    overrideWidth: Int = 0,
-    overrideHeight: Int = 0
+    placeHolderId: Int = 0
 ) {
     if (trans == null) {
         Glide.with(this)
-            .load(url).apply {
-                if (overrideWidth > 0 && overrideHeight > 0) {
-                    override(overrideWidth, overrideHeight)
-                }
-            }
+            .load(url)
             .placeholder(placeHolderId)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
     } else {
         Glide.with(this)
-            .load(url).apply {
-                if (overrideWidth > 0 && overrideHeight > 0) {
-                    override(overrideWidth, overrideHeight)
-                }
-            }
+            .load(url)
             .placeholder(placeHolderId)
             .apply(
                 RequestOptions.bitmapTransform(trans)
             )
             .into(this)
     }
+}
 
+/**
+ * 图片加载扩展方法
+ */
+fun ImageView.load(
+    resId: Int,
+    trans: Transformation<Bitmap>? = null,
+    placeHolderId: Int = 0,
+) {
+    if (trans == null) {
+        Glide.with(this)
+            .load(resId)
+            .placeholder(placeHolderId)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
+    } else {
+        Glide.with(this)
+            .load(resId)
+            .placeholder(placeHolderId)
+            .apply(
+                RequestOptions.bitmapTransform(trans)
+            )
+            .into(this)
+    }
 }

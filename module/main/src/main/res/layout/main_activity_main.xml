@@ -14,7 +14,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <me.pxq.eyepetizer.main.ui.view.EyeBottomNavView
+    <me.pxq.common.ui.view.EyeBottomNavView
         android:id="@+id/bottom_nav_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/main_bottom_nav_bar_height"

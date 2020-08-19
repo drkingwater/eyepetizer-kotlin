@@ -11,7 +11,6 @@ ext {
     //api级别公共依赖
     apiDepds = [
             //kotlin
-            kotlin_stdlib     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             core_ktx          : 'androidx.core:core-ktx:1.3.0',
             viewModelScope    : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01',
             lifecycleScope    : 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01',
@@ -43,6 +42,13 @@ ext {
             arouter_api       : 'com.alibaba:arouter-api:1.5.0',
             //图片加载
             glide             : 'com.github.bumptech.glide:glide:4.11.0'
+    ]
+
+    debugApiDepds = [
+            leakcanary : 'com.squareup.leakcanary:leakcanary-android:2.4'
+    ]
+    releaseApiDepds = [
+            leakcanary_no_op : 'com.squareup.leakcanary:leakcanary-android-no-op:2.4'
     ]
 
     apmDepds = [

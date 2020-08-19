@@ -10,6 +10,15 @@
         android:layout_height="match_parent"
         android:descendantFocusability="blocksDescendants">
 
+        <TextureView
+            android:id="@+id/video_texture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintLeft_toLeftOf="@id/iv_cover"
+            app:layout_constraintRight_toRightOf="@id/iv_cover"
+            app:layout_constraintTop_toTopOf="@id/iv_cover" />
+
         <ImageView
             android:id="@+id/iv_cover"
             android:layout_width="0dp"
@@ -19,15 +28,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextureView
-            android:id="@+id/video_texture"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-            app:layout_constraintLeft_toLeftOf="@id/iv_cover"
-            app:layout_constraintRight_toRightOf="@id/iv_cover"
-            app:layout_constraintTop_toTopOf="@id/iv_cover" />
 
         <me.pxq.common.ui.view.ForegroundImageView
             android:id="@+id/iv_bg"

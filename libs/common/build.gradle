@@ -43,27 +43,38 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //测试依赖
-    rootProject.ext.apiTestDepds.each { k, v ->
+    rootProject.ext.apiTestDepds.each { _, v ->
         testApi v
     }
-    rootProject.ext.apiAndroidTestDepds.each { k, v ->
+    rootProject.ext.apiAndroidTestDepds.each { _, v ->
         androidTestApi v
     }
 
     //库依赖
-    rootProject.ext.apiDepds.each { k, v ->
+    rootProject.ext.apiDepds.each { _, v ->
         api v
     }
 
     //库依赖
-    rootProject.ext.apmDepds.each { k, v ->
+    rootProject.ext.apmDepds.each { _, v ->
         api v
     }
+
+    //debugApi库依赖
+    rootProject.ext.debugApiDepds.each { _, v ->
+        debugApi v
+    }
+    //releaseApi库依赖
+    rootProject.ext.releaseApiDepds.each { _, v ->
+        releaseApi v
+    }
+
 
     //Room
     kapt rootProject.ext.kapt.room_compiler
 
     api project(':libs:utils')
     api project(':libs:network')
+
 
 }

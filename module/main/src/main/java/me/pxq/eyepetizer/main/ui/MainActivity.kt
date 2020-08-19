@@ -1,5 +1,7 @@
 package me.pxq.eyepetizer.main.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -7,10 +9,7 @@ import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.main.R
-import me.pxq.eyepetizer.main.ui.view.EyeBottomNavView
-import me.pxq.utils.SpUtil
-import me.pxq.utils.loge
-import me.pxq.utils.logi
+import me.pxq.common.ui.view.EyeBottomNavView
 
 /**
  * Description: 主页
@@ -132,6 +131,11 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val KEY_CURRENT_FRAGMENT_TAG = "key_current_tag"
         const val KEY_OLD_FRAGMENT_TAG = "key_old_tag"
+
+        @JvmStatic
+        fun start(context: Context){
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
     }
 
 

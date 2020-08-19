@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +24,7 @@ import me.pxq.utils.logd
 import me.pxq.utils.loge
 
 /**
- * Description:
+ * Description: 视频详情页
  * Author : pxq
  * Date : 2020/8/12 10:22 PM
  */
@@ -74,8 +75,13 @@ class VideoDetailActivity : AppCompatActivity() {
         // 视频信息刷新
         videoDetailViewModel.videoDetail.observe(this) {
 
+            // 加载视频cover
+            binding.ivCover.visibility = View.VISIBLE
+            binding.ivCover.load(it.data.cover.detail, placeHolderId = me.pxq.common.R.color.black)
+
             // 播放视频
             videoPlayer?.run {
+                playState.removeObservers(this@VideoDetailActivity)
                 release()
             }
             videoPlayer = PlayerPool.get(this).apply {
@@ -87,11 +93,14 @@ class VideoDetailActivity : AppCompatActivity() {
                 textureView = binding.videoTexture
                 // 准备播放
                 prepare(it.data.playUrl)
+
+                playState.observe(this@VideoDetailActivity, Observer {
+                    if (it == PlayerBase.READY){
+                        binding.ivCover.visibility = View.INVISIBLE
+                    }
+                })
+
             }
-
-
-            // 加载视频cover
-            binding.ivCover.load(it.data.cover.detail)
 
             // 加载背景图
             binding.ivBg.load(
