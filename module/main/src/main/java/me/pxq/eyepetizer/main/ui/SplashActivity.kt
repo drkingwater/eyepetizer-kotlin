@@ -1,7 +1,5 @@
 package me.pxq.eyepetizer.main.ui
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.graphics.Color
@@ -10,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
 import me.pxq.eyepetizer.main.R
@@ -29,16 +26,14 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        imageView = ImageView(this).apply {
-            scaleType = ImageView.ScaleType.FIT_XY
-        }
-        setContentView(imageView)
+        setContentView(R.layout.main_activity_splash)
+        imageView = findViewById(R.id.iv_bg)
         imageView.load(R.drawable.v4_0_version)
     }
 
     override fun onResume() {
         super.onResume()
-        startAnim(imageView)
+        startAnim()
         if (Build.VERSION.SDK_INT >= 21) {
             val decorView = window.decorView
             val option = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -58,9 +53,9 @@ class SplashActivity : AppCompatActivity() {
         animatorSet?.cancel()
     }
 
-    private fun startAnim(view: View) {
-        val scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.2f)
-        val scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f)
+    private fun startAnim() {
+        val scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 1.2f)
+        val scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 1.2f)
         animatorSet = AnimatorSet()
         with(animatorSet!!) {
             playTogether(scaleX, scaleY)

@@ -51,11 +51,13 @@ class IvBannerAdapter(val actionMV: BaseViewModel) :
 
     internal class TitleDiffCallBack : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem.data.image == newItem.data.image
+            // 判断是不是同一个类型viewType
+            return oldItem.type == newItem.type && oldItem.data.dataType == newItem.data.dataType
         }
 
         override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem.data.image == newItem.data.image
+            // 判断内容是否一样，根据id
+            return oldItem.data.id == newItem.data.id
         }
 
     }
