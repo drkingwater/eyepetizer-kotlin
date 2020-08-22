@@ -60,8 +60,10 @@ class ApiService {
             val response = chain.proceed(request)
             val t2 = System.currentTimeMillis()
             logi(
-                "Received response for \n{${response.request()
-                    .url()}}\nin ${(t2 - t1)} ms"
+                "Received response for \n{${
+                    response.request()
+                        .url()
+                }}\nin ${(t2 - t1)} ms"
             )
             return response
         }
@@ -72,10 +74,15 @@ class ApiService {
 
         // 首页-推荐第一页数据
         const val HOME_RECOMMEND_PAGE = "${BASE_URL}api/v5/index/tab/allRec?page=0"
+
         // 首页-日报第一页数据
         const val HOME_DAILY_PAGE = "${BASE_URL}api/v5/index/tab/feed"
+
         // 社区-推荐第一页数据
         const val COMMUNITY_RECOMMEND_PAGE = "${BASE_URL}api/v7/community/tab/rec"
+
+        // 社区-推荐第一页数据
+        const val COMMUNITY_FOLLOW_PAGE = "${BASE_URL}api/v6/community/tab/follow"
 
         private val httpClient = OkHttpClient.Builder()
             .addInterceptor(CommonParamsInterceptor())  //添加公共参数拦截器

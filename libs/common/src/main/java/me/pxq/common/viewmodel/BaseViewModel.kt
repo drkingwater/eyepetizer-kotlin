@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import me.pxq.common.data.Item
 import me.pxq.utils.logd
+import me.pxq.utils.loge
 
 /**
  * Description: viewModel基类，处理点击事件等
@@ -17,7 +18,7 @@ abstract class BaseViewModel : ViewModel() {
     val videoDetail = MutableLiveData<Item>()
 
     protected val _onRefreshing = MutableLiveData<Boolean>()
-    val onRefreshing : LiveData<Boolean> = _onRefreshing
+    val onRefreshing: LiveData<Boolean> = _onRefreshing
 
     /**
      * 首次进入获取数据
@@ -50,11 +51,15 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     /**
-     * 跳转至详情页
+     * 跳转至详情页，需要item.data.dataType == VideoBeanForClient
      */
     fun navigateToVideo(view: View, item: Item) {
-        logd("播放详情页：${item.data.type}")
-        videoDetail.value = item
+        if ("video" == item.type && "VideoBeanForClient" == item.data.dataType) {
+            logd("播放详情页：${item.data.type}")
+            videoDetail.value = item
+        } else {
+            loge(Exception("item类型不匹配：${item.type} - ${item.data.dataType}"))
+        }
     }
 
     /**

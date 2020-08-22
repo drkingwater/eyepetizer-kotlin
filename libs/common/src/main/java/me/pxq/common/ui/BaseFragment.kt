@@ -28,7 +28,6 @@ abstract class BaseFragment : Fragment() {
         // 针对activity
         startActivity(item)
         // 针对Fragment
-
     }
 
     private fun startActivity(item: Item) {

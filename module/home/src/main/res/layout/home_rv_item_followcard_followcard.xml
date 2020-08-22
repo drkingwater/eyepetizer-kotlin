@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -73,7 +74,8 @@
             app:iconType="@{daily.data.header.iconType}"
             app:iconUrl="@{daily.data.header.icon}"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/baseline_layout" />
+            app:layout_constraintTop_toBottomOf="@id/baseline_layout"
+            tools:src="@color/loading"/>
 
         <ImageView
             android:layout_width="10dp"
@@ -85,31 +87,35 @@
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@{daily.data.header.title, default = 怀孕了半辈子}"
+            android:maxLines="1"
+            android:text="@{daily.data.header.title}"
             android:textColor="@color/black25"
             android:textSize="@dimen/text_size_normal"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/baseline_layout"
-            app:typeface="FZLanD" />
+            app:typeface="FZLanD"
+            tools:text="@string/txt_test" />
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@{daily.data.header.description, default = 创意广告}"
-            android:textSize="11dp"
+            android:maxLines="1"
+            android:text="@{daily.data.header.description}"
+            android:textSize="@dimen/text_size_small"
             app:layout_constraintLeft_toRightOf="@id/iv_icon"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            app:typeface="FZLanL" />
+            app:typeface="FZLanL"
+            tools:text="@string/txt_test" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

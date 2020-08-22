@@ -1,5 +1,6 @@
 package me.pxq.eyepetizer.home.ui.daily
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -22,10 +23,12 @@ class DailyViewModel(private val repository: HomeRepository) : BaseViewModel() {
     private var nextPage: String = ""
 
     //下一页的数据
-    val refreshData = MutableLiveData<ApiResult<HomePage>>()
+    private val _refreshData = MutableLiveData<ApiResult<HomePage>>()
+    val refreshData : LiveData<ApiResult<HomePage>> = _refreshData
 
     //首页日报数据
-    val dailyData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData()
+    private  val _dailyData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData()
+    val dailyData: LiveData<ApiResult<HomePage>> = _dailyData
 
     /**
      * 获取首页-日报数据
@@ -46,9 +49,9 @@ class DailyViewModel(private val repository: HomeRepository) : BaseViewModel() {
     /**
      * 请求数据
      */
-    private fun fetchDailyData(isFirst : Boolean, url: String = "") {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (!isFirst && url.isEmpty()){
+    private fun fetchDailyData(isFirst: Boolean, url: String = "") {
+        viewModelScope.launch {
+            if (!isFirst && url.isEmpty()) {
                 loge("没有数据了...")
                 return@launch
             }
@@ -60,16 +63,14 @@ class DailyViewModel(private val repository: HomeRepository) : BaseViewModel() {
             }.let {
                 //更新数据
                 if (url.isEmpty()) {
-                    dailyData.postValue(it)
-                    _onRefreshing.postValue(false)
+                    _dailyData.value = it
                 } else {
-                    refreshData.postValue(it)
+                    _refreshData.value = it
                 }
+                _onRefreshing.value = false
             }
         }
     }
-
-
 
 
 }

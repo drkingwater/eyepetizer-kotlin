@@ -56,5 +56,11 @@ interface Api {
     @GET
     suspend fun fetchCommunityRecommend(@Url url: String): HomePage
 
+    /**
+     * 获取社区-关注数据
+     */
+    @GET
+    suspend fun fetchCommunityFollow(@Url url: String): HomePage
+
 
 }

@@ -1,6 +1,23 @@
 package me.pxq.eyepetizer.community.ui.follow
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import me.pxq.common.ApiService
+import me.pxq.common.R
+import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
+import me.pxq.eyepetizer.community.adapters.FollowAdapter
+import me.pxq.eyepetizer.community.adapters.RecommendAdapter
+import me.pxq.network.ApiResult
+import me.pxq.utils.ui.decoration.MarginDecoration
+import me.pxq.utils.ui.decoration.StaggeredDecoration
 
 /**
  * Description: 社区-关注
@@ -8,6 +25,84 @@ import me.pxq.common.ui.BaseFragment
  * Date : 2020/8/14 3:53 PM
  */
 class FollowFragment : BaseFragment() {
+
+    private val followViewModel by activityViewModels<FollowViewModel> { FollowViewModelFactory() }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return FragmentRvWithFreshBinding.inflate(inflater, container, false).run {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = followViewModel
+            with(recyclerView) {
+                layoutManager = LinearLayoutManager(requireContext())
+                //设置分割线
+                addItemDecoration(
+                    MarginDecoration(
+                        left = context.resources.getDimension(R.dimen.header_padding)
+                            .toInt(),
+                        top = context.resources.getDimension(R.dimen.first_item_margin_top)
+                            .toInt(),
+                        right = context.resources.getDimension(R.dimen.header_padding)
+                            .toInt(),
+                        bottom = context.resources.getDimension(R.dimen.rv_divider_bottom)
+                            .toInt()
+                    )
+                )
+                //设置adapter
+                adapter = FollowAdapter(followViewModel).also {
+                    subscribeUI(it)
+                }
+                setOnBottomListener {
+                    followViewModel.fetchNextPage()
+                }
+            }
+            // 设置swipe_layout边距
+            with(refreshLayout) {
+                val layoutParams = this.layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.leftMargin = 0
+                layoutParams.rightMargin = 0
+                this.layoutParams = layoutParams
+            }
+            root
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // 首次加载数据
+        followViewModel.fetchData()
+    }
+
+    /**
+     * 观察数据变化
+     */
+    private fun subscribeUI(adapter: FollowAdapter) {
+        followViewModel.followData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ApiResult.Success -> {
+                    adapter.items.clear()
+                    adapter.items.addAll(it.data.itemList)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        })
+        followViewModel.refreshData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ApiResult.Success -> {
+                    val index = adapter.items.size
+                    adapter.items.addAll(it.data.itemList)
+                    adapter.notifyItemRangeInserted(index, adapter.items.size)
+                }
+            }
+        })
+        // 跳转播放页
+        followViewModel.videoDetail.observe(viewLifecycleOwner, Observer { video ->
+            navigateToVideo(video)
+        })
+    }
 
 
     companion object {

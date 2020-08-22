@@ -1,6 +1,8 @@
 package me.pxq.network
 
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 /**
@@ -19,8 +21,10 @@ sealed class ApiResult<out T : Any> {
 }
 
 suspend fun <T : Any> request(call: suspend () -> T, errorMsg: String): ApiResult<T> =
-    try {
-        ApiResult.Success(call.invoke())
-    } catch (e: Exception) {
-        ApiResult.Error(Exception(errorMsg, e).also { e.printStackTrace() })
+    withContext(Dispatchers.IO) {
+        try {
+            ApiResult.Success(call.invoke())
+        } catch (e: Exception) {
+            ApiResult.Error(Exception(errorMsg, e).also { e.printStackTrace() })
+        }
     }

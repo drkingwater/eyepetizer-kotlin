@@ -1,8 +1,11 @@
 package me.pxq.eyepetizer.community.repository
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import me.pxq.common.Api
 import me.pxq.common.ApiService
 import me.pxq.network.request
+import me.pxq.utils.logd
 
 /**
  * Description: 社区-推荐栏数据仓库
@@ -17,6 +20,15 @@ class CommunityRepository(private val apiService: Api) {
     suspend fun fetchCommunityRecommend(url: String = ApiService.COMMUNITY_RECOMMEND_PAGE) =
         request({
             apiService.fetchCommunityRecommend(url)
+        }, "请求失败")
+
+    /**
+     * 获取社区-关注数据
+     */
+    suspend fun fetchCommunityFollow(url: String = ApiService.COMMUNITY_FOLLOW_PAGE) =
+        request({
+            logd(Thread.currentThread().name)
+            apiService.fetchCommunityFollow(url)
         }, "请求失败")
 
 }

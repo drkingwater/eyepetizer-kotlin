@@ -1,5 +1,6 @@
 package me.pxq.eyepetizer.home.ui.recommend
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -22,10 +23,12 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
     private var nextPage: String = ""
 
     //下一页的数据
-    val refreshData = MutableLiveData<ApiResult<HomePage>>()
+    private val _refreshData = MutableLiveData<ApiResult<HomePage>>()
+    val refreshData: LiveData<ApiResult<HomePage>> = _refreshData
 
     //首页推荐数据
-    val homeData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData()
+    private val _homeData: MutableLiveData<ApiResult<HomePage>> = MutableLiveData()
+    val homeData: LiveData<ApiResult<HomePage>> = _homeData
 
     /**
      * 获取首页-推荐数据
@@ -46,9 +49,9 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
     /**
      * 请求数据
      */
-    private fun fetchRecommendData(isFirst : Boolean, url: String = "") {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (!isFirst && url.isEmpty()){
+    private fun fetchRecommendData(isFirst: Boolean, url: String = "") {
+        viewModelScope.launch {
+            if (!isFirst && url.isEmpty()) {
                 loge("没有数据了...")
                 return@launch
             }
@@ -60,10 +63,10 @@ class RecommendViewModel(private val repository: HomeRepository) : BaseViewModel
             }.let {
                 //更新数据
                 if (url.isEmpty()) {
-                    homeData.postValue(it)
-                    _onRefreshing.postValue(false)
+                    _homeData.value = it
+                    _onRefreshing.value = false
                 } else {
-                    refreshData.postValue(it)
+                    _refreshData.value = it
                 }
             }
         }

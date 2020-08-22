@@ -66,27 +66,6 @@ class DiscoveryFragment : BaseFragment() {
             adapter = IndexRvAdapter(viewModel).also {
                 subscribeUi(it)
             }
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                private var onBottom = false
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
-                        logi("到底了,刷新数据...")
-                        viewModel.fetchNextPage()
-                    }
-                }
-
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    val layoutManager =
-                        recyclerView.layoutManager as LinearLayoutManager
-                    //屏幕中最后一个可见子项的 position
-                    val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-                    //当前屏幕所看到的子项个数
-                    val visibleItemCount = layoutManager.childCount
-                    //当前 RecyclerView 的所有子项个数
-                    val totalItemCount = layoutManager.itemCount
-                    onBottom = visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1
-                }
-            })
         }
         //请求数据
         viewModel.fetchData()

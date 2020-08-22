@@ -40,21 +40,20 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
     private val _isLoadMoreVisible = MutableLiveData<Boolean>()
     val isLoadMoreVisible: LiveData<Boolean> = _isLoadMoreVisible
 
+    // 下一页评论
+    private var nextRepliesUrl = ""
     // 评论数据
     private val _replies = MutableLiveData<ApiResult<HomePage>>()
+    val replies: LiveData<ApiResult<HomePage>> = _replies
 
     // 更多评论数据
     private val _moreReplies = MutableLiveData<ApiResult<HomePage>>()
-
-    // 下一页评论
-    private var nextRepliesUrl = ""
-    val replies: LiveData<ApiResult<HomePage>> = _replies
     val moreReplies: LiveData<ApiResult<HomePage>> = _moreReplies
 
     // 获取相关视频
     fun fetchVideoRelated() {
         videoDetail.value?.let {
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 _moreRelatedVideos.clear()
                 // 延迟一点时间，让动画执行完
                 if (onAnim) {
@@ -64,7 +63,7 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
                 val homePage = async {
                     repository.fetchVideoRelated(it.data.id).apply {
                         if (this is ApiResult.Success && data.itemList.isNotEmpty()) {
-                            // 去除无关数据 todo 把字符串明文改为常量
+                            // 去除无关数据 todo 把字符串改为常量
                             if (data.itemList[0].type != "videoSmallCard") {
                                 logd("remove index 0 ")
                                 data.itemList.removeAt(0)
@@ -81,10 +80,10 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
                                 // 去除掉额外的数据
                                 data.itemList.removeAll(_moreRelatedVideos)
                                 // 设置按钮可见
-                                _isLoadMoreVisible.postValue(true)
+                                _isLoadMoreVisible.value = true
                             } else {
                                 // 设置按钮不可见
-                                _isLoadMoreVisible.postValue(false)
+                                _isLoadMoreVisible.value = false
                             }
                         }
                     }
@@ -98,9 +97,9 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
                     }
                 }
                 // 通知推荐更新
-                _videoRelated.postValue(homePage.await())
+                _videoRelated.value = homePage.await()
                 // 通知评论更新
-                _replies.postValue(replies.await())
+                _replies.value = replies.await()
 
             }
         }
@@ -121,14 +120,14 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
      */
     fun fetchMoreVideoReplies() {
         if (nextRepliesUrl.isNotEmpty()) {
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 val nextUrl = nextRepliesUrl
                 nextRepliesUrl = ""
-                _moreReplies.postValue(repository.fetchMoreVideoReplies(nextUrl).also {
+                _moreReplies.value = repository.fetchMoreVideoReplies(nextUrl).also {
                     if (it is ApiResult.Success) {
                         nextRepliesUrl = it.data.nextPageUrl ?: ""
                     }
-                })
+                }
             }
         } else {
             loge("没有更多评论了...")
