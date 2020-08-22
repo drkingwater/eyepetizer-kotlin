@@ -57,9 +57,9 @@
 
         <me.pxq.common.ui.view.FontTextView
             android:id="@+id/tv_publish"
+            publishTime="@{follow.data.header.time}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16:10 发布:"
             android:textSize="@dimen/text_size_small"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
             app:layout_constraintLeft_toLeftOf="@id/tv_username"
@@ -129,11 +129,95 @@
             app:layout_constraintRight_toRightOf="@id/iv_cover"
             tools:text="123456" />
 
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_action_like_heart_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/iv_replay"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@{String.valueOf(follow.data.content.data.consumption.collectionCount)}"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_like"
+            app:layout_constraintLeft_toRightOf="@id/iv_like"
+            app:layout_constraintTop_toTopOf="@id/iv_like"
+            app:typeface="FZLanL"
+            tools:text="10" />
+
+        <ImageView
+            android:id="@+id/iv_replay"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_action_comment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_like"
+            app:layout_constraintRight_toLeftOf="@id/iv_collect"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@{String.valueOf(follow.data.content.data.consumption.replyCount)}"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_replay"
+            app:layout_constraintLeft_toRightOf="@id/iv_replay"
+            app:layout_constraintTop_toTopOf="@id/iv_replay"
+            app:typeface="FZLanL"
+            tools:text="10" />
+
+        <ImageView
+            android:id="@+id/iv_collect"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_action_collect_grey_without_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_replay"
+            app:layout_constraintRight_toLeftOf="@id/iv_share"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/collect"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_collect"
+            app:layout_constraintLeft_toRightOf="@id/iv_collect"
+            app:layout_constraintTop_toTopOf="@id/iv_collect"
+            app:typeface="FZLanL" />
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/card_more_action_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_collect"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1px"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"
+            android:background="@color/white50"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_cover" />

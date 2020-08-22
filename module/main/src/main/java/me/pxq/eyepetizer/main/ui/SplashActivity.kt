@@ -28,24 +28,24 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity_splash)
         imageView = findViewById(R.id.iv_bg)
-        imageView.load(R.drawable.v4_0_version)
+        imageView.load(me.pxq.common.R.drawable.author_account_bg)
     }
 
     override fun onResume() {
         super.onResume()
         startAnim()
-        if (Build.VERSION.SDK_INT >= 21) {
-            val decorView = window.decorView
-            val option = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-            decorView.systemUiVisibility = option
-            window.navigationBarColor = Color.TRANSPARENT
-            window.statusBarColor = Color.TRANSPARENT
-        }
+        // 全屏显示、导航栏透明
+        val decorView = window.decorView
+        val option = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+        decorView.systemUiVisibility = option
+        window.navigationBarColor = Color.TRANSPARENT
+        window.statusBarColor = Color.TRANSPARENT
         // 隐藏状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         supportActionBar?.hide()
+
     }
 
     override fun onDestroy() {
@@ -54,16 +54,18 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startAnim() {
-        val scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 1.2f)
-        val scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 1.2f)
+        val scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 1.1f)
+        val scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 1.1f)
         animatorSet = AnimatorSet()
         with(animatorSet!!) {
             playTogether(scaleX, scaleY)
             addListener(onEnd = {
+                // 手动释放背景图
+                window.decorView.background = null
                 MainActivity.start(this@SplashActivity)
                 finish()
             })
-            duration = 3000
+            duration = 2500
             start()
         }
     }

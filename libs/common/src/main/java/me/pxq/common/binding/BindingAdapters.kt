@@ -28,6 +28,7 @@ import java.util.*
  */
 
 internal val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.CHINA)
+internal val dateFormatPublish = SimpleDateFormat("HH:mm", Locale.CHINA)
 
 /**
  * 控制view显示与否
@@ -208,6 +209,18 @@ fun bindIsMultiPic(imageView: ImageView, list: List<Any>?) {
         list.size > 1 -> View.VISIBLE
         else -> View.GONE
     }
+}
+
+/**
+ * 社区-关注 发布TextView时间
+ */
+@BindingAdapter("publishTime")
+fun bindPublishTime(textView: TextView, time: Long) {
+    textView.text = String.format(
+        Locale.CHINA,
+        textView.context.getString(R.string.publish_with_time),
+        dateFormatPublish.format(Date(time))
+    )
 }
 
 

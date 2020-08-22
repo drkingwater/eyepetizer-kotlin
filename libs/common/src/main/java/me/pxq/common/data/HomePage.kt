@@ -76,8 +76,8 @@ data class Data(
     val ifShowNotificationIcon: Boolean,
     val itemList: MutableList<Item>,
     val image: String,
-    val label: Any,
-    val labelList: List<Any>,
+//    val label: String,
+//    val labelList: List<String>,
     val lastViewTime: Any,
     val library: String,
     val liked: Boolean,
@@ -88,20 +88,20 @@ data class Data(
     val showConversationButton: Boolean,
     val medalIcon: Boolean,
     val message: String,
-    val newestEndTime: Any,
+//    val newestEndTime: Any,
     val nickname: String,
     val playInfo: List<PlayInfo>,
     val playUrl: String,
     val played: Boolean,
-    val playlists: Any,
-    val promotion: Any,
+//    val playlists: Any,
+//    val promotion: Any,
     val provider: Provider,
     val reallyCollected: Boolean,
     val recallSource: String,
     val refreshUrl: String,
     val releaseTime: Long,
     val replyStatus: String,
-    val remark: Any,
+//    val remark: Any,
     val resourceType: String,
     val rightText: String,
     val searchWeight: Int,
@@ -112,14 +112,14 @@ data class Data(
     val src: Int,
     val startTime: Long,
     val subTitle: String,
-    val subtitles: List<Any>,
+//    val subtitles: List<String>,
     val switchStatus: Boolean,
     val tags: List<Tag>,
     val text: String,
-    val thumbPlayUrl: Any,
+    val thumbPlayUrl: String,
     val title: String,
     val titleList: List<String>,
-    val titlePgc: Any,
+    val titlePgc: String,
     val topicTitle: String,
     val type: String,
     val uid: Int,
@@ -129,7 +129,7 @@ data class Data(
     val user: User,
     val videoPosterBean: VideoPosterBean,
     val width : Int,
-    val webUrl: WebUrl
+//    val webUrl: WebUrl
 ) : Serializable
 
 data class Author(
@@ -158,10 +158,10 @@ data class Banner(
 ) : Serializable
 
 data class Consumption(
-    val collectionCount: Int,
-    val realCollectionCount: Int,
-    val replyCount: Int,
-    val shareCount: Int
+    val collectionCount: Int = 0,
+    val realCollectionCount: Int = 0,
+    val replyCount: Int = 0,
+    val shareCount: Int = 0
 ) : Serializable
 
 
@@ -291,7 +291,6 @@ data class User(
 
 data class Detail(
     val actionUrl: String,
-    val adTrack: List<AdTrack>,
     val adaptiveImageUrls: String,
     val adaptiveUrls: String,
     val canSkip: Boolean,
