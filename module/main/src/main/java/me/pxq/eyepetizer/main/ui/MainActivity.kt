@@ -18,7 +18,7 @@ import me.pxq.common.ui.view.EyeBottomNavView
  */
 class MainActivity : AppCompatActivity() {
 
-    private val fragmentTags = listOf("Home", "Community")
+    private val fragmentTags = listOf("Home", "Community", "Notification")
     private var currentFragmentTag = ""
     private var oldFragmentTag = ""
 
@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
      * 返回Fragment或者null，如果没有找到
      */
     private fun selectFragment(selectedId: Int): Fragment? = when (selectedId) {
+        // 首页
         R.id.bottom_nav_menu_item_home -> {
             currentFragmentTag = fragmentTags[0]
             var homeFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
@@ -106,6 +107,7 @@ class MainActivity : AppCompatActivity() {
             }
             homeFragment
         }
+        // 社区
         R.id.bottom_nav_menu_item_community -> {
             currentFragmentTag = fragmentTags[1]
             var communityFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
@@ -115,6 +117,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             communityFragment
+        }
+        // 通知
+        R.id.bottom_nav_menu_item_notification -> {
+            currentFragmentTag = fragmentTags[2]
+            var notificationFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
+            if (notificationFragment == null) {
+                ARouter.getInstance().build(RouterHub.MAIN_NOTIFICATION).navigation()?.run {
+                    notificationFragment = this as Fragment
+                }
+            }
+            notificationFragment
         }
 
         else -> null

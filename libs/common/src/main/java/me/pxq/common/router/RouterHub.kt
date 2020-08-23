@@ -12,6 +12,9 @@ object RouterHub {
     // 主页-社区
     const val MAIN_COMMUNITY = "/community/index"
 
+    // 主页-通知
+    const val MAIN_NOTIFICATION = "/notification/index"
+
     // 视频详情页
     const val DETAIL_VIDEO = "/detail/video"
 

@@ -1,10 +1,7 @@
-import java.text.SimpleDateFormat
-
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.alibaba.arouter'
 
 def build = rootProject.ext.build
 
@@ -13,16 +10,16 @@ android {
     buildToolsVersion build.buildToolsVersion
 
     defaultConfig {
-        applicationId "me.pxq.eyepetizer"
         minSdkVersion build.minSdkVersion
         targetSdkVersion build.targetSdkVersion
         versionCode 1
-        versionName "1.0.1.${releaseTime()}"
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
 
-        multiDexEnabled true
     }
+    resourcePrefix 'notification_'
 
     buildTypes {
         release {
@@ -43,29 +40,21 @@ android {
     dataBinding {
         enabled = true
     }
+
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation project(':libs:common')
 
-    // 主页
-    implementation project(':module:main')
-    // 首页
-    implementation project(':module:home')
-    // 社区
-    implementation project(':module:community')
-    // 详情
-    implementation project(':module:detail')
-    // 通知
-    implementation project(':module:notification')
+    //ARouter
+    kapt rootProject.ext.kapt.arouter_compiler
 
-
-}
-
-//版本号带上时间戳
-def static releaseTime() {
-    return new SimpleDateFormat("MMddHH").format(new Date())
 }
