@@ -35,4 +35,5 @@
     <!--  banner  -->
     <dimen name="hor_scroll_banner_height">185dp</dimen>
     <dimen name="hor_scroll_banner_divider_width">6dp</dimen>
+    <dimen name="btn_login_width">240dp</dimen>
 </resources>

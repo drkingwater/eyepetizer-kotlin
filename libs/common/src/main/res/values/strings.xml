@@ -27,4 +27,7 @@
     <string name="carefully_choice">精选</string>
     <string name="publish_with_time">%s 发布:</string>
     <string name="collect">收藏</string>
+    <string name="tip_dont_miss_msg">别错过重要的信息</string>
+    <string name="tip_login_for_more">登录后即可查看评论回复、点赞及关注等通知信息</string>
+    <string name="login">登录</string>
 </resources>

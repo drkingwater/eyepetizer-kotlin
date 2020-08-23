@@ -1,5 +1,10 @@
 package me.pxq.eyepetizer.notification.ui
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import me.pxq.common.R
 import me.pxq.common.ui.BaseFragment
 
 /**
@@ -9,6 +14,14 @@ import me.pxq.common.ui.BaseFragment
  */
 class InteractFragment : BaseFragment() {
 
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_no_account, container, false)
+    }
 
     companion object {
 
