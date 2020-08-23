@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.eyepetizer.home.databinding.HomeRvItemSpecialSquareGridItemBinding
 import me.pxq.common.viewmodel.BaseViewModel
 

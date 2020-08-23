@@ -7,6 +7,8 @@
     <dimen name="header_padding_half">5dp</dimen>
 
     <dimen name="first_item_margin_top">10dp</dimen>
+    <!--  通知-推送rv 第一个item距离顶部的高度  -->
+    <dimen name="first_item_margin_top_push">13dp</dimen>
     <!--  TabLayout 指示器宽高  -->
     <dimen name="tab_layout_indicator_height">3dp</dimen>
     <dimen name="tab_layout_indicator_width">10dp</dimen>

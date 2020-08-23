@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemRepliesItemBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemTextcardHeader4Binding
 

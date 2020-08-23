@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.data.Banner
+import me.pxq.common.model.Banner
 import me.pxq.eyepetizer.home.R
 import me.pxq.common.viewmodel.BaseViewModel
 

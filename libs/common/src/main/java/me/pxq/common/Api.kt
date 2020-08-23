@@ -1,7 +1,7 @@
 package me.pxq.common
 
-import me.pxq.common.data.HomePage
-import retrofit2.Call
+import me.pxq.common.model.HomePage
+import me.pxq.common.model.Messages
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
@@ -61,6 +61,12 @@ interface Api {
      */
     @GET
     suspend fun fetchCommunityFollow(@Url url: String): HomePage
+
+    /**
+     * 获取通知-推送数据
+     */
+    @GET
+    suspend fun fetchNotificationPush(@Url url: String): Messages
 
 
 }

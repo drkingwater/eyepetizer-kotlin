@@ -18,7 +18,7 @@ import me.pxq.common.R
  * Author : pxq
  * Date : 2020/8/23 4:39 PM
  */
-abstract class BaseMainFragment : Fragment() {
+abstract class BaseTabsFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout

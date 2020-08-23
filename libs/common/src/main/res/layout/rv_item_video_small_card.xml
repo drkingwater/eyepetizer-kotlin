@@ -12,7 +12,7 @@
 
         <variable
             name="video"
-            type="me.pxq.common.data.Item" />
+            type="me.pxq.common.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

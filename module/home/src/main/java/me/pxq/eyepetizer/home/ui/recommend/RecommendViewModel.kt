@@ -3,9 +3,8 @@ package me.pxq.eyepetizer.home.ui.recommend
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.pxq.common.data.HomePage
+import me.pxq.common.model.HomePage
 import me.pxq.eyepetizer.home.repository.HomeRepository
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.network.ApiResult

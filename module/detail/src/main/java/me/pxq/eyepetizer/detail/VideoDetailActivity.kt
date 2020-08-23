@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import me.pxq.common.ApiService
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
@@ -20,7 +20,6 @@ import me.pxq.network.ApiResult
 import me.pxq.player.PlayerPool
 import me.pxq.player.base.PlayerBase
 import me.pxq.utils.extensions.load
-import me.pxq.utils.logd
 import me.pxq.utils.loge
 
 /**

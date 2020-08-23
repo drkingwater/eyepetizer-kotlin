@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.ApiService
 import me.pxq.common.R
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository

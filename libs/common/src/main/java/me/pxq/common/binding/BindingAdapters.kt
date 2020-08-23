@@ -1,20 +1,15 @@
 package me.pxq.common.binding
 
-import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import me.pxq.common.R
-import me.pxq.common.data.Follow
-import me.pxq.common.data.Header
-import me.pxq.common.data.Item
+import me.pxq.common.model.Follow
+import me.pxq.common.model.Header
+import me.pxq.common.model.Item
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.extensions.load
 import me.pxq.utils.glide.RoundedCornersTransformation

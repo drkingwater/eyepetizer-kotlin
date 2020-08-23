@@ -10,7 +10,7 @@
 
         <variable
             name="column"
-            type="me.pxq.common.data.Item" />
+            type="me.pxq.common.model.Item" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

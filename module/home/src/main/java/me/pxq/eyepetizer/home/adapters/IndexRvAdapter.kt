@@ -2,15 +2,12 @@ package me.pxq.eyepetizer.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
 import me.pxq.common.R
 import me.pxq.common.adapters.IvBannerAdapter
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.common.databinding.RvItemBannerBinding
 import me.pxq.common.databinding.RvItemHorScrollcardBinding
 import me.pxq.common.databinding.RvItemVideoSmallCardBinding
@@ -20,7 +17,6 @@ import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
-import me.pxq.utils.ui.decoration.LeftDecoration
 
 /**
  * Description: [me.pxq.eyepetizer.home.ui.IndexFragment] 推荐栏 Rv Adapter

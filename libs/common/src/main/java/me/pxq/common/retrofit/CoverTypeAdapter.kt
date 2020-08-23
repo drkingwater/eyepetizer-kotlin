@@ -4,8 +4,7 @@ import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
-import me.pxq.common.data.Cover
-import me.pxq.utils.logd
+import me.pxq.common.model.Cover
 
 /**
  * Description: Gson Adapter for [Cover]；返回的json数据中key为cover的值有两种类型，需要自定义解析

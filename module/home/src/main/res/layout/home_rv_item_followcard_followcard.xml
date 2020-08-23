@@ -14,7 +14,7 @@
 
         <variable
             name="daily"
-            type="me.pxq.common.data.Item" />
+            type="me.pxq.common.model.Item" />
     </data>
 
 

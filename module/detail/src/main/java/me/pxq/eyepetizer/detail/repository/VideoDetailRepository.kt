@@ -1,8 +1,6 @@
 package me.pxq.eyepetizer.detail.repository
 
-import kotlinx.coroutines.delay
 import me.pxq.common.Api
-import me.pxq.common.data.HomePage
 import me.pxq.network.request
 import retrofit2.http.Query
 import retrofit2.http.Url

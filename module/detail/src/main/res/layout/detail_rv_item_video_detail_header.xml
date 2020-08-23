@@ -6,11 +6,11 @@
     <data>
 
         <!--        <import type="java.lang.String"/>-->
-        <import type="me.pxq.common.data.Header" />
+        <import type="me.pxq.common.model.Header" />
 
         <variable
             name="video"
-            type="me.pxq.common.data.Item" />
+            type="me.pxq.common.model.Item" />
 
     </data>
 

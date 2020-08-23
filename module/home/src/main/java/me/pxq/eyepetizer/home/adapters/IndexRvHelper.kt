@@ -1,6 +1,6 @@
 package me.pxq.eyepetizer.home.adapters
 
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.eyepetizer.home.R
 
 /**

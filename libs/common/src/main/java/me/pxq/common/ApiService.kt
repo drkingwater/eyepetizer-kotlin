@@ -84,6 +84,9 @@ class ApiService {
         // 社区-推荐第一页数据
         const val COMMUNITY_FOLLOW_PAGE = "${BASE_URL}api/v6/community/tab/follow"
 
+        // 通知-推送第一页数据
+        const val NOTIFICATION_PUSH_PAGE = "${BASE_URL}api/v3/messages"
+
         private val httpClient = OkHttpClient.Builder()
             .addInterceptor(CommonParamsInterceptor())  //添加公共参数拦截器
             .addInterceptor(LoggingInterceptor())  //添加网络请求日志拦截器

@@ -7,14 +7,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.R
-import me.pxq.common.binding.bindDuration
-import me.pxq.common.data.Item
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.common.model.Item
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemRepliesBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoDetailHeaderBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoRelatedBinding
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
-import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.MarginDecoration
 

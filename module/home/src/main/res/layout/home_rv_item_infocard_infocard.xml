@@ -6,7 +6,7 @@
     <data>
         <variable
             name="info"
-            type="me.pxq.common.data.Item" />
+            type="me.pxq.common.model.Item" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

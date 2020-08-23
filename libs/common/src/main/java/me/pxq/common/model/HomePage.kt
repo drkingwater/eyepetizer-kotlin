@@ -1,10 +1,8 @@
-package me.pxq.common.data
+package me.pxq.common.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import com.google.gson.annotations.JsonAdapter
-import me.pxq.common.db.converter.HomeItemConverter
 import me.pxq.common.retrofit.CoverTypeAdapter
 import java.io.Serializable
 

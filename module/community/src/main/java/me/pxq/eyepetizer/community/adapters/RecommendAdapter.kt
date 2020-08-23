@@ -7,9 +7,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.viewpager2.widget.MarginPageTransformer
 import me.pxq.common.adapters.IvBannerAdapter
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.common.databinding.RvItemHorScrollcardBinding
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.R

@@ -1,16 +1,13 @@
 package me.pxq.common.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.common.databinding.RvItemBannerBinding
 import me.pxq.common.viewmodel.BaseViewModel
-import kotlin.math.acos
 
 /**
  * Description: 水平滚动图片rv adapter

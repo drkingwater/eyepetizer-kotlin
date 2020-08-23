@@ -1,12 +1,11 @@
 package me.pxq.common.db
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import me.pxq.common.data.HomePage
+import me.pxq.common.model.HomePage
 import me.pxq.common.db.converter.HomeItemConverter
 
 /**

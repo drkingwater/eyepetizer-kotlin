@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import me.pxq.common.data.HomePage
+import me.pxq.common.model.HomePage
 
 /**
  * Description: 首页数据DAO类

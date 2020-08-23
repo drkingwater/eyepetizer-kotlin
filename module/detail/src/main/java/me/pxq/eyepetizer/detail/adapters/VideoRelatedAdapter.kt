@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.R
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.common.databinding.RvItemVideoSmallCardBinding
 import me.pxq.common.viewmodel.BaseViewModel
-import me.pxq.utils.logd
 
 /**
  * Description: 视频详情页-相关视频 adapter

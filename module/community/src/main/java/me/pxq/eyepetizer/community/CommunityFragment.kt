@@ -1,19 +1,8 @@
 package me.pxq.eyepetizer.community
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import me.pxq.common.R
 import me.pxq.common.router.RouterHub
-import me.pxq.common.ui.BaseFragment
-import me.pxq.common.ui.BaseMainFragment
+import me.pxq.common.ui.BaseTabsFragment
 import me.pxq.eyepetizer.community.adapters.ViewPagerAdapter
 
 /**
@@ -22,7 +11,7 @@ import me.pxq.eyepetizer.community.adapters.ViewPagerAdapter
  * Date : 2020/8/14 3:18 PM
  */
 @Route(path = RouterHub.MAIN_COMMUNITY)
-class CommunityFragment : BaseMainFragment() {
+class CommunityFragment : BaseTabsFragment() {
 
     private val tabs = listOf("推荐", "关注")
 

@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.utils.logd
 import me.pxq.utils.loge
 

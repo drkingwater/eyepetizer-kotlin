@@ -39,7 +39,7 @@ class RecommendFragment : BaseFragment() {
         return FragmentRvWithFreshBinding.inflate(inflater, container, false).run {
             binding = this
             viewModel = this@RecommendFragment.viewModel
-            lifecycleOwner = requireActivity()
+            lifecycleOwner = viewLifecycleOwner
             root
         }
     }

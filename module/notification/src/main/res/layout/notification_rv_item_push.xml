@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.pxq.common.viewmodel.BaseViewModel" />
+
+        <variable
+            name="message"
+            type="me.pxq.common.model.Message" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:onClickListener="@{(theView) -> viewModel.execAction(theView, message.actionUrl)}">
+
+        <ImageView
+            android:id="@+id/iv_app"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_app"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_goto"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_action_next_grey"
+            app:layout_constraintBottom_toBottomOf="@id/tv_time"
+            app:layout_constraintLeft_toRightOf="@id/tv_time"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_time" />
+
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{message.title}"
+            android:textColor="@color/black20"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/tv_time"
+            app:layout_constraintLeft_toRightOf="@id/iv_app"
+            app:layout_constraintRight_toLeftOf="@id/iv_goto"
+            app:layout_constraintTop_toTopOf="@id/iv_app"
+            app:typeface="FZLanD"
+            tools:text="@string/txt_test" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="一周前"
+            android:textColor="@color/black70"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toRightOf="@id/iv_app"
+            app:layout_constraintRight_toLeftOf="@id/iv_goto"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:typeface="FZLanL"
+            tools:text="一周前" />
+
+        <me.pxq.common.ui.view.FontTextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{message.content}"
+            android:textColor="@color/black35"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toLeftOf="@id/tv_title"
+            app:layout_constraintRight_toLeftOf="@id/iv_goto"
+            app:layout_constraintTop_toBottomOf="@id/tv_time"
+            app:typeface="FZLanL"
+            tools:text="@string/txt_test" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray"
+            app:layout_constraintLeft_toLeftOf="@id/tv_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

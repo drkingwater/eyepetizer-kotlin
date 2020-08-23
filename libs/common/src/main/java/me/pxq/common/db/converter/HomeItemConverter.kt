@@ -2,7 +2,7 @@ package me.pxq.common.db.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
-import me.pxq.common.data.Item
+import me.pxq.common.model.Item
 import me.pxq.utils.JsonUtil
 
 /**

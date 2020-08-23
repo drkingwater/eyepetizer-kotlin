@@ -3,11 +3,9 @@ package me.pxq.eyepetizer.community.ui.follow
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import me.pxq.common.data.HomePage
-import me.pxq.common.data.Item
+import me.pxq.common.model.HomePage
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.repository.CommunityRepository
 import me.pxq.network.ApiResult

@@ -77,13 +77,6 @@ class RecommendFragment : BaseFragment() {
                     recommendViewModel.fetchNextPage()
                 }
             }
-            // 设置swipe_layout边距
-            with(refreshLayout) {
-                val layoutParams = this.layoutParams as ConstraintLayout.LayoutParams
-                layoutParams.leftMargin = 0
-                layoutParams.rightMargin = 0
-                this.layoutParams = layoutParams
-            }
             root
         }
     }

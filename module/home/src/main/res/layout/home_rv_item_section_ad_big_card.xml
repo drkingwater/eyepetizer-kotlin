@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="me.pxq.common.data.Header" />
+        <import type="me.pxq.common.model.Header" />
 
         <variable
             name="viewModel"
@@ -11,7 +11,7 @@
 
         <variable
             name="sectionAd"
-            type="me.pxq.common.data.Item" />
+            type="me.pxq.common.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
