@@ -89,7 +89,7 @@ fun bindFollowed(textView: TextView, follow: Follow?) {
 @BindingAdapter("cover")
 fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
-    imageView.load(url, RoundedCorners(defaultRoundRadius().toInt()))
+    imageView.load(url, RoundedCorners(defaultRoundRadius().toInt()), placeHolderId = R.drawable.shape_bg_album_loading)
 }
 
 
@@ -176,7 +176,8 @@ fun bindSelectedCard(
                             view.load(
                                 this[index].data.url, RoundedCornersTransformation(
                                     defaultRoundRadius().toInt(), 0, type
-                                )
+                                ),
+                                placeHolderId = R.drawable.shape_bg_album_loading
                             )
                         }
                     }

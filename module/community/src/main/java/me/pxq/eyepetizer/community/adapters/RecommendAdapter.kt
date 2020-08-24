@@ -80,8 +80,8 @@ class RecommendAdapter(
                                 )
                             )
                             //
-                            layoutManager =
-                                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+//                            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
                             adapter = HorizontalScrollCardAdapter(actionVM)
                         }

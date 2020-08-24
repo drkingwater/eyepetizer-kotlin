@@ -171,7 +171,7 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemBannerSingleBinding -> {   // 当个图片
+                is HomeRvItemBannerSingleBinding -> {   // 单个图片
                     with(binding) {
                         banner = item
                         viewModel = actionVM

@@ -2,6 +2,7 @@ package me.pxq.eyepetizer.notification.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import me.pxq.common.model.HomePage

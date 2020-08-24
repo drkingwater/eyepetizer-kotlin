@@ -48,7 +48,6 @@ ext {
             leakcanary : 'com.squareup.leakcanary:leakcanary-android:2.4'
     ]
     releaseApiDepds = [
-            leakcanary_no_op : 'com.squareup.leakcanary:leakcanary-android-no-op:2.4'
     ]
 
     apmDepds = [
