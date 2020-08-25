@@ -14,6 +14,8 @@ import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.R
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemColumnsCardBinding
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemHorScrollCardBinding
+import me.pxq.eyepetizer.community.viewmodels.CommunityViewModel
+import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.LeftDecoration
 
 /**
@@ -23,7 +25,7 @@ import me.pxq.utils.ui.decoration.LeftDecoration
  * Date : 2020/8/15 4:31 PM
  */
 class RecommendAdapter(
-    private val actionVM: BaseViewModel,
+    private val actionVM: CommunityViewModel,
     private val staggeredLayoutItemWidth: Int,
     val items: MutableList<Item> = mutableListOf()
 ) : RecyclerView.Adapter<RecommendAdapter.RecommendHolder>() {
@@ -79,7 +81,6 @@ class RecommendAdapter(
                                         .toInt()
                                 )
                             )
-                            //
 //                            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
@@ -109,6 +110,9 @@ class RecommendAdapter(
                     }
                 }
                 is CommunityRvItemColumnsCardBinding -> {
+                    binding.ivCover.setOnClickListener {
+                        actionVM.navigateToAlbum(it, item)
+                    }
                     // 重写ImageView高度
                     binding.ivCover.run {
                         layoutParams.height = calImageViewHeight(
@@ -118,6 +122,7 @@ class RecommendAdapter(
                     }
                     binding.column = item
                     binding.executePendingBindings()
+                    logd(item.data.dataType)
                 }
             }
         }

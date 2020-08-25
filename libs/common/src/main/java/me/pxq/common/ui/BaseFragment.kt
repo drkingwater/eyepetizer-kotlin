@@ -26,18 +26,18 @@ abstract class BaseFragment : Fragment() {
         logd("播放详情页：${item.data.type}")
 
         // 针对activity
-        startActivity(item)
-        // 针对Fragment
+        ARouter.getInstance().build(RouterHub.DETAIL_VIDEO).withSerializable(RouterHub.DETAIL_VIDEO_PARAM, item)
+            .navigation(requireContext())
     }
 
-    private fun startActivity(item: Item) {
-        ARouter.getInstance().build(RouterHub.DETAIL_VIDEO).withSerializable("video_detail", item)
+    fun navigateToAlbum(item: Item) {
+        ARouter.getInstance().build(RouterHub.DETAIL_ALBUM).withSerializable(RouterHub.DETAIL_ALBUM_PARAM, item)
             .navigation(requireContext())
     }
 
     private fun startFragment(item: Item, view: View?) {
         ARouter.getInstance().build(RouterHub.DETAIL_VIDEO)
-            .withSerializable("video_detail", item)
+            .withSerializable(RouterHub.DETAIL_VIDEO_PARAM, item)
             .navigation()?.run {
                 this as Fragment
                 this@BaseFragment.requireActivity().supportFragmentManager

@@ -48,6 +48,8 @@ dependencies {
 
     implementation project(':libs:common')
 
-    //首页
+    // 社区
     implementation project(':module:community')
+    // 详情页
+    implementation project(':module:detail')
 }

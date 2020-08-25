@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.community.ui
+package me.pxq.eyepetizer.community.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

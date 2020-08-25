@@ -17,5 +17,8 @@ object RouterHub {
 
     // 视频详情页
     const val DETAIL_VIDEO = "/detail/video"
+    const val DETAIL_VIDEO_PARAM = "video_detail"
+    const val DETAIL_ALBUM = "/detail/album"
+    const val DETAIL_ALBUM_PARAM = "album_detail"
 
 }

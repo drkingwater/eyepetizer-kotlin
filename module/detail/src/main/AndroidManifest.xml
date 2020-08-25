@@ -4,5 +4,7 @@
     <application>
         <activity android:name=".VideoDetailActivity"
             android:theme="@style/Activity.SlideBottomToTop"/>
+        <activity android:name=".AlbumDetailActivity"
+            android:theme="@style/Activity.SlideBottomToTop"/>
     </application>
 </manifest>

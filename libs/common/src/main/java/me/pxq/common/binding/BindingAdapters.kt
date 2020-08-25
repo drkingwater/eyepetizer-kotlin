@@ -10,6 +10,7 @@ import me.pxq.common.R
 import me.pxq.common.model.Follow
 import me.pxq.common.model.Header
 import me.pxq.common.model.Item
+import me.pxq.common.model.Tag
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.extensions.load
 import me.pxq.utils.glide.RoundedCornersTransformation
@@ -89,7 +90,11 @@ fun bindFollowed(textView: TextView, follow: Follow?) {
 @BindingAdapter("cover")
 fun bindCover(imageView: ImageView, url: String?) {
     url ?: return
-    imageView.load(url, RoundedCorners(defaultRoundRadius().toInt()), placeHolderId = R.drawable.shape_bg_album_loading)
+    imageView.load(
+        url,
+        RoundedCorners(defaultRoundRadius().toInt()),
+        placeHolderId = R.drawable.shape_bg_album_loading
+    )
 }
 
 
@@ -217,6 +222,16 @@ fun bindPublishTime(textView: TextView, time: Long) {
         textView.context.getString(R.string.publish_with_time),
         dateFormatPublish.format(Date(time))
     )
+}
+
+@BindingAdapter("albumTag")
+fun bindTag(textView: TextView, tags: List<Tag>?) {
+    if (tags.isNullOrEmpty()) {
+        textView.visibility = View.GONE
+        return
+    }
+    textView.text = tags[0].name
+
 }
 
 

@@ -51,7 +51,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     /**
-     * 跳转至详情页，需要item.data.dataType == VideoBeanForClient
+     * 跳转至视频详情页，需要item.data.dataType == VideoBeanForClient
      */
     fun navigateToVideo(view: View, item: Item) {
         if ("VideoBeanForClient" == item.data.dataType) {

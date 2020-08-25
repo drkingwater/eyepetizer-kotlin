@@ -9,8 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import me.pxq.common.adapters.IvBannerAdapter
-import me.pxq.eyepetizer.community.ui.CommunityViewModel
-import me.pxq.eyepetizer.community.ui.CommunityViewModelFactory
+import me.pxq.eyepetizer.community.viewmodels.CommunityViewModel
+import me.pxq.eyepetizer.community.viewmodels.CommunityViewModelFactory
 import me.pxq.network.ApiResult
 
 /**

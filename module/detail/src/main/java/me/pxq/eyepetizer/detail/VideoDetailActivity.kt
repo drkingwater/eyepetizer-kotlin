@@ -64,7 +64,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
         // 获取传参
         intent.extras?.run {
-            getSerializable("video_detail")?.run {
+            getSerializable(RouterHub.DETAIL_VIDEO_PARAM)?.run {
                 videoDetailViewModel.videoDetail.value = this as Item
             }
         }

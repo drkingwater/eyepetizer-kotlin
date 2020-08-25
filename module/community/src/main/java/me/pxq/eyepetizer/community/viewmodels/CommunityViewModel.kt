@@ -1,14 +1,17 @@
-package me.pxq.eyepetizer.community.ui
+package me.pxq.eyepetizer.community.viewmodels
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import me.pxq.common.model.HomePage
+import me.pxq.common.model.Item
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.repository.CommunityRepository
 import me.pxq.network.ApiResult
 import me.pxq.utils.logd
+import me.pxq.utils.loge
 
 /**
  * Description: 社区-推荐vm
@@ -16,6 +19,8 @@ import me.pxq.utils.logd
  * Date : 2020/8/14 10:58 PM
  */
 class CommunityViewModel(private val repository: CommunityRepository) : BaseViewModel() {
+
+    val albumDetail = MutableLiveData<Item>()
 
     // 下一页数据url
     private var _nextPage: String = ""
@@ -63,5 +68,18 @@ class CommunityViewModel(private val repository: CommunityRepository) : BaseView
             logd("没有下一页...")
         }
     }
+
+    /**
+     * 跳转至图片详情页，需要item.data.dataType == FollowCard
+     */
+    fun navigateToAlbum(view: View, item: Item) {
+        if ("FollowCard" == item.data.dataType) {
+            logd("图片详情页：${item.type}")
+            albumDetail.value = item
+        } else {
+            loge(Exception("item类型不匹配：${item.type} - ${item.data.dataType}"))
+        }
+    }
+
 
 }

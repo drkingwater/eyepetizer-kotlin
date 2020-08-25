@@ -4,21 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import me.pxq.common.ApiService
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.community.adapters.RecommendAdapter
-import me.pxq.eyepetizer.community.ui.CommunityViewModel
-import me.pxq.eyepetizer.community.ui.CommunityViewModelFactory
+import me.pxq.eyepetizer.community.viewmodels.CommunityViewModel
+import me.pxq.eyepetizer.community.viewmodels.CommunityViewModelFactory
 import me.pxq.network.ApiResult
-import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.utils.ui.decoration.StaggeredDecoration
@@ -109,6 +104,9 @@ class RecommendFragment : BaseFragment() {
                     adapter.notifyItemRangeInserted(index, adapter.items.size)
                 }
             }
+        })
+        recommendViewModel.albumDetail.observe(viewLifecycleOwner, {
+            navigateToAlbum(it)
         })
     }
 
