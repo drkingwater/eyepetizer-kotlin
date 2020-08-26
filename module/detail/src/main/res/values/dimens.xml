@@ -6,4 +6,5 @@
     <dimen name="detail_video_rv_item_margin">10dp</dimen>
     <dimen name="detail_video_title_text_size">18dp</dimen>
     <dimen name="detail_nickname_margin_start">12dp</dimen>
+    <dimen name="detail_album_action_iv_size">23dp</dimen>
 </resources>

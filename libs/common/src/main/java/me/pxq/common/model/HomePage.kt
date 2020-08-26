@@ -123,7 +123,7 @@ data class Data(
     val uid: Int,
     val userCover: String,
     val url: String,
-    val urls: List<String>?,
+    val urls: List<String>,
     val user: User,
     val videoPosterBean: VideoPosterBean,
     val width : Int,

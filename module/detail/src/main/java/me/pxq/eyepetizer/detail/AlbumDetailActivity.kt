@@ -3,9 +3,12 @@ package me.pxq.eyepetizer.detail
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
+import kotlinx.android.synthetic.main.detail_activity_album.*
 import me.pxq.common.model.Item
 import me.pxq.common.router.RouterHub
+import me.pxq.eyepetizer.detail.adapters.AlbumVpAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityAlbumBinding
 
 /**
@@ -18,10 +21,27 @@ class AlbumDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<DetailActivityAlbumBinding>(this, R.layout.detail_activity_album).apply {
-            album = intent.getSerializableExtra(RouterHub.DETAIL_ALBUM_PARAM) as Item
+        DataBindingUtil.setContentView<DetailActivityAlbumBinding>(
+            this,
+            R.layout.detail_activity_album
+        ).apply {
+            val theAlbum = intent.getSerializableExtra(RouterHub.DETAIL_ALBUM_PARAM) as Item
+
+            album = theAlbum
+
+            with(vp_album) {
+                orientation = ViewPager2.ORIENTATION_VERTICAL
+                offscreenPageLimit = 2
+                adapter = AlbumVpAdapter(mutableListOf(theAlbum))
+            }
+
             executePendingBindings()
         }
     }
-    
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0, me.pxq.common.R.anim.slide_bottom_out)
+    }
+
 }
