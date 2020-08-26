@@ -22,7 +22,9 @@ class AlbumVpAdapter(val albums: MutableList<Item>) :
         fun bind(album: Item) {
             with(binding.viewpager) {
                 orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                adapter = AlbumRvAdapter(album.data.content.data.urls)
+                adapter = AlbumRvAdapter(
+                    album.data.content.data.urls ?: listOf(album.data.content.data.cover.detail)
+                )
             }
         }
     }
