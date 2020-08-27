@@ -34,6 +34,7 @@
 
     <style name="Activity.SlideBottomToTop" parent="AppTheme">
         <item name="android:windowAnimationStyle">@style/slide</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Activity.SlideRightIn" parent="AppTheme">
