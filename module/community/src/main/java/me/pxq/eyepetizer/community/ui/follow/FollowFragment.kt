@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
@@ -18,6 +19,7 @@ import me.pxq.utils.ui.decoration.MarginDecoration
  * Author : pxq
  * Date : 2020/8/14 3:53 PM
  */
+@ExperimentalCoroutinesApi
 class FollowFragment : BaseFragment() {
 
     private val followViewModel by activityViewModels<FollowViewModel> { FollowViewModelFactory() }
@@ -64,8 +66,7 @@ class FollowFragment : BaseFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun fetchData() {
         // 首次加载数据
         followViewModel.fetchData()
     }

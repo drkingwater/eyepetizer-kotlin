@@ -1,6 +1,7 @@
 package me.pxq.common.ui
 
 import android.os.Build
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
@@ -18,8 +19,6 @@ import me.pxq.utils.logd
  */
 abstract class BaseFragment : Fragment() {
 
-    private val DETAIL_FRAGMENT_TAG = "detail_fragment_tag"
-
     /**
      * 跳转至详情页
      */
@@ -27,40 +26,25 @@ abstract class BaseFragment : Fragment() {
         logd("播放详情页：${item.data.type}")
 
         // 针对activity
-        ARouter.getInstance().build(RouterHub.DETAIL_VIDEO).withSerializable(RouterHub.DETAIL_VIDEO_PARAM, item)
+        ARouter.getInstance().build(RouterHub.DETAIL_VIDEO)
+            .withSerializable(RouterHub.DETAIL_VIDEO_PARAM, item)
             .navigation(requireContext())
     }
 
     fun navigateToAlbum(item: Item) {
-        ARouter.getInstance().build(RouterHub.DETAIL_ALBUM).withSerializable(RouterHub.DETAIL_ALBUM_PARAM, item)
+        ARouter.getInstance().build(RouterHub.DETAIL_ALBUM)
+            .withSerializable(RouterHub.DETAIL_ALBUM_PARAM, item)
             .navigation(requireContext())
     }
 
-    private fun startFragment(item: Item, view: View?) {
-        ARouter.getInstance().build(RouterHub.DETAIL_VIDEO)
-            .withSerializable(RouterHub.DETAIL_VIDEO_PARAM, item)
-            .navigation()?.run {
-                this as Fragment
-                this@BaseFragment.requireActivity().supportFragmentManager
-                    .beginTransaction().also {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
-                            // Optimize for shared element transition
-                            it.setReorderingAllowed(true)
-                            it.addSharedElement(view, view.transitionName)
-                        }
-                    }
-                    .setCustomAnimations(
-                        R.anim.slide_bottom_in,
-                        R.anim.slide_bottom_out,
-                        R.anim.slide_bottom_in,
-                        R.anim.slide_bottom_out
-                    )
-                    .add(
-                        R.id.fragment_container, this, DETAIL_FRAGMENT_TAG
-                    )
-                    .addToBackStack(DETAIL_FRAGMENT_TAG)
-                    .commit()
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // 处理屏幕旋转等不请求重新请求数据
+        if (savedInstanceState == null) {
+            fetchData()
+        }
     }
+
+    abstract fun fetchData()
 
 }

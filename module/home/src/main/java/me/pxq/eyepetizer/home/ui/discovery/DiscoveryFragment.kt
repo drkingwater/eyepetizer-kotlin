@@ -49,28 +49,28 @@ class DiscoveryFragment : BaseFragment() {
                 this.layoutParams = layoutParams
             }
 
+            binding.recyclerView.run {
+                layoutManager = LinearLayoutManager(requireContext())
+                //设置分割线
+                addItemDecoration(
+                    MarginDecoration(
+                        top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
+                            .toInt(),
+                        bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
+                            .toInt()
+                    )
+                )
+                //设置adapter
+                adapter = IndexRvAdapter(this@DiscoveryFragment.viewModel).also {
+                    subscribeUi(it)
+                }
+            }
+
             root
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.run {
-            layoutManager = LinearLayoutManager(requireContext())
-            //设置分割线
-            addItemDecoration(
-                MarginDecoration(
-                    top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
-                        .toInt(),
-                    bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
-                        .toInt()
-                )
-            )
-            //设置adapter
-            adapter = IndexRvAdapter(viewModel).also {
-                subscribeUi(it)
-            }
-        }
+    override fun fetchData() {
         //请求数据
         viewModel.fetchData()
     }

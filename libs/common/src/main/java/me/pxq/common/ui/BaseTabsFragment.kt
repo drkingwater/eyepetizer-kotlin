@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import me.pxq.common.R
+import me.pxq.utils.SpUtil
 
 /**
  * Description: 主页Fragment布局一样，抽象类
@@ -73,9 +74,17 @@ abstract class BaseTabsFragment : Fragment() {
                         })
                 }
             }
-            //选中"推送"
-            viewPager.currentItem = currentIndex()
+            // 选中"推送"
+            // 处理Activity重建的情况
+            viewPager.currentItem = savedInstanceState?.let {
+                SpUtil.getInt(requireContext(), TAB_INDEX_KEY)
+            } ?: currentIndex()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        SpUtil.putInt(requireContext(), TAB_INDEX_KEY, viewPager.currentItem)
     }
 
     // vp2 adapter
@@ -84,4 +93,8 @@ abstract class BaseTabsFragment : Fragment() {
     abstract fun createTabs(): List<String>
 
     abstract fun currentIndex(): Int
+
+    companion object{
+        const val TAB_INDEX_KEY = "tab_fragment_tab_index"
+    }
 }

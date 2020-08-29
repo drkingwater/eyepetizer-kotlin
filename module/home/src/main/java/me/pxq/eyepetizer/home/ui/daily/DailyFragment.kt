@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
@@ -23,6 +24,7 @@ import me.pxq.utils.logi
  * Author : pxq
  * Date : 2020/7/27 10:30 PM
  */
+@ExperimentalCoroutinesApi
 class DailyFragment : BaseFragment() {
 
     private val viewModel by activityViewModels<DailyViewModel> {
@@ -42,50 +44,32 @@ class DailyFragment : BaseFragment() {
             binding = this
             viewModel = this@DailyFragment.viewModel
             lifecycleOwner = requireActivity()
+
+            binding.recyclerView.run {
+                layoutManager = LinearLayoutManager(requireContext())
+                //设置分割线
+                addItemDecoration(
+                    MarginDecoration(
+                        top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
+                            .toInt(),
+                        bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
+                            .toInt()
+                    )
+                )
+                //设置adapter
+                adapter = IndexRvAdapter(this@DailyFragment.viewModel).also {
+                    subscribeUi(it)
+                }
+                setOnBottomListener {
+                    this@DailyFragment.viewModel.fetchNext()
+                }
+            }
+
             root
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.run {
-            layoutManager = LinearLayoutManager(requireContext())
-            //设置分割线
-            addItemDecoration(
-                MarginDecoration(
-                    top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
-                        .toInt(),
-                    bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
-                        .toInt()
-                )
-            )
-            //设置adapter
-            adapter = IndexRvAdapter(viewModel).also {
-                subscribeUi(it)
-            }
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                private var onBottom = false
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
-                        logi("到底了,刷新数据...")
-                        viewModel.fetchNext()
-                    }
-                }
-
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    val layoutManager =
-                        recyclerView.layoutManager as LinearLayoutManager
-                    //屏幕中最后一个可见子项的 position
-                    val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-                    //当前屏幕所看到的子项个数
-                    val visibleItemCount = layoutManager.childCount
-                    //当前 RecyclerView 的所有子项个数
-                    val totalItemCount = layoutManager.itemCount
-                    //RecyclerView 的滑动状态
-                    onBottom = visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1
-                }
-            })
-        }
+    override fun fetchData() {
         //请求数据
         viewModel.fetchData()
     }

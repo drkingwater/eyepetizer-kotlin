@@ -14,7 +14,6 @@ import me.pxq.common.ui.BaseFragment
  */
 class InteractFragment : BaseFragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,6 +21,8 @@ class InteractFragment : BaseFragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_no_account, container, false)
     }
+
+    override fun fetchData() = Unit
 
     companion object {
 

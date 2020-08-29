@@ -76,9 +76,7 @@ class RecommendFragment : BaseFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        logd("onViewCreated")
+    override fun fetchData() {
         // 获取推荐数据
         recommendViewModel.fetchData()
     }

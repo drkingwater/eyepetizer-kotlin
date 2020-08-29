@@ -42,32 +42,33 @@ class RecommendFragment : BaseFragment() {
             binding = this
             viewModel = this@RecommendFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
+
+            binding.recyclerView.run {
+                layoutManager = LinearLayoutManager(requireContext())
+                //设置分割线
+                addItemDecoration(
+                    MarginDecoration(
+                        top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
+                            .toInt(),
+                        bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
+                            .toInt()
+                    )
+                )
+                //设置adapter
+                adapter = IndexRvAdapter(this@RecommendFragment.viewModel).also {
+                    subscribeUi(it)
+                }
+
+                setOnBottomListener {
+                    this@RecommendFragment.viewModel.fetchNext()
+                }
+            }
+
             root
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.run {
-            layoutManager = LinearLayoutManager(requireContext())
-            //设置分割线
-            addItemDecoration(
-                MarginDecoration(
-                    top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
-                        .toInt(),
-                    bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
-                        .toInt()
-                )
-            )
-            //设置adapter
-            adapter = IndexRvAdapter(viewModel).also {
-                subscribeUi(it)
-            }
-
-            setOnBottomListener {
-                viewModel.fetchNext()
-            }
-        }
+    override fun fetchData() {
         //请求数据
         viewModel.fetchData()
     }
@@ -85,23 +86,6 @@ class RecommendFragment : BaseFragment() {
             adapter.items.clear()
             adapter.items.addAll(it.itemList)
             adapter.notifyDataSetChanged()
-//            when (it) {
-//                is ApiResult.Success -> {
-//                    // 隐藏网络请求失败布局
-//                    binding.layoutNetError.visibility = View.GONE
-//                    // 显示数据
-//                    binding.refreshLayout.visibility = View.VISIBLE
-//
-//                }
-//                is ApiResult.Error -> {
-//                    // 请求失败
-//                    loge(it.exception.message ?: "error!!!")
-//                    // 隐藏布局
-//                    binding.refreshLayout.visibility = View.GONE
-//                    // 显示网络错误
-//                    binding.layoutNetError.visibility = View.VISIBLE
-//                }
-//            }
         })
         //上拉加载数据
         viewModel.nextData.observe(viewLifecycleOwner) {
@@ -111,25 +95,6 @@ class RecommendFragment : BaseFragment() {
             adapter.items.addAll(it.itemList)
             adapter.notifyItemInserted(newPosition)
         }
-//            when (it) {
-//                is ApiResult.Success -> {
-//                    // 隐藏网络请求失败布局
-//                    binding.layoutNetError.visibility = View.GONE
-//                    // 显示数据
-//                    binding.refreshLayout.visibility = View.VISIBLE
-//
-//
-//                }
-//                is ApiResult.Error -> {
-//
-//                    // 请求失败
-//                    loge(it.exception.message ?: "error!!!")
-//                    // 隐藏布局
-//                    binding.refreshLayout.visibility = View.GONE
-//                    // 显示网络错误
-//                    binding.layoutNetError.visibility = View.VISIBLE
-//                }
-//            }
 
         // 导航到详情页
         viewModel.videoDetail.observe(viewLifecycleOwner) {

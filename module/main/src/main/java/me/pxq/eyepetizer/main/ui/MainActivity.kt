@@ -10,6 +10,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 import me.pxq.common.router.RouterHub
 import me.pxq.eyepetizer.main.R
 import me.pxq.common.ui.view.EyeBottomNavView
+import me.pxq.utils.SpUtil
+import me.pxq.utils.loge
+import me.pxq.utils.logi
 
 /**
  * Description: 主页
@@ -19,6 +22,11 @@ import me.pxq.common.ui.view.EyeBottomNavView
 class MainActivity : AppCompatActivity() {
 
     private val fragmentTags = listOf("Home", "Community", "Notification")
+    private val fragmentTagsMap = mutableMapOf(
+        "Home" to R.id.bottom_nav_menu_item_home,
+        "Community" to R.id.bottom_nav_menu_item_community,
+        "Notification" to R.id.bottom_nav_menu_item_notification
+    )
     private var currentFragmentTag = ""
     private var oldFragmentTag = ""
 
@@ -26,11 +34,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity_main)
 
-//        savedInstanceState?.run {
-//            currentFragmentTag = SpUtil.getString(this@MainActivity, KEY_CURRENT_FRAGMENT_TAG)
-//            oldFragmentTag = SpUtil.getString(this@MainActivity, KEY_OLD_FRAGMENT_TAG)
-//            logi("savedInstanceState get : $currentFragmentTag $oldFragmentTag")
-//        }
+        savedInstanceState?.run {
+            currentFragmentTag = SpUtil.getString(this@MainActivity, KEY_CURRENT_FRAGMENT_TAG)
+            oldFragmentTag = SpUtil.getString(this@MainActivity, KEY_OLD_FRAGMENT_TAG)
+            logi("savedInstanceState get : $currentFragmentTag $oldFragmentTag")
+        }
 
         findViewById<EyeBottomNavView>(R.id.bottom_nav_layout)?.apply {
             itemIconTintList = null
@@ -86,7 +94,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             //默认选择"首页"
-            selectedItemId = R.id.bottom_nav_menu_item_home
+            selectedItemId = savedInstanceState ?.let {
+                fragmentTagsMap[SpUtil.getString(this@MainActivity, KEY_CURRENT_FRAGMENT_TAG)]
+            } ?: R.id.bottom_nav_menu_item_home
         }
     }
 
@@ -136,17 +146,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-//        loge("onSaveInstance put : $currentFragmentTag $oldFragmentTag")
-//        SpUtil.putString(this, KEY_CURRENT_FRAGMENT_TAG, currentFragmentTag)
-//        SpUtil.putString(this, KEY_OLD_FRAGMENT_TAG, currentFragmentTag)
+        loge("onSaveInstance put : $currentFragmentTag $oldFragmentTag")
+        SpUtil.putString(this, KEY_CURRENT_FRAGMENT_TAG, currentFragmentTag)
+        SpUtil.putString(this, KEY_OLD_FRAGMENT_TAG, currentFragmentTag)
     }
 
-    companion object{
+    companion object {
         const val KEY_CURRENT_FRAGMENT_TAG = "key_current_tag"
         const val KEY_OLD_FRAGMENT_TAG = "key_old_tag"
 
         @JvmStatic
-        fun start(context: Context){
+        fun start(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
         }
     }

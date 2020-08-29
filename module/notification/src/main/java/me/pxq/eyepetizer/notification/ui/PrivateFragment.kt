@@ -14,6 +14,8 @@ import me.pxq.common.ui.BaseFragment
  */
 class PrivateFragment : BaseFragment() {
 
+    override fun fetchData() = Unit
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

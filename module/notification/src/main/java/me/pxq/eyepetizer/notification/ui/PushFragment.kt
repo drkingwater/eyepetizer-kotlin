@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
@@ -21,6 +22,7 @@ import me.pxq.utils.ui.decoration.MarginDecoration
  * Author : pxq
  * Date : 2020/8/23 4:30 PM
  */
+@ExperimentalCoroutinesApi
 class PushFragment : BaseFragment() {
 
     private val pushViewModel by activityViewModels<PushViewModel> {
@@ -67,8 +69,7 @@ class PushFragment : BaseFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun fetchData() {
         // 请求数据
         pushViewModel.fetchData()
     }

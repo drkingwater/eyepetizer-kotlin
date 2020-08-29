@@ -10,9 +10,9 @@ import androidx.core.content.edit
  */
 object SpUtil {
 
-    fun getString(context: Context, key: String) =
+    fun getString(context: Context, key: String, def: String = "") =
         context.getSharedPreferences("${context.packageName}_eye_sp", Context.MODE_PRIVATE)
-            .getString(key, "") ?: ""
+            .getString(key, def) ?: def
 
 
     fun putString(context: Context, key: String, value: String) {
@@ -21,5 +21,16 @@ object SpUtil {
             apply()
         }
     }
+
+    fun putInt(context: Context, key: String, value: Int) {
+        context.getSharedPreferences("${context.packageName}_eye_sp", Context.MODE_PRIVATE).edit {
+            putInt(key, value)
+            apply()
+        }
+    }
+
+    fun getInt(context: Context, key: String, def: Int = 0) =
+        context.getSharedPreferences("${context.packageName}_eye_sp", Context.MODE_PRIVATE)
+            .getInt(key, def)
 
 }
