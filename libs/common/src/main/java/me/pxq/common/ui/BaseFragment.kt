@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import me.pxq.common.R
 import me.pxq.common.model.Item
 import me.pxq.common.router.RouterHub
+import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.utils.logd
 
 

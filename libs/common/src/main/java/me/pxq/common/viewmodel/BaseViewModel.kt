@@ -5,25 +5,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import me.pxq.common.model.Item
+import me.pxq.network.requestFlow
 import me.pxq.utils.logd
 import me.pxq.utils.loge
+import java.io.Serializable
 
 /**
  * Description: viewModel基类，处理点击事件等
  * Author : pxq
  * Date : 2020/8/4 9:11 PM
  */
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel(), Serializable {
 
     val videoDetail = MutableLiveData<Item>()
 
     protected val _onRefreshing = MutableLiveData<Boolean>()
     val onRefreshing: LiveData<Boolean> = _onRefreshing
+    protected val _onError = MutableLiveData<Boolean>()
+    val onError : LiveData<Boolean> = _onError
 
     /**
      * 首次进入获取数据
      */
     abstract fun fetchData()
+
+    /**
+     * 获取下一页数据
+     */
+    abstract fun fetchNext()
 
     /**
      * 网络错误

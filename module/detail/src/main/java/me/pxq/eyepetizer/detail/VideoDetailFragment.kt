@@ -165,14 +165,7 @@ class VideoDetailFragment : Fragment() {
         })
         // 更多评论
         videoDetailViewModel.moreReplies.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ApiResult.Success -> {
-                    videoDetailAdapter.onMoreRepliesLoaded(it.data.itemList)
-                }
-                is ApiResult.Error -> {
-                    loge(it.exception)
-                }
-            }
+            videoDetailAdapter.onMoreRepliesLoaded(it.itemList)
         })
 
     }

@@ -17,7 +17,7 @@ android {
         minSdkVersion build.minSdkVersion
         targetSdkVersion build.targetSdkVersion
         versionCode 1
-        versionName "1.0.1.${releaseTime()}"
+        versionName "1.1.0.${releaseTime()}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

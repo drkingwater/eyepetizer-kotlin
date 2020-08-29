@@ -6,18 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import me.pxq.common.ApiService
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.community.adapters.FollowAdapter
-import me.pxq.eyepetizer.community.adapters.RecommendAdapter
-import me.pxq.network.ApiResult
 import me.pxq.utils.ui.decoration.MarginDecoration
-import me.pxq.utils.ui.decoration.StaggeredDecoration
 
 /**
  * Description: 社区-关注
@@ -56,7 +50,7 @@ class FollowFragment : BaseFragment() {
                     subscribeUI(it)
                 }
                 setOnBottomListener {
-                    followViewModel.fetchNextPage()
+                    followViewModel.fetchNext()
                 }
             }
             // 设置swipe_layout边距
@@ -80,28 +74,20 @@ class FollowFragment : BaseFragment() {
      * 观察数据变化
      */
     private fun subscribeUI(adapter: FollowAdapter) {
-        followViewModel.followData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ApiResult.Success -> {
-                    adapter.items.clear()
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        })
-        followViewModel.refreshData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ApiResult.Success -> {
-                    val index = adapter.items.size
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyItemRangeInserted(index, adapter.items.size)
-                }
-            }
-        })
+        followViewModel.followData.observe(viewLifecycleOwner) {
+            adapter.items.clear()
+            adapter.items.addAll(it.itemList)
+            adapter.notifyDataSetChanged()
+        }
+        followViewModel.nextData.observe(viewLifecycleOwner) {
+            val index = adapter.items.size
+            adapter.items.addAll(it.itemList)
+            adapter.notifyItemRangeInserted(index, adapter.items.size)
+        }
         // 跳转播放页
-        followViewModel.videoDetail.observe(viewLifecycleOwner, Observer { video ->
+        followViewModel.videoDetail.observe(viewLifecycleOwner) { video ->
             navigateToVideo(video)
-        })
+        }
     }
 
 

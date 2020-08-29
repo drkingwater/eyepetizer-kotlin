@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.community.adapters.RecommendAdapter
 import me.pxq.eyepetizer.community.viewmodels.CommunityViewModel
 import me.pxq.eyepetizer.community.viewmodels.CommunityViewModelFactory
-import me.pxq.network.ApiResult
 import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.MarginDecoration
 import me.pxq.utils.ui.decoration.StaggeredDecoration
@@ -23,6 +22,7 @@ import me.pxq.utils.ui.decoration.StaggeredDecoration
  * Author : pxq
  * Date : 2020/8/14 3:52 PM
  */
+@ExperimentalCoroutinesApi
 class RecommendFragment : BaseFragment() {
 
     // 推荐vm
@@ -69,7 +69,7 @@ class RecommendFragment : BaseFragment() {
                     subscribeUI(it)
                 }
                 setOnBottomListener {
-                    recommendViewModel.fetchNextPage()
+                    recommendViewModel.fetchNext()
                 }
             }
             root
@@ -87,24 +87,19 @@ class RecommendFragment : BaseFragment() {
      * 观察数据变化
      */
     private fun subscribeUI(adapter: RecommendAdapter) {
-        recommendViewModel.recommendData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ApiResult.Success -> {
-                    adapter.items.clear()
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        })
-        recommendViewModel.refreshData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ApiResult.Success -> {
-                    val index = adapter.items.size
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyItemRangeInserted(index, adapter.items.size)
-                }
-            }
-        })
+        // 首次加载数据
+        recommendViewModel.recommendData.observe(viewLifecycleOwner) {
+            adapter.items.clear()
+            adapter.items.addAll(it.itemList)
+            adapter.notifyDataSetChanged()
+        }
+        // 加载更多
+        recommendViewModel.nextData.observe(viewLifecycleOwner) {
+            val index = adapter.items.size
+            adapter.items.addAll(it.itemList)
+            adapter.notifyItemRangeInserted(index, adapter.items.size)
+        }
+        // 点击图集
         recommendViewModel.albumDetail.observe(viewLifecycleOwner, {
             navigateToAlbum(it)
         })

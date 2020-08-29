@@ -13,16 +13,21 @@
             type="me.pxq.common.model.Item" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_special_category_item_size"
         app:onClickListener="@{(theView) -> viewModel.execAction(theView, column.data.actionUrl)}">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:scaleType="fitXY"
-            app:cover="@{column.data.image}" />
+            app:cover="@{column.data.image}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/loading" />
 
         <me.pxq.common.ui.view.FontTextView
             android:layout_width="wrap_content"
@@ -33,9 +38,13 @@
             android:text="@{column.data.title}"
             android:textColor="@color/gray"
             android:textSize="@dimen/text_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:typeface="FZLanD"
             tools:text="#奇奇怪怪运动合集" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

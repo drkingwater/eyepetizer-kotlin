@@ -157,7 +157,7 @@ class IndexRvAdapter(val actionVM: BaseViewModel, var items: MutableList<Item> =
                         executePendingBindings()
                     }
                 }
-                is HomeRvItemSectionAdBigCardBinding -> { // 分段广告 small
+                is HomeRvItemSectionAdBigCardBinding -> { // 分段广告 big
                     with(binding) {
                         sectionAd = item
                         viewModel = actionVM

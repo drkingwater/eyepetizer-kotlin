@@ -9,6 +9,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pxq.common.ApiService
 import me.pxq.common.model.Item
 import me.pxq.common.router.RouterHub
@@ -27,6 +28,7 @@ import me.pxq.utils.loge
  * Author : pxq
  * Date : 2020/8/12 10:22 PM
  */
+@ExperimentalCoroutinesApi
 @Route(path = RouterHub.DETAIL_VIDEO)
 class VideoDetailActivity : AppCompatActivity() {
 
@@ -94,7 +96,7 @@ class VideoDetailActivity : AppCompatActivity() {
                 prepare(it.data.playUrl)
 
                 playState.observe(this@VideoDetailActivity, Observer {
-                    if (it == PlayerBase.READY){
+                    if (it == PlayerBase.READY) {
                         binding.ivCover.visibility = View.INVISIBLE
                     }
                 })
@@ -119,7 +121,6 @@ class VideoDetailActivity : AppCompatActivity() {
         }
         // 相关视频
         videoDetailViewModel.videoRelated.observe(this) {
-
             when (it) {
                 // position = 1 推荐视频
                 is ApiResult.Success -> {
@@ -137,15 +138,15 @@ class VideoDetailActivity : AppCompatActivity() {
             }
         }
         // 查看更多视频
-        videoDetailViewModel.moreRelatedVideos.observe(this) {
+        videoDetailViewModel.moreRelatedVideos.observe(this, Observer {
             videoDetailAdapter.onMoreRelatedVideosLoaded(it)
-        }
+        })
         // 查看更多 按钮隐藏控制
-        videoDetailViewModel.isLoadMoreVisible.observe(this) {
+        videoDetailViewModel.isLoadMoreVisible.observe(this, Observer {
             videoDetailAdapter.setLoadMoreRelatedVisible(it)
-        }
+        })
         // 评论
-        videoDetailViewModel.replies.observe(this) {
+        videoDetailViewModel.replies.observe(this, Observer {
             when (it) {
                 // position = 2 评论
                 is ApiResult.Success -> {
@@ -164,18 +165,11 @@ class VideoDetailActivity : AppCompatActivity() {
             binding.rvVideoDetail.scrollToPosition(0)
             binding.rvVideoDetail.visibility = View.VISIBLE
             videoDetailAdapter.notifyDataSetChanged()
-        }
+        })
         // 更多评论
-        videoDetailViewModel.moreReplies.observe(this) {
-            when (it) {
-                is ApiResult.Success -> {
-                    videoDetailAdapter.onMoreRepliesLoaded(it.data.itemList)
-                }
-                is ApiResult.Error -> {
-                    loge(it.exception)
-                }
-            }
-        }
+        videoDetailViewModel.moreReplies.observe(this, Observer {
+            videoDetailAdapter.onMoreRepliesLoaded(it.itemList)
+        })
 
     }
 

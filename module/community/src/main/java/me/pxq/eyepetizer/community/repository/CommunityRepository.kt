@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import me.pxq.common.Api
 import me.pxq.common.ApiService
 import me.pxq.network.request
+import me.pxq.network.requestFlow
 import me.pxq.utils.logd
 
 /**
@@ -17,18 +18,11 @@ class CommunityRepository(private val apiService: Api) {
     /**
      * 获取社区-推荐数据
      */
-    suspend fun fetchCommunityRecommend(url: String = ApiService.COMMUNITY_RECOMMEND_PAGE) =
-        request({
-            apiService.fetchCommunityRecommend(url)
-        }, "请求失败")
+    suspend fun fetchCommunityRecommend(url: String = ApiService.COMMUNITY_RECOMMEND_PAGE) = apiService.fetchCommunityRecommend(url)
 
     /**
      * 获取社区-关注数据
      */
-    suspend fun fetchCommunityFollow(url: String = ApiService.COMMUNITY_FOLLOW_PAGE) =
-        request({
-            logd(Thread.currentThread().name)
-            apiService.fetchCommunityFollow(url)
-        }, "请求失败")
+    suspend fun fetchCommunityFollow(url: String = ApiService.COMMUNITY_FOLLOW_PAGE) = apiService.fetchCommunityFollow(url)
 
 }

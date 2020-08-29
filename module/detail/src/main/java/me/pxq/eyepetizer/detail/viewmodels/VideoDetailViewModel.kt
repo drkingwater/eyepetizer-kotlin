@@ -3,14 +3,17 @@ package me.pxq.eyepetizer.detail.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import me.pxq.common.model.HomePage
 import me.pxq.common.model.Item
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.network.ApiResult
+import me.pxq.network.requestFlow
 import me.pxq.utils.logd
 import me.pxq.utils.loge
 
@@ -19,6 +22,7 @@ import me.pxq.utils.loge
  * Author : pxq
  * Date : 2020/8/8 8:50 PM
  */
+@ExperimentalCoroutinesApi
 class VideoDetailViewModel(private val repository: VideoDetailRepository) : BaseViewModel() {
 
     // 首次加载
@@ -39,14 +43,15 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
     val isLoadMoreVisible: LiveData<Boolean> = _isLoadMoreVisible
 
     // 下一页评论
-    private var nextRepliesUrl = ""
+    private var nextRepliesUrl: String? = null
+
     // 评论数据
     private val _replies = MutableLiveData<ApiResult<HomePage>>()
     val replies: LiveData<ApiResult<HomePage>> = _replies
 
     // 更多评论数据
-    private val _moreReplies = MutableLiveData<ApiResult<HomePage>>()
-    val moreReplies: LiveData<ApiResult<HomePage>> = _moreReplies
+    private val _moreReplies = MutableLiveData<HomePage>()
+    val moreReplies: LiveData<HomePage> = _moreReplies
 
     // 获取相关视频
     fun fetchVideoRelated() {
@@ -117,17 +122,16 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
      * 加载更多评论数据
      */
     fun fetchMoreVideoReplies() {
-        if (nextRepliesUrl.isNotEmpty()) {
-            viewModelScope.launch {
-                val nextUrl = nextRepliesUrl
-                nextRepliesUrl = ""
-                _moreReplies.value = repository.fetchMoreVideoReplies(nextUrl).also {
-                    if (it is ApiResult.Success) {
-                        nextRepliesUrl = it.data.nextPageUrl ?: ""
-                    }
-                }
-            }
-        } else {
+        nextRepliesUrl?.run {
+            val nextUrl = this@run
+            nextRepliesUrl = null
+            requestFlow({
+                repository.fetchMoreVideoReplies(nextUrl)
+            }, {
+                nextRepliesUrl = it.nextPageUrl
+                _moreReplies.value = it
+            }).launchIn(viewModelScope)
+        } ?: kotlin.run {
             loge("没有更多评论了...")
         }
     }
@@ -138,8 +142,8 @@ class VideoDetailViewModel(private val repository: VideoDetailRepository) : Base
         const val VISIBLE_RELATED_VIDEO_COUNT = 5
     }
 
-    override fun fetchData() {
-        // 不需要做什么
-    }
+    override fun fetchData() = Unit
+
+    override fun fetchNext() = Unit
 
 }

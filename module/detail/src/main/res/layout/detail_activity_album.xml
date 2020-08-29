@@ -29,13 +29,13 @@
             cover="@{album.data.content.data.cover.detail}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitCenter"
-            tools:src="@drawable/layer_splash"
-            android:visibility="gone"/>
+            tools:src="@drawable/layer_splash" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"

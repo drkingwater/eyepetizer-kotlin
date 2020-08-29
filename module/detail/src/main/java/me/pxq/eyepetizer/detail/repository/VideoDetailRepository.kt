@@ -31,9 +31,6 @@ class VideoDetailRepository(private val apiService: Api) {
     /**
      * 加载更多评论
      */
-    suspend fun fetchMoreVideoReplies(@Url url: String) =
-        request({
-            apiService.fetchMoreVideoReplies(url)
-        }, "请求失败")
+    suspend fun fetchMoreVideoReplies(@Url url: String) = apiService.fetchMoreVideoReplies(url)
 
 }

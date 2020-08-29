@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.pxq.common.adapters.IvBannerAdapter
 import me.pxq.eyepetizer.community.viewmodels.CommunityViewModel
 import me.pxq.eyepetizer.community.viewmodels.CommunityViewModelFactory
@@ -18,6 +19,7 @@ import me.pxq.network.ApiResult
  * Author : pxq
  * Date : 2020/8/15 8:05 PM
  */
+@ExperimentalCoroutinesApi
 class Vp2Fragment : Fragment() {
 
     private val viewModel by activityViewModels<CommunityViewModel> { CommunityViewModelFactory() }
@@ -38,13 +40,9 @@ class Vp2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.recommendData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ApiResult.Success -> {
-                    vp.adapter = IvBannerAdapter(viewModel)
-                    (vp.adapter as IvBannerAdapter).submitList(it.data.itemList[1].data.itemList)
-                    vp.offscreenPageLimit = 3
-                }
-            }
+            vp.adapter = IvBannerAdapter(viewModel)
+            (vp.adapter as IvBannerAdapter).submitList(it.itemList[1].data.itemList)
+            vp.offscreenPageLimit = 3
         })
         viewModel.fetchData()
     }

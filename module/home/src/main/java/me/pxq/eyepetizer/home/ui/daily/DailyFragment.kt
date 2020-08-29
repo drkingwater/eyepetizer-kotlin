@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
+import me.pxq.eyepetizer.home.viewmodels.DailyViewModel
+import me.pxq.eyepetizer.home.viewmodels.DailyViewModelFactory
 import me.pxq.utils.ui.decoration.MarginDecoration
-import me.pxq.network.ApiResult
-import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 import me.pxq.utils.loge
 import me.pxq.utils.logi
@@ -68,7 +68,7 @@ class DailyFragment : BaseFragment() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     if (newState == RecyclerView.SCROLL_STATE_IDLE && onBottom) {
                         logi("到底了,刷新数据...")
-                        viewModel.fetchNextPage()
+                        viewModel.fetchNext()
                     }
                 }
 
@@ -100,27 +100,17 @@ class DailyFragment : BaseFragment() {
         viewModel.dailyData.observe(viewLifecycleOwner, Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
-            when (it) {
-                is ApiResult.Success -> {
-                    adapter.items.clear()
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyDataSetChanged()
-                }
-                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
-            }
+            adapter.items.clear()
+            adapter.items.addAll(it.itemList)
+            adapter.notifyDataSetChanged()
         })
         //上拉加载数据
-        viewModel.refreshData.observe(viewLifecycleOwner, Observer {
+        viewModel.nextData.observe(viewLifecycleOwner, Observer {
             loge("data change...")
             binding.refreshLayout.isRefreshing = false
-            when (it) {
-                is ApiResult.Success -> {
-                    val newPosition = adapter.items.size
-                    adapter.items.addAll(it.data.itemList)
-                    adapter.notifyItemInserted(newPosition)
-                }
-                is ApiResult.Error -> loge(it.exception.message ?: "error!!!")
-            }
+            val newPosition = adapter.items.size
+            adapter.items.addAll(it.itemList)
+            adapter.notifyItemInserted(newPosition)
         })
         // 导航到详情页
         viewModel.videoDetail.observe(requireActivity(), Observer {

@@ -17,7 +17,7 @@ interface Api {
      * 获取首页-推荐数据
      */
     @GET
-    suspend fun fetchRecommend(@Url url: String = ApiService.HOME_RECOMMEND_PAGE): HomePage
+    suspend fun fetchRecommend(@Url url: String): HomePage
 
     /**
      * 获取首页-发现数据
@@ -29,7 +29,7 @@ interface Api {
      * 获取首页-日报数据
      */
     @GET
-    suspend fun fetchDaily(@Url url: String = ApiService.HOME_DAILY_PAGE): HomePage
+    suspend fun fetchDaily(@Url url: String): HomePage
 
 
     /**

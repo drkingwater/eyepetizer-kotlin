@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import me.pxq.common.model.HomePage
 import me.pxq.common.model.Messages
 import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.notification.repository.NotificationRepository
 import me.pxq.network.ApiResult
+import me.pxq.network.requestFlow
 import me.pxq.utils.loge
 
 /**
@@ -17,47 +20,48 @@ import me.pxq.utils.loge
  * Author : pxq
  * Date : 2020/8/23 5:24 PM
  */
+@ExperimentalCoroutinesApi
 class PushViewModel(private val repository: NotificationRepository) : BaseViewModel() {
 
     private var nextPageUrl: String? = null
 
-    private val _pushData = MutableLiveData<ApiResult<Messages>>()
-    val pushData: LiveData<ApiResult<Messages>> = _pushData
+    private val _pushData = MutableLiveData<Messages>()
+    val pushData: LiveData<Messages> = _pushData
 
     // 下一页数据
-    private val _nextData = MutableLiveData<ApiResult<Messages>>()
-    val nextData: LiveData<ApiResult<Messages>> = _nextData
+    private val _nextData = MutableLiveData<Messages>()
+    val nextData: LiveData<Messages> = _nextData
 
     override fun fetchData() {
-        viewModelScope.launch {
-            nextPageUrl = null
+        requestFlow({
+            repository.fetchNotificationPush()
+        }, {
+            nextPageUrl = it.nextPageUrl
+            _pushData.value = it
+        }, onStart = {
             _onRefreshing.value = true
-
-            _pushData.value = repository.fetchNotificationPush().also {
-                if (it is ApiResult.Success) {
-                    nextPageUrl = it.data.nextPageUrl
-                }
-            }
-
+            _onError.value = false
+        }, onComplete = {
             _onRefreshing.value = false
-        }
+        }, onError = {
+            _onError.value = true
+        }).launchIn(viewModelScope)
     }
 
     /**
      * 请求下一页数据
      */
-    fun fetchNextData() {
-        nextPageUrl?.let {
+    override fun fetchNext() {
+        nextPageUrl?.run {
             // 防止刷新过快
-            val url = nextPageUrl!!
+            val url = this
             nextPageUrl = null
-            viewModelScope.launch {
-                _nextData.value = repository.fetchNotificationPush(url).also {
-                    if (it is ApiResult.Success) {
-                        nextPageUrl = it.data.nextPageUrl
-                    }
-                }
-            }
+            requestFlow({
+                repository.fetchNotificationPush(url)
+            }, {
+                nextPageUrl = it.nextPageUrl
+                _nextData.value = it
+            }).launchIn(viewModelScope)
         } ?: kotlin.run {
             loge("没有数据了")
         }

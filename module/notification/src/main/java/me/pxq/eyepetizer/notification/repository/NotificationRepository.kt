@@ -12,9 +12,6 @@ import retrofit2.http.Url
  */
 class NotificationRepository(private val apiService: Api) {
 
-    suspend fun fetchNotificationPush(@Url url: String = ApiService.NOTIFICATION_PUSH_PAGE) =
-        request(call = {
-            apiService.fetchNotificationPush(url)
-        }, "请求异常");
+    suspend fun fetchNotificationPush(@Url url: String = ApiService.NOTIFICATION_PUSH_PAGE) = apiService.fetchNotificationPush(url)
 
 }

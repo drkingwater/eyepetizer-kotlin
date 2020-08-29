@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.R
 import me.pxq.common.databinding.FragmentRvWithFreshBinding
 import me.pxq.common.ui.BaseFragment
@@ -63,7 +60,7 @@ class PushFragment : BaseFragment() {
                 }
 
                 setOnBottomListener {
-                    pushViewModel.fetchNextData()
+                    pushViewModel.fetchNext()
                 }
             }
             root
@@ -79,21 +76,14 @@ class PushFragment : BaseFragment() {
 
     private fun observe(adapter: PushAdapter) {
         pushViewModel.pushData.observe(viewLifecycleOwner) {
-            if (it is ApiResult.Success) {
-                adapter.messages.clear()
-                adapter.messages.addAll(it.data.messageList)
-                adapter.notifyDataSetChanged()
-                binding.recyclerView.postDelayed({
-                    logd(binding.recyclerView.getChildAt(0).width)
-                }, 1000)
-            }
+            adapter.messages.clear()
+            adapter.messages.addAll(it.messageList)
+            adapter.notifyDataSetChanged()
         }
         pushViewModel.nextData.observe(viewLifecycleOwner) {
-            if (it is ApiResult.Success) {
-                val start = adapter.messages.size
-                adapter.messages.addAll(it.data.messageList)
-                adapter.notifyItemRangeInserted(start, adapter.messages.size)
-            }
+            val start = adapter.messages.size
+            adapter.messages.addAll(it.messageList)
+            adapter.notifyItemRangeInserted(start, adapter.messages.size)
         }
     }
 

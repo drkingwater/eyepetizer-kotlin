@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.home.ui.recommend
+package me.pxq.eyepetizer.home.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -12,16 +12,16 @@ import me.pxq.eyepetizer.home.repository.HomeRepository
  * Author : pxq
  * Date : 2020/7/18 10:44 PM
  */
-class RecommendViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
+class DailyViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return RecommendViewModel(repository) as T
+        return DailyViewModel(repository) as T
     }
 
     companion object {
-        fun get(context: Context): RecommendViewModelFactory =
-            RecommendViewModelFactory(
+        fun get(context: Context): DailyViewModelFactory =
+            DailyViewModelFactory(
                 HomeRepository(ApiService.instance, EyeDatabase.get(context).homeDAO())
             )
     }

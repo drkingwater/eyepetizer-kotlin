@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            app:cover="@{category.data.image}" />
+            app:cover="@{category.data.image}"
+            tools:src="@color/loading"/>
 
         <me.pxq.common.ui.view.FontTextView
             android:layout_width="wrap_content"

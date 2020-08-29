@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.detail_activity_album.*
 import kotlinx.coroutines.delay
 import me.pxq.common.model.Item
 import me.pxq.common.router.RouterHub
+import me.pxq.common.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.detail.adapters.AlbumVpAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityAlbumBinding
 
@@ -23,6 +24,8 @@ class AlbumDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: DetailActivityAlbumBinding
 
+//    private lateinit var recommendViewModel : BaseViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<DetailActivityAlbumBinding>(
@@ -30,7 +33,7 @@ class AlbumDetailActivity : AppCompatActivity() {
             R.layout.detail_activity_album
         ).apply {
             val theAlbum = intent.getSerializableExtra(RouterHub.DETAIL_ALBUM_PARAM) as Item
-
+//            recommendViewModel = intent.getSerializableExtra("viewmodel") as BaseViewModel
 
             album = theAlbum
 

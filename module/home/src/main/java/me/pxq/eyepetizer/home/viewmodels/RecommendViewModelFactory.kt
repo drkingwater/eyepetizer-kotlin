@@ -1,4 +1,4 @@
-package me.pxq.eyepetizer.home.ui.discovery
+package me.pxq.eyepetizer.home.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -12,16 +12,16 @@ import me.pxq.eyepetizer.home.repository.HomeRepository
  * Author : pxq
  * Date : 2020/7/18 10:44 PM
  */
-class DiscoveryViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
+class RecommendViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DiscoveryViewModel(repository) as T
+        return RecommendViewModel(repository) as T
     }
 
     companion object {
-        fun get(context: Context): DiscoveryViewModelFactory =
-            DiscoveryViewModelFactory(
+        fun get(context: Context): RecommendViewModelFactory =
+            RecommendViewModelFactory(
                 HomeRepository(ApiService.instance, EyeDatabase.get(context).homeDAO())
             )
     }
