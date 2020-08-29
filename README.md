@@ -4,6 +4,8 @@
 仿开眼app的练习项目，主要为了练习MVVM + DataBinding + LiveData + 组件化 + kotlin等的使用
 
 
+[点我下载](https://github.com/drkingwater/eyepetizer-kotlin/raw/master/release/eyepetizer_v1.1.0.apk)
+
 
 ### 应用截图
 
@@ -40,6 +42,7 @@
 ### 声明
 
 > 该项目所用api均来源于开眼官方，仅供学习交流使用，不可用于商业用途。
+
 
 
 
