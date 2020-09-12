@@ -70,10 +70,6 @@ class Vp2BannerLayout(context: Context, attributeSet: AttributeSet? = null) :
             // 寻找嵌套的父vp2
             findVp2Parent()
             logd("find end ${System.currentTimeMillis() - start}ms")
-            // 找到vp2 parent
-            postDelayed({
-
-            }, 100) // 延迟一点时间，确保能找到vp2 parent
             init = true
         }
 
