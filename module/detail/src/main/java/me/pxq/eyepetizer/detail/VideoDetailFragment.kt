@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.pxq.common.ApiService
@@ -15,6 +16,7 @@ import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
+import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModelFactory
 import me.pxq.network.ApiResult
 import me.pxq.player.PlayerPool
 import me.pxq.player.base.PlayerBase
@@ -30,8 +32,7 @@ import me.pxq.utils.loge
 
 class VideoDetailFragment : Fragment() {
 
-    private val videoDetailViewModel =
-        VideoDetailViewModel(VideoDetailRepository(ApiService.instance))
+    private val videoDetailViewModel = ViewModelProvider(this, VideoDetailViewModelFactory.get()).get(VideoDetailViewModel::class.java)
 
     private lateinit var binding: DetailActivityVideoBinding
 

@@ -1,5 +1,8 @@
 package me.pxq.common.binding
 
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ImageSpan
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -232,6 +235,17 @@ fun bindTag(textView: TextView, tags: List<Tag>?) {
     }
     textView.text = tags[0].name
 
+}
+
+const val ICON = "[icon]"
+@BindingAdapter("iconSpan", "iconId")
+fun bindIconSpan(textView: TextView, txt: String, resId: Int) {
+
+    val iconTxt = txt + ICON
+    val spanString = SpannableString(iconTxt).apply {
+        setSpan(ImageSpan(textView.context, resId), txt.length, iconTxt.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+    textView.text = spanString
 }
 
 

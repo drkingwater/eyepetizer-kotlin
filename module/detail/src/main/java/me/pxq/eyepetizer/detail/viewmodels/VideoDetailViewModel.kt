@@ -22,7 +22,6 @@ import me.pxq.utils.loge
  * Author : pxq
  * Date : 2020/8/8 8:50 PM
  */
-@ExperimentalCoroutinesApi
 class VideoDetailViewModel(private val repository: VideoDetailRepository) : BaseViewModel() {
 
     // 首次加载
