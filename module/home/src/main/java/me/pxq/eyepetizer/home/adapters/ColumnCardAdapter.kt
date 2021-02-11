@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.model.Item
+import me.pxq.framework.model.Item
 import me.pxq.eyepetizer.home.databinding.HomeRvItemColumnCardGridItemBinding
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.viewmodel.BaseViewModel
 
 /**
  * Description: 首页-发现 专题策划 rv grid adapter

@@ -1,8 +1,7 @@
 package me.pxq.eyepetizer.notification.repository
 
-import me.pxq.common.Api
-import me.pxq.common.ApiService
-import me.pxq.network.request
+import me.pxq.framework.Api
+import me.pxq.framework.ApiService
 import retrofit2.http.Url
 
 /**

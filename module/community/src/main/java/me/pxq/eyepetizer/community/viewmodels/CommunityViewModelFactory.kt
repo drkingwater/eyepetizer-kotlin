@@ -2,7 +2,7 @@ package me.pxq.eyepetizer.community.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import me.pxq.common.ApiService
+import me.pxq.framework.ApiService
 import me.pxq.eyepetizer.community.repository.CommunityRepository
 
 /**

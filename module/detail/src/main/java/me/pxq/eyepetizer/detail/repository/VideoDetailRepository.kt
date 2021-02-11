@@ -1,6 +1,6 @@
 package me.pxq.eyepetizer.detail.repository
 
-import me.pxq.common.Api
+import me.pxq.framework.Api
 import me.pxq.network.request
 import retrofit2.http.Query
 import retrofit2.http.Url

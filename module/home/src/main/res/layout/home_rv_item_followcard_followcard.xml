@@ -9,12 +9,12 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.common.viewmodel.BaseViewModel" />
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
 
 
         <variable
             name="daily"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
 
@@ -41,7 +41,7 @@
             app:layout_constraintLeft_toLeftOf="@id/iv_cover"
             app:layout_constraintTop_toTopOf="@id/iv_cover" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             style="@style/Home_VideoDurationText"
             app:duration="@{daily.data.content.data.duration}"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover"
@@ -85,7 +85,7 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_icon"
             app:layout_constraintRight_toRightOf="@id/iv_icon" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             app:typeface="FZLanD"
             tools:text="@string/txt_test" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -7,7 +7,7 @@
 
         <variable
             name="header"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         android:paddingBottom="5dp">
 
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

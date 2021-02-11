@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.common.viewmodel.BaseViewModel" />
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
 
         <variable
             name="banner"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
 
     </data>
 

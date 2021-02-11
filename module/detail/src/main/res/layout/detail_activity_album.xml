@@ -7,7 +7,7 @@
 
         <variable
             name="album"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +59,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:src="@drawable/shape_bg_album_loading" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 app:typeface="FZLanD"
                 tools:text="@string/txt_test" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/btn_private_msg"
                 android:layout_width="44dp"
                 android:layout_height="22dp"
@@ -93,7 +93,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_icon"
                 app:typeface="FZLanD" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/btn_follow"
                 android:layout_width="44dp"
                 android:layout_height="22dp"
@@ -108,7 +108,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_icon"
                 app:typeface="FZLanD" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                 app:typeface="FZLanL"
                 tools:text="@string/txt_test" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_tag"
                 albumTag="@{album.data.content.data.tags}"
                 android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                 app:layout_constraintRight_toLeftOf="@id/tv_like"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_like"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                 app:layout_constraintRight_toLeftOf="@id/tv_replay"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_replay"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
                 app:layout_constraintRight_toLeftOf="@id/tv_collect"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_collect"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

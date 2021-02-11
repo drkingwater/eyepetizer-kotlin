@@ -5,11 +5,11 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.common.viewmodel.BaseViewModel" />
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
 
         <variable
             name="content"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@color/loading" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             app:typeface="FZLanD"
             tools:text="@string/txt_test" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

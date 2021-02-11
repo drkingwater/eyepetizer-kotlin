@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import me.pxq.common.R
-import me.pxq.common.databinding.FragmentRvWithFreshBinding
-import me.pxq.common.ui.BaseFragment
+import me.pxq.eyepetizer.community.R
+import me.pxq.framework.databinding.FragmentRvWithFreshBinding
+import me.pxq.framework.ui.BaseFragment
 import me.pxq.eyepetizer.community.adapters.FollowAdapter
 import me.pxq.utils.ui.decoration.MarginDecoration
 

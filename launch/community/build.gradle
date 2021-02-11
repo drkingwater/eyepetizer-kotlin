@@ -46,7 +46,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation project(':libs:common')
+    implementation project(':libs:framework')
 
     // 社区
     implementation project(':module:community')

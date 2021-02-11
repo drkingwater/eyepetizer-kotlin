@@ -9,12 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.ApiService
-import me.pxq.common.R
-import me.pxq.common.model.Item
+import me.pxq.framework.R
+import me.pxq.framework.model.Item
 import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
-import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModel
 import me.pxq.eyepetizer.detail.viewmodels.VideoDetailViewModelFactory
 import me.pxq.network.ApiResult

@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
-import me.pxq.common.router.RouterHub
+import me.pxq.framework.router.RouterHub
 import me.pxq.eyepetizer.main.R
-import me.pxq.common.ui.view.EyeBottomNavView
+import me.pxq.framework.ui.view.EyeBottomNavView
 import me.pxq.utils.SpUtil
 import me.pxq.utils.loge
 import me.pxq.utils.logi

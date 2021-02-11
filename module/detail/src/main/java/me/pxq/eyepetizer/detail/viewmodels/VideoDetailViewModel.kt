@@ -3,14 +3,13 @@ package me.pxq.eyepetizer.detail.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
-import me.pxq.common.model.HomePage
-import me.pxq.common.model.Item
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.model.HomePage
+import me.pxq.framework.model.Item
+import me.pxq.framework.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
 import me.pxq.network.ApiResult
 import me.pxq.network.requestFlow

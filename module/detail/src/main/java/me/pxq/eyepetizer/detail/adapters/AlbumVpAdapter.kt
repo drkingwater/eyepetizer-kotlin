@@ -2,10 +2,9 @@ package me.pxq.eyepetizer.detail.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import me.pxq.common.model.Item
+import me.pxq.framework.model.Item
 import me.pxq.eyepetizer.detail.databinding.DetailAlbumVpItemBinding
 
 /**

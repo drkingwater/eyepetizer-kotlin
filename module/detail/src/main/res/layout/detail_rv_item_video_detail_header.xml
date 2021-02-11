@@ -6,11 +6,11 @@
     <data>
 
         <!--        <import type="java.lang.String"/>-->
-        <import type="me.pxq.common.model.Header" />
+        <import type="me.pxq.framework.model.Header" />
 
         <variable
             name="video"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
 
     </data>
 
@@ -30,7 +30,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 tools:text="@string/txt_test"
                 tools:textColor="@color/black" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 tools:text="@string/txt_test"
                 tools:textColor="@color/black" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 app:layout_constraintRight_toLeftOf="@id/tv_like"
                 app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_like"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                 app:layout_constraintRight_toLeftOf="@id/tv_share"
                 app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_share"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_author"
             app:layout_constraintRight_toRightOf="@id/iv_author" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_author"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
             tools:text="@string/txt_test"
             tools:textColor="@color/black" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_author_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
             tools:text="@string/txt_test"
             tools:textColor="@color/black" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/btn_follow"
             followed="@{video.data.author.follow}"
             android:layout_width="44dp"

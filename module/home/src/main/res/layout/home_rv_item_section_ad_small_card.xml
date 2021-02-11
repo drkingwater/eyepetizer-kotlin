@@ -7,12 +7,12 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.common.viewmodel.BaseViewModel" />
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
 
 
         <variable
             name="sectionAd"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +32,7 @@
             tools:src="@color/loading" />
 
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_video_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -6,12 +6,12 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.common.viewmodel.BaseViewModel" />
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
 
 
         <variable
             name="category"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +26,7 @@
             app:cover="@{category.data.image}"
             tools:src="@color/loading"/>
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -3,11 +3,9 @@ package me.pxq.eyepetizer.notification.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.model.Message
-import me.pxq.common.model.Messages
+import me.pxq.framework.model.Message
 import me.pxq.eyepetizer.notification.databinding.NotificationRvItemPushBinding
 import me.pxq.eyepetizer.notification.viewmodels.PushViewModel
-import me.pxq.utils.logd
 
 /**
  * Description: 推送RV adapter

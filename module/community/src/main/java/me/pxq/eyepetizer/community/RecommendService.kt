@@ -1,9 +1,8 @@
 package me.pxq.eyepetizer.community
 
 import android.content.Context
-import com.alibaba.android.arouter.facade.template.IProvider
-import me.pxq.common.router.service.ICommunityService
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.router.service.ICommunityService
+import me.pxq.framework.viewmodel.BaseViewModel
 
 /**
  * Description:

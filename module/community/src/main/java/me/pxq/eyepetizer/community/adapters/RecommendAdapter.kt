@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import me.pxq.common.adapters.IvBannerAdapter
-import me.pxq.common.model.Item
-import me.pxq.common.databinding.RvItemHorScrollcardBinding
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.adapters.IvBannerAdapter
+import me.pxq.framework.model.Item
+import me.pxq.framework.databinding.RvItemHorScrollcardBinding
 import me.pxq.eyepetizer.community.R
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemColumnsCardBinding
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemHorScrollCardBinding
@@ -44,9 +42,9 @@ class RecommendAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendHolder {
         val layoutId = when (viewType) {
             1 -> R.layout.community_rv_item_hor_scroll_card
-            2 -> me.pxq.common.R.layout.rv_item_hor_scrollcard
+            2 -> me.pxq.framework.R.layout.rv_item_hor_scrollcard
             3 -> R.layout.community_rv_item_columns_card
-            else -> me.pxq.common.R.layout.rv_item_hor_scrollcard
+            else -> me.pxq.framework.R.layout.rv_item_hor_scrollcard
         }
         return RecommendHolder(
             DataBindingUtil.inflate(
@@ -77,7 +75,7 @@ class RecommendAdapter(
                             // 设置边距
                             addItemDecoration(
                                 LeftDecoration(
-                                    context.resources.getDimension(me.pxq.common.R.dimen.hor_scroll_banner_divider_width)
+                                    context.resources.getDimension(me.pxq.framework.R.dimen.hor_scroll_banner_divider_width)
                                         .toInt()
                                 )
                             )

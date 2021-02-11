@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import me.pxq.common.R
-import me.pxq.common.databinding.FragmentRvWithFreshBinding
-import me.pxq.common.ui.BaseFragment
+import me.pxq.eyepetizer.notification.R
+import me.pxq.framework.databinding.FragmentRvWithFreshBinding
+import me.pxq.framework.ui.BaseFragment
 import me.pxq.eyepetizer.notification.adapters.PushAdapter
 import me.pxq.eyepetizer.notification.viewmodels.PushViewModel
 import me.pxq.eyepetizer.notification.viewmodels.PushViewModelFactory
-import me.pxq.network.ApiResult
-import me.pxq.utils.logd
 import me.pxq.utils.ui.decoration.MarginDecoration
 
 /**

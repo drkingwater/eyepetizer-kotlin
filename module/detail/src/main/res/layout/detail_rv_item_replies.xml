@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <me.pxq.common.ui.view.BottomRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <me.pxq.framework.ui.view.BottomRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rv_replies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

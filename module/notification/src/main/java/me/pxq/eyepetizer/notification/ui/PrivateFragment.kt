@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import me.pxq.common.R
-import me.pxq.common.ui.BaseFragment
+import me.pxq.framework.R
+import me.pxq.framework.ui.BaseFragment
 
 /**
  * Description: 通知-私信Fragment

@@ -1,22 +1,8 @@
 package me.pxq.eyepetizer.detail.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.launch
-import me.pxq.common.ApiService
-import me.pxq.common.db.EyeDatabase
-import me.pxq.common.model.HomePage
-import me.pxq.common.model.Item
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.ApiService
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
-import me.pxq.network.ApiResult
-import me.pxq.network.requestFlow
-import me.pxq.utils.logd
-import me.pxq.utils.loge
 
 /**
  * Description: 视频详情页vm

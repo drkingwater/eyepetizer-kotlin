@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.R
-import me.pxq.common.model.Item
+import me.pxq.framework.R
+import me.pxq.framework.model.Item
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemRepliesBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoDetailHeaderBinding
 import me.pxq.eyepetizer.detail.databinding.DetailRvItemVideoRelatedBinding

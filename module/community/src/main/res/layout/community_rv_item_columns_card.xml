@@ -11,7 +11,7 @@
 
         <variable
             name="column"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/shape_bg_album_loading" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -56,7 +56,7 @@
             app:layout_constraintRight_toRightOf="@id/iv_cover"
             app:layout_constraintTop_toTopOf="@id/iv_cover" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_desc"
             tools:src="@drawable/shape_bg_album_loading" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_nickname"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -109,7 +109,7 @@
             app:layout_constraintRight_toLeftOf="@id/tv_count"
             app:layout_constraintTop_toTopOf="@id/iv_icon" />
 
-        <me.pxq.common.ui.view.FontTextView
+        <me.pxq.framework.ui.view.FontTextView
             android:id="@+id/tv_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

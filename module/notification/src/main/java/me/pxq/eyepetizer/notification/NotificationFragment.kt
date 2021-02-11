@@ -2,8 +2,8 @@ package me.pxq.eyepetizer.notification
 
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import me.pxq.common.router.RouterHub
-import me.pxq.common.ui.BaseTabsFragment
+import me.pxq.framework.router.RouterHub
+import me.pxq.framework.ui.BaseTabsFragment
 import me.pxq.eyepetizer.notification.adapters.ViewPagerAdapter
 
 /**

@@ -7,12 +7,12 @@
 
         <variable
             name="viewModel"
-            type="me.pxq.common.viewmodel.BaseViewModel" />
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
 
 
         <variable
             name="collection"
-            type="me.pxq.common.model.Item" />
+            type="me.pxq.framework.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:onClickListener="@{(theView) -> viewModel.execAction(theView, collection.data.header.actionUrl)}">
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_right" />
 
-            <me.pxq.common.ui.view.FontTextView
+            <me.pxq.framework.ui.view.FontTextView
                 android:id="@+id/tv_right"
                 style="@style/Home_TitleActionText"
                 android:text="@{collection.data.header.rightText, default = @string/home_look_before}"

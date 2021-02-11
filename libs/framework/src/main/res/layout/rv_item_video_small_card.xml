@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.pxq.framework.viewmodel.BaseViewModel" />
+
+
+        <variable
+            name="video"
+            type="me.pxq.framework.model.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:onClickListener="@{(theView) -> viewModel.navigateToVideo(theView, video)}">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="@dimen/small_video_card_cover_width"
+            android:layout_height="@dimen/small_video_card_cover_height"
+            android:scaleType="fitXY"
+            app:cover="@{video.data.cover.feed}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.pxq.framework.ui.view.FontTextView
+            style="@style/Home_VideoDurationText"
+            app:duration="@{video.data.duration}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintRight_toRightOf="@id/iv_cover" />
+
+        <me.pxq.framework.ui.view.FontTextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{video.data.title}"
+            android:textColor="@color/black25"
+            android:textSize="@dimen/text_size_normal"
+            app:layout_constraintLeft_toRightOf="@id/iv_cover"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeface="FZLanD"
+            tools:ignore="SpUsage" />
+
+        <me.pxq.framework.ui.view.FontTextView
+            android:id="@+id/tv_video_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@{@string/home_video_tag(video.data.category)}"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_cover"
+            app:typeface="FZLanL" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -3,8 +3,8 @@ package me.pxq.eyepetizer.home.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import me.pxq.common.ApiService
-import me.pxq.common.db.EyeDatabase
+import me.pxq.framework.ApiService
+import me.pxq.framework.db.EyeDatabase
 import me.pxq.eyepetizer.home.repository.HomeRepository
 
 /**

@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import me.pxq.common.ApiService
-import me.pxq.common.model.Item
-import me.pxq.common.router.RouterHub
+import me.pxq.framework.ApiService
+import me.pxq.framework.model.Item
+import me.pxq.framework.router.RouterHub
 import me.pxq.eyepetizer.detail.adapters.VideoDetailAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityVideoBinding
 import me.pxq.eyepetizer.detail.repository.VideoDetailRepository
@@ -78,7 +78,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
             // 加载视频cover
             binding.ivCover.visibility = View.VISIBLE
-            binding.ivCover.load(it.data.cover.detail, placeHolderId = me.pxq.common.R.color.black)
+            binding.ivCover.load(it.data.cover.detail, placeHolderId = me.pxq.framework.R.color.black)
 
             // 播放视频
             videoPlayer?.run {
@@ -106,7 +106,7 @@ class VideoDetailActivity : AppCompatActivity() {
             // 加载背景图
             binding.ivBg.load(
                 it.data.cover.blurred,
-                placeHolderId = me.pxq.common.R.drawable.shape_bg_album_loading
+                placeHolderId = me.pxq.framework.R.drawable.shape_bg_album_loading
             )
 
             // 先隐藏rv
@@ -175,6 +175,6 @@ class VideoDetailActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(0, me.pxq.common.R.anim.slide_bottom_out)
+        overridePendingTransition(0, me.pxq.framework.R.anim.slide_bottom_out)
     }
 }

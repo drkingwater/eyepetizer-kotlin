@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
-import me.pxq.common.model.HomePage
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.model.HomePage
+import me.pxq.framework.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.repository.CommunityRepository
 import me.pxq.network.requestFlow
 import me.pxq.utils.logd

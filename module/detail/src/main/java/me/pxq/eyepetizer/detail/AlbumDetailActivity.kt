@@ -3,14 +3,11 @@ package me.pxq.eyepetizer.detail
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.detail_activity_album.*
-import kotlinx.coroutines.delay
-import me.pxq.common.model.Item
-import me.pxq.common.router.RouterHub
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.model.Item
+import me.pxq.framework.router.RouterHub
 import me.pxq.eyepetizer.detail.adapters.AlbumVpAdapter
 import me.pxq.eyepetizer.detail.databinding.DetailActivityAlbumBinding
 
@@ -49,7 +46,7 @@ class AlbumDetailActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(0, me.pxq.common.R.anim.slide_bottom_out)
+        overridePendingTransition(0, me.pxq.framework.R.anim.slide_bottom_out)
     }
 
 }

@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
-import me.pxq.common.R
-import me.pxq.common.adapters.IvBannerAdapter
-import me.pxq.common.model.Item
-import me.pxq.common.databinding.RvItemBannerBinding
-import me.pxq.common.databinding.RvItemHorScrollcardBinding
-import me.pxq.common.databinding.RvItemVideoSmallCardBinding
-import me.pxq.common.ui.view.TheEndHolder
+import me.pxq.framework.R
+import me.pxq.framework.adapters.IvBannerAdapter
+import me.pxq.framework.model.Item
+import me.pxq.framework.databinding.RvItemBannerBinding
+import me.pxq.framework.databinding.RvItemHorScrollcardBinding
+import me.pxq.framework.databinding.RvItemVideoSmallCardBinding
+import me.pxq.framework.ui.view.TheEndHolder
 import me.pxq.eyepetizer.home.databinding.*
 import me.pxq.utils.ui.decoration.MarginDecoration
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.viewmodel.BaseViewModel
 import me.pxq.utils.extensions.dp2px
 import me.pxq.utils.logd
 

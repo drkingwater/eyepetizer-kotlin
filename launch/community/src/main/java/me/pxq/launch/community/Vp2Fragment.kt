@@ -9,10 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import me.pxq.common.adapters.IvBannerAdapter
+import me.pxq.framework.adapters.IvBannerAdapter
 import me.pxq.eyepetizer.community.viewmodels.CommunityViewModel
 import me.pxq.eyepetizer.community.viewmodels.CommunityViewModelFactory
-import me.pxq.network.ApiResult
 
 /**
  * Description:

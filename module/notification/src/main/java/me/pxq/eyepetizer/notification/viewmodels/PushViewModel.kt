@@ -2,16 +2,12 @@ package me.pxq.eyepetizer.notification.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.launch
-import me.pxq.common.model.HomePage
-import me.pxq.common.model.Messages
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.model.Messages
+import me.pxq.framework.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.notification.repository.NotificationRepository
-import me.pxq.network.ApiResult
 import me.pxq.network.requestFlow
 import me.pxq.utils.loge
 

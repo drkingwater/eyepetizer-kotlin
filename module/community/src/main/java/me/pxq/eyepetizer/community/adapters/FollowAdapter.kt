@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import me.pxq.common.model.Item
-import me.pxq.common.viewmodel.BaseViewModel
+import me.pxq.framework.model.Item
+import me.pxq.framework.viewmodel.BaseViewModel
 import me.pxq.eyepetizer.community.R
 import me.pxq.eyepetizer.community.databinding.CommunityRvItemAutoPlayFollowCardBinding
 

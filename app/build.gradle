@@ -49,7 +49,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation project(':libs:common')
+    implementation project(':libs:framework')
 
     // 主页
     implementation project(':module:main')

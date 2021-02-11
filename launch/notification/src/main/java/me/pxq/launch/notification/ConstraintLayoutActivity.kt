@@ -3,7 +3,7 @@ package me.pxq.launch.notification
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import me.pxq.common.model.Message
+import me.pxq.framework.model.Message
 import me.pxq.eyepetizer.notification.R
 import me.pxq.eyepetizer.notification.databinding.NotificationRvItemPushBinding
 

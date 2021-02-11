@@ -3,7 +3,6 @@ package me.pxq.eyepetizer.main.ui
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -28,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity_splash)
         imageView = findViewById(R.id.iv_bg)
-        imageView.load(me.pxq.common.R.drawable.author_account_bg)
+        imageView.load(me.pxq.framework.R.drawable.author_account_bg)
     }
 
     override fun onResume() {

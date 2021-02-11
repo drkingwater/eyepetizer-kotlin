@@ -1,6 +1,6 @@
 package me.pxq.eyepetizer.home.adapters
 
-import me.pxq.common.model.Item
+import me.pxq.framework.model.Item
 import me.pxq.eyepetizer.home.R
 
 /**
@@ -71,13 +71,13 @@ object IndexRvHelper {
         VIEW_HOLDER_TYPE_TEXT_CARD_TEXT_FOOTER2 -> R.layout.home_rv_item_textcard_textcard_footer2
         VIEW_HOLDER_TYPE_FOLLOW_CARD_FOLLOW -> R.layout.home_rv_item_followcard_followcard
         VIEW_HOLDER_TYPE_INFO_CARD_INFO -> R.layout.home_rv_item_infocard_infocard
-        VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> me.pxq.common.R.layout.rv_item_video_small_card
+        VIEW_HOLDER_TYPE_VIDEO_SMALL_CARD -> me.pxq.framework.R.layout.rv_item_video_small_card
         VIEW_HOLDER_TYPE_TEXT_CARD_WITH_TAG -> R.layout.home_rv_item_textcard_with_tag_id
         VIEW_HOLDER_TYPE_BANNER -> R.layout.home_rv_item_banner_single
         VIEW_HOLDER_TYPE_SELECTION_CARD -> R.layout.home_rv_item_ugs_selectioncard
         VIEW_HOLDER_TYPE_BRIEF_CARD_TAG -> R.layout.home_rv_item_briefcard_tag
         VIEW_HOLDER_TYPE_BRIEF_CARD_TOP -> R.layout.home_rv_item_briefcard_top
-        VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> me.pxq.common.R.layout.rv_item_hor_scrollcard
+        VIEW_HOLDER_TYPE_HOR_SCROLL_CARD -> me.pxq.framework.R.layout.rv_item_hor_scrollcard
         VIEW_HOLDER_TYPE_AUTO_PLAY_VIDEO_AD -> R.layout.home_rv_item_auto_play_video_ad   //视频广告，自动播放
         VIEW_HOLDER_TYPE_SPECIAL_SQUARE_CARD -> R.layout.home_rv_item_special_square_card //热门分类、专题策划共用一个item
         VIEW_HOLDER_TYPE_COLUMN_CARD -> R.layout.home_rv_item_special_square_card

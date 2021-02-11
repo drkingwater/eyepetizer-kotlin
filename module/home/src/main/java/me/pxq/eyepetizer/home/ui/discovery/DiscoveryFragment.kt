@@ -9,8 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import me.pxq.common.databinding.FragmentRvWithFreshBinding
-import me.pxq.common.ui.BaseFragment
+import me.pxq.framework.databinding.FragmentRvWithFreshBinding
+import me.pxq.framework.ui.BaseFragment
 import me.pxq.eyepetizer.home.adapters.IndexRvAdapter
 import me.pxq.eyepetizer.home.viewmodels.DiscoveryViewModel
 import me.pxq.eyepetizer.home.viewmodels.DiscoveryViewModelFactory
@@ -54,9 +54,9 @@ class DiscoveryFragment : BaseFragment() {
                 //设置分割线
                 addItemDecoration(
                     MarginDecoration(
-                        top = context.resources.getDimension(me.pxq.common.R.dimen.header_padding)
+                        top = context.resources.getDimension(me.pxq.framework.R.dimen.header_padding)
                             .toInt(),
-                        bottom = context.resources.getDimension(me.pxq.common.R.dimen.rv_divider_bottom)
+                        bottom = context.resources.getDimension(me.pxq.framework.R.dimen.rv_divider_bottom)
                             .toInt()
                     )
                 )
